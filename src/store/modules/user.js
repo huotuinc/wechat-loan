@@ -1,6 +1,6 @@
 import request from '@/utils/request'
-import { getUserInfo, setUserInfo } from '@/utils/auth'
-import { USER_INFO } from '../mutation-type'
+import {getUserInfo, setUserInfo, removeUserInfo} from '@/utils/auth'
+import {USER_INFO} from '../mutation-type'
 
 const user = {
   state: {
@@ -12,7 +12,7 @@ const user = {
     }
   },
   actions: {
-    login({ commit }, userInfo) {
+    login({commit}, userInfo) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/login',
@@ -30,7 +30,47 @@ const user = {
             reject(error)
           })
       })
-    }
+    },
+    sendVerifyCode({}, mobile) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/sendVerifyCode',
+          method: 'post',
+          data: {
+            mobile: mobile
+          }
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    register({}, userInfo) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/register',
+          method: 'post',
+          data: userInfo
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+
+    logout({commit}) {
+      return new Promise(resolve => {
+        commit(USER_INFO, '')
+        removeUserInfo()
+        resolve()
+      })
+    },
   }
 }
 
