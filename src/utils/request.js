@@ -8,8 +8,6 @@ const service = AjaxPlugin.$http.create({
   // baseURL: 'http://localhost:5000',
   timeout: 15000
 })
-console.log(token)
-// store.getters.userInfo.token
 service.interceptors.request.use(
   config => {
     if (token) {
