@@ -9,7 +9,7 @@
                  ref="mobile" v-model="obj.mobile"></x-input>
       </group>
       <group class="weui-cells_form">
-        <x-input title="验证码" class="weui-vcode">
+        <x-input title="验证码" class="weui-vcode" :min="4" name="verifyCode" ref="verifyCode" v-model="obj.verifyCode">
           <x-button slot="right" :disabled="disabled" @click.native="sendCode" type="primary" mini>{{sendButtonText}}
           </x-button>
         </x-input>
@@ -33,6 +33,7 @@
 
 <script>
   import {XInput, Group, XButton, Cell, md5, CheckIcon} from 'vux'
+  const buttonText = '发送验证码'
   export default {
     components: {
       XInput,
@@ -45,14 +46,15 @@
       return {
         disabled: false,
         time: 0,
-        sendButtonText: '发送验证码',
+        sendButtonText: buttonText,
         agree: false,
         valid1: false,
         valid2: false,
+        valid3: false,
         obj: {
           mobile: '',
           password: '',
-          loginType: 0,
+          verifyCode: '',
           userType: 1
         }
       }
@@ -64,8 +66,13 @@
       getValid2() {
         this.valid2 = this.$refs.password.valid
       },
+      getValid3() {
+        this.valid3 = this.$refs.verifyCode.valid
+      },
       sendCode() {
         if (!this.disabled) {
+          this.$store
+            .dispatch('sendVerifyCode', this.mobile)
           this.disabled = true
           this.time = 10
           this.timer()
@@ -74,9 +81,10 @@
       timer() {
         if (this.time > 0) {
           this.time--;
-          this.sendButtonText = '请' + this.time + '后发送'
+          this.sendButtonText = '请' + this.time + '秒后发送'
           setTimeout(this.timer, 1000);
         } else {
+          this.sendButtonText = buttonText
           this.disabled = false;
         }
       },
@@ -90,12 +98,13 @@
         }
         this.getValid1()
         this.getValid2()
-        if (this.valid1 && this.valid2) {
+        this.getValid3()
+        if (this.valid1 && this.valid2 && this.valid3) {
           this.obj.password = md5(this.obj.password)
           this.$store
-            .dispatch('login', this.obj)
+            .dispatch('register', this.obj)
             .then(() => {
-              this.$router.push({path: '/'})
+              this.$router.push({path: '/login'})
             })
             .catch(() => {
             })

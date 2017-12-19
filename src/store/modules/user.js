@@ -30,6 +30,38 @@ const user = {
             reject(error)
           })
       })
+    },
+    sendVerifyCode({}, mobile) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/sendVerifyCode',
+          method: 'post',
+          data: {
+            mobile:mobile
+          }
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    register({}, userInfo) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/register',
+          method: 'post',
+          data: userInfo
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }
