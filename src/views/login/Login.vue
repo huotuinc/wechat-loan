@@ -1,41 +1,41 @@
 <template>
   <div class="login-wrapper">
     <div class="login-hd">
-      <h2 class="title">登录</h2>
       <div class="logo-wrapper">
-        <!-- <img class="logo" src="../../assets/vux_logo.png"> -->
+        <img class="logo" src="../../assets/logo.png">
       </div>
     </div>
 
     <div>
-      <group>
-        <x-input
-          title="手机号"
+      <group label-width="4.5em" label-margin-right="2em" class="login-group">
+         <x-input
           name="mobile"
-          placeholder="请输入手机号码"
+          placeholder="手机号码"
           keyboard="number"
           is-type="china-mobile"
           ref="mobile"
           :show-clear="false"
           required
-          v-model.trim="form.mobile">
+          v-model.trim="form.mobile"
+          class="login-input">
+          <i slot="label" class="iconfont icon-mobile"></i>
         </x-input>
-      </group>
-      <group>
         <x-input
-          title="密码"
           type="password"
           name="password"
           placeholder="请输入密码"
           v-model.trim="form.password"
           ref="password"
           required
-          :min="6">
+          :min="6"
+          class="login-input_last">
+          <i slot="label" class="iconfont icon-password"></i>
         </x-input>
       </group>
     </div>
-    <div style="padding:20px;">
-      <x-button @click.native="submit" type="primary">登录</x-button>
+    <div class="login-btn_warp">
+      <x-button @click.native="submit" class="btn-yellow">登录</x-button>
+      <x-button class="btn-white" link="/register">新用户注册</x-button>
     </div>
   </div>
 </template>
@@ -93,8 +93,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import '../../style/variable.less';
+
+.login-wrapper {
+  height: 100%;
+  background: #fff;
+}
 .login-hd {
+  padding-top: 10px;
+  margin-bottom: 60px;
   overflow: hidden;
 }
 .login-hd .title {
@@ -109,5 +117,58 @@ export default {
 .login-hd .logo {
   width: 80px;
   height: 80px;
+}
+.login-btn_warp {
+  padding: 20px 50px;
+}
+.login-group {
+  .weui-cells:before {
+    border-top: none !important;
+  }
+  .weui-cells:after {
+    border-bottom: none !important;
+  }
+  .weui-cell {
+    padding: 10px 50px !important;
+    &::before {
+      left: 50px !important;
+      right: 50px !important;
+    }
+    .iconfont {
+      padding: 0 10px;
+      color: #000;
+      font-size: 20px;
+    }
+  }
+  .login-input_last {
+    &:after {
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      right: 50px;
+      height: 1px;
+      border-bottom: 1px solid #d9d9d9;
+      color: #d9d9d9;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      left: 50px;
+    }
+  }
+  .weui-cell_warn {
+    &::before {
+      border-top: 1px solid @loan-red !important;
+    }
+    &::after {
+      border-bottom: 1px solid @loan-red !important;
+    }
+    .weui-cell__ft {
+      display: none;
+    }
+    .iconfont {
+      color: @loan-red;
+    }
+  }
 }
 </style>
