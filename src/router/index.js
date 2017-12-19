@@ -55,6 +55,11 @@ export const constantRouterMap = [
     path: '/setting',
     name: 'Setting',
     component: _import('setting/index')
+  },
+  {
+    path: '/borrow',
+    name: 'Borrow',
+    component: _import('borrow/index')
   }
 ]
 
