@@ -50,6 +50,11 @@ export const constantRouterMap = [
     path: '/register',
     name: 'Register',
     component: _import('register/index')
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: _import('setting/index')
   }
 ]
 

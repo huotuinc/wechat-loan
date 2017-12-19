@@ -7,7 +7,8 @@ const loginData = Mock.mock({
       userId: '@id',
       merchantId: '@id',
       uname: '@cname',
-      token: '@guid'
+      token: '@guid',
+      headimg:'@IMG(30x30)'
     }
   }
 })
