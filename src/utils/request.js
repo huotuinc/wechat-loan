@@ -43,7 +43,10 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error)
-    // Message.error(error.message)
+    Toast.show({
+      text: error.message,
+      type: cancel
+    })
     return Promise.reject(error)
   }
 )
