@@ -3,7 +3,7 @@
     <div>
       <h2 class="title">登录</h2>
       <div class="logo-wrapper">
-        <img class="logo" src="../../assets/vux_logo.png">
+        <!-- <img class="logo" src="../../assets/vux_logo.png"> -->
       </div>
     </div>
 
@@ -24,76 +24,76 @@
 </template>
 
 <script>
-  import {XInput, Group, XButton, Cell, md5, Toast} from 'vux'
-  export default {
-    components: {
-      XInput,
-      XButton,
-      Group,
-      Cell
-    },
-    data () {
-      return {
-        valid1: false,
-        valid2: false,
-        obj: {
-          mobile: '',
-          password: '',
-          loginType: 0,
-          userType: 1
-        }
+import { XInput, Group, XButton, Cell, md5 } from 'vux'
+export default {
+  components: {
+    XInput,
+    XButton,
+    Group,
+    Cell
+  },
+  data() {
+    return {
+      valid1: false,
+      valid2: false,
+      obj: {
+        mobile: '',
+        password: '',
+        loginType: 0,
+        userType: 1
       }
+    }
+  },
+  methods: {
+    getValid1() {
+      this.valid1 = this.$refs.mobile.valid
     },
-    methods: {
-      getValid1 () {
-        this.valid1 = this.$refs.mobile.valid
-      },
-      getValid2 () {
-        this.valid2 = this.$refs.password.valid
-      },
-      submit() {
-        this.getValid1()
-        this.getValid2()
-        if( this.valid1 && this.valid2) {
-          this.obj.password = md5(this.obj.password)
-          this.$store.dispatch('login', this.obj).then(() => {
-            this.$router.push({path: '/'})
-          }).catch(() => {
-
+    getValid2() {
+      this.valid2 = this.$refs.password.valid
+    },
+    submit() {
+      this.getValid1()
+      this.getValid2()
+      if (this.valid1 && this.valid2) {
+        this.obj.password = md5(this.obj.password)
+        this.$store
+          .dispatch('login', this.obj)
+          .then(() => {
+            this.$router.push({ path: '/' })
           })
-        } else {
-          Toast.show({
-            text: '手机号或密码填写错误',
-          })
-        }
-
+          .catch(() => {})
+      } else {
+        this.$vux.toast.show({
+          text: '手机号或密码填写错误'
+        })
       }
     }
   }
+}
 </script>
 
 <style scoped>
-  .title {
-    font-size: 25px;
-    font-weight: 400;
-    text-align: center;
-    margin: 20px 0;
-  }
+.title {
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+  margin: 20px 0;
+}
 
-  .logo-wrapper {
-    text-align: center;
-  }
+.logo-wrapper {
+  text-align: center;
+}
 
-  .logo {
-    width: 80px;
-    height: 80px;
-  }
+.logo {
+  width: 80px;
+  height: 80px;
+}
 
-  .red {
-    color: red;
-  }
+.red {
+  color: red;
+}
 
-  .green {
-    color: green;
-  }
+.green {
+  color: green;
+}
 </style>
