@@ -22,10 +22,10 @@ export const constantRouterMap = [
   {
     path: '/todo',
     component: Layout,
-    name: 'Todo',
     children: [
       {
         path: '',
+        name: 'Todo',
         component: _import('todo/index')
       }
     ]
@@ -33,10 +33,10 @@ export const constantRouterMap = [
   {
     path: '/personal',
     component: Layout,
-    name: 'Personal',
     children: [
       {
         path: '',
+        name: 'Personal',
         component: _import('personal/index')
       }
     ]
@@ -45,6 +45,11 @@ export const constantRouterMap = [
     path: '/login',
     name: 'Login',
     component: _import('login/Login')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: _import('404')
   }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <div class="login-wrapper">
-    <div>
+    <div class="login-hd">
       <h2 class="title">登录</h2>
       <div class="logo-wrapper">
         <!-- <img class="logo" src="../../assets/vux_logo.png"> -->
@@ -9,12 +9,29 @@
 
     <div>
       <group>
-        <x-input title="手机号" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"
-               ref="mobile"  v-model="obj.mobile"></x-input>
+        <x-input
+          title="手机号"
+          name="mobile"
+          placeholder="请输入手机号码"
+          keyboard="number"
+          is-type="china-mobile"
+          ref="mobile"
+          :show-clear="false"
+          required
+          v-model.trim="form.mobile">
+        </x-input>
       </group>
       <group>
-        <x-input title="请输入密码" type="password" name="password" placeholder="请输入密码" v-model="obj.password"
-               ref="password"  :min="6"></x-input>
+        <x-input
+          title="密码"
+          type="password"
+          name="password"
+          placeholder="请输入密码"
+          v-model.trim="form.password"
+          ref="password"
+          required
+          :min="6">
+        </x-input>
       </group>
     </div>
     <div style="padding:20px;">
@@ -34,9 +51,7 @@ export default {
   },
   data() {
     return {
-      valid1: false,
-      valid2: false,
-      obj: {
+      form: {
         mobile: '',
         password: '',
         loginType: 0,
@@ -45,55 +60,54 @@ export default {
     }
   },
   methods: {
-    getValid1() {
-      this.valid1 = this.$refs.mobile.valid
+    getMobileValid() {
+      return this.$refs.mobile.valid
     },
-    getValid2() {
-      this.valid2 = this.$refs.password.valid
+    getPwdValid() {
+      return this.$refs.password.valid
     },
     submit() {
-      this.getValid1()
-      this.getValid2()
-      if (this.valid1 && this.valid2) {
-        this.obj.password = md5(this.obj.password)
+      if (this.validForm()) {
+        this.form.password = md5(this.form.password)
         this.$store
-          .dispatch('login', this.obj)
+          .dispatch('login', this.form)
           .then(() => {
             this.$router.push({ path: '/' })
           })
-          .catch(() => {})
+          .catch(err => {
+            console.log(err)
+          })
       } else {
-        this.$vux.toast.show({
-          text: '手机号或密码填写错误'
-        })
+        this.$vux.toast.text('手机号或密码错误')
+      }
+    },
+    validForm() {
+      if (this.form.mobile && this.form.password) {
+        if (this.getMobileValid() && this.getPwdValid()) return true
+        return false
+      } else {
+        return false
       }
     }
   }
 }
 </script>
 
-<style scoped>
-.title {
+<style>
+.login-hd {
+  overflow: hidden;
+}
+.login-hd .title {
   font-size: 25px;
   font-weight: 400;
   text-align: center;
   margin: 20px 0;
 }
-
-.logo-wrapper {
+.login-hd .logo-wrapper {
   text-align: center;
 }
-
-.logo {
+.login-hd .logo {
   width: 80px;
   height: 80px;
-}
-
-.red {
-  color: red;
-}
-
-.green {
-  color: green;
 }
 </style>
