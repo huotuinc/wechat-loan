@@ -1,4 +1,5 @@
-import { AUTH_INFO } from '../mutation-type'
+import request from '@/utils/request'
+import { AUTH_INFO, AUTH_STATUS } from '../mutation-type'
 
 const authentication = {
   state: {
@@ -9,7 +10,22 @@ const authentication = {
       state.authInfo = payload
     }
   },
-  actions: {}
+  actions: {
+    certificationAll({}) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/certificationAll',
+          method: 'post'
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    }
+  }
 }
 
 export default authentication

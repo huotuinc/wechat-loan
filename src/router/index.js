@@ -84,6 +84,21 @@ export const constantRouterMap = [
     component: _import('download/index')
   },
   {
+    path: '/borrowInfo',
+    name: 'BorrowInfo',
+    component: _import('borrow-info/index')
+  },
+  {
+    path: '/authenticationList',
+    name: 'AuthenticationList',
+    component: _import('authentication-list/index')
+  },
+  {
+    path: '/basicInfo',
+    name: 'BasicInfo',
+    component: _import('basic-info/index')
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

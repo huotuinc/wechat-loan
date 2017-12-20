@@ -2,13 +2,15 @@
   <div>
     <div>
       <group>
-        <x-input title="借款金额" ref="borrowMoney" type="number" name="obj.borrowMoney" v-model.number="obj.borrowMoney">
+        <x-input title="借款金额" ref="borrowMoney" type="number" :show-clear="false" name="obj.borrowMoney" v-model.number="obj.borrowMoney">
           <span slot="right">元</span>
         </x-input>
-        <x-input title="借款时长" ref="borrowTime" name="borrowTime" type="number" v-model.number="obj.borrowTime">
+        <x-input title="借款时长" ref="borrowTime" name="borrowTime" :show-clear="false" type="number" v-model.number="obj.borrowTime">
           <span slot="right">天</span>
         </x-input>
-        <popup-picker title="借款用途" :data="list" v-model="value"></popup-picker>
+        <popup-picker title="借款用途" :data="list"
+                      v-model="value"
+                      popup-title="借款用途"></popup-picker>
       </group>
       <group>
         <cell title="信用报告" is-link>
@@ -37,7 +39,7 @@
 <script>
   import {XInput, Group, XButton, Cell, Picker, PopupPicker} from 'vux'
   import {mapGetters} from 'vuex'
-  import {createPurposeArray,findPurposeCode} from '@/common/js/purpose'
+  import {purpose,findCode} from '@/utils/enum'
   export default {
 
     created() {
@@ -66,8 +68,6 @@
       return {
         value: [],
         list: [],
-        valid1: false,
-        valid2: false,
         obj: {
           borrowTime: 1,
           borrowMoney: 1,
@@ -79,8 +79,8 @@
     methods: {
       _getPurposeList() {
         let ret = []
-        createPurposeArray().forEach((item) => {
-          ret.push(item.borrowUse)
+        purpose.forEach((item) => {
+          ret.push(item.desc)
         })
         this.list.push(ret)
       },
@@ -93,7 +93,7 @@
           this.$vux.toast.text('请选择借款用途')
           return
         }
-        this.obj.borrowUse = findPurposeCode(this.value[0])
+        this.obj.borrowUse = findCode(purpose,this.value[0])
 
         if (this.obj.borrowTime !== 0 && this.obj.borrowMoney !== 0) {
           this.$store
