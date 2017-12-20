@@ -2,16 +2,27 @@
   <div>
     <div>
       <group>
-        <x-input title="借款金额" ref="borrowMoney" type="number" name="obj.borrowMoney" v-model.number="borrowMoney">
+        <x-input title="借款金额" ref="borrowMoney" type="number" name="obj.borrowMoney" v-model.number="obj.borrowMoney">
           <span slot="right">元</span>
         </x-input>
-        <x-input title="借款时长" name="borrowTime" type="number" v-model.number="obj.borrowTime">
+        <x-input title="借款时长" ref="borrowTime" name="borrowTime" type="number" v-model.number="obj.borrowTime">
           <span slot="right">天</span>
         </x-input>
         <popup-picker title="借款用途" :data="list" v-model="value"></popup-picker>
       </group>
       <group>
-        <cell title="信用报告" is-link>未认证</cell>
+        <cell title="信用报告" is-link>
+          <div v-if="authNum === 3">
+            <router-link to="/login"><!--跳转到查看信用报告页面-->
+              <span style="color: green">{{authText}}</span>
+            </router-link>
+          </div>
+          <div v-else>
+            <router-link to="/login"><!--跳转到信用认证页面-->
+              <span>{{authText}}</span>
+            </router-link>
+          </div>
+        </cell>
       </group>
     </div>
 
@@ -25,7 +36,24 @@
 </template>
 <script>
   import {XInput, Group, XButton, Cell, Picker, PopupPicker} from 'vux'
+  import {mapGetters} from 'vuex'
+  import {createPurposeArray,findPurposeCode} from '@/common/js/purpose'
   export default {
+
+    created() {
+      this._getPurposeList()
+    },
+    computed: {
+      authText() {
+        return this.authInfo.authMsg
+      },
+      authNum() {
+        return this.authInfo.authCode
+      },
+      ...mapGetters([
+        'authInfo'
+      ])
+    },
     components: {
       XInput,
       XButton,
@@ -36,36 +64,46 @@
     },
     data() {
       return {
-        borrowMoney: 0,
         value: [],
-        list: [['个体经营', '消费', '助学', '创业', '租房', '旅游', '装修', '医疗', '其他']],
+        list: [],
         valid1: false,
         valid2: false,
         obj: {
-          borrowTime: 0,
-          borrowMoney: 0,
+          borrowTime: 1,
+          borrowMoney: 1,
           borrowUse: 1,
           userType: 1
         }
       }
     },
     methods: {
+      _getPurposeList() {
+        let ret = []
+        createPurposeArray().forEach((item) => {
+          ret.push(item.borrowUse)
+        })
+        this.list.push(ret)
+      },
       submit() {
-        this.getValid1()
-        this.getValid2()
-        if (this.valid1 && this.valid2) {
-          this.obj.password = md5(this.obj.password)
+        if (this.authNum !== 3){
+          this.$vux.toast.text('请先完成信用认证')
+          return
+        }
+        if (this.value.length !== 1){
+          this.$vux.toast.text('请选择借款用途')
+          return
+        }
+        this.obj.borrowUse = findPurposeCode(this.value[0])
+
+        if (this.obj.borrowTime !== 0 && this.obj.borrowMoney !== 0) {
           this.$store
-            .dispatch('login', this.obj)
+            .dispatch('saveInfo', this.obj)
             .then(() => {
-              this.$router.push({path: '/'})
-            })
-            .catch(() => {
+              //todo 借款成功跳转页面
+              this.$vux.toast.text('借款成功')
             })
         } else {
-          this.$vux.toast.show({
-            text: '手机号或密码填写错误'
-          })
+          this.$vux.toast.text('借款金额或借款时长不能为0')
         }
       }
     }

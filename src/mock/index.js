@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 import loginApi from './modules/login'
 import sendCodeApi from './modules/register'
 import registerApi from './modules/register'
+import borrowApi from './modules/borrow'
 
 // 模拟服务器延迟
 Mock.setup({
@@ -14,3 +15,5 @@ Mock.mock(/\/api\/user\/login/, 'post', loginApi.login)
 Mock.mock(/\/api\/user\/sendVerifyCode/, 'post', sendCodeApi.sendCode)
 //注册
 Mock.mock(/\/api\/user\/register/, 'post', registerApi.register())
+//我要借款
+Mock.mock(/\/api\/borrow\/saveInfo/, 'post', borrowApi.saveInfo())
