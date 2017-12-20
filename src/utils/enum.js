@@ -145,4 +145,24 @@ export const realState = [new Enum({
   desc: '其他'
 })]
 
+export const relation = [new Enum({
+  code: 1,
+  desc: '父母'
+}), new Enum({
+  code: 2,
+  desc: '配偶'
+}), new Enum({
+  code: 3,
+  desc: '兄妹'
+}), new Enum({
+  code: 4,
+  desc: '亲戚'
+}), new Enum({
+  code: 5,
+  desc: '朋友'
+}), new Enum({
+  code: 6,
+  desc: '其他'
+})]
+
 

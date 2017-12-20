@@ -2,7 +2,7 @@
   <div>
     <div>
       <group title="* 恶意填写会对您的借款额度造成负面影响">
-        <x-input title="姓名" ref="realName" required :show-clear="false"></x-input>
+        <x-input title="姓名" ref="realName" required :show-clear="false" v-model="form.realName"></x-input>
         <popup-picker title="婚姻状况" :data="list"
                       v-model="value"
                       popup-title="婚姻状况"></popup-picker>
@@ -17,11 +17,11 @@
                       popup-title="本单位工龄"></popup-picker>
         <popup-picker title="房产状况" :data="list4"
                       v-model="value4"
-                      popup-title="本单位工龄"></popup-picker>
-        <x-input title="单位名称" ref="unitName" required :show-clear="false" placeholder="请输入单位名称"></x-input>
-        <x-input title="单位地址" ref="unitAddress" required :show-clear="false" placeholder="请输入单位地址"></x-input>
+                      popup-title="房产状况"></popup-picker>
+        <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
+        <x-input title="单位地址" ref="unitAddress" required :show-clear="false" v-model="form.unitAddress" placeholder="请输入单位地址"></x-input>
         <x-address title="居住地区" v-model="value5" raw-value :list="addressData" value-text-align="center"></x-address>
-        <x-input title="详细地址" ref="homeAddress" required :show-clear="false" placeholder="请输入详细地址"></x-input>
+        <x-input title="详细地址" ref="homeAddress" required :show-clear="false" v-model="form.homeAddress" placeholder="请输入详细地址"></x-input>
       </group>
     </div>
     <div style="padding:20px;">
@@ -75,11 +75,17 @@
         list3: [],
         list4: [],
         form: {
-          homeAreaCode: '',
+          realName: '',
           homeArea: '',
           homeAddress: '',
+          unitAddress: '',
+          unitName: '',
+          homeAreaCode: '',
           marry: null,
-          unitName: ''
+          realStateStatus: null,
+          workTime: null,
+          annualIncome: null,
+          education: null
         }
       }
     },
@@ -107,11 +113,23 @@
         list.push(ret)
       },
       submit() {
-        if (this.value.length !== 1){
-          this.$vux.toast.text('请选择借款用途')
+        if (!this.validFormInput() || !this.validForm ){
+          this.$vux.toast.text('信息填写有误')
           return
         }
-        alert(this.value1.join(','))
+        this.form.homeAreaCode = this.value5.join(',')
+        this.form.homeArea = this.getName(this.value5)
+        this.form.marry = findCode(marry,this.value[0])
+        this.form.realStateStatus = findCode(realState,this.value4[0])
+        this.form.workTime = findCode(workAge,this.value3[0])
+        this.form.annualIncome = findCode(income,this.value2[0])
+        this.form.education = findCode(education,this.value1[0])
+        this.$store
+          .dispatch('userinfoedit', this.form)
+          .then(() => {
+            //todo 提交成功跳转
+            this.$vux.toast.text('提交成功')
+          })
       },
       getName (value) {
         return value2name(value, ChinaAddressV4Data)
@@ -129,7 +147,8 @@
         return this.$refs.homeAddress.valid
       },
       validFormInput() {
-        if (this.form.mobile && this.form.password) {
+        if (this.form.realName && this.form.unitName && this.form.unitAddress
+          && this.form.homeAddress) {
           if (this.getRealNameValid() && this.getUnitNameValid()
           && this.getUnitAddressValid() && this.getUnitAddressValid()
           && this.getHomeAddressValid()) return true

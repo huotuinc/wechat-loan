@@ -99,6 +99,11 @@ export const constantRouterMap = [
     component: _import('basic-info/index')
   },
   {
+    path: '/contacts',
+    name: 'Contacts',
+    component: _import('contacts/index')
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

@@ -24,6 +24,22 @@ const authentication = {
             reject(error)
           })
       })
+    },
+    userinfoedit({},form) {
+      console.log(form)
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/userinfoedit',
+          method: 'post',
+          data: form
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

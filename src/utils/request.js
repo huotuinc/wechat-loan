@@ -1,4 +1,4 @@
-import { AjaxPlugin, Toast } from 'vux'
+import { AjaxPlugin} from 'vux'
 import { getUserInfo } from '@/utils/auth'
 import sign from './sign'
 
@@ -32,10 +32,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.resultCode !== 2000) {
-      Toast.show({
-        text: res.resultMsg,
-        type: cancel
-      })
+      this.$vux.toast.text(res.resultMsg)
       return Promise.reject(new Error(res.resultMsg))
     } else {
       return res.data
@@ -43,10 +40,7 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error)
-    Toast.show({
-      text: error.message,
-      type: cancel
-    })
+    this.$vux.toast.text(error.message)
     return Promise.reject(error)
   }
 )
