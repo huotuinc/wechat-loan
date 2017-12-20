@@ -20,7 +20,7 @@
                       popup-title="本单位工龄"></popup-picker>
         <x-input title="单位名称" ref="unitName" required :show-clear="false" placeholder="请输入单位名称"></x-input>
         <x-input title="单位地址" ref="unitAddress" required :show-clear="false" placeholder="请输入单位地址"></x-input>
-        <x-address title="居住地区" v-model="value1" raw-value :list="addressData" value-text-align="center"></x-address>
+        <x-address title="居住地区" v-model="value5" raw-value :list="addressData" value-text-align="center"></x-address>
         <x-input title="详细地址" ref="homeAddress" required :show-clear="false" placeholder="请输入详细地址"></x-input>
       </group>
     </div>
@@ -68,6 +68,7 @@
         value2: [],
         value3: [],
         value4: [],
+        value5: [],
         list: [],
         list1: [],
         list2: [],
@@ -115,9 +116,36 @@
       getName (value) {
         return value2name(value, ChinaAddressV4Data)
       },
-
+      getRealNameValid() {
+        return this.$refs.realName.valid
+      },
+      getUnitNameValid() {
+        return this.$refs.unitName.valid
+      },
+      getUnitAddressValid() {
+        return this.$refs.unitAddress.valid
+      },
+      getHomeAddressValid() {
+        return this.$refs.homeAddress.valid
+      },
+      validFormInput() {
+        if (this.form.mobile && this.form.password) {
+          if (this.getRealNameValid() && this.getUnitNameValid()
+          && this.getUnitAddressValid() && this.getUnitAddressValid()
+          && this.getHomeAddressValid()) return true
+          return false
+        } else {
+          return false
+        }
+      },
       validForm() {
-
+        if (this.value.length !== 1 || this.value1.length !== 1
+        || this.value2.length !== 1 || this.value3.length !== 1
+          || this.value4.length !== 1 || this.value5 == ''){
+          return false
+        } else {
+            return true
+        }
       }
     }
   }
