@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-wechat-title="$route.meta.title"></router-view>
   </div>
 </template>
 
@@ -43,6 +43,121 @@ body {
   color: #000 !important;
   &:active {
     background-color: darken(#fff, 5%) !important;
+  }
+}
+
+.login-wrapper {
+  height: 100%;
+  background: #fff;
+}
+.login-hd {
+  padding-top: 10px;
+  overflow: hidden;
+}
+.login-hd .title {
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+  margin: 20px 0;
+}
+.login-hd .logo-wrapper {
+  text-align: center;
+}
+.login-hd .logo {
+  width: 80px;
+  height: 80px;
+}
+.login-btn_warp {
+  padding: 20px 50px;
+  margin-bottom: 50px;
+  .login-tips {
+    padding: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+}
+.login-link {
+  text-align: center;
+  font-size: 15px;
+  p {
+    margin-bottom: 15px;
+  }
+  a {
+    text-decoration: underline;
+    &:visited {
+      color: #000;
+    }
+    &:active {
+      text-decoration: none;
+    }
+  }
+}
+.login-group {
+  padding-top: 50px;
+  .weui-cells:first-of-type {
+    margin-top: 0;
+  }
+  .weui-cells:before {
+    border-top: none !important;
+  }
+  .weui-cells:after {
+    border-bottom: none !important;
+  }
+  .weui-cell {
+    padding: 10px 50px !important;
+    &::before {
+      left: 50px !important;
+      right: 50px !important;
+    }
+    .iconfont {
+      padding: 0 10px;
+      color: #000;
+      font-size: 20px;
+    }
+  }
+  .login-input_last {
+    &:after {
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      right: 50px;
+      height: 1px;
+      border-bottom: 1px solid #d9d9d9;
+      color: #d9d9d9;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      left: 50px;
+    }
+  }
+  .weui-cell_warn {
+    &::before {
+      border-top: 1px solid @loan-red !important;
+    }
+    &::after {
+      border-bottom: 1px solid @loan-red !important;
+    }
+    .weui-cell__ft {
+      .weui-icon-warn {
+        display: none;
+      }
+    }
+    .iconfont {
+      color: @loan-red;
+    }
+  }
+  .login-auto-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 14px;
+  }
+  .login-agree {
+    padding: 25px 0;
+    text-align: center;
+    color: #000;
+    font-size: 15px;
   }
 }
 </style>

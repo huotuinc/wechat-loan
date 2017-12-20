@@ -9,15 +9,12 @@ Vue.use(Router)
 export const constantRouterMap = [
   {
     path: '/',
-    component: Layout,
-    redirect: '/loan',
+    alias: '/loan',
     name: 'Loan',
-    children: [
-      {
-        path: 'loan',
-        component: _import('loan/index')
-      }
-    ]
+    component: _import('loan/index'),
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/todo',
@@ -26,7 +23,10 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'Todo',
-        component: _import('todo/index')
+        component: _import('todo/index'),
+        meta: {
+          title: '待办事项'
+        }
       }
     ]
   },
@@ -37,24 +37,36 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'Personal',
-        component: _import('personal/index')
+        component: _import('personal/index'),
+        meta: {
+          title: '个人中心'
+        }
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: _import('login/Login')
+    component: _import('login/index'),
+    meta: {
+      title: '登录'
+    }
   },
   {
     path: '/register',
     name: 'Register',
-    component: _import('register/index')
+    component: _import('register/index'),
+    meta: {
+      title: '用户注册'
+    }
   },
   {
-    path: '*',
-    name: '404',
-    component: _import('404')
+    path: '/forget',
+    name: 'Forget',
+    component: _import('forget/index'),
+    meta: {
+      title: '忘记密码'
+    }
   },
   {
     path: '/setting',
@@ -65,6 +77,19 @@ export const constantRouterMap = [
     path: '/borrow',
     name: 'Borrow',
     component: _import('borrow/index')
+  },
+  {
+    path: '/download',
+    name: 'Download',
+    component: _import('download/index')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: _import('404'),
+    meta: {
+      title: '404'
+    }
   }
 ]
 

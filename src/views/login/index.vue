@@ -37,6 +37,14 @@
       <x-button @click.native="submit" class="btn-yellow">登录</x-button>
       <x-button class="btn-white" link="/register">新用户注册</x-button>
     </div>
+    <div class="login-link">
+      <p>
+        <router-link to="/download">我是出借人</router-link>
+      </p>
+      <p>
+        <router-link to="/forget">忘记密码</router-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -92,83 +100,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-@import '../../style/variable.less';
-
-.login-wrapper {
-  height: 100%;
-  background: #fff;
-}
-.login-hd {
-  padding-top: 10px;
-  margin-bottom: 60px;
-  overflow: hidden;
-}
-.login-hd .title {
-  font-size: 25px;
-  font-weight: 400;
-  text-align: center;
-  margin: 20px 0;
-}
-.login-hd .logo-wrapper {
-  text-align: center;
-}
-.login-hd .logo {
-  width: 80px;
-  height: 80px;
-}
-.login-btn_warp {
-  padding: 20px 50px;
-}
-.login-group {
-  .weui-cells:before {
-    border-top: none !important;
-  }
-  .weui-cells:after {
-    border-bottom: none !important;
-  }
-  .weui-cell {
-    padding: 10px 50px !important;
-    &::before {
-      left: 50px !important;
-      right: 50px !important;
-    }
-    .iconfont {
-      padding: 0 10px;
-      color: #000;
-      font-size: 20px;
-    }
-  }
-  .login-input_last {
-    &:after {
-      content: ' ';
-      position: absolute;
-      bottom: 0;
-      right: 50px;
-      height: 1px;
-      border-bottom: 1px solid #d9d9d9;
-      color: #d9d9d9;
-      -webkit-transform-origin: 0 0;
-      transform-origin: 0 0;
-      -webkit-transform: scaleY(0.5);
-      transform: scaleY(0.5);
-      left: 50px;
-    }
-  }
-  .weui-cell_warn {
-    &::before {
-      border-top: 1px solid @loan-red !important;
-    }
-    &::after {
-      border-bottom: 1px solid @loan-red !important;
-    }
-    .weui-cell__ft {
-      display: none;
-    }
-    .iconfont {
-      color: @loan-red;
-    }
-  }
-}
-</style>

@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import { ToastPlugin } from 'vux'
 import FastClick from 'fastclick'
+import VueWechatTitle from 'vue-wechat-title'
 import App from './App'
 import router from './router'
 import store from './store'
@@ -12,6 +13,7 @@ import './mock'
 FastClick.attach(document.body)
 
 Vue.use(ToastPlugin)
+Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -1,4 +1,4 @@
-import {AUTH_INFO} from '../mutation-type'
+import { AUTH_INFO } from '../mutation-type'
 
 const authentication = {
   state: {
@@ -9,8 +9,7 @@ const authentication = {
       state.authInfo = payload
     }
   },
-  actions: {
-  }
+  actions: {}
 }
 
 export default authentication
