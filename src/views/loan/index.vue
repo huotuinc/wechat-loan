@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="loan-footer">
-        <x-button class="loan-button btn-yellow">我要出借</x-button>
+        <x-button class="loan-button btn-yellow" link="/loan/publish">我要出借</x-button>
     </div>
   </div>
 </template>
