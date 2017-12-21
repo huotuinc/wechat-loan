@@ -23,7 +23,7 @@
         return dateFormat(new Date(),'YYYY-MM-DD')
       },
       heightStyle() {
-        return `height:${this.repayDetail.length * 100}px`
+        return `height:${this.repayDetail.length * 85}px`
       }
     },
     created() {
@@ -34,7 +34,6 @@
         this.$store
           .dispatch('getRepayDetail', 1)//        this.$route.params.id
           .then((res) => {
-            console.log(res)
             this.repayDetail = res
           })
       }

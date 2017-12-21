@@ -31,7 +31,7 @@ const getorderinfoData = Mock.mock({
 
 const getRepayDetailData = Mock.mock({
   data: [{
-    repayDate: '2017-12-20',
+    repayDate: '2017-12-22',
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)'
@@ -72,6 +72,6 @@ const orderNotice = Mock.mock({
 
 export default {
   getOrderInfo: config => Object.assign(globalData, getorderinfoData),
-  getRepayDetail: config => Object.assign(globalData, getRepayDetailData)
+  getRepayDetail: config => Object.assign(globalData, getRepayDetailData),
   getOrderNotice: config => Object.assign(globalData, orderNotice)
 }
