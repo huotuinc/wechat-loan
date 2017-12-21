@@ -97,6 +97,11 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/orderInfo/:orderId',
+    name: 'OrderInfo',
+    component: _import('borrow-info/LoanTreaty')
+  },
+  {
     path: '/authenticationList',
     name: 'AuthenticationList',
     component: _import('authentication-list/index')

@@ -1,19 +1,25 @@
 <template>
   <div>
-    <div class="loan-todo vux-1px-b">
-      <a class="loan-todo_item vux-1px-t">
-        <div class="loan-todo_hd">
-          <i class="iconfont icon-msg"></i>
-        </div>
-        <div class="loan-todo_bd">
-          <h4>xxx借给我的借款已逾期</h4>
-          <p>xxxxxxxxx</p>
-          <span>2017-05-11 09:00</span>
-        </div>
-        <div class="loan-todo_ft">
-            <button type="button">立即查看</button>
-        </div>
-      </a>
+    <div class="loan-todo vux-1px-b" v-if="messageList.length > 0">
+      <template v-for="message in messageList" >
+        <router-link :to="{name: 'OrderInfo', params:{orderId: message.orderId}}" class="loan-todo_item vux-1px-t" :key="message.orderId" >
+          <div class="loan-todo_hd">
+            <i class="iconfont icon-msg"></i>
+          </div>
+          <div class="loan-todo_bd">
+            <h4>{{message.noticeTitle}}</h4>
+            <p>{{message.noticeContent}}</p>
+            <span>{{message.noticeActTime}}</span>
+          </div>
+          <div class="loan-todo_ft">
+              <button type="button">立即查看</button>
+          </div>
+        </router-link>
+      </template>
+    </div>
+    <div class="is-empty" v-else-if="messageList.length == 0">
+        <img src="../../assets/empty.png" alt="空数据">
+        <p>暂无消息</p>
     </div>
   </div>
 </template>
@@ -81,7 +87,8 @@ export default {
       word-break: break-all;
     }
     p {
-      font-size: 15px;
+      padding-right: 5px;
+      font-size: 14px;
       line-height: 1.2;
       overflow: hidden;
       text-overflow: ellipsis;
