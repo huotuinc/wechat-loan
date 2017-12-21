@@ -1,11 +1,17 @@
 import Mock from 'mockjs'
 import globalData from '../global'
 
-let Random = Mock.Random;
+let Random = Mock.Random
 Random.extend({
   code: 0,
-  constellations: [{id:1,value: '未认证'}, {id:2,value: '认证失败'}, {id:3,value: '已认证'}, {id:4,value: '过期'}, {id:5,value: '认证中'}],
-  constellation: function(){
+  constellations: [
+    { id: 1, value: '未认证' },
+    { id: 2, value: '认证失败' },
+    { id: 3, value: '已认证' },
+    { id: 4, value: '过期' },
+    { id: 5, value: '认证中' }
+  ],
+  constellation: function() {
     for (let i = 0; i < this.constellations.length; i++) {
       if (this.constellations[i].id === this.code) {
         return this.constellations[i].value
@@ -13,13 +19,13 @@ Random.extend({
     }
     return ''
   },
-  randomCode: function(){
-    let Min = 1;
-    let Max = 5;
-    let Range = Max - Min;
-    let Rand = Math.random();
-    let code = (Min + Math.round(Rand * Range));
-    this.code = code;
+  randomCode: function() {
+    let Min = 1
+    let Max = 5
+    let Range = Max - Min
+    let Rand = Math.random()
+    let code = Min + Math.round(Rand * Range)
+    this.code = code
     return code
   }
 })
@@ -36,14 +42,12 @@ const certificationAllData = Mock.mock({
     carrierFlg: Random.randomCode(),
     carrierFlgMsg: Random.constellation(),
     idCardFlg: Random.randomCode(),
-    idCardFlgMsg:Random.constellation()
+    idCardFlgMsg: Random.constellation()
   }
 })
 
 const userinfoeditData = Mock.mock({
-  data: {
-
-  }
+  data: {}
 })
 
 export default {

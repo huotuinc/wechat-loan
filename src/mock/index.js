@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 import loginApi from './modules/login'
+import loanApi from './modules/loan'
 import sendCodeApi from './modules/register'
 import registerApi from './modules/register'
 import borrowApi from './modules/borrow'
@@ -23,3 +24,6 @@ Mock.mock(/\/api\/borrow\/saveInfo/, 'post', borrowApi.saveInfo())
 Mock.mock(/\/api\/user\/certificationAll/, 'post', certificationAllApi.certificationAll())
 //基本信息认证
 Mock.mock(/\/api\/user\/userinfoedit/, 'post', userinfoeditDataApi.userinfoedit())
+
+// 借款相关
+Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
