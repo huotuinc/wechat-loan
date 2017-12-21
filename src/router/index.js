@@ -17,17 +17,12 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/loan',
-    children: [
-      {
-        path: '/publish',
-        name: 'Publish',
-        component: _import('loan/LoanPublish'),
-        meta: {
-          title: '我要借款'
-        }
-      }
-    ]
+    path: '/publish',
+    name: 'Publish',
+    component: _import('loan/LoanPublish'),
+    meta: {
+      title: '我要借款'
+    }
   },
   {
     path: '/todo',
@@ -45,7 +40,17 @@ export const constantRouterMap = [
   },
   {
     path: '/personal',
-    component: Layout
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Personal',
+        component: _import('personal/index'),
+        meta: {
+          title: '个人中心'
+        }
+      }
+    ]
   },
   {
     path: '/login',
@@ -77,11 +82,6 @@ export const constantRouterMap = [
     component: _import('setting/index')
   },
   {
-    path: '/borrow',
-    name: 'Borrow',
-    component: _import('borrow/index')
-  },
-  {
     path: '/download',
     name: 'Download',
     component: _import('download/index')
@@ -95,6 +95,11 @@ export const constantRouterMap = [
         component: _import('borrow-info/LoanTreaty')
       }
     ]
+  },
+  {
+    path: '/orderInfo/:orderId',
+    name: 'OrderInfo',
+    component: _import('borrow-info/LoanTreaty')
   },
   {
     path: '/authenticationList',

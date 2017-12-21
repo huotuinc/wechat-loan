@@ -1,35 +1,44 @@
 <template>
-  <div>
-    <group>
-      <x-input title="借款金额" ref="borrowMoney" type="number" :show-clear="false" name="obj.borrowMoney" v-model.number="obj.borrowMoney">
+  <div class="loan-wrap">
+    <group class="loan-publish">
+      <x-input
+        title="借款金额"
+        ref="borrowMoney"
+        type="number"
+        :show-clear="false"
+        name="obj.borrowMoney"
+        v-model.number="obj.borrowMoney">
         <span slot="right">元</span>
       </x-input>
-      <x-input title="借款时长" ref="borrowTime" name="borrowTime" :show-clear="false" type="number" v-model.number="obj.borrowTime">
+      <x-input
+        title="借款时长"
+        ref="borrowTime"
+        name="borrowTime"
+        :show-clear="false"
+        type="number"
+        v-model.number="obj.borrowTime">
         <span slot="right">天</span>
       </x-input>
-      <popup-picker title="借款用途" :data="list"
-                    v-model="value"
-                    popup-title="借款用途"></popup-picker>
+      <popup-picker
+        title="借款用途"
+        :data="list"
+        v-model="value"
+        popup-title="借款用途">
+      </popup-picker>
     </group>
-    <group>
-      <cell title="信用报告" is-link>
-        <div v-if="authNum === 3">
-          <router-link to="/login"><!--跳转到查看信用报告页面-->
-            <span style="color: green">{{authText}}</span>
-          </router-link>
-        </div>
-        <div v-else>
-          <router-link to="/login"><!--跳转到信用认证页面-->
-            <span>{{authText}}</span>
-          </router-link>
-        </div>
+    <group class="loan-publish">
+      <cell title="信用报告" is-link to="/login" v-if="authNum === 1">
+        <span class="text-success">{{authText}}</span>
+      </cell>
+      <cell title="信用报告" is-link to="/login" v-else>
+        <span class="text-danger">{{authText}}</span>
       </cell>
     </group>
-    <div style="text-align: center">
-      <span style="font-size: 8px;vertical-align: bottom">已阅读并同意《超级借条借款条约》</span>
+    <div class="loan-publish_rule">
+      <span>已阅读并同意《借款条约》</span>
     </div>
-    <div style="padding:20px;">
-      <x-button @click.native="submit" type="primary">确认发布</x-button>
+    <div class="loan-publish_btn">
+      <x-button @click.native="submit" class="btn-yellow">确认发布</x-button>
     </div>
   </div>
 </template>
@@ -39,6 +48,7 @@ import { mapGetters } from 'vuex'
 import { purpose, findCode } from '@/utils/enum'
 
 export default {
+  name: 'loanPublish',
   created() {
     this._getPurposeList()
   },
@@ -64,8 +74,8 @@ export default {
       value: [],
       list: [],
       obj: {
-        borrowTime: 1,
-        borrowMoney: 1,
+        borrowTime: '',
+        borrowMoney: '',
         borrowUse: 1,
         userType: 1
       }
@@ -80,7 +90,7 @@ export default {
       this.list.push(ret)
     },
     submit() {
-      if (this.authNum !== 3) {
+      if (this.authNum !== 1) {
         this.$vux.toast.text('请先完成信用认证')
         return
       }
@@ -102,4 +112,28 @@ export default {
   }
 }
 </script>
+<style lang="less">
+@import '../../style/variable.less';
 
+.loan-publish {
+  .weui-cells {
+    margin-top: 0 !important;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .weui-cell__bd {
+    input {
+      text-align: right;
+    }
+  }
+}
+.loan-publish_rule {
+  padding-top: 60px;
+  text-align: center;
+  color: #7c8496;
+  font-size: 12px;
+}
+.loan-publish_btn {
+  padding: 20px;
+}
+</style>

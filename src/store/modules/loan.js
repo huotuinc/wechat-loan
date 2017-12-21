@@ -32,7 +32,6 @@ const loan = {
           method: 'get'
         })
           .then(res => {
-            console.log(res)
             commit(AUTH_INFO, res)
             resolve(res)
           })

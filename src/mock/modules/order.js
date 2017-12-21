@@ -1,7 +1,6 @@
 import Mock from 'mockjs'
 import globalData from '../global'
 
-
 const getorderinfoData = Mock.mock({
   data: {
     orderId: '@id',
@@ -59,7 +58,20 @@ const getRepayDetailData = Mock.mock({
   }]
 })
 
+const orderNotice = Mock.mock({
+  'data|0-5': [
+    {
+      noticeTitle: '@ctitle',
+      noticeContent: '@csentence',
+      noticeActTime: '@datetime',
+      orderId: '@id',
+      lendOrder: true
+    }
+  ]
+})
+
 export default {
   getOrderInfo: config => Object.assign(globalData, getorderinfoData),
   getRepayDetail: config => Object.assign(globalData, getRepayDetailData)
+  getOrderNotice: config => Object.assign(globalData, orderNotice)
 }

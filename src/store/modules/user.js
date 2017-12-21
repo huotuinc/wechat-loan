@@ -48,7 +48,7 @@ const user = {
           })
       })
     },
-    register({}, userInfo) {
+    register({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/register',
@@ -68,6 +68,20 @@ const user = {
         commit(USER_INFO, '')
         removeUserInfo()
         resolve()
+      })
+    },
+    personalIndex({ commit }) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/userIndex',
+          method: 'get'
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
       })
     }
   }
