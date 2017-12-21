@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import loginApi from './modules/login'
 import loanApi from './modules/loan'
+import userApi from './modules/user'
 import registerApi from './modules/register'
 import borrowApi from './modules/borrow'
 import authenticationApi from './modules/authentication'
@@ -33,4 +34,7 @@ Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
 
 // 借款单详情
 Mock.mock(/\/api\/order\/getOrderInfo/, 'post', orderApi.getOrderInfo)
-Mock.mock(/\/api\/order\/getOrderNotice/, orderApi.getOrderNotice)
+Mock.mock(/\/api\/order\/getOrderNotice/, 'get', orderApi.getOrderNotice)
+
+// 用户相关
+Mock.mock(/\/api\/user\/userIndex/, 'get', userApi.personal)
