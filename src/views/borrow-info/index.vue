@@ -1,7 +1,7 @@
 <template>
   <div class="borrowInfo-wrapper">
     <group>
-      <cell title="订单状态">
+      <cell :title="orderTitle">
         {{borrowDetail.orderStatus}}
       </cell>
     </group>
@@ -36,7 +36,7 @@
     <div v-if="borrowDetail.repayTypeCode === 1">
       <group>
         <cell title="每月还款金额" is-link>
-          <router-link to="/login">
+          <router-link to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}">
             100元
           </router-link>
         </cell>
@@ -65,7 +65,7 @@
       || borrowDetail.grantStatus === 5
       || borrowDetail.grantStatus === 6">
       <cell title="出借条约" is-link>
-        <router-link to="{path:'/borrowInfo',params:{id:borrowDetail.orderId}}">
+        <router-link to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}">
           立即查看
         </router-link>
       </cell>
@@ -81,20 +81,31 @@
 </template>
 
 <script>
-  import {XInput, Group, Cell,} from 'vux'
+  import {XInput, Group, Cell,dateFormat } from 'vux'
   export default {
+    computed: {
+      orderTitle() {
+        let status = this.borrowDetail.grantStatus
+        let repayDate = dateFormat (new Date(this.borrowDetail.agreedRepayTime),'MM-DD')
+        let days = Math.abs(this.borrowDetail.repayTimeDays)
+        if (status === 5) {
+            return '还款日'+repayDate+ '   已逾期'+days+'天'
+        }
+        if (status === 4) {
+          return '还款日'+repayDate+'   '+days+ "天后逾期"
+        }
+        return '订单状态';
+      }
+    },
     created() {
       this._getBorrowDetail()
     },
     methods: {
       _getBorrowDetail() {
         this.$store
-          .dispatch('getOrderInfo', 1)
-          //        this.$route.params.id
+          .dispatch('getOrderInfo', 1)//this.$route.params.id
           .then((res) => {
             this.borrowDetail = res
-            //todo 提交成功跳转
-            this.$vux.toast.text('提交成功')
           })
       }
     },

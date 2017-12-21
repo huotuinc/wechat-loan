@@ -7,7 +7,7 @@ const getorderinfoData = Mock.mock({
     orderId: '@id',
     orderName: '@name',
     orderStatus: '@pick(["待审核","待还款","已拒绝","已完成","已取消","已逾期"])',
-    grantStatus: '@pick([1,6])',
+    grantStatus: '@integer(1, 6)',
     loanAmount: '@float(10000, 99999, 2, 2)',
     payAmount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)',
@@ -21,7 +21,7 @@ const getorderinfoData = Mock.mock({
     authStatus: '@boolean',
     grantTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")',
     agreedRepayTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")',
-    repayTimeDays: '@integer(1, 30)',
+    repayTimeDays: '@integer(-30, 30)',
     loanerUserId: '@id',
     remarks: '@string(10,20)',
     repayType: '@pick(["等额本息","还本付息"])',
@@ -30,6 +30,36 @@ const getorderinfoData = Mock.mock({
   }
 })
 
+const getRepayDetailData = Mock.mock({
+  data: [{
+    repayDate: '2017-12-20',
+    payAmount: '@float(99999, 100000, 2, 2)',
+    amount: '@float(99999, 100000, 2, 2)',
+    interestAmount: '@float(100, 500, 2, 2)'
+  },{
+    repayDate: '@DATETIME("yyyy-MM-dd")',
+    payAmount: '@float(99999, 100000, 2, 2)',
+    amount: '@float(99999, 100000, 2, 2)',
+    interestAmount: '@float(100, 500, 2, 2)'
+  },{
+    repayDate: '@DATETIME("yyyy-MM-dd")',
+    payAmount: '@float(99999, 100000, 2, 2)',
+    amount: '@float(99999, 100000, 2, 2)',
+    interestAmount: '@float(100, 500, 2, 2)'
+  },{
+    repayDate: '@DATETIME("yyyy-MM-dd")',
+    payAmount: '@float(99999, 100000, 2, 2)',
+    amount: '@float(99999, 100000, 2, 2)',
+    interestAmount: '@float(100, 500, 2, 2)'
+  },{
+    repayDate: '@DATETIME("yyyy-MM-dd")',
+    payAmount: '@float(99999, 100000, 2, 2)',
+    amount: '@float(99999, 100000, 2, 2)',
+    interestAmount: '@float(100, 500, 2, 2)'
+  }]
+})
+
 export default {
-  getOrderInfo: config => Object.assign(globalData, getorderinfoData)
+  getOrderInfo: config => Object.assign(globalData, getorderinfoData),
+  getRepayDetail: config => Object.assign(globalData, getRepayDetailData)
 }

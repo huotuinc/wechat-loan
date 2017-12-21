@@ -1,38 +1,52 @@
 <template>
   <div>
-    <timeline>
-      <timeline-item>
-        <p class="recent">2016-04-17</p>
-        <h4 class="recent">300元</h4>
-        <p class="recent">含本金250+利息50</p>
-      </timeline-item>
-      <timeline-item>
-        <p>2016-04-16</p>
-        <h4>300元</h4>
-        <p>含本金250+利息50</p>
-      </timeline-item>
-      <timeline-item>
-        <p>2016-04-15</p>
-        <h4> 300元</h4>
-        <p>含本金250+利息50</p>
-      </timeline-item>
-    </timeline>
+    <flow orientation="vertical" :style="heightStyle">
+      <template  v-for="(item,index) in repayDetail">
+      <flow-state :state="repayDetail.length - index" :is-done="currentDate === item.repayDate">
+        <span slot="title">
+        <p v-html="item.repayDate"></p>
+        <p v-html="item.payAmount + '元'"></p>
+          <p>含本金<span v-html="item.amount"></span>元+利息<span v-html="item.interestAmount"></span>元</p>
+        </span>
+      </flow-state>
+      <flow-line v-if="index < repayDetail.length - 1"></flow-line>
+      </template>
+    </flow>
   </div>
 </template>
 
 <script>
-  import { Timeline, TimelineItem } from 'vux'
+  import { Flow, FlowState, FlowLine ,dateFormat} from 'vux'
   export default {
+    computed: {
+      currentDate() {
+        return dateFormat(new Date(),'YYYY-MM-DD')
+      },
+      heightStyle() {
+        return `height:${this.repayDetail.length * 100}px`
+      }
+    },
     created() {
+      this._getRepayDetail()
     },
     methods: {
+      _getRepayDetail() {
+        this.$store
+          .dispatch('getRepayDetail', 1)//        this.$route.params.id
+          .then((res) => {
+            console.log(res)
+            this.repayDetail = res
+          })
+      }
     },
     components: {
-      TimelineItem,
-      Timeline
+      Flow,
+      FlowState,
+      FlowLine
     },
     data() {
       return {
+          repayDetail: []
       }
     }
   }

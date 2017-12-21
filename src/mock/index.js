@@ -32,4 +32,6 @@ Mock.mock(/\/api\/user\/editcontacts/, 'post', authenticationApi.editcontacts)
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
 
 // 借款单详情
-Mock.mock(/\/api\/order\/getOrderInfo/, 'post', orderApi.getOrderInfo())
+Mock.mock(/\/api\/order\/getOrderInfo/, 'get', orderApi.getOrderInfo())
+// 每月还款金额
+Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail())
