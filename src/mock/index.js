@@ -4,7 +4,8 @@ import sendCodeApi from './modules/register'
 import registerApi from './modules/register'
 import borrowApi from './modules/borrow'
 import certificationAllApi from './modules/authentication'
-import userinfoeditDataApi from './modules/authentication'
+import userinfoeditApi from './modules/authentication'
+import editcontactsApi from './modules/authentication'
 
 // 模拟服务器延迟
 Mock.setup({
@@ -22,4 +23,6 @@ Mock.mock(/\/api\/borrow\/saveInfo/, 'post', borrowApi.saveInfo())
 //信用认证
 Mock.mock(/\/api\/user\/certificationAll/, 'post', certificationAllApi.certificationAll())
 //基本信息认证
-Mock.mock(/\/api\/user\/userinfoedit/, 'post', userinfoeditDataApi.userinfoedit())
+Mock.mock(/\/api\/user\/userinfoedit/, 'post', userinfoeditApi.userinfoedit())
+//联系人认证
+Mock.mock(/\/api\/user\/editcontacts/, 'post', editcontactsApi.editcontacts())
