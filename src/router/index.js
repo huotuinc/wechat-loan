@@ -82,11 +82,6 @@ export const constantRouterMap = [
     component: _import('setting/index')
   },
   {
-    path: '/borrow',
-    name: 'Borrow',
-    component: _import('borrow/index')
-  },
-  {
     path: '/download',
     name: 'Download',
     component: _import('download/index')
