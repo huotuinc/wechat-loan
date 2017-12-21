@@ -52,5 +52,6 @@ const userinfoeditData = Mock.mock({
 
 export default {
   certificationAll: config => Object.assign(globalData, certificationAllData),
-  userinfoedit: config => Object.assign(globalData, userinfoeditData)
+  userinfoedit: config => Object.assign(globalData, userinfoeditData),
+  editcontacts: config => Object.assign(globalData, editcontactsData)
 }

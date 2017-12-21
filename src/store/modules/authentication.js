@@ -26,10 +26,24 @@ const authentication = {
       })
     },
     userinfoedit({},form) {
-      console.log(form)
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/userinfoedit',
+          method: 'post',
+          data: form
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    editcontacts({},form) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/editcontacts',
           method: 'post',
           data: form
         })
