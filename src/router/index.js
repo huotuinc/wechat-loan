@@ -17,17 +17,12 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/loan',
-    children: [
-      {
-        path: '/publish',
-        name: 'Publish',
-        component: _import('loan/LoanPublish'),
-        meta: {
-          title: '我要借款'
-        }
-      }
-    ]
+    path: '/publish',
+    name: 'Publish',
+    component: _import('loan/LoanPublish'),
+    meta: {
+      title: '我要借款'
+    }
   },
   {
     path: '/todo',

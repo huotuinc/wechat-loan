@@ -6,6 +6,8 @@ body {
 }
 body {
   background-color: #fbf9fe;
+  font-family: 'Helvetica Neue', 'PingFang SC', Helvetica, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei',
+    sans-serif;
 }
 #app {
   height: 100%;
@@ -27,6 +29,14 @@ body {
   &:active {
     background-color: darken(#fff, 5%) !important;
   }
+}
+
+.text-danger {
+  color: @loan-text-danger;
+}
+
+.text-success {
+  color: @loan-text-success;
 }
 
 .login-wrapper {
@@ -143,5 +153,10 @@ body {
     text-align: center;
     color: #000;
     font-size: 15px;
+  }
+}
+.loan-wrap {
+  .weui-cells {
+    font-size: 14px;
   }
 }

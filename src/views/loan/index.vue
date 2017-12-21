@@ -24,7 +24,7 @@
       </group>
       <div class="loan-body_grid">
         <grid>
-          <grid-item label="我的借条">
+          <grid-item label="借条">
             <i class="iconfont icon-loan-o"></i>
           </grid-item>
           <grid-item label="我的借条">
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="loan-footer">
-        <x-button class="loan-button btn-yellow" link="/loan/publish">我要出借</x-button>
+        <x-button class="loan-button btn-yellow" link="/publish">我要出借</x-button>
     </div>
   </div>
 </template>
@@ -60,7 +60,6 @@ export default {
   },
   created() {
     this.$store.dispatch('getIndex').then(res => {
-      console.log(res)
       this.page = res
     })
   }
@@ -118,6 +117,9 @@ export default {
       background: @loan-yellow;
       text-align: center;
       border-radius: 50%;
+    }
+    .vux-label {
+      font-size: 16px;
     }
   }
   .loan-body_grid {
