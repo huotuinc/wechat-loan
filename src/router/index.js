@@ -112,6 +112,11 @@ export const constantRouterMap = [
     component: _import('contacts/index')
   },
   {
+    path: '/repayDetail',
+    name: 'RepayDetail',
+    component: _import('borrow-info/RepayDetail')
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

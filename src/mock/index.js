@@ -4,6 +4,7 @@ import loanApi from './modules/loan'
 import registerApi from './modules/register'
 import borrowApi from './modules/borrow'
 import authenticationApi from './modules/authentication'
+import orderApi from './modules/order'
 
 // 模拟服务器延迟
 Mock.setup({
@@ -29,3 +30,6 @@ Mock.mock(/\/api\/user\/editcontacts/, 'post', authenticationApi.editcontacts)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
+
+// 借款单详情
+Mock.mock(/\/api\/order\/getOrderInfo/, 'post', orderApi.getOrderInfo())
