@@ -40,7 +40,17 @@ export const constantRouterMap = [
   },
   {
     path: '/personal',
-    component: Layout
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Personal',
+        component: _import('personal/index'),
+        meta: {
+          title: '个人中心'
+        }
+      }
+    ]
   },
   {
     path: '/login',

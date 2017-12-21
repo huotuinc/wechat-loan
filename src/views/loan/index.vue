@@ -27,10 +27,10 @@
           <grid-item label="借条">
             <i class="iconfont icon-loan-o"></i>
           </grid-item>
-          <grid-item label="我的借条">
+          <grid-item label="待办事项" link="/todo">
             <i class="iconfont icon-todo"></i>
           </grid-item>
-          <grid-item label="我的借条">
+          <grid-item label="个人中心" link="/personal">
             <i class="iconfont icon-personal"></i>
           </grid-item>
         </grid>
