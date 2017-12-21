@@ -37,77 +37,71 @@
   </div>
 </template>
 <script>
-  import {XInput, Group, XButton, Cell, Picker, PopupPicker} from 'vux'
-  import {mapGetters} from 'vuex'
-  import {purpose,findCode} from '@/utils/enum'
-  export default {
-
-    created() {
-      this._getPurposeList()
+import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
+import { mapGetters } from 'vuex'
+import { purpose, findCode } from '@/utils/enum'
+export default {
+  created() {
+    this._getPurposeList()
+  },
+  computed: {
+    authText() {
+      return this.authInfo.authMsg
     },
-    computed: {
-      authText() {
-        return this.authInfo.authMsg
-      },
-      authNum() {
-        return this.authInfo.authCode
-      },
-      ...mapGetters([
-        'authInfo'
-      ])
+    authNum() {
+      return this.authInfo.authCode
     },
-    components: {
-      XInput,
-      XButton,
-      Group,
-      Cell,
-      PopupPicker,
-      Picker
-    },
-    data() {
-      return {
-        value: [],
-        list: [],
-        obj: {
-          borrowTime: 1,
-          borrowMoney: 1,
-          borrowUse: 1,
-          userType: 1
-        }
+    ...mapGetters(['authInfo'])
+  },
+  components: {
+    XInput,
+    XButton,
+    Group,
+    Cell,
+    PopupPicker,
+    Picker
+  },
+  data() {
+    return {
+      value: [],
+      list: [],
+      obj: {
+        borrowTime: 1,
+        borrowMoney: 1,
+        borrowUse: 1,
+        userType: 1
       }
+    }
+  },
+  methods: {
+    _getPurposeList() {
+      let ret = []
+      purpose.forEach(item => {
+        ret.push(item.desc)
+      })
+      this.list.push(ret)
     },
-    methods: {
-      _getPurposeList() {
-        let ret = []
-        purpose.forEach((item) => {
-          ret.push(item.desc)
-        })
-        this.list.push(ret)
-      },
-      submit() {
-        if (this.authNum !== 3){
-          this.$vux.toast.text('请先完成信用认证')
-          return
-        }
-        if (this.value.length !== 1){
-          this.$vux.toast.text('请选择借款用途')
-          return
-        }
-        this.obj.borrowUse = findCode(purpose,this.value[0])
+    submit() {
+      if (this.authNum !== 3) {
+        this.$vux.toast.text('请先完成信用认证')
+        return
+      }
+      if (this.value.length !== 1) {
+        this.$vux.toast.text('请选择借款用途')
+        return
+      }
+      this.obj.borrowUse = findCode(purpose, this.value[0])
 
-        if (this.obj.borrowTime !== 0 && this.obj.borrowMoney !== 0) {
-          this.$store
-            .dispatch('saveInfo', this.obj)
-            .then(() => {
-              //todo 借款成功跳转页面
-              this.$vux.toast.text('借款成功')
-            })
-        } else {
-          this.$vux.toast.text('借款金额或借款时长不能为0')
-        }
+      if (this.obj.borrowTime !== 0 && this.obj.borrowMoney !== 0) {
+        this.$store.dispatch('saveInfo', this.obj).then(() => {
+          //todo 借款成功跳转页面
+          this.$vux.toast.text('借款成功')
+        })
+      } else {
+        this.$vux.toast.text('借款金额或借款时长不能为0')
       }
     }
   }
-
+}
 </script>
 

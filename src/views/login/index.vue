@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <div class="login-hd">
       <div class="logo-wrapper">
-        <img class="logo" src="../../assets/logo.png">
+        <img class="logo" src="../../assets/logo.png" alt="有信">
       </div>
     </div>
 

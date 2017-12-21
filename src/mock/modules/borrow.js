@@ -2,8 +2,7 @@ import Mock from 'mockjs'
 import globalData from '../global'
 
 const saveInfoData = Mock.mock({
-  data: {
-  }
+  data: {}
 })
 
 export default {
