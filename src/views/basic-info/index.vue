@@ -2,13 +2,14 @@
   <div>
     <div>
       <group title="* 恶意填写会对您的借款额度造成负面影响">
-        <x-input title="姓名" ref="realName" required :show-clear="false" v-model="form.realName"></x-input>
-        <popup-picker title="婚姻状况" :data="list"
-                      v-model="value"
-                      popup-title="婚姻状况"></popup-picker>
+        <x-address title="居住地区" v-model="value5" raw-value :list="addressData" value-text-align="center"></x-address>
+        <x-input title="详细地址" ref="homeAddress" required :show-clear="false" v-model="form.homeAddress" placeholder="请输入详细地址"></x-input>
         <popup-picker title="学历" :data="list1"
                       v-model="value1"
                       popup-title="学历"></popup-picker>
+        <popup-picker title="婚姻状况" :data="list"
+                      v-model="value"
+                      popup-title="婚姻状况"></popup-picker>
         <popup-picker title="月薪范围" :data="list2"
                       v-model="value2"
                       popup-title="月薪范围"></popup-picker>
@@ -20,8 +21,7 @@
                       popup-title="房产状况"></popup-picker>
         <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
         <x-input title="单位地址" ref="unitAddress" required :show-clear="false" v-model="form.unitAddress" placeholder="请输入单位地址"></x-input>
-        <x-address title="居住地区" v-model="value5" raw-value :list="addressData" value-text-align="center"></x-address>
-        <x-input title="详细地址" ref="homeAddress" required :show-clear="false" v-model="form.homeAddress" placeholder="请输入详细地址"></x-input>
+       <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber"></x-input>
       </group>
     </div>
     <div style="padding:20px;">
@@ -75,7 +75,7 @@
         list3: [],
         list4: [],
         form: {
-          realName: '',
+          wechatNumber: '',
           homeArea: '',
           homeAddress: '',
           unitAddress: '',
@@ -134,8 +134,8 @@
       getName (value) {
         return value2name(value, ChinaAddressV4Data)
       },
-      getRealNameValid() {
-        return this.$refs.realName.valid
+      getWechatNumberValid() {
+        return this.$refs.wechatNumber.valid
       },
       getUnitNameValid() {
         return this.$refs.unitName.valid
@@ -147,9 +147,9 @@
         return this.$refs.homeAddress.valid
       },
       validFormInput() {
-        if (this.form.realName && this.form.unitName && this.form.unitAddress
+        if (this.form.wechatNumber && this.form.unitName && this.form.unitAddress
           && this.form.homeAddress) {
-          if (this.getRealNameValid() && this.getUnitNameValid()
+          if (this.getWechatNumberValid() && this.getUnitNameValid()
           && this.getUnitAddressValid() && this.getUnitAddressValid()
           && this.getHomeAddressValid()) return true
           return false

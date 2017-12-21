@@ -85,8 +85,13 @@ export const constantRouterMap = [
   },
   {
     path: '/borrowInfo',
-    name: 'BorrowInfo',
-    component: _import('borrow-info/index')
+    component: _import('borrow-info/index'),
+    children: [
+      {
+        path: ':id',
+        component: _import('borrow-info/LoanTreaty')
+      }
+    ]
   },
   {
     path: '/authenticationList',

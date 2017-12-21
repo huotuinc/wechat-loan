@@ -15,9 +15,7 @@
       <cell title="应还金额">
         830元
       </cell>
-      <cell title="应还金额">
-        0元
-      </cell>
+
       <cell title="借款利息">
         0元
       </cell>
@@ -30,7 +28,17 @@
       <cell title="逾期利息">
         0元
       </cell>
+      <cell title="还款方式">
+        到期还本付息
+      </cell>
     </group>
+
+    <group>
+      <cell title="每月还款金额" is-link>
+        100元
+      </cell>
+    </group>
+
     <group>
       <cell title="信用报告" is-link>
         已提交
@@ -59,7 +67,6 @@
     },
     methods: {
       _getBorrowDetail() {
-
       }
     },
     components: {
