@@ -77,6 +77,28 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/loanList',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'LoanList',
+        component: _import('loan/LoanList'),
+        meta: {
+          title: '我的借款'
+        }
+      }
+    ]
+  },
+  {
+    path: '/loanInfo',
+    name: 'LoanInfo',
+    component: _import('loan/LoanInfo'),
+    meta: {
+      title: '借款信息'
+    }
+  },
+  {
     path: '/setting',
     name: 'Setting',
     component: _import('setting/index')
