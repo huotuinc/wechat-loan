@@ -35,22 +35,22 @@ const getRepayDetailData = Mock.mock({
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)'
-  },{
+  }, {
     repayDate: '@DATETIME("yyyy-MM-dd")',
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)'
-  },{
+  }, {
     repayDate: '@DATETIME("yyyy-MM-dd")',
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)'
-  },{
+  }, {
     repayDate: '@DATETIME("yyyy-MM-dd")',
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)'
-  },{
+  }, {
     repayDate: '@DATETIME("yyyy-MM-dd")',
     payAmount: '@float(99999, 100000, 2, 2)',
     amount: '@float(99999, 100000, 2, 2)',
@@ -70,8 +70,29 @@ const orderNotice = Mock.mock({
   ]
 })
 
+const checkoutData = Mock.mock({
+  data: {
+    userId: '@id',
+    userBalance: '@float(100, 500, 2, 2)',
+    finalAmount: 3,
+    payments: [
+      {
+        payType: 0,
+        name: '支付宝',
+        remark: '@string(10,20)'
+      },
+      {
+        payType: 2,
+        name: "余额",
+        remark: '@string(10,20)'
+      }
+    ]
+  }
+})
+
 export default {
   getOrderInfo: config => Object.assign(globalData, getorderinfoData),
   getRepayDetail: config => Object.assign(globalData, getRepayDetailData),
-  getOrderNotice: config => Object.assign(globalData, orderNotice)
+  getOrderNotice: config => Object.assign(globalData, orderNotice),
+  checkout: config => Object.assign(globalData, checkoutData)
 }

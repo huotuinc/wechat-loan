@@ -64,10 +64,8 @@
       <div v-if="borrowDetail.grantStatus === 4
       || borrowDetail.grantStatus === 5
       || borrowDetail.grantStatus === 6">
-      <cell title="出借条约" is-link>
-        <router-link to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}">
+      <cell title="出借条约" is-link @click.native="selectTreaty">
           立即查看
-        </router-link>
       </cell>
       </div>
       <cell title="日志" is-link>
@@ -101,6 +99,12 @@
       this._getBorrowDetail()
     },
     methods: {
+      selectTreaty() {
+        this.$router.push({
+          path: '/loanTreatyPage',
+          params:{orderId:1}
+        })
+      },
       _getBorrowDetail() {
         this.$store
           .dispatch('getOrderInfo', 1)//this.$route.params.id

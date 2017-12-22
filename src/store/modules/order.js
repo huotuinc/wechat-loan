@@ -51,7 +51,22 @@ const order = {
             reject(error)
           })
       })
-    }
+    },
+    checkout({}, params) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/unifiedorder/checkout',
+          method: 'post',
+          data: params
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
   }
 }
 export default order

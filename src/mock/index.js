@@ -39,4 +39,6 @@ Mock.mock(/\/api\/order\/getOrderNotice/, 'get', orderApi.getOrderNotice)
 // 用户相关
 Mock.mock(/\/api\/user\/userIndex/, 'get', userApi.personal)
 // 每月还款金额
-Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail())
+Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail)
+//查询电子签章的支付信息
+Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout())
