@@ -16,7 +16,8 @@
     "vue-router": "^3.0.1",
     "vue-wechat-title": "^2.0.4",
     "vuex": "^3.0.1",
-    "vux": "^2.7.5"
+    "vux": "^2.7.5",
+    "better-scroll": "^0.1.15"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

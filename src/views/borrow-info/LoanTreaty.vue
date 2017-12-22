@@ -12,11 +12,11 @@
           required
           v-model.trim="form.email">
         </x-input>
-        <popup-picker title="支付方式" :data="list1"
-                      v-model="value1"
+        <popup-picker title="支付方式" :data="list"
+                      v-model="value"
                       popup-title="支付方式"></popup-picker>
         <cell title="实际支付">
-            <span style="color: red">2元</span>
+            <span style="color: red" v-html="form.money + '元'"></span>
         </cell>
       </group>
     </div>
@@ -36,6 +36,9 @@
     PopupPicker
   } from 'vux'
   export default {
+    created() {
+      this._checkout()
+    },
     components: {
       XInput,
       XButton,
@@ -46,19 +49,34 @@
     },
     data() {
       return {
+        tmp: [],
         value: [],
-        value1: [],
         list: [],
-        list1: [],
         form: {
-          treatyType: null,
+          treatyType: 3,
           email: '',
           payType: null,
-          money: 2
+          money: null
         }
       }
     },
     methods: {
+      _checkout() {
+        let requestParams = {}
+        requestParams.treatyType = 3
+        requestParams.loanOrderId = this.$route.params.orderId
+        let ret = []
+        this.$store
+          .dispatch('checkout', requestParams)
+          .then((res) => {
+            res.payments.forEach((item) => {
+              ret.push(item.name)
+            })
+            this.list.push(ret)
+            this.tmp = res.payments
+            this.form.money = res.finalAmount
+          })
+      },
       submit() {
         if (!this.validFormInput() || !this.validForm ){
           this.$vux.toast.text('信息填写有误')
