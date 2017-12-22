@@ -14,7 +14,7 @@ const authentication = {
     certificationAll({}) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/certificationAll',
+          url: '/api/authentication/certificationAll',
           method: 'post'
         })
           .then(response => {
@@ -46,6 +46,34 @@ const authentication = {
           url: '/api/user/editcontacts',
           method: 'post',
           data: form
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    authoperator({}) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/authoperator',
+          method: 'post'
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getSesameUrl({}) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/authentication/getSesameUrl',
+          method: 'post'
         })
           .then(response => {
             resolve(response)

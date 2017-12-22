@@ -23,7 +23,7 @@
         <span class="text-danger">{{borrowDetail.interestAmount}}元</span>
       </cell>
       <cell title="借款期限">
-        <span class="text-danger">{{borrowDetail.loanDay}}</span>
+        <span class="text-danger">{{borrowDetail.loanDay}}天</span>
       </cell>
       <cell title="逾期利率">
         {{borrowDetail.overdueRate}}%/天

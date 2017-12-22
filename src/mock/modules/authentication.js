@@ -52,9 +52,18 @@ const userinfoeditData = Mock.mock({
 const editcontactsData = Mock.mock({
   data: {}
 })
+const authoperatorData = Mock.mock({
+  data: 'https://open.shujumohe.com/box/yys?box_token=02B2654432184CE69E088C0BED366737&real_name=张三&identity_code=340222199803052620&user_mobile=15655503490'
+
+})
+const getSesameUrlData = Mock.mock({
+  data: 'https://open.shujumohe.com/box/yys?box_token=02B2654432184CE69E088C0BED366737&real_name=张三&identity_code=340222199803052620&user_mobile=15655503490'
+})
 
 export default {
   certificationAll: config => Object.assign(globalData, certificationAllData),
   userinfoedit: config => Object.assign(globalData, userinfoeditData),
-  editcontacts: config => Object.assign(globalData, editcontactsData)
+  editcontacts: config => Object.assign(globalData, editcontactsData),
+  authoperator: config => Object.assign(globalData, authoperatorData),
+  getSesameUrl: config => Object.assign(globalData, getSesameUrlData)
 }

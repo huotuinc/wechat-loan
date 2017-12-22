@@ -37,8 +37,8 @@
          <span style="color: green">{{status.carrierFlgMsg}}</span>
        </div>
        <div v-else>
-         <router-link to="/login"><!--跳转到认证页面-->
-           <span style="color: red">{{status.carrierFlgMsg}}</span>
+         <router-link :to="carrierUrl"><!--跳转到认证页面-->
+         <span @click="carrierHandleClick()" style="color: red">{{status.carrierFlgMsg}}</span>
          </router-link>
        </div>
      </cell>
@@ -47,8 +47,8 @@
          <span style="color: green">{{status.zhimaFlgMsg}}</span>
        </div>
        <div v-else>
-         <router-link to="/login"><!--跳转到认证页面-->
-           <span style="color: red">{{status.zhimaFlgMsg}}</span>
+         <router-link :to="zhimaUrl"><!--跳转到认证页面-->
+           <span @click="zhimaHandleClick()" style="color: red">{{status.zhimaFlgMsg}}</span>
          </router-link>
        </div>
      </cell>
@@ -59,11 +59,34 @@
 
 <script>
   import {XInput, Group, Cell,} from 'vux'
+  import openWindow from '@/utils/openWindow'
   export default {
     created() {
       this._getAuthenticationStatus()
+      this._getCarrierUrl()
+      this._getZhimaUrl()
     },
     methods: {
+      carrierHandleClick() {
+        openWindow(this.carrierUrl)
+      },
+      zhimaHandleClick(){
+        openWindow(this.zhimaUrl)
+      },
+      _getCarrierUrl() {
+        this.$store
+          .dispatch('authoperator')
+          .then((res) => {
+            this.carrierUrl = res
+          })
+      },
+      _getZhimaUrl() {
+        this.$store
+          .dispatch('getSesameUrl')
+          .then((res) => {
+            this.zhimaUrl = res
+          })
+      },
       _getAuthenticationStatus() {
         this.$store
           .dispatch('certificationAll')
@@ -79,7 +102,9 @@
     },
     data() {
       return {
-        status: {}
+        status: {},
+        carrierUrl: '',
+        zhimaUrl: ''
       }
     }
   }

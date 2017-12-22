@@ -23,11 +23,15 @@ Mock.mock(/\/api\/user\/register/, 'post', registerApi.register)
 Mock.mock(/\/api\/borrow\/saveInfo/, 'post', borrowApi.saveInfo)
 
 //信用认证
-Mock.mock(/\/api\/user\/certificationAll/, 'post', authenticationApi.certificationAll)
+Mock.mock(/\/api\/authentication\/certificationAll/, 'post', authenticationApi.certificationAll)
 //基本信息认证
 Mock.mock(/\/api\/user\/userinfoedit/, 'post', authenticationApi.userinfoedit)
 //联系人认证
 Mock.mock(/\/api\/user\/editcontacts/, 'post', authenticationApi.editcontacts)
+//运营商认证
+Mock.mock(/\/api\/user\/authoperator/, 'post', authenticationApi.authoperator)
+//芝麻认证
+Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSesameUrl)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
