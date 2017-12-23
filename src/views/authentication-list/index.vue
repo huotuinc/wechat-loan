@@ -37,9 +37,7 @@
          <span style="color: green">{{status.carrierFlgMsg}}</span>
        </div>
        <div v-else>
-         <router-link :to="carrierUrl"><!--跳转到认证页面-->
          <span @click="carrierHandleClick()" style="color: red">{{status.carrierFlgMsg}}</span>
-         </router-link>
        </div>
      </cell>
      <cell title="芝麻信用认证" is-link>
@@ -47,9 +45,7 @@
          <span style="color: green">{{status.zhimaFlgMsg}}</span>
        </div>
        <div v-else>
-         <router-link :to="zhimaUrl"><!--跳转到认证页面-->
-           <span @click="zhimaHandleClick()" style="color: red">{{status.zhimaFlgMsg}}</span>
-         </router-link>
+         <span @click="zhimaHandleClick()" style="color: red">{{status.zhimaFlgMsg}}</span>
        </div>
      </cell>
    </group>
