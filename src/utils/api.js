@@ -13,10 +13,15 @@ const service = Vue => {
   axios.defaults.headers['osType'] = 'h5'
   axios.defaults.headers['merchantId'] = 1
 
+  const { userId, merchantId, userToken } = getUserInfo()
+
   axios.interceptors.request.use(
     config => {
       if (userToken) {
+<<<<<<< HEAD
+=======
         console.log("here");
+>>>>>>> 870bf9e3c4f01ceb7b9861f4fe3f96c746ae6162
         config.headers = {
           userToken: userToken,
           userId: userId,
@@ -31,6 +36,7 @@ const service = Vue => {
         params.append(key, config.data[key])
       }
       config.data = params
+      console.log(config)
       return config
     },
     error => {

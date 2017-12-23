@@ -3,6 +3,7 @@
     <div class="loan-body">
        <group class="loan-body_item">
         <x-input
+          v-if="needEmail"
           name="email"
           title="接收邮箱"
           keyboard="number"
@@ -59,6 +60,7 @@ export default {
         payType: '',
         redirectUrl: ''
       },
+      needEmail: false,
       paymentMoney: 0
     }
   },
@@ -77,6 +79,7 @@ export default {
       this.paymentForm.tradeType = this.$route.params.tradeType
       requestParams.tradeType = this.$route.params.tradeType
       if (this.$route.params.orderId) {
+        this.needEmail = true
         requestParams.loanOrderId = this.$route.params.orderId
         this.paymentForm.loanOrderId = this.$route.params.orderId
       }
@@ -101,17 +104,17 @@ export default {
       return this.$refs.email.valid
     },
     validFormInput() {
-      if (this.form.email) {
-        return this.getEmailValid()
+      if (!this.needEmail) {
+        return this.form.email && this.getEmailValid()
       } else {
-        return false
+        return true
       }
     },
     getRedirectUrl() {
       this.paymentForm.redirectUrl = window.location.origin
     },
     validForm() {
-      return this.value.length !== 1
+      return this.value.length > 0
     }
   }
 }
