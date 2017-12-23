@@ -1,8 +1,7 @@
-import { getUserInfo } from '@/utils/auth'
+import store from '../store'
 import { md5 } from 'vux'
-const validKey = ['merchantId', 'userId', 'userToken', 'cityName', 'cityCode', 'timestamp']
+const validKey = ['merchantId', 'userId', 'userToken', 'cityName', 'cityCode']
 const secretKey = '4165a8d240b29af3f41818d10599d0d1'
-const userInfo = getUserInfo()
 
 const raw = args => {
   let keys = Object.keys(args)
@@ -23,6 +22,7 @@ const raw = args => {
 }
 
 const sign = () => {
+  const userInfo = store.getters.userInfo
   return md5(raw(userInfo) + secretKey)
 }
 export default sign

@@ -1,16 +1,28 @@
 import Cookies from 'js-cookie'
 
-const UserInfo = 'Loan-Info'
+const UserId = 'User-Id'
+const TokenKey = 'User-Tkoen'
 
-export function getUserInfo() {
-  return Cookies.getJSON(UserInfo) || {}
+export function getUserId() {
+  return Cookies.getJSON(UserId)
 }
 
-export function setUserInfo(info) {
-  console.log(info);
-  return Cookies.set(UserInfo, info)
+export function setUserId(id) {
+  return Cookies.set(UserId, id)
 }
 
-export function removeUserInfo() {
-  return Cookies.remove(UserInfo)
+export function removeUserId() {
+  return Cookies.remove(UserId)
+}
+
+export function getToken() {
+  return Cookies.get(TokenKey)
+}
+
+export function setToken(token) {
+  return Cookies.set(TokenKey, token)
+}
+
+export function removeToken() {
+  return Cookies.remove(TokenKey)
 }

@@ -3,13 +3,11 @@ import globalData from '../global'
 
 const loginData = Mock.mock({
   data: {
-    userInfo: {
-      userId: '@id',
-      merchantId: '@id',
-      uname: '@cname',
-      token: '@guid',
-      headimg: '@IMG(30x30)'
-    }
+    userId: '@id',
+    merchantId: '@id',
+    uname: '@cname',
+    userToken: '@guid',
+    headimg: '@IMG(30x30)'
   }
 })
 

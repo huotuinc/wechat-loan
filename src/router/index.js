@@ -116,7 +116,7 @@ export const constantRouterMap = [
   },
   {
     path: '/payment/:tradeType/:orderId',
-    name: 'Payment',
+    name: 'PaymentWithId',
     component: _import('payment/index'),
     meta: {
       title: '支付'

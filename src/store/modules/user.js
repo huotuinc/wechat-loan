@@ -1,15 +1,23 @@
 import request from '@/utils/request'
-import { getUserInfo, setUserInfo, removeUserInfo } from '@/utils/auth'
-import { USER_INFO } from '../mutation-type'
+import { SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
 import { md5 } from 'vux'
+import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId } from '../../utils/auth'
 
 const user = {
   state: {
-    userInfo: getUserInfo()
+    userInfo: '',
+    token: getToken(),
+    userId: getUserId()
   },
   mutations: {
-    [USER_INFO](state, payload) {
+    [SET_USER_INFO](state, payload) {
       state.userInfo = payload
+    },
+    [SET_TOKEN](state, payload) {
+      state.token = payload
+    },
+    [SET_USER_ID](state, payload) {
+      state.userId = payload
     }
   },
   actions: {
@@ -21,8 +29,11 @@ const user = {
           data: userInfo
         })
           .then(response => {
-            setUserInfo(response)
-            commit(USER_INFO, response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {
@@ -79,8 +90,10 @@ const user = {
     },
     logout({ commit }) {
       return new Promise(resolve => {
-        commit(USER_INFO, '')
-        removeUserInfo()
+        commit(SET_TOKEN, '')
+        commit(SET_USER_ID, '')
+        removeToken()
+        removeUserId()
         resolve()
       })
     },
