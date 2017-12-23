@@ -10,7 +10,8 @@ const service = Vue => {
     timeout: 15000,
     headers: {
       osType: 'h5',
-      merchantId: 1
+      merchantId: 1,
+      appVersion: 1.0
     }
   })
 
