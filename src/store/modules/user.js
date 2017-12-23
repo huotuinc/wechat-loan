@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 import { getUserInfo, setUserInfo, removeUserInfo } from '@/utils/auth'
 import { USER_INFO } from '../mutation-type'
+import { md5 } from 'vux'
 
 const user = {
   state: {
@@ -21,7 +22,6 @@ const user = {
         })
           .then(response => {
             let res = response.userInfo
-            res['userToken'] = res['token']
             setUserInfo(res)
             commit(USER_INFO, res)
             resolve(res)

@@ -91,15 +91,11 @@ export default {
       })
     },
     submit() {
-      if (!this.validFormInput() || !this.validForm) {
+      if (!this.validFormInput() || !this.validForm()) {
         this.$vux.toast.text('信息填写有误')
         return
       }
       console.log(this.paymentForm)
-      this.$store.dispatch('', this.form).then(() => {
-        //todo 提交成功跳转
-        this.$vux.toast.text('提交成功')
-      })
     },
     getEmailValid() {
       return this.$refs.email.valid
@@ -115,11 +111,7 @@ export default {
       this.paymentForm.redirectUrl = window.location.origin
     },
     validForm() {
-      if (this.value.length !== 1 || this.value1.length !== 1) {
-        return false
-      } else {
-        return true
-      }
+      return this.value.length !== 1
     }
   }
 }

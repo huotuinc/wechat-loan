@@ -16,7 +16,7 @@
           ref="mobile"
           :show-clear="false"
           required
-          v-model.trim="form.mobile"
+          v-model.trim="form.username"
           class="login-input">
           <i slot="label" class="iconfont icon-mobile"></i>
         </x-input>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       form: {
-        mobile: '',
+        username: '',
         password: '',
         loginType: 0,
         userType: 1
@@ -75,10 +75,14 @@ export default {
       return this.$refs.password.valid
     },
     submit() {
+      let login = {}
+      login.username = this.form.username
+      login.password = md5(this.form.password)
+      login.loginType = this.form.loginType
+      login.userType = this.form.userType
       if (this.validForm()) {
-        this.form.password = md5(this.form.password)
         this.$store
-          .dispatch('login', this.form)
+          .dispatch('login', login)
           .then(() => {
             this.$router.push({ path: '/' })
           })

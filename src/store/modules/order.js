@@ -66,7 +66,7 @@ const order = {
             reject(error)
           })
       })
-    },
+    }
   }
 }
 export default order
