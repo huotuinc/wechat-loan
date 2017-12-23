@@ -1,13 +1,7 @@
 import request from '@/utils/request'
-<<<<<<< HEAD
 import { SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
 import { md5 } from 'vux'
 import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId } from '../../utils/auth'
-=======
-import {getUserInfo, setUserInfo, removeUserInfo} from '@/utils/auth'
-import {USER_INFO} from '../mutation-type'
-import {md5} from 'vux'
->>>>>>> 2df966a502ab893fa3c2c0c8784a8b17ef1f4723
 
 const user = {
   state: {
@@ -27,7 +21,7 @@ const user = {
     }
   },
   actions: {
-    login({commit}, userInfo) {
+    login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/login',
@@ -53,7 +47,7 @@ const user = {
           url: '/api/user/sendVerifyCode',
           method: 'post',
           data: {
-              mobile:mobile
+            mobile: mobile
           }
         })
           .then(response => {
@@ -64,7 +58,7 @@ const user = {
           })
       })
     },
-    register({commit}, userInfo) {
+    register({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/register',
@@ -79,7 +73,7 @@ const user = {
           })
       })
     },
-    forger({commit}, userInfo) {
+    forger({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/updatePassword',
@@ -94,7 +88,7 @@ const user = {
           })
       })
     },
-    logout({commit}) {
+    logout({ commit }) {
       return new Promise(resolve => {
         commit(SET_TOKEN, '')
         commit(SET_USER_ID, '')
@@ -103,7 +97,7 @@ const user = {
         resolve()
       })
     },
-    personalIndex({commit}) {
+    personalIndex({ commit }) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/userIndex',
