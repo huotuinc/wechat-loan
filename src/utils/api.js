@@ -18,10 +18,6 @@ const service = Vue => {
   axios.interceptors.request.use(
     config => {
       if (userToken) {
-<<<<<<< HEAD
-=======
-        console.log("here");
->>>>>>> 870bf9e3c4f01ceb7b9861f4fe3f96c746ae6162
         config.headers = {
           userToken: userToken,
           userId: userId,
