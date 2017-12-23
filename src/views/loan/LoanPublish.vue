@@ -31,7 +31,7 @@
         <span class="text-success">{{authText}}</span>
       </cell>
       <cell title="信用报告" is-link v-else>
-        <router-link to="/authenticationList">
+        <router-link to="/authentication">
           <span class="text-danger">{{authText}}</span>
         </router-link>
       </cell>
