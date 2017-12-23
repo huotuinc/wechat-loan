@@ -21,10 +21,9 @@ const user = {
           data: userInfo
         })
           .then(response => {
-            let res = response.userInfo
-            setUserInfo(res)
-            commit(USER_INFO, res)
-            resolve(res)
+            setUserInfo(response)
+            commit(USER_INFO, response)
+            resolve(response)
           })
           .catch(error => {
             reject(error)

@@ -9,11 +9,11 @@
     <div>
       <group label-width="4.5em" label-margin-right="2em" class="login-group">
          <x-input
-          name="mobile"
+          name="username"
           placeholder="手机号码"
           keyboard="number"
           is-type="china-mobile"
-          ref="mobile"
+          ref="username"
           :show-clear="false"
           required
           v-model.trim="form.username"
@@ -22,10 +22,10 @@
         </x-input>
         <x-input
           type="password"
-          name="password"
+          name="input"
           placeholder="请输入密码"
-          v-model.trim="form.password"
-          ref="password"
+          v-model.trim="form.input"
+          ref="input"
           required
           :min="6"
           class="login-input_last">
@@ -61,7 +61,7 @@ export default {
     return {
       form: {
         username: '',
-        password: '',
+        input: '',
         loginType: 0,
         userType: 1
       }
@@ -69,15 +69,15 @@ export default {
   },
   methods: {
     getMobileValid() {
-      return this.$refs.mobile.valid
+      return this.$refs.username.valid
     },
     getPwdValid() {
-      return this.$refs.password.valid
+      return this.$refs.input.valid
     },
     submit() {
       let login = {}
       login.username = this.form.username
-      login.password = md5(this.form.password)
+      login.input = md5(this.form.input)
       login.loginType = this.form.loginType
       login.userType = this.form.userType
       if (this.validForm()) {
@@ -94,7 +94,7 @@ export default {
       }
     },
     validForm() {
-      if (this.form.mobile && this.form.password) {
+      if (this.form.username && this.form.input) {
         if (this.getMobileValid() && this.getPwdValid()) return true
         return false
       } else {
