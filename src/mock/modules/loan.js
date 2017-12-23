@@ -7,7 +7,7 @@ const getIndex = Mock.mock({
     loanTotalAmount: '@float(10000, 99999, 2, 2)',
     loanNum: '@integer(0, 100)',
     myLoanAmount: '@float(10000, 99999, 2, 2)',
-    authCode: '@pick([0,1])',
+    authCode: '@integer(1, 5)',
     authMsg: '@pick(["已认证","未认证"])'
   }
 })

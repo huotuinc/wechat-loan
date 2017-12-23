@@ -27,11 +27,13 @@
       </popup-picker>
     </group>
     <group class="loan-publish">
-      <cell title="信用报告" is-link to="/login" v-if="authNum === 1">
+      <cell title="信用报告" v-if="authNum === 3">
         <span class="text-success">{{authText}}</span>
       </cell>
-      <cell title="信用报告" is-link to="/login" v-else>
-        <span class="text-danger">{{authText}}</span>
+      <cell title="信用报告" is-link v-else>
+        <router-link to="/authenticationList">
+          <span class="text-danger">{{authText}}</span>
+        </router-link>
       </cell>
     </group>
     <div class="loan-publish_rule">
@@ -43,97 +45,111 @@
   </div>
 </template>
 <script>
-import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
-import { mapGetters } from 'vuex'
-import { purpose, findCode } from '@/utils/enum'
+  import {XInput, Group, XButton, Cell, Picker, PopupPicker} from 'vux'
+  import {mapGetters} from 'vuex'
+  import {purpose, findCode} from '@/utils/enum'
 
-export default {
-  name: 'loanPublish',
-  created() {
-    this._getPurposeList()
-  },
-  computed: {
-    authText() {
-      return this.authInfo.authMsg
+  export default {
+    name: 'loanPublish',
+    created() {
+      this._getPurposeList()
     },
-    authNum() {
-      return this.authInfo.authCode
+    computed: {
+      authText() {
+        return this.authInfo.authMsg
+      },
+      authNum() {
+        return this.authInfo.authCode
+      },
+      ...mapGetters(['authInfo'])
     },
-    ...mapGetters(['authInfo'])
-  },
-  components: {
-    XInput,
-    XButton,
-    Group,
-    Cell,
-    PopupPicker,
-    Picker
-  },
-  data() {
-    return {
-      value: [],
-      list: [],
-      obj: {
-        borrowTime: '',
-        borrowMoney: '',
-        borrowUse: 1,
-        userType: 1
-      }
-    }
-  },
-  methods: {
-    _getPurposeList() {
-      let ret = []
-      purpose.forEach(item => {
-        ret.push(item.desc)
-      })
-      this.list.push(ret)
+    components: {
+      XInput,
+      XButton,
+      Group,
+      Cell,
+      PopupPicker,
+      Picker
     },
-    submit() {
-      if (this.authNum !== 1) {
-        this.$vux.toast.text('请先完成信用认证')
-        return
+    data() {
+      return {
+        value: [],
+        list: [],
+        obj: {
+          borrowTime: null,
+          borrowMoney: null,
+          borrowUse: 1,
+          userType: 1
+        }
       }
-      if (this.value.length !== 1) {
-        this.$vux.toast.text('请选择借款用途')
-        return
-      }
-      this.obj.borrowUse = findCode(purpose, this.value[0])
+    },
+    methods: {
+      _getPurposeList() {
+        let ret = []
+        purpose.forEach(item => {
+          ret.push(item.desc)
+        })
+        this.list.push(ret)
+      },
+      validFormInput() {
+        if (this.obj.borrowTime && this.obj.borrowMoney) {
+          return true
+        } else {
+          return false
+        }
+      },
+      submit() {
+        if (this.authNum !== 3) {
+          this.$vux.toast.text('请先完成信用认证')
+          return
+        }
+        if (this.value.length !== 1) {
+          this.$vux.toast.text('请选择借款用途')
+          return
+        }
 
-      if (this.obj.borrowTime !== 0 && this.obj.borrowMoney !== 0) {
+        if (!this.validFormInput()) {
+          this.$vux.toast.text('借款信息填写有误')
+          return
+        }
+        this.obj.borrowUse = findCode(purpose, this.value[0])
+
         this.$store.dispatch('saveInfo', this.obj).then(() => {
           //todo 借款成功跳转页面
           this.$vux.toast.text('借款成功')
         })
-      } else {
-        this.$vux.toast.text('借款金额或借款时长不能为0')
+
       }
     }
   }
-}
 </script>
 <style lang="less">
-@import '../../style/variable.less';
+  @import '../../style/variable.less';
 
-.loan-publish {
+  .loan-publish {
+
   .weui-cells {
     margin-top: 0 !important;
     margin-bottom: 6px;
     font-size: 14px;
   }
+
   .weui-cell__bd {
-    input {
-      text-align: right;
-    }
+
+  input {
+    text-align: right;
   }
-}
-.loan-publish_rule {
-  padding-top: 60px;
-  text-align: center;
-  color: #7c8496;
-  font-size: 12px;
-}
-.loan-publish_btn {
-  padding: 20px;
-}
+
+  }
+  }
+  .loan-publish_rule {
+    padding-top: 60px;
+    text-align: center;
+    color: #7c8496;
+    font-size: 12px;
+  }
+
+  .loan-publish_btn {
+    padding: 20px;
+  }
 </style>
