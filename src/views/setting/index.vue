@@ -9,7 +9,7 @@
       </group>
     </div>
     <div class="loan-publish_btn" style="padding:20px;">
-      <x-button @click.native="logout" class="btn-yellow">提交</x-button>
+      <x-button @click.native="logout" class="btn-yellow">退出</x-button>
     </div>
   </div>
 </template>

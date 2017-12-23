@@ -27,92 +27,76 @@
 </template>
 
 <script>
-  import {
+import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
+export default {
+  created() {
+    this._checkout()
+  },
+  components: {
     XInput,
-    Group,
     XButton,
+    Group,
     Cell,
-    Picker,
-    PopupPicker
-  } from 'vux'
-  export default {
-    created() {
-      this._checkout()
+    PopupPicker,
+    Picker
+  },
+  data() {
+    return {
+      tmp: [],
+      value: [],
+      list: [],
+      form: {
+        treatyType: 3,
+        email: '',
+        payType: null,
+        money: null
+      }
+    }
+  },
+  methods: {
+    _checkout() {
+      let requestParams = {}
+      requestParams.treatyType = 3
+      requestParams.loanOrderId = this.$route.params.orderId
+      let ret = []
+      this.$store.dispatch('checkout', requestParams).then(res => {
+        res.payments.forEach(item => {
+          ret.push(item.name)
+        })
+        this.list.push(ret)
+        this.tmp = res.payments
+        this.form.money = res.finalAmount
+      })
     },
-    components: {
-      XInput,
-      XButton,
-      Group,
-      Cell,
-      PopupPicker,
-      Picker
+    submit() {
+      if (!this.validFormInput() || !this.validForm) {
+        this.$vux.toast.text('信息填写有误')
+        return
+      }
+
+      this.$store.dispatch('', this.form).then(() => {
+        //todo 提交成功跳转
+        this.$vux.toast.text('提交成功')
+      })
     },
-    data() {
-      return {
-        tmp: [],
-        value: [],
-        list: [],
-        form: {
-          treatyType: 3,
-          email: '',
-          payType: null,
-          money: null
-        }
+    getEmailValid() {
+      return this.$refs.email.valid
+    },
+    validFormInput() {
+      if (this.form.email) {
+        if (this.getEmailValid()) return true
+        return false
+      } else {
+        return false
       }
     },
-    methods: {
-      _checkout() {
-        let requestParams = {}
-        requestParams.treatyType = 3
-        requestParams.loanOrderId = this.$route.params.orderId
-        let ret = []
-        this.$store
-          .dispatch('checkout', requestParams)
-          .then((res) => {
-            res.payments.forEach((item) => {
-              ret.push(item.name)
-            })
-            this.list.push(ret)
-            this.tmp = res.payments
-            this.form.money = res.finalAmount
-          })
-      },
-      submit() {
-        if (!this.validFormInput() || !this.validForm ){
-          this.$vux.toast.text('信息填写有误')
-          return
-        }
-
-        this.$store
-          .dispatch('', this.form)
-          .then(() => {
-            //todo 提交成功跳转
-            this.$vux.toast.text('提交成功')
-          })
-      },
-      getEmailValid() {
-        return this.$refs.email.valid
-      },
-      validFormInput() {
-        if (this.form.email) {
-          if (this.getEmailValid()) return true
-          return false
-        } else {
-          return false
-        }
-      },
-      validForm() {
-        if (this.value.length !== 1 || this.value1.length !== 1){
-          return false
-        } else {
-          return true
-        }
+    validForm() {
+      if (this.value.length !== 1 || this.value1.length !== 1) {
+        return false
+      } else {
+        return true
       }
     }
   }
-
+}
 </script>
-
-<style scoped>
-
-</style>

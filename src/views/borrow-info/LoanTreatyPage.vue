@@ -11,27 +11,21 @@
 </template>
 
 <script>
-  import {
+import { XButton } from 'vux'
+export default {
+  components: {
     XButton
-  } from 'vux'
-  export default {
-    components: {
-      XButton
-    },
-    data() {
-      return {}
-    },
-    methods: {
-      submit() {
-        this.$router.push({
-          path: '/loanTreaty',
-          params:{orderId:1}
-        })
-      }
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    submit() {
+      this.$router.push({
+        path: '/loanTreaty',
+        params: { orderId: 1 }
+      })
     }
   }
+}
 </script>
-
-<style scoped>
-
-</style>

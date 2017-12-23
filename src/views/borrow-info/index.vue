@@ -79,53 +79,49 @@
 </template>
 
 <script>
-  import {XInput, Group, Cell,dateFormat } from 'vux'
-  export default {
-    computed: {
-      orderTitle() {
-        let status = this.borrowDetail.grantStatus
-        let repayDate = dateFormat (new Date(this.borrowDetail.agreedRepayTime),'MM-DD')
-        let days = Math.abs(this.borrowDetail.repayTimeDays)
-        if (status === 5) {
-            return '还款日'+repayDate+ '   已逾期'+days+'天'
-        }
-        if (status === 4) {
-          return '还款日'+repayDate+'   '+days+ "天后逾期"
-        }
-        return '订单状态';
+import { XInput, Group, Cell, dateFormat } from 'vux'
+export default {
+  computed: {
+    orderTitle() {
+      let status = this.borrowDetail.grantStatus
+      let repayDate = dateFormat(new Date(this.borrowDetail.agreedRepayTime), 'MM-DD')
+      let days = Math.abs(this.borrowDetail.repayTimeDays)
+      if (status === 5) {
+        return '还款日' + repayDate + '   已逾期' + days + '天'
       }
+      if (status === 4) {
+        return '还款日' + repayDate + '   ' + days + '天后逾期'
+      }
+      return '订单状态'
+    }
+  },
+  created() {
+    this._getBorrowDetail()
+  },
+  methods: {
+    selectTreaty() {
+      this.$router.push({
+        path: '/loanTreatyPage',
+        params: { orderId: 1 }
+      })
     },
-    created() {
-      this._getBorrowDetail()
-    },
-    methods: {
-      selectTreaty() {
-        this.$router.push({
-          path: '/loanTreatyPage',
-          params:{orderId:1}
+    _getBorrowDetail() {
+      this.$store
+        .dispatch('getOrderInfo', 1) //this.$route.params.id
+        .then(res => {
+          this.borrowDetail = res
         })
-      },
-      _getBorrowDetail() {
-        this.$store
-          .dispatch('getOrderInfo', 1)//this.$route.params.id
-          .then((res) => {
-            this.borrowDetail = res
-          })
-      }
-    },
-    components: {
-      XInput,
-      Group,
-      Cell
-    },
-    data() {
-      return {
-        borrowDetail: {}
-      }
-    },
+    }
+  },
+  components: {
+    XInput,
+    Group,
+    Cell
+  },
+  data() {
+    return {
+      borrowDetail: {}
+    }
   }
+}
 </script>
-
-<style scoped>
-
-</style>
