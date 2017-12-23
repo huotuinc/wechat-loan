@@ -1,15 +1,15 @@
 <template>
   <div class="repay-wrap">
     <flow orientation="vertical" :style="heightStyle">
-      <template  v-for="(item,index) in repayDetail">
-      <flow-state :is-done="currentDate === item.repayDate" :key="index">
-        <div slot="title">
-          <p>{{item.repayDate}}</p>
-          <p class="text-danger">{{item.payAmount}}元</p>
-          <p>含本金<span v-html="item.amount"></span>元 + 利息<span v-html="item.interestAmount"></span>元</p>
-        </div>
-      </flow-state>
-      <flow-line v-if="index < repayDetail.length - 1" :key="index"></flow-line>
+      <template v-for="(item, index) in repayDetail">
+        <flow-state :is-done="currentDate === item.repayDate" :key="index">
+          <div slot="title">
+            <p>{{item.repayDate}}</p>
+            <p class="text-danger">{{item.payAmount}}元</p>
+            <p>含本金<span v-html="item.amount"></span>元 + 利息<span v-html="item.interestAmount"></span>元</p>
+          </div>
+        </flow-state>
+        <flow-line v-if="index < repayDetail.length - 1"></flow-line>
       </template>
     </flow>
   </div>
@@ -31,11 +31,9 @@ export default {
   },
   methods: {
     _getRepayDetail() {
-      this.$store
-        .dispatch('getRepayDetail', 1) //        this.$route.params.id
-        .then(res => {
-          this.repayDetail = res
-        })
+      this.$store.dispatch('getRepayDetail', this.$route.params.id).then(res => {
+        this.repayDetail = res
+      })
     }
   },
   components: {

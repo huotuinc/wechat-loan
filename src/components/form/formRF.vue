@@ -84,6 +84,9 @@ export default {
       }
     }
   },
+  created() {
+    console.log(this.$route.path)
+  },
   methods: {
     getMobileValid() {
       return this.$refs.mobile.valid
@@ -127,6 +130,9 @@ export default {
       }
     },
     submit() {
+      let action
+      if (this.$route.path === '/register') action = 'register'
+      if (this.$route.path === '/forget') action = 'forger'
       if (this.validForm()) {
         this.$store
           .dispatch('register', this.obj)

@@ -25,7 +25,7 @@ const authentication = {
           })
       })
     },
-    userinfoedit({},form) {
+    userinfoedit({}, form) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/userinfoedit',
@@ -40,7 +40,7 @@ const authentication = {
           })
       })
     },
-    editcontacts({},form) {
+    editcontacts({}, form) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/editcontacts',
@@ -73,6 +73,20 @@ const authentication = {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/authentication/getSesameUrl',
+          method: 'post'
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    checkIsPay({ commit }) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/authentication/checkIsPay',
           method: 'post'
         })
           .then(response => {

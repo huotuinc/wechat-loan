@@ -13,7 +13,7 @@
         </cell>
       </group>
       <group class="loan-body_item">
-        <cell is-link title="信用报告" :value="page.authMsg">
+        <cell is-link title="信用报告" :value="page.authMsg" link="/authentication">
           <i class="iconfont icon-report" slot="icon"></i>
         </cell>
       </group>

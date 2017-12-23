@@ -41,9 +41,7 @@
             <span class="text-success">{{status.carrierFlgMsg}}</span>
           </div>
           <div v-else>
-            <a :href="carrierUrl">
-              <span class="text-danger">{{status.carrierFlgMsg}}</span>
-            </a>
+            <span @click="carrierHandleClick()"  class="text-danger">{{status.carrierFlgMsg}}</span>
           </div>
         </cell>
         <cell title="芝麻信用认证" :is-link="status.zhimaFlg !== 3">
@@ -52,9 +50,7 @@
             <span class="text-success">{{status.zhimaFlgMsg}}</span>
           </div>
           <div v-else>
-            <a :href="zhimaUrl">
-              <span class="text-danger">{{status.zhimaFlgMsg}}</span>
-            </a>
+            <span @click="zhimaHandleClick()"  class="text-danger">{{status.zhimaFlgMsg}}</span>
           </div>
         </cell>
       </group>
@@ -64,14 +60,36 @@
 
 <script>
 import { XInput, Group, Cell } from 'vux'
+import openWindow from '@/utils/openWindow'
 
 export default {
+  components: {
+    XInput,
+    Group,
+    Cell
+  },
+  data() {
+    return {
+      status: {},
+      carrierUrl: '',
+      zhimaUrl: ''
+    }
+  },
   created() {
     this._getAuthenticationStatus()
     this._getCarrierUrl()
     this._getZhimaUrl()
+    this.$store.dispatch('checkIsPay').then(res => {
+      if (!res) this.needPay()
+    })
   },
   methods: {
+    carrierHandleClick() {
+      openWindow(this.carrierUrl)
+    },
+    zhimaHandleClick() {
+      openWindow(this.zhimaUrl)
+    },
     _getCarrierUrl() {
       this.$store.dispatch('authoperator').then(res => {
         this.carrierUrl = res
@@ -86,18 +104,14 @@ export default {
       this.$store.dispatch('certificationAll').then(res => {
         this.status = res
       })
-    }
-  },
-  components: {
-    XInput,
-    Group,
-    Cell
-  },
-  data() {
-    return {
-      status: {},
-      carrierUrl: '',
-      zhimaUrl: ''
+    },
+    needPay() {
+      const vm = this
+      this.$vux.confirm.show({
+        title: '认证费',
+        content: '你未支付认证费',
+        onConfirm() {}
+      })
     }
   }
 }

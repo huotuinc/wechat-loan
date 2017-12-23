@@ -99,6 +99,30 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/installment/:id',
+    name: 'Installment',
+    component: _import('installment/index'),
+    meta: {
+      title: '每月还款金额'
+    }
+  },
+  {
+    path: '/payment/:tradeType',
+    name: 'Payment',
+    component: _import('payment/index'),
+    meta: {
+      title: '支付'
+    }
+  },
+  {
+    path: '/payment/:tradeType/:orderId',
+    name: 'Payment',
+    component: _import('payment/index'),
+    meta: {
+      title: '支付'
+    }
+  },
+  {
     path: '/setting',
     name: 'Setting',
     component: _import('setting/index')
@@ -107,10 +131,6 @@ export const constantRouterMap = [
     path: '/download',
     name: 'Download',
     component: _import('download/index')
-  },
-  {
-    path: '/borrowInfo',
-    component: _import('borrow-info/index')
   },
   {
     path: '/loanTreatyPage',
@@ -128,9 +148,12 @@ export const constantRouterMap = [
     component: _import('borrow-info/LoanTreaty')
   },
   {
-    path: '/authenticationList',
-    name: 'AuthenticationList',
-    component: _import('authentication-list/index')
+    path: '/authentication',
+    name: 'Authentication',
+    component: _import('authentication/index'),
+    meta: {
+      title: '信用报告'
+    }
   },
   {
     path: '/basicInfo',
@@ -141,11 +164,6 @@ export const constantRouterMap = [
     path: '/contacts',
     name: 'Contacts',
     component: _import('contacts/index')
-  },
-  {
-    path: '/repayDetail',
-    name: 'RepayDetail',
-    component: _import('borrow-info/RepayDetail')
   },
   {
     path: '*',

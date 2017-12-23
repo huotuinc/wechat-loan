@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import { ToastPlugin } from 'vux'
+import { AlertPlugin, ConfirmPlugin, ToastPlugin } from 'vux'
 import FastClick from 'fastclick'
 import VueWechatTitle from 'vue-wechat-title'
 import App from './App'
@@ -12,8 +12,11 @@ import './mock'
 
 FastClick.attach(document.body)
 
+Vue.use(AlertPlugin)
+Vue.use(ConfirmPlugin)
 Vue.use(ToastPlugin)
 Vue.use(VueWechatTitle)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

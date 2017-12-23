@@ -39,7 +39,7 @@
     <template v-if="borrowDetail.repayTypeCode === 1">
       <group class="loan-body_item">
         <cell title="每月还款金额" is-link>
-          <router-link to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}">
+          <router-link to="{name:'Installment',params:{id:borrowDetail.orderId}}">
             100元
           </router-link>
         </cell>
@@ -103,11 +103,9 @@ export default {
   },
   methods: {
     _getBorrowDetail() {
-      this.$store
-        .dispatch('getOrderInfo', 1) //this.$route.params.id
-        .then(res => {
-          this.borrowDetail = res
-        })
+      this.$store.dispatch('getOrderInfo', this.$route.params.id).then(res => {
+        this.borrowDetail = res
+      })
     }
   },
   components: {

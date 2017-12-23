@@ -63,6 +63,21 @@ const user = {
           })
       })
     },
+    forger({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/updatePassword',
+          method: 'post',
+          data: userInfo
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     logout({ commit }) {
       return new Promise(resolve => {
         commit(USER_INFO, '')

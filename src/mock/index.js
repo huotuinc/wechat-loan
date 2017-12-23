@@ -32,6 +32,8 @@ Mock.mock(/\/api\/user\/editcontacts/, 'post', authenticationApi.editcontacts)
 Mock.mock(/\/api\/user\/authoperator/, 'post', authenticationApi.authoperator)
 //芝麻认证
 Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSesameUrl)
+// 是否支付
+Mock.mock(/\/api\/authentication\/checkIsPay/, 'post', authenticationApi.isPay)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
