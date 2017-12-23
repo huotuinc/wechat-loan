@@ -79,9 +79,14 @@ export default {
     this._getAuthenticationStatus()
     this._getCarrierUrl()
     this._getZhimaUrl()
-    this.$store.dispatch('checkIsPay').then(res => {
-      if (!res) this.needPay()
-    })
+    this.$store
+      .dispatch('checkIsPay')
+      .then(isPay => {
+        if (!isPay) this.needPay()
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   methods: {
     carrierHandleClick() {
@@ -91,18 +96,18 @@ export default {
       openWindow(this.zhimaUrl)
     },
     _getCarrierUrl() {
-      this.$store.dispatch('authoperator').then(res => {
-        this.carrierUrl = res
+      this.$store.dispatch('authoperator').then(carrierUrl => {
+        this.carrierUrl = carrierUrl
       })
     },
     _getZhimaUrl() {
-      this.$store.dispatch('getSesameUrl').then(res => {
-        this.zhimaUrl = res
+      this.$store.dispatch('getSesameUrl').then(zhimaUrl => {
+        this.zhimaUrl = zhimaUrl
       })
     },
     _getAuthenticationStatus() {
-      this.$store.dispatch('certificationAll').then(res => {
-        this.status = res
+      this.$store.dispatch('certificationAll').then(status => {
+        this.status = status
       })
     },
     needPay() {
@@ -110,7 +115,9 @@ export default {
       this.$vux.confirm.show({
         title: '认证费',
         content: '你未支付认证费',
-        onConfirm() {}
+        onConfirm() {
+          vm.$router.push({ path: '/payment/1' })
+        }
       })
     }
   }

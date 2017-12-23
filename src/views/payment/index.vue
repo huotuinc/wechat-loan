@@ -85,6 +85,7 @@ export default {
       }
       let ret = []
       this.$store.dispatch('checkout', requestParams).then(res => {
+        console.log(res)
         res.payments.forEach(item => {
           ret.push(item.name)
         })
@@ -98,13 +99,15 @@ export default {
         this.$vux.toast.text('信息填写有误')
         return
       }
-      console.log(this.paymentForm)
+      this.$store.dispatch('createOrder', this.paymentForm).catch(err => {
+        console.log(err)
+      })
     },
     getEmailValid() {
       return this.$refs.email.valid
     },
     validFormInput() {
-      if (!this.needEmail) {
+      if (this.needEmail) {
         return this.form.email && this.getEmailValid()
       } else {
         return true

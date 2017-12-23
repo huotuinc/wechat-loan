@@ -62,7 +62,7 @@ const getSesameUrlData = Mock.mock({
 })
 
 const isPay = Mock.mock({
-  data: '@boolean'
+  data: false
 })
 export default {
   certificationAll: config => Object.assign(globalData, certificationAllData),

@@ -17,6 +17,7 @@ const service = Vue => {
   axios.interceptors.request.use(
     config => {
       if (store.getters.token) {
+        if (!config.params) config.params = {}
         config.params['sign'] = sign()
         config.params['timestamp'] = +new Date()
         config.headers['userToken'] = getToken()
@@ -29,7 +30,6 @@ const service = Vue => {
       }
       config.data = params
 
-      console.log(config)
       return config
     },
     error => {

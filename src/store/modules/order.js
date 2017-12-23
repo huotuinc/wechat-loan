@@ -66,6 +66,21 @@ const order = {
             reject(error)
           })
       })
+    },
+    createOrder({}, orderData) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/unifiedorder/create',
+          method: 'post',
+          data: orderData
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }
