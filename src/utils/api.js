@@ -7,11 +7,7 @@ const { userId, merchantId, token } = getUserInfo()
 
 const service = Vue => {
   const axios = Axios.create({
-<<<<<<< HEAD
     // baseURL: 'http://localhost:5000',
-=======
-    baseURL: 'http://localhost:8999',
->>>>>>> 0cd22812867dbb666c7b221dd6f99fb0da4309dd
     timeout: 15000
   })
   axios.defaults.headers['osType'] = 'h5'

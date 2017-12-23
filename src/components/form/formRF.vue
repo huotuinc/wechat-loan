@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { XInput, Group, XButton, md5} from 'vux'
+import { XInput, Group, XButton, md5 } from 'vux'
 export default {
   components: {
     XInput,
@@ -131,12 +131,23 @@ export default {
     },
     submit() {
       let action
-      if (this.$route.path === '/register') action = 'register'
-      if (this.$route.path === '/forget') action = 'forger'
+      let form = {}
+      if (this.$route.path === '/register') {
+        action = 'register'
+        form.username = this.obj.username
+        form.password = md5(this.obj.password)
+        form.verifyCode = this.obj.verifyCode
+        form.userType = this.obj.userType
+      }
+      if (this.$route.path === '/forget') {
+        action = 'forger'
+        form.username = this.obj.username
+        form.newPassword = md5(this.obj.password)
+        form.verifyCode = this.obj.verifyCode
+      }
       if (this.validForm()) {
-        this.obj.password = md5(this.obj.password)
         this.$store
-          .dispatch('register', this.obj)
+          .dispatch(action, form)
           .then(() => {
             this.$router.push({ path: '/login' })
           })
