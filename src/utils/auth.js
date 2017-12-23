@@ -7,6 +7,7 @@ export function getUserInfo() {
 }
 
 export function setUserInfo(info) {
+  console.log(info);
   return Cookies.set(UserInfo, info)
 }
 
