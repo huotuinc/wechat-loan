@@ -3,8 +3,6 @@ import URLSearchParams from 'url-search-params'
 import { getUserInfo } from '@/utils/auth'
 import sign from './sign'
 
-const { userId, merchantId, token } = getUserInfo()
-
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://localhost:5000',
@@ -13,11 +11,13 @@ const service = Vue => {
   axios.defaults.headers['osType'] = 'h5'
   axios.defaults.headers['merchantId'] = '1'
 
+  const { userId, merchantId, userToken } = getUserInfo()
+
   axios.interceptors.request.use(
     config => {
-      if (token) {
+      if (userToken) {
         config.headers = {
-          userToken: token,
+          userToken: userToken,
           userId: userId,
           timestamp: +new Date(),
           sign: sign()
@@ -28,6 +28,7 @@ const service = Vue => {
         params.append(key, config.data[key])
       }
       config.data = params
+      console.log(config)
       return config
     },
     error => {
