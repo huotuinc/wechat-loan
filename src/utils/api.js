@@ -6,7 +6,7 @@ import sign from './sign'
 
 const service = Vue => {
   const axios = Axios.create({
-    // baseURL: 'http://localhost:8999',
+    baseURL: 'http://localhost:8999',
     timeout: 15000,
     headers: {
       osType: 'h5',
@@ -17,13 +17,19 @@ const service = Vue => {
   axios.interceptors.request.use(
     config => {
       if (store.getters.token) {
-        config.params = {
-          sign: sign(),
-          timestamp: +new Date()
-        }
+        config.params['sign'] = sign()
+        config.params['timestamp'] = +new Date()
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
+
+      const params = new URLSearchParams()
+      for (let key in config.data) {
+        params.append(key, config.data[key])
+      }
+      config.data = params
+
+      console.log(config)
       return config
     },
     error => {
