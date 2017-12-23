@@ -3,14 +3,14 @@
     <div>
       <group label-width="4.5em" label-margin-right="2em" class="login-group">
         <x-input
-          name="mobile"
+          name="username"
           placeholder="手机号码"
           keyboard="number"
           is-type="china-mobile"
-          ref="mobile"
+          ref="username"
           required
           :show-clear="false"
-          v-model="obj.mobile">
+          v-model="obj.username">
           <i slot="label" class="iconfont icon-mobile"></i>
         </x-input>
         <x-input
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { XInput, Group, XButton } from 'vux'
+import { XInput, Group, XButton, md5} from 'vux'
 export default {
   components: {
     XInput,
@@ -77,7 +77,7 @@ export default {
       timer: '',
       sendButtonText: '获取验证码',
       obj: {
-        mobile: '',
+        username: '',
         password: '',
         verifyCode: '',
         userType: 1
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     getMobileValid() {
-      return this.$refs.mobile.valid
+      return this.$refs.username.valid
     },
     getPwdValid() {
       return this.$refs.password.valid
@@ -100,10 +100,10 @@ export default {
     sendCode() {
       if (!this.disabled) {
         clearTimeout(this.timer)
-        if (this.obj.mobile && this.getMobileValid()) {
+        if (this.obj.username && this.getMobileValid()) {
           this.disabled = true
           this.$store
-            .dispatch('sendVerifyCode', this.obj.mobile)
+            .dispatch('sendVerifyCode', this.obj.username)
             .then(() => {
               this.time = 60
               this.countDown()
@@ -134,6 +134,7 @@ export default {
       if (this.$route.path === '/register') action = 'register'
       if (this.$route.path === '/forget') action = 'forger'
       if (this.validForm()) {
+        this.obj.password = md5(this.obj.password)
         this.$store
           .dispatch('register', this.obj)
           .then(() => {
@@ -147,7 +148,7 @@ export default {
       }
     },
     validForm() {
-      if (this.obj.mobile && this.obj.password && this.obj.verifyCode) {
+      if (this.obj.username && this.obj.password && this.obj.verifyCode) {
         if (this.getMobileValid() && this.getPwdValid() && this.getAuthValid()) return true
         return false
       } else {
