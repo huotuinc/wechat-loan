@@ -104,7 +104,6 @@ export default {
       this.$store
         .dispatch('getSesameUrl')
         .then(res => {
-          console.log(res)
           openWindow(res)
         })
         .catch(err => {

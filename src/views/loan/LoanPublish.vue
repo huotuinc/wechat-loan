@@ -115,8 +115,7 @@ export default {
       this.obj.borrowUse = findCode(purpose, this.value[0])
 
       this.$store.dispatch('saveInfo', this.obj).then(() => {
-        //todo 借款成功跳转页面
-        this.$vux.toast.text('借款成功')
+        this.$router.push({ path: '/orderList' })
       })
     }
   }

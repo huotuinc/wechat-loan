@@ -131,7 +131,7 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/installment/:id',
+    path: '/installment/:orderId',
     name: 'Installment',
     component: _import('installment/index'),
     meta: {
@@ -157,34 +157,33 @@ export const constantRouterMap = [
   {
     path: '/setting',
     name: 'Setting',
-    component: _import('setting/index')
+    component: _import('setting/index'),
+    meta: {
+      title: '系统设置'
+    }
   },
   {
     path: '/download',
     name: 'Download',
-    component: _import('download/index')
+    component: _import('download/index'),
+    meta: {
+      title: '软件下载'
+    }
   },
-  {
-    path: '/loanTreatyPage',
-    name: 'LoanTreatyPage',
-    component: _import('borrow-info/LoanTreatyPage')
-  },
-  // {
-  //   path: '/loanTreaty',
-  //   name: 'LoanTreaty',
-  //   component: _import('borrow-info/LoanTreaty')
-  // },
-  // {
-  //   path: '/orderInfo/:orderId',
-  //   name: 'OrderInfo',
-  //   component: _import('borrow-info/LoanTreaty')
-  // },
   {
     path: '/authentication',
     name: 'Authentication',
     component: _import('authentication/index'),
     meta: {
       title: '信用报告'
+    }
+  },
+  {
+    path: '/treaty/:orderId',
+    name: 'Treaty',
+    component: _import('treaty/index'),
+    meta: {
+      title: '借款条约'
     }
   },
   {

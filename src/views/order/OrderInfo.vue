@@ -39,13 +39,10 @@
     <template v-if="borrowDetail.repayTypeCode === 1">
       <group class="loan-body_item">
         <cell title="每月还款金额" is-link>
-          <router-link :to="{name:'Installment', params:{id:borrowDetail.orderId}}">
-            100元
-          </router-link>
+          <router-link class="text-danger" :to="{ name:'Installment', params: { orderId:borrowDetail.orderId } }">100元</router-link>
         </cell>
       </group>
     </template>
-
     <group class="loan-body_item">
       <template v-if="borrowDetail.needAuth">
         <cell title="信用报告" is-link>
@@ -60,7 +57,7 @@
       </cell>
       <template v-if="borrowDetail.grantStatus === 4 || borrowDetail.grantStatus === 5 || borrowDetail.grantStatus === 6">
         <cell title="出借条约" is-link>
-          <router-link :to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}" class="text-danger">立即查看</router-link>
+          <router-link :to="{ name:'Treaty', params:{ orderId: borrowDetail.orderId } }" class="text-danger">立即查看</router-link>
         </cell>
       </template>
       <cell title="日志" is-link>日志</cell>
