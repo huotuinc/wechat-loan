@@ -43,7 +43,7 @@
         </cell>
       </group>
       <group class="loan-body_item">
-        <cell is-link title="设置">
+        <cell is-link title="设置" link="/setting">
           <i class="iconfont icon-setting" slot="icon"></i>
         </cell>
       </group>
