@@ -124,9 +124,9 @@ export default {
         this.sendButtonText = `${this.time}秒后发送`
         this.timer = setTimeout(this.countDown, 1000)
       } else {
-        clearTimeout(timer)
         this.disabled = false
         this.sendButtonText = '获取验证码'
+        clearTimeout(timer)
       }
     },
     submit() {
