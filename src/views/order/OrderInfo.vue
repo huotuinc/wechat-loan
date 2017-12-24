@@ -46,6 +46,7 @@
     <group class="loan-body_item">
       <template v-if="borrowDetail.needAuth">
         <cell title="信用报告" is-link>
+          <!-- TODO 跳转信用报告 -->
           <router-link to="/authentication">
             <span v-if="borrowDetail.authStatus" class="text-success">查看</span>
             <span v-else class="text-danger">未认证</span>

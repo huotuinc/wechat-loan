@@ -52,3 +52,5 @@ Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', orderApi.getOrderList)
+Mock.mock(/\/api\/user\/esign\/checkPayment/, 'post', orderApi.checkPayment)
+Mock.mock(/\/api\/user\/esign\/send/, 'post', orderApi.sendPayment)

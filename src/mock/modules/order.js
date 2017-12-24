@@ -149,11 +149,28 @@ const getOrderList = Mock.mock({
   }
 })
 
+const checkPayment = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    hasPayed: '@boolean',
+    receiveEmail: '@email'
+  }
+})
+
+const sendPayment = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {}
+})
+
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
   getOrderNotice: config => orderNotice,
   checkout: config => checkoutData,
   createOrder: config => createOrder,
-  getOrderList: config => getOrderList
+  getOrderList: config => getOrderList,
+  checkPayment: config => checkPayment,
+  sendPayment: config => sendPayment
 }

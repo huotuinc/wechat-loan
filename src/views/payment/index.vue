@@ -87,8 +87,10 @@ export default {
       }
       let ret = []
       this.$store.dispatch('checkout', requestParams).then(res => {
-        console.log(res)
         res.payments.forEach(item => {
+          if (item.payType === 2) {
+            this.value.push(item.name)
+          }
           ret.push(item.name)
         })
         this.pickList.push(ret)
