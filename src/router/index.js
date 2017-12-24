@@ -158,12 +158,18 @@ export const constantRouterMap = [
   {
     path: '/basicInfo',
     name: 'BasicInfo',
-    component: _import('basic-info/index')
+    component: _import('basicInfo/index'),
+    meta: {
+      title: '基本信息认证'
+    }
   },
   {
     path: '/contacts',
     name: 'Contacts',
-    component: _import('contacts/index')
+    component: _import('contacts/index'),
+    meta: {
+      title: '联系人信息'
+    }
   },
   {
     path: '*',
