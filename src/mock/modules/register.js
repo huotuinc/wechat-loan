@@ -1,11 +1,14 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const sendData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {}
 })
 
 const registerData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     userId: '@id',
     merchantId: '@id',
@@ -14,6 +17,6 @@ const registerData = Mock.mock({
   }
 })
 export default {
-  sendCode: config => Object.assign(globalData, sendData),
-  register: config => Object.assign(globalData, registerData)
+  sendCode: config => sendData,
+  register: config => registerData
 }

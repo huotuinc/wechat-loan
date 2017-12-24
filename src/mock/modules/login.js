@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const loginData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     userId: '@id',
     merchantId: '@id',
@@ -12,5 +13,5 @@ const loginData = Mock.mock({
 })
 
 export default {
-  login: config => Object.assign(globalData, loginData)
+  login: config => loginData
 }

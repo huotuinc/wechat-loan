@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const getorderinfoData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     orderId: '@id',
     orderName: '@name',
@@ -30,35 +31,45 @@ const getorderinfoData = Mock.mock({
 })
 
 const getRepayDetailData = Mock.mock({
-  data: [{
-    repayDate: '2017-12-22',
-    payAmount: '@float(99999, 100000, 2, 2)',
-    amount: '@float(99999, 100000, 2, 2)',
-    interestAmount: '@float(100, 500, 2, 2)'
-  }, {
-    repayDate: '@DATETIME("yyyy-MM-dd")',
-    payAmount: '@float(99999, 100000, 2, 2)',
-    amount: '@float(99999, 100000, 2, 2)',
-    interestAmount: '@float(100, 500, 2, 2)'
-  }, {
-    repayDate: '@DATETIME("yyyy-MM-dd")',
-    payAmount: '@float(99999, 100000, 2, 2)',
-    amount: '@float(99999, 100000, 2, 2)',
-    interestAmount: '@float(100, 500, 2, 2)'
-  }, {
-    repayDate: '@DATETIME("yyyy-MM-dd")',
-    payAmount: '@float(99999, 100000, 2, 2)',
-    amount: '@float(99999, 100000, 2, 2)',
-    interestAmount: '@float(100, 500, 2, 2)'
-  }, {
-    repayDate: '@DATETIME("yyyy-MM-dd")',
-    payAmount: '@float(99999, 100000, 2, 2)',
-    amount: '@float(99999, 100000, 2, 2)',
-    interestAmount: '@float(100, 500, 2, 2)'
-  }]
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: [
+    {
+      repayDate: '2017-12-22',
+      payAmount: '@float(99999, 100000, 2, 2)',
+      amount: '@float(99999, 100000, 2, 2)',
+      interestAmount: '@float(100, 500, 2, 2)'
+    },
+    {
+      repayDate: '@DATETIME("yyyy-MM-dd")',
+      payAmount: '@float(99999, 100000, 2, 2)',
+      amount: '@float(99999, 100000, 2, 2)',
+      interestAmount: '@float(100, 500, 2, 2)'
+    },
+    {
+      repayDate: '@DATETIME("yyyy-MM-dd")',
+      payAmount: '@float(99999, 100000, 2, 2)',
+      amount: '@float(99999, 100000, 2, 2)',
+      interestAmount: '@float(100, 500, 2, 2)'
+    },
+    {
+      repayDate: '@DATETIME("yyyy-MM-dd")',
+      payAmount: '@float(99999, 100000, 2, 2)',
+      amount: '@float(99999, 100000, 2, 2)',
+      interestAmount: '@float(100, 500, 2, 2)'
+    },
+    {
+      repayDate: '@DATETIME("yyyy-MM-dd")',
+      payAmount: '@float(99999, 100000, 2, 2)',
+      amount: '@float(99999, 100000, 2, 2)',
+      interestAmount: '@float(100, 500, 2, 2)'
+    }
+  ]
 })
 
 const orderNotice = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   'data|0-5': [
     {
       noticeTitle: '@ctitle',
@@ -71,6 +82,8 @@ const orderNotice = Mock.mock({
 })
 
 const checkoutData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     userId: '@id',
     userBalance: '@float(100, 500, 2, 2)',
@@ -83,7 +96,7 @@ const checkoutData = Mock.mock({
       },
       {
         payType: 2,
-        name: "余额",
+        name: '余额',
         remark: '@string(10,20)'
       }
     ]
@@ -91,8 +104,8 @@ const checkoutData = Mock.mock({
 })
 
 export default {
-  getOrderInfo: config => Object.assign(globalData, getorderinfoData),
-  getRepayDetail: config => Object.assign(globalData, getRepayDetailData),
-  getOrderNotice: config => Object.assign(globalData, orderNotice),
-  checkout: config => Object.assign(globalData, checkoutData)
+  getOrderInfo: config => getorderinfoData,
+  getRepayDetail: config => getRepayDetailData,
+  getOrderNotice: config => orderNotice,
+  checkout: config => checkoutData
 }

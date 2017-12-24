@@ -1,5 +1,4 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 let Random = Mock.Random
 Random.extend({
@@ -31,6 +30,8 @@ Random.extend({
 })
 
 const certificationAllData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     userId: '@id',
     uinfoFlg: Random.randomCode(),
@@ -47,28 +48,38 @@ const certificationAllData = Mock.mock({
 })
 
 const userinfoeditData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {}
 })
 const editcontactsData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {}
 })
 const authoperatorData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data:
     'https://open.shujumohe.com/box/yys?box_token=02B2654432184CE69E088C0BED366737&real_name=张三&identity_code=340222199803052620&user_mobile=15655503490'
 })
 const getSesameUrlData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data:
     'https://open.shujumohe.com/box/yys?box_token=02B2654432184CE69E088C0BED366737&real_name=张三&identity_code=340222199803052620&user_mobile=15655503490'
 })
 
 const isPay = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: false
 })
 export default {
-  certificationAll: config => Object.assign(globalData, certificationAllData),
-  userinfoedit: config => Object.assign(globalData, userinfoeditData),
-  editcontacts: config => Object.assign(globalData, editcontactsData),
-  authoperator: config => Object.assign(globalData, authoperatorData),
-  getSesameUrl: config => Object.assign(globalData, getSesameUrlData),
-  isPay: config => Object.assign(globalData, isPay)
+  certificationAll: config => certificationAllData,
+  userinfoedit: config => userinfoeditData,
+  editcontacts: config => editcontactsData,
+  authoperator: config => authoperatorData,
+  getSesameUrl: config => getSesameUrlData,
+  isPay: config => isPay
 }

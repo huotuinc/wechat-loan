@@ -1,23 +1,32 @@
 import request from '@/utils/request'
-import { AUTH_INFO, AUTH_STATUS } from '../mutation-type'
+import { AUTH_INFO, AUTH_STATUS, SESAME_URL, AUTH_OPERATOR } from '../mutation-type'
 
 const authentication = {
   state: {
-    authInfo: {}
+    authStatus: {},
+    sesameUrl: '',
+    authOperator: ''
   },
   mutations: {
-    [AUTH_INFO](state, payload) {
-      state.authInfo = payload
+    [AUTH_STATUS](state, payload) {
+      state.authStatus = payload
+    },
+    [SESAME_URL](state, payload) {
+      state.sesameUrl = payload
+    },
+    [AUTH_OPERATOR](state, payload) {
+      state.authOperator = payload
     }
   },
   actions: {
-    certificationAll({}) {
+    certificationAll({ commit }) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/authentication/certificationAll',
           method: 'post'
         })
           .then(response => {
+            commit(AUTH_STATUS, response)
             resolve(response)
           })
           .catch(error => {
@@ -55,13 +64,14 @@ const authentication = {
           })
       })
     },
-    authoperator({}) {
+    authoperator({ commit }) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/authoperator',
           method: 'post'
         })
           .then(response => {
+            commit(AUTH_OPERATOR, response)
             resolve(response)
           })
           .catch(error => {
@@ -69,13 +79,14 @@ const authentication = {
           })
       })
     },
-    getSesameUrl({}) {
+    getSesameUrl({ commit }) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/authentication/getSesameUrl',
           method: 'post'
         })
           .then(response => {
+            commit(SESAME_URL, response)
             resolve(response)
           })
           .catch(error => {

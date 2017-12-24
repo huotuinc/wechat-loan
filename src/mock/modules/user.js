@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const personal = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     userHeadImgURL: 'http://localhost:8080/static/img/avatar.0d02701.png',
     loanAmount: '@float(99999, 100000, 2, 2)',
@@ -16,5 +17,5 @@ const personal = Mock.mock({
 })
 
 export default {
-  personal: config => Object.assign(globalData, personal)
+  personal: config => personal
 }

@@ -1,10 +1,11 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const saveInfoData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {}
 })
 
 export default {
-  saveInfo: config => Object.assign(globalData, saveInfoData)
+  saveInfo: config => saveInfoData
 }

@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
-import globalData from '../global'
 
 const getIndex = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
   data: {
     loanAmount: '@float(10000, 99999, 2, 2)',
     loanTotalAmount: '@float(10000, 99999, 2, 2)',
@@ -13,5 +14,5 @@ const getIndex = Mock.mock({
 })
 
 export default {
-  index: config => Object.assign(globalData, getIndex)
+  index: config => getIndex
 }
