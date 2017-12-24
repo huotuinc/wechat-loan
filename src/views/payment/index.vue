@@ -114,7 +114,7 @@ export default {
               }
             })
           } else {
-            openWindow(bizParameters.wapPayUrl)
+            openWindow(res.bizParameters.wapPayUrl)
           }
         })
         .catch(err => {

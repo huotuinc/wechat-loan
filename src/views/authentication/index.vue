@@ -41,7 +41,7 @@
             <span class="text-success">{{status.carrierFlgMsg}}</span>
           </div>
           <div v-else>
-            <span @click="carrierHandleClick()"  class="text-danger">{{status.carrierFlgMsg}}</span>
+            <span @click="carrierHandleClick"  class="text-danger">{{status.carrierFlgMsg}}</span>
           </div>
         </cell>
         <cell title="芝麻信用认证" :is-link="status.zhimaFlg !== 3">
@@ -50,7 +50,7 @@
             <span class="text-success">{{status.zhimaFlgMsg}}</span>
           </div>
           <div v-else>
-            <span @click="zhimaHandleClick()"  class="text-danger">{{status.zhimaFlgMsg}}</span>
+            <span @click="zhimaHandleClick"  class="text-danger">{{status.zhimaFlgMsg}}</span>
           </div>
         </cell>
       </group>
@@ -104,6 +104,7 @@ export default {
       this.$store
         .dispatch('getSesameUrl')
         .then(res => {
+          console.log(res)
           openWindow(res)
         })
         .catch(err => {
