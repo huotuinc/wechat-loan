@@ -56,7 +56,7 @@ const order = {
         request({
           url: '/api/order/getOrderInfo',
           method: 'get',
-          data: {
+          params: {
             orderId: id
           }
         })
