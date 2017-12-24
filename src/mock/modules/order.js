@@ -119,10 +119,41 @@ const createOrder = Mock.mock({
   }
 })
 
+const getOrderList = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    totalAmount: 1000,
+    'list|10': [
+      {
+        orderId: '@id',
+        orderName: '借给***的借条',
+        userHeadImg: 'http://localhost:8080/static/img/avatar.0d02701.png',
+        userName: '13765281632',
+        userRealName: '@cname',
+        needAuth: true,
+        authSuccess: true,
+        loanAmount: '@float(1000, 9999, 2, 2)',
+        overdueRate: '@float(1, 10, 2, 2)',
+        createTime: '@datetime',
+        grantTime: '@datetime',
+        agreedRepayTime: '@datetime(yyyy-MM-dd)',
+        grantStatus: '@pick([2,3,4,5,6,7])',
+        grantStatusMsg: '@pick(["待审核","已拒绝","待还款","已逾期","已完成","已取消"])',
+        overdueDay: '@integer(1, 30)',
+        overdueAmount: '@float(1000, 9999, 2, 2)',
+        rePayedAmount: '@float(1, 10, 2, 2)',
+        RepayTypeName: '等额本息'
+      }
+    ]
+  }
+})
+
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
   getOrderNotice: config => orderNotice,
   checkout: config => checkoutData,
-  createOrder: config => createOrder
+  createOrder: config => createOrder,
+  getOrderList: config => getOrderList
 }

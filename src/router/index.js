@@ -77,23 +77,55 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/loanList',
-    component: Layout,
+    path: '/orderList',
+    component: _import('order/index'),
     children: [
       {
         path: '',
-        name: 'LoanList',
-        component: _import('loan/LoanList'),
+        name: 'All',
+        component: _import('order/OrderAll'),
         meta: {
           title: '我的借款'
+        }
+      },
+      {
+        path: 'pending',
+        name: 'Pending',
+        component: _import('order/OrderPending'),
+        meta: {
+          title: '待审核'
+        }
+      },
+      {
+        path: 'repayment',
+        name: 'Repayment',
+        component: _import('order/OrderRepayment'),
+        meta: {
+          title: '待还款'
+        }
+      },
+      {
+        path: 'overdue',
+        name: 'Overdue',
+        component: _import('order/OrderOverdue'),
+        meta: {
+          title: '已逾期'
+        }
+      },
+      {
+        path: 'complete',
+        name: 'Complete',
+        component: _import('order/OrderComplete'),
+        meta: {
+          title: '已完成'
         }
       }
     ]
   },
   {
-    path: '/loanInfo',
-    name: 'LoanInfo',
-    component: _import('loan/LoanInfo'),
+    path: '/orderInfo/:orderId',
+    name: 'OrderInfo',
+    component: _import('order/OrderInfo'),
     meta: {
       title: '借款信息'
     }
@@ -137,16 +169,16 @@ export const constantRouterMap = [
     name: 'LoanTreatyPage',
     component: _import('borrow-info/LoanTreatyPage')
   },
-  {
-    path: '/loanTreaty',
-    name: 'LoanTreaty',
-    component: _import('borrow-info/LoanTreaty')
-  },
-  {
-    path: '/orderInfo/:orderId',
-    name: 'OrderInfo',
-    component: _import('borrow-info/LoanTreaty')
-  },
+  // {
+  //   path: '/loanTreaty',
+  //   name: 'LoanTreaty',
+  //   component: _import('borrow-info/LoanTreaty')
+  // },
+  // {
+  //   path: '/orderInfo/:orderId',
+  //   name: 'OrderInfo',
+  //   component: _import('borrow-info/LoanTreaty')
+  // },
   {
     path: '/authentication',
     name: 'Authentication',

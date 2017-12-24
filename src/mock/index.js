@@ -50,3 +50,5 @@ Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail)
 Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
+
+Mock.mock(/\/api\/order\/getOrderList/, 'post', orderApi.getOrderList)

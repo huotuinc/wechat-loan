@@ -40,26 +40,3 @@ export default {
   }
 }
 </script>
-<style lang="less">
-@import '../../style/variable.less';
-
-.loan-wrap {
-  .weui-tabbar {
-    background: #fff;
-  }
-  .weui-tabbar__item {
-    padding: 0;
-  }
-  .weui-tabbar__icon {
-    width: 38px;
-    height: 34px;
-  }
-  .weui-tabbar__item.weui-bar__item_on {
-    .weui-tabbar__label,
-    .weui-tabbar__icon,
-    i {
-      color: @loan-yellow !important;
-    }
-  }
-}
-</style>
