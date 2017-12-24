@@ -4,54 +4,54 @@
       <group class="loan-body_item">
         <cell title="身份证识别" :is-link="status.idCardFlg !== 3">
           <i class="iconfont icon-id-front" slot="icon"></i>
-          <div v-if="status.idCardFlg === 3">
+          <template v-if="status.idCardFlg === 3">
               <span class="text-success">{{status.idCardFlgMsg}}</span>
-          </div>
-          <div v-else>
+          </template>
+          <template v-else>
             <router-link to="/login"><!--跳转到认证页面-->
               <span class="text-danger">{{status.idCardFlgMsg}}</span>
             </router-link>
-          </div>
+          </template>
         </cell>
         <cell title="基本信息认证" :is-link="status.uinfoFlg !== 3">
           <i class="iconfont icon-user-o" slot="icon"></i>
-          <div v-if="status.uinfoFlg === 3">
+          <template v-if="status.uinfoFlg === 3">
             <span class="text-success">{{status.uinfoFlgMsg}}</span>
-          </div>
-          <div v-else>
-            <router-link to="/basicInfo"><!--跳转到认证页面-->
+          </template>
+          <template v-else>
+            <router-link to="/basicInfo">
               <span class="text-danger">{{status.uinfoFlgMsg}}</span>
             </router-link>
-          </div>
+          </template>
         </cell>
         <cell title="联系人信息" :is-link="status.contactFlg !== 3">
           <i class="iconfont icon-contacts" slot="icon"></i>
-          <div v-if="status.contactFlg === 3">
+          <template v-if="status.contactFlg === 3">
             <span class="text-success">{{status.contactFlgMsg}}</span>
-          </div>
-          <div v-else>
-            <router-link to="/contacts"><!--跳转到认证页面-->
+          </template>
+          <template v-else>
+            <router-link to="/contacts">
               <span class="text-danger">{{status.contactFlgMsg}}</span>
             </router-link>
-          </div>
+          </template>
         </cell>
         <cell title="运营商认证" :is-link="status.carrierFlg !== 3">
           <i class="iconfont icon-mobile" slot="icon"></i>
-          <div v-if="status.carrierFlg === 3">
+          <template v-if="status.carrierFlg === 3">
             <span class="text-success">{{status.carrierFlgMsg}}</span>
-          </div>
-          <div v-else>
-            <span @click="carrierHandleClick()"  class="text-danger">{{status.carrierFlgMsg}}</span>
-          </div>
+          </template>
+          <template v-else>
+            <span @click="carrierHandleClick"  class="text-danger">{{status.carrierFlgMsg}}</span>
+          </template>
         </cell>
         <cell title="芝麻信用认证" :is-link="status.zhimaFlg !== 3">
           <i class="iconfont icon-zhi-ma" slot="icon"></i>
-          <div v-if="status.zhimaFlg === 3">
+          <template v-if="status.zhimaFlg === 3">
             <span class="text-success">{{status.zhimaFlgMsg}}</span>
-          </div>
-          <div v-else>
-            <span @click="zhimaHandleClick()"  class="text-danger">{{status.zhimaFlgMsg}}</span>
-          </div>
+          </template>
+          <template v-else>
+            <span @click="zhimaHandleClick"  class="text-danger">{{status.zhimaFlgMsg}}</span>
+          </template>
         </cell>
       </group>
     </div>
@@ -104,6 +104,7 @@ export default {
       this.$store
         .dispatch('getSesameUrl')
         .then(res => {
+          console.log(res)
           openWindow(res)
         })
         .catch(err => {
