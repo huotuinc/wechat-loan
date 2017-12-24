@@ -8,6 +8,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './assets/font/iconfont.css'
+// import './permission'
 import './mock'
 
 FastClick.attach(document.body)
@@ -26,4 +27,12 @@ new Vue({
   store,
   template: '<App/>',
   components: { App }
+})
+
+router.beforeEach((to, from, next) => {
+  store.commit('UPDATE_LOADING', { isLoading: true })
+})
+
+router.afterEach(() => {
+  store.commit('UPDATE_LOADING', { isLoading: false })
 })
