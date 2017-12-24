@@ -32,6 +32,8 @@
 
 <script>
 import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
+import openWindow from '@/utils/openWindow'
+
 export default {
   created() {
     this._checkout()
@@ -95,13 +97,32 @@ export default {
       })
     },
     submit() {
+      const vm = this
       if (!this.validFormInput() || !this.validForm()) {
         this.$vux.toast.text('信息填写有误')
         return
       }
-      this.$store.dispatch('createOrder', this.paymentForm).catch(err => {
-        console.log(err)
-      })
+      this.$store
+        .dispatch('createOrder', this.paymentForm)
+        .then(res => {
+          if (res.surplusAmount === 0) {
+            this.$vux.alert.show({
+              title: '支付完成',
+              content: '已用积分抵扣',
+              onHide() {
+                vm.push({ path: '/' })
+              }
+            })
+          } else {
+            openWindow(bizParameters.wapPayUrl)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    openPaymentPage(url) {
+      openWindow(url)
     },
     getEmailValid() {
       return this.$refs.email.valid

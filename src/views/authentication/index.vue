@@ -79,12 +79,7 @@ export default {
     this.$store.dispatch('certificationAll').then(res => {
       this.status = res
     })
-    this.$store.dispatch('getSesameUrl').then(res => {
-      this.sesameUrl = res
-    })
-    this.$store.dispatch('authoperator').then(res => {
-      this.carrierUrl = res
-    })
+
     this.$store
       .dispatch('checkIsPay')
       .then(isPay => {
@@ -96,10 +91,24 @@ export default {
   },
   methods: {
     carrierHandleClick() {
-      openWindow(this.carrierUrl)
+      this.$store
+        .dispatch('authoperator')
+        .then(res => {
+          openWindow(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     zhimaHandleClick() {
-      openWindow(this.sesameUrl)
+      this.$store
+        .dispatch('getSesameUrl')
+        .then(res => {
+          openWindow(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     needPay() {
       const vm = this

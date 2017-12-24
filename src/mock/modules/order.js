@@ -103,9 +103,26 @@ const checkoutData = Mock.mock({
   }
 })
 
+const createOrder = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    orderNo: '@id',
+    payType: 1,
+    tradeType: 1,
+    surplusAmount: 100,
+    bizParameters: {
+      returnUrl: 'http://xxx.com/alipay/return/order-A20171213123412345566',
+      wapPayUrl: 'http://baidu.com',
+      bizPackage: 'sdsd=asdfsd&sadfasdf=asdfsd&sign=sdfsadkfjkjksd'
+    }
+  }
+})
+
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
   getOrderNotice: config => orderNotice,
-  checkout: config => checkoutData
+  checkout: config => checkoutData,
+  createOrder: config => createOrder
 }
