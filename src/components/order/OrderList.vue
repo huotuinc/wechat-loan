@@ -1,17 +1,17 @@
 <template>
   <div class="loan-list">
-    <list-item></list-item>
+    <order-item :orders="orders"></order-item>
   </div>
 </template>
 <script>
-import ListItem from './LoanListItem'
+import OrderItem from './OrderListItem'
 
 export default {
   components: {
-    ListItem
+    OrderItem
   },
   props: {
-    item: String
+    orders: Array
   }
 }
 </script>

@@ -84,9 +84,7 @@ export default {
       }
     }
   },
-  created() {
-    console.log(this.$route.path)
-  },
+  created() {},
   methods: {
     getMobileValid() {
       return this.$refs.username.valid

@@ -77,29 +77,61 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/loanList',
-    component: Layout,
+    path: '/orderList',
+    component: _import('order/index'),
     children: [
       {
         path: '',
-        name: 'LoanList',
-        component: _import('loan/LoanList'),
+        name: 'All',
+        component: _import('order/OrderAll'),
         meta: {
           title: '我的借款'
+        }
+      },
+      {
+        path: 'pending',
+        name: 'Pending',
+        component: _import('order/OrderPending'),
+        meta: {
+          title: '待审核'
+        }
+      },
+      {
+        path: 'repayment',
+        name: 'Repayment',
+        component: _import('order/OrderRepayment'),
+        meta: {
+          title: '待还款'
+        }
+      },
+      {
+        path: 'overdue',
+        name: 'Overdue',
+        component: _import('order/OrderOverdue'),
+        meta: {
+          title: '已逾期'
+        }
+      },
+      {
+        path: 'complete',
+        name: 'Complete',
+        component: _import('order/OrderComplete'),
+        meta: {
+          title: '已完成'
         }
       }
     ]
   },
   {
-    path: '/loanInfo',
-    name: 'LoanInfo',
-    component: _import('loan/LoanInfo'),
+    path: '/orderInfo/:orderId',
+    name: 'OrderInfo',
+    component: _import('order/OrderInfo'),
     meta: {
       title: '借款信息'
     }
   },
   {
-    path: '/installment/:id',
+    path: '/installment/:orderId',
     name: 'Installment',
     component: _import('installment/index'),
     meta: {
@@ -125,27 +157,18 @@ export const constantRouterMap = [
   {
     path: '/setting',
     name: 'Setting',
-    component: _import('setting/index')
+    component: _import('setting/index'),
+    meta: {
+      title: '系统设置'
+    }
   },
   {
     path: '/download',
     name: 'Download',
-    component: _import('download/index')
-  },
-  {
-    path: '/loanTreatyPage',
-    name: 'LoanTreatyPage',
-    component: _import('borrow-info/LoanTreatyPage')
-  },
-  {
-    path: '/loanTreaty',
-    name: 'LoanTreaty',
-    component: _import('borrow-info/LoanTreaty')
-  },
-  {
-    path: '/orderInfo/:orderId',
-    name: 'OrderInfo',
-    component: _import('borrow-info/LoanTreaty')
+    component: _import('download/index'),
+    meta: {
+      title: '软件下载'
+    }
   },
   {
     path: '/authentication',
@@ -153,6 +176,14 @@ export const constantRouterMap = [
     component: _import('authentication/index'),
     meta: {
       title: '信用报告'
+    }
+  },
+  {
+    path: '/treaty/:orderId',
+    name: 'Treaty',
+    component: _import('treaty/index'),
+    meta: {
+      title: '借款条约'
     }
   },
   {

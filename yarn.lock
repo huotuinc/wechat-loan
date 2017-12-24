@@ -859,9 +859,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-better-scroll@^0.1.15:
-  version "0.1.15"
-  resolved "http://registry.npm.taobao.org/better-scroll/download/better-scroll-0.1.15.tgz#17bd5fc175d2fb422d370163c8ab9e28729b2fc1"
+better-scroll@^1.6.2:
+  version "1.6.2"
+  resolved "http://registry.npm.taobao.org/better-scroll/download/better-scroll-1.6.2.tgz#ccc13d2663a2b05c488da5d1e4424213be4a3887"
   dependencies:
     babel-runtime "^6.0.0"
 
@@ -4310,7 +4310,7 @@ qr.js@0.0.0:
   version "0.0.0"
   resolved "http://registry.npm.taobao.org/qr.js/download/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
 
-qs@6.5.1, qs@^6.5.1:
+qs@6.5.1:
   version "6.5.1"
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 

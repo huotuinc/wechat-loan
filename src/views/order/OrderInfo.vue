@@ -39,43 +39,28 @@
     <template v-if="borrowDetail.repayTypeCode === 1">
       <group class="loan-body_item">
         <cell title="每月还款金额" is-link>
-          <router-link to="{name:'Installment',params:{id:borrowDetail.orderId}}">
-            100元
-          </router-link>
+          <router-link class="text-danger" :to="{ name:'Installment', params: { orderId:borrowDetail.orderId } }">100元</router-link>
         </cell>
       </group>
     </template>
-
     <group class="loan-body_item">
-      <div v-if="borrowDetail.needAuth">
+      <template v-if="borrowDetail.needAuth">
         <cell title="信用报告" is-link>
-          <div v-if="borrowDetail.authStatus">
-            <router-link to="/login">
-              <span class="text-success">查看</span>
-            </router-link>
-          </div>
-          <div v-else>
-            <router-link to="/authentication">
-              <span class="text-danger">未认证</span>
-            </router-link>
-          </div>
+          <router-link to="/authentication">
+            <span v-if="borrowDetail.authStatus" class="text-success">查看</span>
+            <span v-else class="text-danger">未认证</span>
+          </router-link>
         </cell>
-      </div>
+      </template>
       <cell title="放款人">
         {{borrowDetail.lenderUserName}}
       </cell>
-      <div v-if="borrowDetail.grantStatus === 4
-      || borrowDetail.grantStatus === 5
-      || borrowDetail.grantStatus === 6">
-      <cell title="出借条约" is-link>
-        <router-link to="{path:'borrowInfo',params:{id:borrowDetail.orderId}}" class="text-danger">
-          立即查看
-        </router-link>
-      </cell>
-      </div>
-      <cell title="日志" is-link>
-        日志
-      </cell>
+      <template v-if="borrowDetail.grantStatus === 4 || borrowDetail.grantStatus === 5 || borrowDetail.grantStatus === 6">
+        <cell title="出借条约" is-link>
+          <router-link :to="{ name:'Treaty', params:{ orderId: borrowDetail.orderId } }" class="text-danger">立即查看</router-link>
+        </cell>
+      </template>
+      <cell title="日志" is-link>日志</cell>
       <x-textarea :max="100" name="description" placeholder="补充说明" :value="borrowDetail.remarks" readonly></x-textarea>
     </group>
   </div>
@@ -103,7 +88,7 @@ export default {
   },
   methods: {
     _getBorrowDetail() {
-      this.$store.dispatch('getOrderInfo', this.$route.params.id).then(res => {
+      this.$store.dispatch('getOrderInfo', this.$route.params.orderId).then(res => {
         this.borrowDetail = res
       })
     }
