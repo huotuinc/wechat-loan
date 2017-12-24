@@ -64,14 +64,14 @@ export default {
           name: '',
           mobile: '',
           relation: null,
-          isimportant: 1
+          isImportant: 1
         },
         {
           contactId: 0,
           name: '',
           mobile: '',
           relation: null,
-          isimportant: 0
+          isImportant: 0
         }
       ]
     }
@@ -94,7 +94,11 @@ export default {
       }
       this.form[0].relation = findCode(relation, this.value[0])
       this.form[1].relation = findCode(relation, this.value1[0])
-      this.$store.dispatch('editcontacts', this.form).then(() => {
+
+      let req = {
+        requestData: JSON.stringify(this.form)
+      }
+      this.$store.dispatch('editcontacts', req).then(() => {
         //todo 提交成功跳转
         this.$vux.toast.text('提交成功')
       })

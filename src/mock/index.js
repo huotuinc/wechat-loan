@@ -27,9 +27,9 @@ Mock.mock(/\/api\/authentication\/certificationAll/, 'post', authenticationApi.c
 //基本信息认证
 Mock.mock(/\/api\/user\/userinfoedit/, 'post', authenticationApi.userinfoedit)
 //联系人认证
-Mock.mock(/\/api\/user\/editcontacts/, 'post', authenticationApi.editcontacts)
+Mock.mock(/\/api\/user\/editContacts/, 'post', authenticationApi.editcontacts)
 //运营商认证
-Mock.mock(/\/api\/user\/authoperator/, 'post', authenticationApi.authoperator)
+Mock.mock(/\/api\/user\/authOperator/, 'post', authenticationApi.authoperator)
 //芝麻认证
 Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSesameUrl)
 // 是否支付

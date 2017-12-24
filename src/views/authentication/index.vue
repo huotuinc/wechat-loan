@@ -19,7 +19,7 @@
             <span class="text-success">{{status.uinfoFlgMsg}}</span>
           </div>
           <div v-else>
-            <router-link to="/login"><!--跳转到认证页面-->
+            <router-link to="/basicInfo"><!--跳转到认证页面-->
               <span class="text-danger">{{status.uinfoFlgMsg}}</span>
             </router-link>
           </div>
@@ -30,7 +30,7 @@
             <span class="text-success">{{status.contactFlgMsg}}</span>
           </div>
           <div v-else>
-            <router-link to="/login"><!--跳转到认证页面-->
+            <router-link to="/contacts"><!--跳转到认证页面-->
               <span class="text-danger">{{status.contactFlgMsg}}</span>
             </router-link>
           </div>

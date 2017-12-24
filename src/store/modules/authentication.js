@@ -52,7 +52,7 @@ const authentication = {
     editcontacts({}, form) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/editcontacts',
+          url: '/api/user/editContacts',
           method: 'post',
           data: form
         })
@@ -67,7 +67,7 @@ const authentication = {
     authoperator({ commit }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/authoperator',
+          url: '/api/user/authOperator',
           method: 'post'
         })
           .then(response => {
