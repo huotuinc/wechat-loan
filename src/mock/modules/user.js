@@ -4,7 +4,7 @@ const personal = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
   data: {
-    headimg: 'http://localhost:8080/static/img/avatar.0d02701.png',
+    headimg: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
     loanAmount: '@float(99999, 100000, 2, 2)',
     userName: '15856562514',
     authReport: false,

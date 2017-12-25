@@ -1,7 +1,7 @@
 <template>
   <div class="loan-wrap">
     <div class="loan-head">
-        <img class="loan-head_avatar" :src="page.headimg ? page.headimg : '/static/img/avatar.png'" alt="头像">
+        <img class="loan-head_avatar" :src="page.headimg" alt="头像">
         <p class="loan-head_title">我的负债</p>
         <h2 class="loan-head_debt">{{page.loanAmount}}</h2>
         <span class="loan-head_my"><i class="iconfont icon-zhi-ma"></i>&nbsp;信用认证：{{page.authMsg}}</span>
@@ -25,13 +25,13 @@
         </template>
       </group>
       <group class="loan-body_item">
-        <cell is-link title="发布记录">
+        <cell is-link title="发布记录" link="/publishList">
           <i class="iconfont icon-add" slot="icon"></i>
         </cell>
       </group>
       <div class="loan-body_grid">
         <grid>
-          <grid-item label="借条">
+          <grid-item label="我的借条" link="/orderList">
             <i class="iconfont icon-loan-o"></i>
           </grid-item>
           <grid-item label="待办事项" link="/todo">

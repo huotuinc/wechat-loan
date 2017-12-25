@@ -17,15 +17,17 @@
         </router-link>
       </template>
     </div>
-    <div class="is-empty" v-else-if="messageList.length == 0">
-        <img src="../../assets/empty.png" alt="空数据">
-        <p>暂无消息</p>
-    </div>
+    <empty :empty="messageList.length === 0" text="暂无消息"></empty>
   </div>
 </template>
 <script>
+import Empty from '@/components/empty'
+
 export default {
   name: 'Todo',
+  components: {
+    Empty
+  },
   data() {
     return {
       messageList: []
@@ -33,7 +35,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getOrderNotice').then(res => {
-      this.messageList = res
+      this.messageList = []
     })
   }
 }

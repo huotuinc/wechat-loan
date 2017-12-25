@@ -33,18 +33,20 @@
         </router-link>
       </div>
       <div class="personal-grid_item personal-grid_border">
-        <i class="iconfont icon-loan"></i>
-        <span class="label">我的借款</span>
+        <router-link to="/orderList">
+          <i class="iconfont icon-loan"></i>
+          <span class="label">我的借款</span>
+        </router-link>
       </div>
     </div>
     <div class="loan-body">
-      <group class="loan-body_item">
+      <!-- <group class="loan-body_item">
         <cell is-link title="系统消息">
           <i class="iconfont icon-msg" slot="icon"></i>
         </cell>
-      </group>
+      </group> -->
       <group class="loan-body_item">
-        <cell is-link title="发布记录">
+        <cell is-link title="发布记录" link="/publishList">
           <i class="iconfont icon-add" slot="icon"></i>
         </cell>
       </group>

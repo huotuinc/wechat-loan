@@ -5,16 +5,19 @@
       @pullingUp="onPullingUp"
     >
     <order-list :orders="orders"></order-list>
+    <empty :empty="isEmpty"></empty>
   </scroll>
 </template>
 <script>
 import Scroll from '../../components/scroll/scroll'
 import OrderList from '../../components/order/OrderList'
+import Empty from '@/components/empty'
 
 export default {
   components: {
     OrderList,
-    Scroll
+    Scroll,
+    Empty
   },
   data() {
     return {
@@ -28,7 +31,8 @@ export default {
         grantStatus: -1,
         pageIndex: 1,
         pageSize: 10
-      }
+      },
+      isEmpty: true
     }
   },
   mounted() {
@@ -57,6 +61,7 @@ export default {
     getOrderList() {
       this.$store.dispatch('getOrderList', this.requestData).then(newOrder => {
         this.orders = this.orders.concat(newOrder)
+        if(newOrder.length > 0) this.isEmpty = false
         if (newOrder.length < this.requestData.pageSize) {
           this.$refs.scroll.forceUpdate()
         } else {

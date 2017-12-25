@@ -1,17 +1,18 @@
 import Mock from 'mockjs'
 
-const saveInfoData = Mock.mock({
+const avatar = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
   data: {}
 })
 
-const cancel = Mock.mock({
+const identity = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
   data: {}
 })
+
 export default {
-  saveInfo: config => saveInfoData,
-  cancel: config => cancel
+  avatar: config => avatar,
+  identity: config => identity
 }

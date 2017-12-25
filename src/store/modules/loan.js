@@ -39,6 +39,38 @@ const loan = {
             reject(error)
           })
       })
+    },
+    getBorrowList({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/borrow/list',
+          method: 'get',
+          params: data
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    cancelBorrow({}, borrowId) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/borrow/cancel',
+          method: 'post',
+          data: {
+            borrowId: borrowId
+          }
+        })
+          .then(res => {
+            resolve()
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

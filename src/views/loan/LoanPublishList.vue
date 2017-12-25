@@ -8,39 +8,42 @@
     <div class="loan-list">
       <div class="list-item">
         <template v-for="order in orders">
-          <router-link class="loan-card" :key="order.id" :to="{name:'OrderInfo', params: {orderId: order.orderId}}" >
-            <div class="loan-card_hd clearfix">
+          <div class="loan-card" :key="order.id">
+            <div class="loan-card_hd loan-publish_hd clearfix">
               <span class="loan-hd_title">我的发布</span>
-              <span class="loan-hd_user" @click="del">删除</span>
+              <span class="loan-hd_user" @click="del(order)" v-if="order.cancelable">删除</span>
             </div>
             <div class="loan-card_bd vux-1px-b">
               <div class="loan-bd_img">
-                <img :src="order.userHeadImg" alt="">
+                <img :src="order.headimg" alt="">
               </div>
               <div class="loan-bd_content">
-                <p>借款金额：<span>1000元</span>&nbsp;&nbsp;&nbsp;&nbsp;借款金额：<span>10天</span></p>
-                <p>借款用途：<span>消费</span></p>
+                <p>借款金额：<span>{{order.money}}元</span>&nbsp;&nbsp;&nbsp;&nbsp;借款金额：<span>{{order.interval}}天</span></p>
+                <p>借款用途：<span>{{order.purpose}}</span></p>
               </div>
             </div>
             <div class="loan-card_ft loan-publish_ft">
               <div class="loan-ft_content">
-                <span>发布时间：<span>2017-11-10 12:1212</span></span>
+                <span>发布时间：<span>{{order.createTime}}</span></span>
               </div>
             </div>
-          </router-link>
+          </div>
         </template>
       </div>
     </div>
+     <empty :empty="isEmpty"></empty>
   </scroll>
   </div>
 </template>
 <script>
 import Scroll from '../../components/scroll/scroll'
+import Empty from '@/components/empty'
 
 export default {
   name: 'PublishList',
   components: {
-    Scroll
+    Scroll,
+    Empty
   },
   data() {
     return {
@@ -50,11 +53,10 @@ export default {
       pullUpLoadNoMoreTxt: '没有更多数据了',
       orders: [],
       requestData: {
-        orderType: 1,
-        grantStatus: -1,
         pageIndex: 1,
         pageSize: 10
-      }
+      },
+      isEmpty: true
     }
   },
   mounted() {
@@ -81,14 +83,35 @@ export default {
       this.getOrderList()
     },
     getOrderList() {
-      this.$store.dispatch('getOrderList', this.requestData).then(newOrder => {
+      this.$store.dispatch('getBorrowList', this.requestData).then(newOrder => {
         this.orders = this.orders.concat(newOrder)
+        if (newOrder.length > 0) this.isEmpty = false
         if (newOrder.length < this.requestData.pageSize) {
           this.$refs.scroll.forceUpdate()
         } else {
           this.requestData.pageIndex++
         }
       })
+    },
+    del(order) {
+      const vm = this
+      this.$vux.confirm.show({
+        title: '取消借条',
+        content: '你确定要取消该借条？',
+        onConfirm() {
+          vm.cancelOrder(order)
+        }
+      })
+    },
+    cancelOrder(order) {
+      this.$store.dispatch('cancelBorrow', order.id).then(() => {
+        this.$vux.toast.text('取消成功')
+        this.deleteOrder(order)
+      })
+    },
+    deleteOrder(order) {
+      this.orders.splice(this.orders.indexOf(order), 1)
+      if (this.orders.length === 0) this.isEmpty = true
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <waiting :show="isLoading" :progress="isProgress" :percent="percent"></waiting>
+   <waiting :show="isLoading" :text="text" :progress="isProgress" :percent="percent"></waiting>
     <router-view v-wechat-title="$route.meta.title"></router-view>
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
   computed: {
     ...mapState({
       isLoading: state => state.vux.isLoading,
+      text: state => state.vux.text,
       isProgress: state => state.vux.isProgress,
       percent: state => state.vux.percent
     })

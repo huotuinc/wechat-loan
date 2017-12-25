@@ -73,7 +73,7 @@ const order = {
         request({
           url: '/api/order/getRepayDetail',
           method: 'get',
-          data: {
+          params: {
             orderId: id
           }
         })

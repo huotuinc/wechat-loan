@@ -27,13 +27,11 @@
       </popup-picker>
     </group>
     <group class="loan-publish">
-      <cell title="信用报告" v-if="authNum === 3">
+      <cell title="信用报告" is-link v-if="authNum === 3" link="/credit">
         <span class="text-success">{{authText}}</span>
       </cell>
-      <cell title="信用报告" is-link v-else>
-        <router-link to="/authentication">
-          <span class="text-danger">{{authText}}</span>
-        </router-link>
+      <cell title="信用报告" is-link v-else link="/authentication">
+        <span class="text-danger">{{authText}}</span>
       </cell>
     </group>
     <div class="loan-publish_rule">
@@ -53,6 +51,13 @@ export default {
   name: 'loanPublish',
   created() {
     this._getPurposeList()
+    //页面刷新，需要再次获取
+    if (!this.authText) {
+      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '查询中' })
+      this.$store.dispatch('getIndex').then(() => {
+        this.$store.commit('UPDATE_LOADING', { isLoading: false })
+      })
+    }
   },
   computed: {
     authText() {
@@ -114,8 +119,9 @@ export default {
       }
       this.obj.borrowUse = findCode(purpose, this.value[0])
 
+      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
       this.$store.dispatch('saveInfo', this.obj).then(() => {
-        this.$router.push({ path: '/orderList' })
+        this.$router.push({ path: '/publishList' })
       })
     }
   }
