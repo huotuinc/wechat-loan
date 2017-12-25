@@ -43,7 +43,7 @@
           <i slot="label" class="iconfont icon-password"></i>
         </x-input>
         <div class="login-agree">
-          <span>我已阅读并同意《注册服务协议》</span>
+          <span>我已阅读并同意《<ins @click="open">注册服务协议</ins>》</span>
         </div>
       </group>
     </div>
@@ -55,17 +55,27 @@
     <p>
       <router-link to="/download">我是出借人</router-link>
     </p>
+    <div v-transfer-dom>
+      <popup v-model="popupShow" position="bottom" max-height="50%">
+        <iframe src="https://baidu.com" frameborder="0"></iframe>
+      </popup>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import { XInput, Group, XButton, md5 } from 'vux'
+import { TransferDom, Popup, Cell, XInput, Group, XButton, md5 } from 'vux'
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     XInput,
     XButton,
-    Group
+    Group,
+    Popup,
+    Cell
   },
   props: {
     type: String
@@ -81,7 +91,8 @@ export default {
         password: '',
         verifyCode: '',
         userType: 1
-      }
+      },
+      popupShow: false
     }
   },
   created() {},
@@ -163,7 +174,19 @@ export default {
       } else {
         return false
       }
+    },
+    open() {
+      this.popupShow = true
     }
   }
 }
 </script>
+<style lang="less">
+.vux-popup-dialog  {
+  iframe {
+    display: block;
+    width: 100%;
+    height: 1000px;
+  }
+}
+</style>
