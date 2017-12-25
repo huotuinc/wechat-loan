@@ -1,7 +1,7 @@
 <template>
   <div class="loan-wrap">
     <div class="loan-head">
-        <img class="loan-head_avatar" src="../../assets/avatar.png" alt="头像">
+        <img class="loan-head_avatar" :src="page.headimg ? page.headimg : '/static/img/avatar.png'" alt="头像">
         <p class="loan-head_title">我的负债</p>
         <h2 class="loan-head_debt">{{page.loanAmount}}</h2>
         <span class="loan-head_my"><i class="iconfont icon-zhi-ma"></i>&nbsp;信用认证：{{page.authMsg}}</span>
@@ -60,6 +60,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getIndex').then(res => {
+      console.log(res)
       this.page = res
     })
   }

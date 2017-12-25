@@ -22,6 +22,9 @@ body {
   &:active {
     background-color: darken(@loan-yellow, 5%) !important;
   }
+  &:disabled {
+    background-color: #ccc !important;
+  }
 }
 .btn-white {
   background-color: #fff !important;
@@ -186,6 +189,7 @@ body {
   text-align: center;
   color: #fff;
   .loan-head_avatar {
+    display: inline-block;
     width: 75px;
     height: 75px;
     border: 2px solid #fff;
