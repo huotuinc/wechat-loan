@@ -2,18 +2,6 @@
  <div class="loan-wrap">
     <div class="loan-body">
       <group class="loan-body_item">
-<!--
-        <cell title="身份证识别" :is-link="status.idCardFlg !== 3">
-          <i class="iconfont icon-id-front" slot="icon"></i>
-          <template v-if="status.idCardFlg === 3">
-              <span class="text-success">{{status.idCardFlgMsg}}</span>
-          </template>
-          <template v-else>
-            <router-link to="/login">
-              <span class="text-danger">{{status.idCardFlgMsg}}</span>
-            </router-link>
-          </template>
-        </cell> -->
         <!-- 身份证识别 -->
         <template v-if="status.idCardFlg === 3">
           <cell title="身份证识别">
