@@ -52,7 +52,7 @@ export default {
       let vm = this
       lrz(e.target.files[0], { width: 1980 })
         .then(function(rst) {
-          rst.formData.append('img', rst.file)
+          rst.formData.append('img', rst.file,rst.origin.name)
           // rst.formData.append('img')
           uploader('/api/user/uploadHeadImg', rst.formData)
         })

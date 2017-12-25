@@ -4,7 +4,7 @@ import sign from './sign'
 
 const uploader = (url, file) => {
   axios
-    .post(url, file, {
+    .post(url,file, {
       headers: {
         osType: 'h5',
         merchantId: 1,
