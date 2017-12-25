@@ -130,7 +130,6 @@ const order = {
       })
     },
     getOrderList({ commit }, orderData) {
-      console.log(orderData.pageIndex)
       return new Promise((resolve, reject) => {
         request({
           url: '/api/order/getOrderList',

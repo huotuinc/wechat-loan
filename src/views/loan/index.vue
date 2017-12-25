@@ -67,7 +67,6 @@ export default {
   },
   created() {
     this.$store.dispatch('getIndex').then(res => {
-      console.log(res)
       this.page = res
     })
   }

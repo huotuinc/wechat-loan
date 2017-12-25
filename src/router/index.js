@@ -25,6 +25,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/publishList',
+    name: 'PublishList',
+    component: _import('loan/LoanPublishList'),
+    meta: {
+      title: '发布'
+    }
+  },
+  {
     path: '/todo',
     component: Layout,
     children: [

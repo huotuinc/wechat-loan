@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getToken, getUserId } from './auth'
 import sign from './sign'
 
-const uploader = (url, file) => {
+const uploader = (url, file, successCb, errorCb) => {
   axios
     .post(url, file, {
       headers: {
@@ -21,11 +21,11 @@ const uploader = (url, file) => {
         console.log(progressEvent)
       }
     })
-    .then(() => {
-      console.log(1)
+    .then(res => {
+      successCb && successCb(res)
     })
     .catch(err => {
-      console.log(err)
+      errorCb && errorCb(res)
     })
 }
 

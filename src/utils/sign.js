@@ -1,6 +1,6 @@
 import store from '../store'
 import { md5 } from 'vux'
-const validKey = ['merchantId', 'userId', 'userToken', 'cityName', 'cityCode']
+const validKey = ['merchantId', 'userId', 'userToken', 'cityName', 'cityCode', 'timestamp']
 const secretKey = '4165a8d240b29af3f41818d10599d0d1'
 
 const raw = args => {
@@ -22,7 +22,9 @@ const raw = args => {
 }
 
 const sign = () => {
-  const userInfo = store.getters.userInfo
+  let userInfo = store.getters.userInfo
+  if (!userInfo) userInfo = {}
+  userInfo.timestamp = +new Date()
   return md5(raw(userInfo) + secretKey)
 }
 export default sign

@@ -2,57 +2,84 @@
  <div class="loan-wrap">
     <div class="loan-body">
       <group class="loan-body_item">
+<!--
         <cell title="身份证识别" :is-link="status.idCardFlg !== 3">
           <i class="iconfont icon-id-front" slot="icon"></i>
           <template v-if="status.idCardFlg === 3">
               <span class="text-success">{{status.idCardFlgMsg}}</span>
           </template>
           <template v-else>
-            <router-link to="/login"><!--跳转到认证页面-->
+            <router-link to="/login">
               <span class="text-danger">{{status.idCardFlgMsg}}</span>
             </router-link>
           </template>
-        </cell>
-        <cell title="基本信息认证" :is-link="status.uinfoFlg !== 3">
-          <i class="iconfont icon-user-o" slot="icon"></i>
-          <template v-if="status.uinfoFlg === 3">
+        </cell> -->
+        <!-- 身份证识别 -->
+        <template v-if="status.idCardFlg === 3">
+          <cell title="身份证识别">
+            <i class="iconfont icon-id-front" slot="icon"></i>
+             <span class="text-success">{{status.idCardFlgMsg}}</span>
+          </cell>
+        </template>
+        <template v-else>
+          <cell title="身份证识别" is-link link="/identity">
+            <i class="iconfont icon-id-front" slot="icon"></i>
+            <span class="text-danger">{{status.idCardFlgMsg}}</span>
+          </cell>
+        </template>
+        <!-- 基本信息认证 -->
+        <template v-if="status.uinfoFlg === 3">
+          <cell title="基本信息认证">
+            <i class="iconfont icon-user-o" slot="icon"></i>
             <span class="text-success">{{status.uinfoFlgMsg}}</span>
-          </template>
-          <template v-else>
-            <router-link to="/basicInfo">
-              <span class="text-danger">{{status.uinfoFlgMsg}}</span>
-            </router-link>
-          </template>
-        </cell>
-        <cell title="联系人信息" :is-link="status.contactFlg !== 3">
-          <i class="iconfont icon-contacts" slot="icon"></i>
-          <template v-if="status.contactFlg === 3">
+          </cell>
+        </template>
+        <template v-else>
+           <cell title="基本信息认证" is-link link="/basicInfo">
+             <i class="iconfont icon-user-o" slot="icon"></i>
+            <span class="text-danger">{{status.uinfoFlgMsg}}</span>
+           </cell>
+        </template>
+        <!-- 联系人信息 -->
+        <template v-if="status.contactFlg === 3">
+          <cell title="联系人信息">
+            <i class="iconfont icon-contacts" slot="icon"></i>
             <span class="text-success">{{status.contactFlgMsg}}</span>
-          </template>
-          <template v-else>
-            <router-link to="/contacts">
-              <span class="text-danger">{{status.contactFlgMsg}}</span>
-            </router-link>
-          </template>
-        </cell>
-        <cell title="运营商认证" :is-link="status.carrierFlg !== 3">
-          <i class="iconfont icon-mobile" slot="icon"></i>
-          <template v-if="status.carrierFlg === 3">
+          </cell>
+        </template>
+        <template v-else>
+          <cell title="联系人信息" is-link link="/contacts">
+            <i class="iconfont icon-contacts" slot="icon"></i>
+            <span class="text-danger">{{status.contactFlgMsg}}</span>
+          </cell>
+        </template>
+        <!-- 运营商认证 -->
+        <template v-if="status.carrierFlg === 3">
+          <cell title="运营商认证">
+            <i class="iconfont icon-mobile" slot="icon"></i>
             <span class="text-success">{{status.carrierFlgMsg}}</span>
-          </template>
-          <template v-else>
-            <span @click="carrierHandleClick"  class="text-danger">{{status.carrierFlgMsg}}</span>
-          </template>
-        </cell>
-        <cell title="芝麻信用认证" :is-link="status.zhimaFlg !== 3">
-          <i class="iconfont icon-zhi-ma" slot="icon"></i>
-          <template v-if="status.zhimaFlg === 3">
+          </cell>
+        </template>
+        <template v-else>
+          <cell title="运营商认证" is-link @click="carrierHandleClick">
+            <i class="iconfont icon-mobile" slot="icon"></i>
+            <span class="text-danger">{{status.carrierFlgMsg}}</span>
+          </cell>
+        </template>
+        <!-- 芝麻信用认证 -->
+        <template v-if="status.zhimaFlg === 3">
+          <cell title="芝麻信用认证">
+            <i class="iconfont icon-zhi-ma" slot="icon"></i>
             <span class="text-success">{{status.zhimaFlgMsg}}</span>
-          </template>
-          <template v-else>
-            <span @click="zhimaHandleClick"  class="text-danger">{{status.zhimaFlgMsg}}</span>
-          </template>
-        </cell>
+          </cell>
+        </template>
+        <template v-else>
+          <cell title="芝麻信用认证" is-link  @click="zhimaHandleClick">
+            <i class="iconfont icon-zhi-ma" slot="icon"></i>
+            <span class="text-danger">{{status.zhimaFlgMsg}}</span>
+          </cell>
+        </template>
+
       </group>
     </div>
  </div>
