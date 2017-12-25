@@ -12,15 +12,15 @@ const service = Vue => {
       osType: 'h5',
       merchantId: 1,
       appVersion: 1.0
-    }
+    },
+    params: {}
   })
 
   axios.interceptors.request.use(
     config => {
+      config.params['sign'] = sign()
+      config.params['timestamp'] = +new Date()
       if (store.getters.token) {
-        if (!config.params) config.params = {}
-        config.params['sign'] = sign()
-        config.params['timestamp'] = +new Date()
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }

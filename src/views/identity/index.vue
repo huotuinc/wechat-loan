@@ -2,7 +2,7 @@
   <div class="loan-wrap">
     <group class="loan-body_item">
       <cell title="上传身份证正面" is-link>
-        <input type="file" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        <input type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
       </cell>
       <cell title="上传身份证背面" is-link></cell>
       <cell title="上传手持身份证照片" is-link></cell>
@@ -26,8 +26,7 @@ export default {
       let vm = this
       lrz(e.target.files[0], { width: 1980 })
         .then(function(rst) {
-          rst.formData.append('name', 'img')
-          uploader('/api/user/uploadHeadImg', rst.formData)
+          uploader('/api/user/uploadHeadImg', rst.origin.name)
         })
         .catch(function(err) {})
     }

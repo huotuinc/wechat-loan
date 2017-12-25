@@ -6,7 +6,7 @@
         <cell title="常见问题" is-link></cell>
         <cell title="平台协议" is-link></cell>
         <cell title="头像" is-link>
-          <input type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+          <input type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" multiple @change="upload">
         </cell>
       </group>
     </div>
@@ -52,7 +52,9 @@ export default {
       let vm = this
       lrz(e.target.files[0], { width: 1980 })
         .then(function(rst) {
+          console.log(rst)
           rst.formData.append('img', rst.file)
+
           // rst.formData.append('img')
           uploader('/api/user/uploadHeadImg', rst.formData)
         })
