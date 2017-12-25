@@ -11,7 +11,8 @@ const getters = {
   orderPending: state => state.order.orderPending,
   orderRepayment: state => state.order.orderRepayment,
   orderOverdue: state => state.order.orderOverdue,
-  orderComplete: state => state.order.orderComplete
+  orderComplete: state => state.order.orderComplete,
+
 }
 
 export default getters

@@ -5,6 +5,7 @@ import loan from './modules/loan'
 import order from './modules/order'
 import esign from './modules/esign'
 import credit from './modules/credit'
+import vux from './modules/vux'
 import authentication from './modules/authentication'
 import getters from './getters'
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     order,
     authentication,
     esign,
-    credit
+    credit,
+    vux
   },
   getters
 })

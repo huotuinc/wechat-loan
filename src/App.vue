@@ -1,12 +1,26 @@
 <template>
   <div id="app">
+   <waiting :show="isLoading" :progress="isProgress" :percent="percent"></waiting>
     <router-view v-wechat-title="$route.meta.title"></router-view>
   </div>
 </template>
 
 <script>
+import Waiting from './components/waiting'
+import { mapState } from 'vuex'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Waiting
+  },
+  computed: {
+    ...mapState({
+      isLoading: state => state.vux.isLoading,
+      isProgress: state => state.vux.isProgress,
+      percent: state => state.vux.percent
+    })
+  }
 }
 </script>
 

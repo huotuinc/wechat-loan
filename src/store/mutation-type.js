@@ -12,3 +12,8 @@ export const AUTH_OPERATOR = 'AUTH_OPERATOR'
 // 订单列表
 
 export const SET_ORDER_LIST = 'SET_ORDER_LIST'
+
+//loading
+export const UPDATE_LOADING = 'UPDATE_LOADING'
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
+export const UPDATE_PERCENT = 'UPDATE_PERCENT'
