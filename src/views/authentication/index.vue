@@ -10,7 +10,11 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="身份证识别" is-link link="/identity">
+          <cell title="身份证识别" is-link link="/identity" v-if="isPay">
+            <i class="iconfont icon-id-front" slot="icon"></i>
+            <span class="text-danger">{{status.idCardFlgMsg}}</span>
+          </cell>
+          <cell title="身份证识别" v-else>
             <i class="iconfont icon-id-front" slot="icon"></i>
             <span class="text-danger">{{status.idCardFlgMsg}}</span>
           </cell>
@@ -23,10 +27,14 @@
           </cell>
         </template>
         <template v-else>
-           <cell title="基本信息认证" is-link link="/basicInfo">
-             <i class="iconfont icon-user-o" slot="icon"></i>
+          <cell title="基本信息认证" is-link link="/basicInfo" v-if="isPay">
+            <i class="iconfont icon-user-o" slot="icon"></i>
             <span class="text-danger">{{status.uinfoFlgMsg}}</span>
-           </cell>
+          </cell>
+          <cell title="基本信息认证" v-else>
+            <i class="iconfont icon-user-o" slot="icon"></i>
+            <span class="text-danger">{{status.uinfoFlgMsg}}</span>
+          </cell>
         </template>
         <!-- 联系人信息 -->
         <template v-if="status.contactFlg === 3">
@@ -36,7 +44,11 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="联系人信息" is-link link="/contacts">
+          <cell title="联系人信息" is-link link="/contacts" v-if="isPay">
+            <i class="iconfont icon-contacts" slot="icon"></i>
+            <span class="text-danger">{{status.contactFlgMsg}}</span>
+          </cell>
+          <cell title="联系人信息" v-else>
             <i class="iconfont icon-contacts" slot="icon"></i>
             <span class="text-danger">{{status.contactFlgMsg}}</span>
           </cell>
@@ -49,7 +61,11 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="运营商认证" is-link @click="carrierHandleClick">
+          <cell title="运营商认证" is-link @click="carrierHandleClick" v-if="isPay">
+            <i class="iconfont icon-mobile" slot="icon"></i>
+            <span class="text-danger">{{status.carrierFlgMsg}}</span>
+          </cell>
+          <cell title="运营商认证" v-else>
             <i class="iconfont icon-mobile" slot="icon"></i>
             <span class="text-danger">{{status.carrierFlgMsg}}</span>
           </cell>
@@ -62,7 +78,11 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="芝麻信用认证" is-link  @click="zhimaHandleClick">
+          <cell title="芝麻信用认证" is-link  @click="zhimaHandleClick"  v-if="isPay">
+            <i class="iconfont icon-zhi-ma" slot="icon"></i>
+            <span class="text-danger">{{status.zhimaFlgMsg}}</span>
+          </cell>
+          <cell title="芝麻信用认证" v-else>
             <i class="iconfont icon-zhi-ma" slot="icon"></i>
             <span class="text-danger">{{status.zhimaFlgMsg}}</span>
           </cell>
@@ -87,7 +107,8 @@ export default {
     return {
       status: {},
       sesameUrl: '',
-      carrierUrl: ''
+      carrierUrl: '',
+      isPay: false
     }
   },
   created() {
@@ -97,8 +118,9 @@ export default {
 
     this.$store
       .dispatch('checkIsPay')
-      .then(isPay => {
-        if (!isPay) this.needPay()
+      .then(res => {
+        this.isPay = res
+        if (!res) this.needPay()
       })
       .catch(err => {
         console.log(err)
@@ -130,6 +152,9 @@ export default {
       this.$vux.confirm.show({
         title: '认证费',
         content: '你未支付认证费',
+        onCancel() {
+          vm.$router.back()
+        },
         onConfirm() {
           vm.$router.push({ path: '/payment/1' })
         }
