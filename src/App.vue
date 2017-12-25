@@ -1,25 +1,24 @@
 <template>
   <div id="app">
-   <loading :show="isLoading"></loading>
+   <waiting :show="isLoading" :progress="isProgress" :percent="percent"></waiting>
     <router-view v-wechat-title="$route.meta.title"></router-view>
   </div>
 </template>
 
 <script>
-import { Loading, TransferDom } from 'vux'
+import Waiting from './components/waiting'
 import { mapState } from 'vuex'
 
 export default {
   name: 'app',
-  directives: {
-    TransferDom
-  },
   components: {
-    Loading
+    Waiting
   },
   computed: {
     ...mapState({
-      isLoading: state => state.vux.isLoading
+      isLoading: state => state.vux.isLoading,
+      isProgress: state => state.vux.isProgress,
+      percent: state => state.vux.percent
     })
   }
 }
@@ -29,8 +28,4 @@ export default {
 @import '~vux/src/styles/reset.less';
 @import './style/variable.less';
 @import './style/index.less';
-.vux-loading .weui-toast {
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
 </style>

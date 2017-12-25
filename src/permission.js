@@ -8,5 +8,5 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  store.commit('UPDATE_LOADING', { isLoading: false })
+  store.commit('UPDATE_LOADING', { isLoading: true })
 })

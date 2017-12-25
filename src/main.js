@@ -31,8 +31,9 @@ new Vue({
 
 router.beforeEach((to, from, next) => {
   store.commit('UPDATE_LOADING', { isLoading: true })
+  next()
 })
 
-router.afterEach(() => {
+router.afterEach((to) => {
   store.commit('UPDATE_LOADING', { isLoading: false })
 })
