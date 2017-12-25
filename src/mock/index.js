@@ -7,6 +7,7 @@ import borrowApi from './modules/borrow'
 import authenticationApi from './modules/authentication'
 import orderApi from './modules/order'
 import uploader from './modules/uploader'
+import record from './modules/record'
 
 // 模拟服务器延迟
 Mock.setup({
@@ -110,3 +111,8 @@ Mock.mock(/\/api\/user\/esign\/send/, 'post', orderApi.sendPayment)
 
 Mock.mock(/\/api\/user\/uploadHeadImg/, 'post', uploader.avatar)
 Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
+
+
+Mock.mock(/\/api\/user\/riskCallList/, 'post', record.riskCallList)
+Mock.mock(/\/api\/user\/emergencyContactList/, 'post', record.emergencyContactList)
+Mock.mock(/\/api\/user\/consumeBillList/, 'post', record.consumeBillList)

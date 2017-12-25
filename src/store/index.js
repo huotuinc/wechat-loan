@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import vux from './modules/vux'
 import user from './modules/user'
 import loan from './modules/loan'
 import order from './modules/order'
 import esign from './modules/esign'
 import credit from './modules/credit'
-import vux from './modules/vux'
+import record from './modules/record'
 import authentication from './modules/authentication'
 import getters from './getters'
 
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     authentication,
     esign,
     credit,
-    vux
+    vux,
+    record
   },
   getters
 })

@@ -60,9 +60,9 @@
       <cell title="月均通话次数">
         {{carrier.avgMonthlyCount}}
       </cell>
-      <cell title="缴费记录" is-link></cell>
-      <cell title="紧急联系人通话" is-link></cell>
-      <cell title="风险通话记录" is-link></cell>
+      <cell title="缴费记录" is-link link="/consume"></cell>
+      <cell title="紧急联系人通话" is-link link="/emergency"></cell>
+      <cell title="风险通话记录" is-link link="/riskCall"></cell>
     </group>
     <group title="本平台借款记录">
       <cell title="当前借入">

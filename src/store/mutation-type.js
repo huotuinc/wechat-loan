@@ -17,3 +17,7 @@ export const SET_ORDER_LIST = 'SET_ORDER_LIST'
 export const UPDATE_LOADING = 'UPDATE_LOADING'
 export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
 export const UPDATE_PERCENT = 'UPDATE_PERCENT'
+
+export const RISK_CALL = 'RISK_CALL'
+export const CONSUME_BILL = 'CONSUME_BILL'
+export const EMERGENCY = 'EMERGENCY'

@@ -249,6 +249,30 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/riskCall',
+    name: 'RiskCall',
+    component:  _import('record/RiskCall'),
+    eta: {
+      title: '风险通话记录'
+    }
+  },
+  {
+    path: '/emergency',
+    name: 'Emergency',
+    component:  _import('record/EmergencyContact'),
+    eta: {
+      title: '紧急联系人通话'
+    }
+  },
+  {
+    path: '/consume',
+    name: 'ConsumeBill',
+    component:  _import('record/ConsumeBill'),
+    eta: {
+      title: '缴费记录'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

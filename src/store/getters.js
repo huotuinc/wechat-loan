@@ -13,6 +13,9 @@ const getters = {
   orderOverdue: state => state.order.orderOverdue,
   orderComplete: state => state.order.orderComplete,
 
+  riskCallList: state => state.record.riskCallList,
+  emergencyList: state => state.record.emergencyList,
+  billList: state => state.record.billList
 }
 
 export default getters
