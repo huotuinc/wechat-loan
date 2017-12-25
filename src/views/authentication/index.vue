@@ -8,7 +8,7 @@
               <span class="text-success">{{status.idCardFlgMsg}}</span>
           </template>
           <template v-else>
-            <router-link to="/login"><!--跳转到认证页面-->
+            <router-link to="/identity"><!--跳转到认证页面-->
               <span class="text-danger">{{status.idCardFlgMsg}}</span>
             </router-link>
           </template>
