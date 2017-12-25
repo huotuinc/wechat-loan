@@ -2,15 +2,19 @@
   <div class="loan-wrap">
     <group class="loan-body_item identity-body_item">
       <cell title="上传身份证正面" is-link>
-        <label for="J_front" class="upload-label">
-          <input id="J_front" type="file" name="front" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
-        </label>
+          <label for="J_front" class="upload-label">{{frontName}}
+            <input id="J_front" type="file" name="front" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+          </label>
       </cell>
       <cell title="上传身份证背面" is-link>
-        <input type="file" name="back"  accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        <label for="J_back" class="upload-label">{{backName}}
+          <input id="J_back" type="file" name="back"  accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        </label>
       </cell>
       <cell title="上传手持身份证照片" is-link>
-        <input type="file" name="photoSelf" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        <label for="J_photoSelf" class="upload-label">{{photoSelfName}}
+          <input id="J_photoSelf"  type="file" name="photoSelf" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        </label>
       </cell>
     </group>
     <div class="identity-demo">
@@ -36,13 +40,29 @@ export default {
   data() {
     return {
       formData: new FormData(),
-      length: 0,
-      disabled: true
+      front: false,
+      back: false,
+      photoSelf: false,
+      disabled: true,
+      frontName: '',
+      backName: '',
+      photoSelfName: ''
     }
   },
   watch: {
-    length(value) {
-      if (value === 3) {
+    front(value) {
+      if (value && this.back && this.photoSelf) {
+        this.disabled = false
+      }
+    },
+    back(value) {
+      if (value && this.front && this.photoSelf) {
+        this.disabled = false
+      }
+    },
+    photoSelf(value) {
+      console.log(value)
+      if (value && this.front && this.back) {
         this.disabled = false
       }
     }
@@ -53,12 +73,13 @@ export default {
       if (!fileDOM.files[0]) return
       let vm = this
       lrz(fileDOM.files[0], { width: 1980 })
-        .then(function(rst) {
+        .then(rst => {
           vm.formData.append(fileDOM.name, rst.file, rst.origin.name)
+          vm[fileDOM.name] = true
+          vm[`${fileDOM.name}Name`] = rst.origin.name
           fileDOM.value = ''
-          vm.length++
         })
-        .catch(function(err) {})
+        .catch(err => {})
     },
     uploadAll() {
       uploader('/api/authentication/identityHtml', this.formData)
@@ -71,6 +92,9 @@ export default {
   .weui-cells {
     margin-top: 0 !important;
   }
+  .weui-cell__ft {
+    width: 230px;
+  }
 }
 
 .identity-demo {
@@ -78,11 +102,14 @@ export default {
     width: 100%;
   }
 }
-// .upload-label {
-//   input {
-//     visibility: hidden;
-//     height: 0;
-//   }
-// }
+.upload-label {
+  display: inline-block;
+  text-align: left;
+  input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+}
 </style>
 

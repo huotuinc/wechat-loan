@@ -6,8 +6,10 @@
         <cell title="常见问题" is-link></cell>
         <cell title="平台协议" is-link></cell>
         <cell title="头像" is-link>
-          <input type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" multiple @change="upload">
-        </cell>
+          <label for="J_img" class="upload-label">
+            <input id="J_img" type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" multiple @change="upload">
+          </label>
+      </cell>
       </group>
     </div>
     <div class="loan-publish_btn" style="padding:20px;">
@@ -60,3 +62,14 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.upload-label {
+  display: inline-block;
+  text-align: left;
+  input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+}
+</style>
