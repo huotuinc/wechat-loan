@@ -75,11 +75,33 @@ const isPay = Mock.mock({
   resultMsg: 'OK',
   data: false
 })
+
+const certificationInfo = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    name: '张三',
+    idNumber: '330104200012121111',
+    mobile: '18898889788',
+    marry: '未婚',
+    realState: '无',
+    unitName: '杭州火图科技',
+    workTime: '20个月',
+    annualIncome: '5000-10000元',
+    unitAddress: '杭州市滨江区智慧E谷B幢4楼',
+    homeAddress: '杭州市滨江区明月江南1幢',
+    sesameScore: '700',
+    education: '小学',
+    device: '诺基亚 100',
+    wechatAccount: '哈哈'
+  }
+})
 export default {
   certificationAll: config => certificationAllData,
   userinfoedit: config => userinfoeditData,
   editcontacts: config => editcontactsData,
   authoperator: config => authoperatorData,
   getSesameUrl: config => getSesameUrlData,
-  isPay: config => isPay
+  isPay: config => isPay,
+  certificationInfo: config => certificationInfo
 }

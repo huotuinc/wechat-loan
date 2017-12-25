@@ -69,6 +69,7 @@
 
 <script>
 import { XInput, Group, Cell, dateFormat, XTextarea } from 'vux'
+
 export default {
   computed: {
     orderTitle() {

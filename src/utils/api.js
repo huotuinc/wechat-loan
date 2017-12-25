@@ -6,7 +6,7 @@ import sign from './sign'
 
 const service = Vue => {
   const axios = Axios.create({
-    baseURL: 'http://localhost:8999',
+    // baseURL: 'http://youxin.51morecash.com',
     timeout: 15000,
     headers: {
       osType: 'h5',

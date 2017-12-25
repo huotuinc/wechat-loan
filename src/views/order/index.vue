@@ -1,7 +1,7 @@
 <template>
   <div class="loan-wrap">
     <view-box>
-      <tab :line-width=2 active-color='#ff9c00' v-model="index" custom-bar-width="40px">
+      <tab :line-width="2" active-color="#ff9c00" v-model="index" custom-bar-width="40px">
         <tab-item class="vux-center" :selected="activeTab === item" v-for="(item, index) in tabList" @on-item-click="pageChange" :key="index">{{item}}</tab-item>
       </tab>
       <div class="loan-list-wrap">

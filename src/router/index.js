@@ -203,6 +203,28 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/identity',
+    name: 'Identity',
+    component: _import('identity/index'),
+    meta: {
+      title: '身份证识别'
+    }
+  },
+  {
+    path: '/credit',
+    component: _import('credit/index'),
+    children: [
+      {
+        path: '',
+        name: 'CreditInfo',
+        component: _import('credit/info'),
+        meta: {
+          title: '认证信息'
+        }
+      }
+    ]
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

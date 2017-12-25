@@ -12,9 +12,11 @@
     </div>
     <div class="personal-grid">
       <div class="personal-grid_item">
-        <i class="iconfont icon-apply"></i>
-        <span class="label">待审核</span>
-        <badge :text="personal.countNoComplete" v-if="personal.countNoComplete > 0"></badge>
+        <router-link to="/orderList/pending">
+          <i class="iconfont icon-apply"></i>
+          <span class="label">待审核</span>
+          <badge :text="personal.countNoComplete" v-if="personal.countNoComplete > 0"></badge>
+        </router-link>
       </div>
       <div class="personal-grid_item">
         <i class="iconfont icon-bank-card"></i>

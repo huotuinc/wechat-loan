@@ -5,7 +5,9 @@
         <cell title="关于我们" is-link></cell>
         <cell title="常见问题" is-link></cell>
         <cell title="平台协议" is-link></cell>
-        <cell title="头像" is-link></cell>
+        <cell title="头像" is-link>
+          <input type="file" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+        </cell>
       </group>
     </div>
     <div class="loan-publish_btn" style="padding:20px;">
@@ -17,6 +19,8 @@
 <script>
 import { XInput, Group, XButton, Cell } from 'vux'
 import { mapGetters } from 'vuex'
+import lrz from 'lrz'
+import uploader from '@/utils/uploader'
 
 export default {
   props: {
@@ -42,6 +46,16 @@ export default {
       this.$store.dispatch('logout').then(() => {
         this.$router.push({ path: '/login' })
       })
+    },
+    upload(e) {
+      if (!e.target.files[0]) return
+      let vm = this
+      lrz(e.target.files[0], { width: 1980 })
+        .then(function(rst) {
+          rst.formData.append('name', 'img')
+          uploader('/api/user/uploadHeadImg', rst.formData)
+        })
+        .catch(function(err) {})
     }
   }
 }
