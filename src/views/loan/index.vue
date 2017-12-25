@@ -13,9 +13,16 @@
         </cell>
       </group>
       <group class="loan-body_item">
-        <cell is-link title="信用报告" :value="page.authMsg" link="/authentication">
-          <i class="iconfont icon-report" slot="icon"></i>
-        </cell>
+        <template v-if="page.authCode === 3">
+          <cell is-link title="信用报告" :value="page.authMsg" link="/credit">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
+        <template v-else>
+          <cell is-link title="信用报告" :value="page.authMsg" link="/authentication">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
       </group>
       <group class="loan-body_item">
         <cell is-link title="发布记录">

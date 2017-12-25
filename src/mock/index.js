@@ -36,6 +36,7 @@ Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSe
 Mock.mock(/\/api\/authentication\/checkIsPay/, 'post', authenticationApi.isPay)
 
 Mock.mock(/\/api\/user\/certificationInfo/, 'post', authenticationApi.certificationInfo)
+Mock.mock(/\/api\/user\/creditReport/, 'post', authenticationApi.creditReport)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)

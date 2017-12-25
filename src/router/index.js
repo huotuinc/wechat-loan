@@ -221,6 +221,14 @@ export const constantRouterMap = [
         meta: {
           title: '认证信息'
         }
+      },
+      {
+        path: 'report',
+        name: 'CreditReport',
+        component: _import('credit/report'),
+        meta: {
+          title: '信用信息'
+        }
       }
     ]
   },

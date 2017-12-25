@@ -96,6 +96,40 @@ const certificationInfo = Mock.mock({
     wechatAccount: '哈哈'
   }
 })
+
+const creditReport = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    risk: {
+      finalScore: 100,
+      finalDecision: 'reject',
+      courtLoseFaith: 1,
+      courtExecution: 1,
+      courtCase: 0,
+      discredit: 1,
+      fuzzyNameHits: ['法院失信模糊名单', '信贷逾期模糊名单'],
+      phoneNumberRisks: ['虚假号', '小号', '骚扰库'],
+      platformApply7: 3,
+      platformApply30: 10
+    },
+    carrier: {
+      isMyIdCard: 1,
+      status: 'xx',
+      totalTime: 44,
+      mutualCount: 10,
+      avgMonthlyCost: 100,
+      avgMonthlyCount: 3
+    },
+    loan: {
+      borrowIng: { num: 1, amount: 1000 },
+      lendIng: { num: 1, amount: 1000 },
+      totalBorrow: { num: 1, amount: 1000 },
+      totalLend: { num: 1, amount: 1000 },
+      totalOverdue: { num: 1, day: 7 }
+    }
+  }
+})
 export default {
   certificationAll: config => certificationAllData,
   userinfoedit: config => userinfoeditData,
@@ -103,5 +137,6 @@ export default {
   authoperator: config => authoperatorData,
   getSesameUrl: config => getSesameUrlData,
   isPay: config => isPay,
-  certificationInfo: config => certificationInfo
+  certificationInfo: config => certificationInfo,
+  creditReport: config => creditReport
 }
