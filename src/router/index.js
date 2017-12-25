@@ -85,6 +85,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/receive',
+    name: 'Receive',
+    component: _import('receive/index'),
+    meta: {
+      title: '领取'
+    }
+  },
+  {
     path: '/orderList',
     component: _import('order/index'),
     children: [

@@ -1,8 +1,11 @@
 import axios from 'axios'
+import store from '../store'
 import { getToken, getUserId } from './auth'
 import sign from './sign'
 
-const uploader = (url, file, successCb, errorCb) => {
+const uploader = (url, file, successCb, errorCb, progressCb) => {
+  store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
+  store.commit(UPDATE_PROGRESS, true)
   axios
     .post(url, file, {
       headers: {
@@ -17,15 +20,22 @@ const uploader = (url, file, successCb, errorCb) => {
         timestamp: +new Date()
       },
       onUploadProgress: function(progressEvent) {
-        // 对原生进度事件的处理
-        console.log(progressEvent)
+        if (progressEvent.lengthComputable) {
+          progressCb && progressCb(progressEvent)
+          let percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total)
+          store.commit(UPDATE_PERCENT, percentCompleted)
+        }
       }
     })
     .then(res => {
       successCb && successCb(res)
+      store.commit(UPDATE_LOADING, { isLoading: false })
+      store.commit(UPDATE_PROGRESS, false)
     })
     .catch(err => {
       errorCb && errorCb(res)
+      store.commit(UPDATE_LOADING, { isLoading: false })
+      store.commit(UPDATE_PROGRESS, false)
     })
 }
 
