@@ -78,5 +78,13 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.personal-grid_item {
+  a {
+    color: #000;
+  }
+}
+</style>
+
 
 
