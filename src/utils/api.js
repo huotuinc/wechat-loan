@@ -27,10 +27,6 @@ const service = Vue => {
           merchantId: 1,
           timestamp: +new Date()
         })
-        // let getParams = {}
-        // getParams['merchantId'] = 1
-        // getParams['timestamp'] = +new Date()
-        // getParams['sign'] = signUtil(config.params)
         let signData = signUtil(config.params)
         Object.assign(config.params, {
           sign: signData
@@ -43,10 +39,6 @@ const service = Vue => {
           merchantId: 1,
           timestamp: +new Date()
         })
-        // let postData = {}
-        // postData['merchantId'] = 1
-        // postData['timestamp'] = +new Date()
-        // postData['sign'] = signUtil(config.data)
         let signData = signUtil(config.data)
         Object.assign(config.data, {
           sign: signData
@@ -57,7 +49,6 @@ const service = Vue => {
         dataParams.append(key, config.data[key])
       }
       config.data = dataParams
-      console.log(config)
       return config
     },
     error => {
