@@ -61,7 +61,7 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="运营商认证" is-link @click="carrierHandleClick" v-if="isPay">
+          <cell title="运营商认证" is-link @click.native="carrierHandleClick" v-if="isPay">
             <i class="iconfont icon-mobile" slot="icon"></i>
             <span class="text-danger">{{status.carrierFlgMsg}}</span>
           </cell>
@@ -78,7 +78,7 @@
           </cell>
         </template>
         <template v-else>
-          <cell title="芝麻信用认证" is-link  @click="zhimaHandleClick"  v-if="isPay">
+          <cell title="芝麻信用认证" is-link  @click.native="zhimaHandleClick"  v-if="isPay">
             <i class="iconfont icon-zhi-ma" slot="icon"></i>
             <span class="text-danger">{{status.zhimaFlgMsg}}</span>
           </cell>

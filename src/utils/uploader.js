@@ -2,6 +2,7 @@ import axios from 'axios'
 import store from '../store'
 import { getToken, getUserId } from './auth'
 import sign from './sign'
+import { UPDATE_LOADING, UPDATE_PROGRESS, UPDATE_PERCENT } from '../store/mutation-type'
 
 const uploader = (url, file, successCb, errorCb, progressCb) => {
   store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
