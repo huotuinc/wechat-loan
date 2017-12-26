@@ -12,8 +12,7 @@ const service = Vue => {
       osType: 'h5',
       merchantId: 1,
       appVersion: 1.0
-    },
-    params: {}
+    }
   })
 
   axios.interceptors.request.use(
@@ -22,26 +21,27 @@ const service = Vue => {
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
-
       if (config.method.toLowerCase() === 'get') {
-        config.params['merchantId'] = 1
-        config.params['timestamp'] = +new Date()
-        signUtil(config.params)
+        if (!config.params) config.params = {}
+        let getParams = {}
+        getParams['merchantId'] = 1
+        getParams['timestamp'] = +new Date()
+        getParams['sign'] = signUtil(config.params)
+        Object.assign(config.params, getParams)
       }
       if (config.method.toLowerCase() === 'post') {
-        config.data['merchantId'] = 1
-        config.data['timestamp'] = +new Date()
-        console.log(config.data)
-        signUtil(config.data)
+        let postData = {}
+        postData['merchantId'] = 1
+        postData['timestamp'] = +new Date()
+        postData['sign'] = signUtil(config.data)
+        Object.assign(config.data, postData)
       }
-      // const params = new URLSearchParams()
-      // for (let key in config.data) {
-      //   params.append(key, config.data[key])
-      // }
-      // config.data = params
+      const dataParams = new URLSearchParams()
+      for (let key in config.data) {
+        dataParams.append(key, config.data[key])
+      }
+      config.data = dataParams
 
-      // signUtil(config.params)
-      // console.log(config)
       return config
     },
     error => {
