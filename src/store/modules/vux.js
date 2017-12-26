@@ -13,7 +13,7 @@ const vux = {
       state.text = payload.text ? payload.text : ''
     },
     [UPDATE_PROGRESS](state, payload) {
-      state.isProgress = payload.isProgress
+      state.isProgress = payload
     },
     [UPDATE_PERCENT](state, payload) {
       state.percent = payload

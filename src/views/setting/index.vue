@@ -23,7 +23,6 @@ import { XInput, Group, XButton, Cell } from 'vux'
 import { mapGetters } from 'vuex'
 import lrz from 'lrz'
 import uploader from '@/utils/uploader'
-import { UPDATE_LOADING, UPDATE_PROGRESS, UPDATE_PERCENT } from '../../store/mutation-type'
 
 export default {
   props: {
@@ -63,8 +62,7 @@ export default {
       lrz(e.target.files[0], { width: 1980 })
         .then(function(rst) {
           rst.formData.append('img', rst.file, rst.origin.name)
-
-          uploader('/api/user/uploadHeadImg', rst.formData, this.success, this.error)
+          uploader('/api/user/uploadHeadImg', rst.formData)
         })
         .catch(function(err) {})
     },

@@ -2,7 +2,7 @@ import Axios from 'axios'
 import URLSearchParams from 'url-search-params'
 import store from '../store'
 import { getToken, getUserId } from './auth'
-import sign from './sign'
+import signUtil from './sign'
 
 const service = Vue => {
   const axios = Axios.create({
@@ -18,19 +18,30 @@ const service = Vue => {
 
   axios.interceptors.request.use(
     config => {
-      config.params['sign'] = sign()
-      config.params['timestamp'] = +new Date()
       if (store.getters.token) {
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
 
-      const params = new URLSearchParams()
-      for (let key in config.data) {
-        params.append(key, config.data[key])
+      if (config.method.toLowerCase() === 'get') {
+        config.params['merchantId'] = 1
+        config.params['timestamp'] = +new Date()
+        signUtil(config.params)
       }
-      config.data = params
+      if (config.method.toLowerCase() === 'post') {
+        config.data['merchantId'] = 1
+        config.data['timestamp'] = +new Date()
+        console.log(config.data)
+        signUtil(config.data)
+      }
+      // const params = new URLSearchParams()
+      // for (let key in config.data) {
+      //   params.append(key, config.data[key])
+      // }
+      // config.data = params
 
+      // signUtil(config.params)
+      // console.log(config)
       return config
     },
     error => {
