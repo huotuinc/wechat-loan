@@ -23,25 +23,41 @@ const service = Vue => {
       }
       if (config.method.toLowerCase() === 'get') {
         if (!config.params) config.params = {}
-        let getParams = {}
-        getParams['merchantId'] = 1
-        getParams['timestamp'] = +new Date()
-        getParams['sign'] = signUtil(config.params)
-        Object.assign(config.params, getParams)
+        Object.assign(config.params, {
+          merchantId: 1,
+          timestamp: +new Date()
+        })
+        // let getParams = {}
+        // getParams['merchantId'] = 1
+        // getParams['timestamp'] = +new Date()
+        // getParams['sign'] = signUtil(config.params)
+        let signData = signUtil(config.params)
+        Object.assign(config.params, {
+          sign: signData
+        })
       }
       if (config.method.toLowerCase() === 'post') {
-        let postData = {}
-        postData['merchantId'] = 1
-        postData['timestamp'] = +new Date()
-        postData['sign'] = signUtil(config.data)
-        Object.assign(config.data, postData)
+        if (!config.data) config.data = {}
+
+        Object.assign(config.data, {
+          merchantId: 1,
+          timestamp: +new Date()
+        })
+        // let postData = {}
+        // postData['merchantId'] = 1
+        // postData['timestamp'] = +new Date()
+        // postData['sign'] = signUtil(config.data)
+        let signData = signUtil(config.data)
+        Object.assign(config.data, {
+          sign: signData
+        })
       }
       const dataParams = new URLSearchParams()
       for (let key in config.data) {
         dataParams.append(key, config.data[key])
       }
       config.data = dataParams
-
+      console.log(config)
       return config
     },
     error => {
