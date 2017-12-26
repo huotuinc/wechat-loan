@@ -7,7 +7,7 @@
         <cell title="平台协议" is-link></cell>
         <cell title="头像" is-link>
           <label for="J_img" class="upload-label">
-            <input id="J_img" type="file" name="img" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" multiple @change="upload">
+            <input id="J_img" type="file" name="img" accept="image/*" @change="upload">
           </label>
       </cell>
       </group>
@@ -51,7 +51,7 @@ export default {
         content: '确定退出系统？',
         onConfirm() {
           vm.$store.dispatch('logout').then(() => {
-            vm.$router.push({ path: '/login' })
+            vm.$router.replace({ path: '/login' })
           })
         }
       })

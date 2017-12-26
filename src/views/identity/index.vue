@@ -3,17 +3,17 @@
     <group class="loan-body_item identity-body_item">
       <cell title="上传身份证正面" is-link>
           <label for="J_front" class="upload-label">{{frontName}}
-            <input id="J_front" type="file" name="front" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+            <input id="J_front" type="file" name="front" accept="image/*"  @change="upload">
           </label>
       </cell>
       <cell title="上传身份证背面" is-link>
         <label for="J_back" class="upload-label">{{backName}}
-          <input id="J_back" type="file" name="back"  accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+          <input id="J_back" type="file" name="back" accept="image/*"  @change="upload">
         </label>
       </cell>
       <cell title="上传手持身份证照片" is-link>
         <label for="J_photoSelf" class="upload-label">{{photoSelfName}}
-          <input id="J_photoSelf"  type="file" name="photoSelf" accept="image/jpeg, image/jpg, image/gif, image/png" capture="camera" @change="upload">
+          <input id="J_photoSelf"  type="file" name="photoSelf" accept="image/*"  @change="upload">
         </label>
       </cell>
     </group>
@@ -82,7 +82,9 @@ export default {
         .catch(err => {})
     },
     uploadAll() {
-      uploader('/api/authentication/identityHtml', this.formData)
+      uploader('/api/authentication/identityHtml', this.formData).then(() => {
+        vm.$router.back()
+      })
     }
   }
 }

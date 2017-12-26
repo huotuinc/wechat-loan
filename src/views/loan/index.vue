@@ -1,12 +1,14 @@
 <template>
   <div class="loan-wrap">
     <div class="loan-head">
-        <img class="loan-head_avatar" :src="page.headimg" alt="头像">
+        <div class="loan-head_avatar">
+          <img :src="page.headimg" alt="头像">
+        </div>
         <p class="loan-head_title">我的负债</p>
         <h2 class="loan-head_debt">{{page.loanAmount}}</h2>
         <span class="loan-head_my"><i class="iconfont icon-zhi-ma"></i>&nbsp;信用认证：{{page.authMsg}}</span>
     </div>
-    <div class="loan-body">
+    <div class="loan-body loan-body-index">
       <group class="loan-body_item">
         <cell is-link title="借款次数" :value="page.loanNum">
           <i class="iconfont icon-my-loan" slot="icon"></i>
@@ -72,3 +74,9 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.loan-body-index {
+  min-height: 400px;
+}
+</style>
+

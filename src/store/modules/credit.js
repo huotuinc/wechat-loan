@@ -7,7 +7,7 @@ const credit = {
     certificationInfo() {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/certificationInfo',
+          url: '/api/user/report/certificationInfo',
           method: 'post'
         })
           .then(response => {
@@ -21,7 +21,7 @@ const credit = {
     creditReport() {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/creditReport',
+          url: '/api/user/report/creditReport',
           method: 'post'
         })
           .then(response => {
