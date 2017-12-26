@@ -1,6 +1,6 @@
 <template>
   <div class="loan-wrap" style="padding-bottom: 80px;">
-    <iframe src="https://baidu.com" frameborder="0"></iframe>
+    <div>{{html}}</div>
     <div class="loan-treaty">
       <div class="loan-publish_btn">
         <x-button  class="loan-button btn-yellow" @click.native="submit">立即下载</x-button>
@@ -11,6 +11,7 @@
 
 <script>
 import { XButton } from 'vux'
+
 export default {
   components: {
     XButton
@@ -20,7 +21,8 @@ export default {
       orderId: '',
       hasPayed: false,
       receiveEmail: '',
-      show: false
+      show: false,
+      html: ''
     }
   },
   methods: {
@@ -42,6 +44,9 @@ export default {
   },
   created() {
     this.orderId = this.$route.params.orderId
+    this.$store.dispatch('getEsign', this.orderId).then(res => {
+      this.html = res
+    })
     this.$store.dispatch('checkPayment', this.orderId).then(res => {
       this.hasPayed = res.hasPayed
       this.receiveEmail = res.receiveEmail
@@ -50,11 +55,6 @@ export default {
 }
 </script>
 <style lang="less">
-iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
 .loan-treaty {
   padding: 20px;
   position: fixed;

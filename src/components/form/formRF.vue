@@ -57,7 +57,7 @@
     </p>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
-        <iframe src="https://baidu.com" frameborder="0"></iframe>
+        <iframe :src="iframe" frameborder="0"></iframe>
       </popup>
     </div>
   </div>
@@ -66,6 +66,8 @@
 
 <script>
 import { TransferDom, Popup, Cell, XInput, Group, XButton, md5 } from 'vux'
+import { getLoanerRegisterLink } from '../../utils/init.js'
+
 export default {
   directives: {
     TransferDom
@@ -92,10 +94,13 @@ export default {
         verifyCode: '',
         userType: 1
       },
-      popupShow: false
+      popupShow: false,
+      iframe: ''
     }
   },
-  created() {},
+  created() {
+    this.iframe = getLoanerRegisterLink()
+  },
   methods: {
     getMobileValid() {
       return this.$refs.username.valid
@@ -114,6 +119,7 @@ export default {
           this.$store
             .dispatch('sendVerifyCode', this.obj.username)
             .then(() => {
+              this.$vux.toast.text('发送成功')
               this.time = 60
               this.countDown()
             })
@@ -135,7 +141,7 @@ export default {
       } else {
         this.disabled = false
         this.sendButtonText = '获取验证码'
-        clearTimeout(timer)
+        clearTimeout(this.timer)
       }
     },
     submit() {
@@ -176,13 +182,14 @@ export default {
       }
     },
     open() {
+      if(!this.iframe) return
       this.popupShow = true
     }
   }
 }
 </script>
 <style lang="less">
-.vux-popup-dialog  {
+.vux-popup-dialog {
   iframe {
     display: block;
     width: 100%;

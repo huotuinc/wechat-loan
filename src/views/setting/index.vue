@@ -2,8 +2,8 @@
   <div class="loan-wrap">
     <div class="loan-body" style="margin-bottom: 60px;">
       <group class="loan-body_item">
-        <cell title="关于我们" is-link></cell>
-        <cell title="常见问题" is-link></cell>
+        <cell title="关于我们" is-link link="/about"></cell>
+        <cell title="常见问题" is-link link="/question"></cell>
         <cell title="平台协议" is-link></cell>
         <cell title="头像" is-link>
           <label for="J_img" class="upload-label">
@@ -62,7 +62,7 @@ export default {
       lrz(e.target.files[0], { width: 1980 })
         .then(function(rst) {
           rst.formData.append('img', rst.file, rst.origin.name)
-          uploader('/api/user/uploadHeadImg', rst.formData)
+          uploader('/api/user/uploadHeadImg', rst.formData, vm.success, vm.error)
         })
         .catch(function(err) {})
     },

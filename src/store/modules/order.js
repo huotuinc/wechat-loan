@@ -144,6 +144,21 @@ const order = {
             reject(error)
           })
       })
+    },
+    receiveOrder({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/receiveOrder',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

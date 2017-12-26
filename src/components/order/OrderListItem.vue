@@ -8,7 +8,7 @@
         </div>
         <div class="loan-card_bd vux-1px-b">
           <div class="loan-bd_img">
-            <img :src="order.userHeadImg" alt="">
+            <img :src="order.userHeadImg ? order.userHeadImg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="">
           </div>
           <div class="loan-bd_content">
             <h4>{{order.userName}}</h4>

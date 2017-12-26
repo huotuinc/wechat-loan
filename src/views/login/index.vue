@@ -50,6 +50,7 @@
 
 <script>
 import { XInput, Group, XButton, Cell, md5 } from 'vux'
+
 export default {
   components: {
     XInput,
@@ -66,6 +67,9 @@ export default {
         userType: 1
       }
     }
+  },
+  created() {
+    this.$store.dispatch('init')
   },
   methods: {
     getMobileValid() {
