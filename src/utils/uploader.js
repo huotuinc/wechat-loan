@@ -2,9 +2,16 @@ import axios from 'axios'
 import store from '../store'
 import { getToken, getUserId } from './auth'
 import { UPDATE_LOADING, UPDATE_PROGRESS, UPDATE_PERCENT } from '../store/mutation-type'
-import sign from './sign'
+import signUtil from './sign'
 
 const uploader = (url, file, successCb, errorCb, progressCb) => {
+  let timestamp = +new Date()
+  let sign = signUtil({
+    merchantId: 1,
+    timestamp: timestamp,
+    userToken: getToken(),
+    userId: getUserId()
+  })
   store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
   store.commit(UPDATE_PROGRESS, true)
   axios
@@ -17,8 +24,8 @@ const uploader = (url, file, successCb, errorCb, progressCb) => {
         userId: getUserId()
       },
       params: {
-        sign: sign(),
-        timestamp: +new Date()
+        sign: sign,
+        timestamp: timestamp
       },
       onUploadProgress: function(progressEvent) {
         if (progressEvent.lengthComputable) {

@@ -18,7 +18,7 @@
                 <img :src="order.headimg" alt="">
               </div>
               <div class="loan-bd_content">
-                <p>借款金额：<span>{{order.money}}元</span>&nbsp;&nbsp;&nbsp;&nbsp;借款金额：<span>{{order.interval}}天</span></p>
+                <p>借款金额：<span>{{order.money}}元</span>&nbsp;&nbsp;&nbsp;&nbsp;借款时长：<span>{{order.interval}}天</span></p>
                 <p>借款用途：<span>{{order.purpose}}</span></p>
               </div>
             </div>

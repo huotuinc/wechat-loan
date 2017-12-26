@@ -2,7 +2,7 @@
   <div class="loan-wrap">
     <div class="loan-head">
         <div class="loan-head_avatar">
-          <img :src="page.headimg" alt="头像">
+          <img :src="page.headimg ? page.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
         </div>
         <p class="loan-head_title">我的负债</p>
         <h2 class="loan-head_debt">{{page.loanAmount}}</h2>
