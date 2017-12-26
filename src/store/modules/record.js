@@ -16,13 +16,13 @@ const record = {
     },
     [CONSUME_BILL](state, payload) {
       state.billList = payload
-    },
+    }
   },
   actions: {
     riskCallList({ commit }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/riskCallList',
+          url: '/api/user/report/riskCallList',
           method: 'post'
         })
           .then(res => {
@@ -37,7 +37,7 @@ const record = {
     emergencyContactList({ commit }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/emergencyContactList',
+          url: '/api/user/report/emergencyContactList',
           method: 'post'
         })
           .then(res => {
@@ -52,7 +52,7 @@ const record = {
     consumeBillList({ commit }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/consumeBillList',
+          url: '/api/user/report/consumeBillList',
           method: 'post'
         })
           .then(res => {
@@ -63,7 +63,7 @@ const record = {
             reject(err)
           })
       })
-    },
+    }
   }
 }
 

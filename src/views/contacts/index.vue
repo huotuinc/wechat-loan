@@ -1,5 +1,5 @@
 <template>
-  <div class="loan-wrap">
+  <div class="loan-wrap loan-contact">
     <div style="overflow:hidden;">
     <group title="主要联系人信息(需直系亲属)">
       <popup-picker title="关系" :data="list"
@@ -99,8 +99,8 @@ export default {
         requestData: JSON.stringify(this.form)
       }
       this.$store.dispatch('editcontacts', req).then(() => {
-        //todo 提交成功跳转
         this.$vux.toast.text('提交成功')
+        this.$router.back()
       })
     },
     getNameValid() {
@@ -134,6 +134,11 @@ export default {
     .weui-icon-warn {
       display: none;
     }
+  }
+}
+.loan-contact {
+  .weui-input {
+    text-align: right !important;
   }
 }
 </style>

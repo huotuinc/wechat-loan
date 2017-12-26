@@ -116,7 +116,7 @@ export default {
               }
             })
           } else {
-            openWindow(res.bizParameters.wapPayUrl)
+            window.location.href = res.bizParameters.wapPayUrl
           }
         })
         .catch(err => {

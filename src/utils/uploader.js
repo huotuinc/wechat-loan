@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../store'
 import { getToken, getUserId } from './auth'
+import { UPDATE_LOADING, UPDATE_PROGRESS, UPDATE_PERCENT } from '../store/mutation-type'
 import sign from './sign'
 import { UPDATE_LOADING, UPDATE_PROGRESS, UPDATE_PERCENT } from '../store/mutation-type'
 

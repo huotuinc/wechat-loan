@@ -2,9 +2,10 @@ import Cookies from 'js-cookie'
 
 const UserId = 'User-Id'
 const TokenKey = 'User-Tkoen'
+const UserInfo = 'User-Info'
 
 export function getUserId() {
-  return Cookies.getJSON(UserId)
+  return Cookies.get(UserId)
 }
 
 export function setUserId(id) {
@@ -25,4 +26,12 @@ export function setToken(token) {
 
 export function removeToken() {
   return Cookies.remove(TokenKey)
+}
+
+export function getUserInfo() {
+  return Cookies.getJSON(UserInfo) || {}
+}
+
+export function setUserInfo(info) {
+  return Cookies.set(UserInfo, info)
 }

@@ -125,8 +125,8 @@ export default {
       this.form.annualIncome = findCode(income, this.value2[0])
       this.form.education = findCode(education, this.value1[0])
       this.$store.dispatch('userinfoedit', this.form).then(() => {
-        //todo 提交成功跳转
         this.$vux.toast.text('提交成功')
+        this.$router.back()
       })
     },
     getName(value) {

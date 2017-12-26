@@ -2,7 +2,7 @@ import Axios from 'axios'
 import URLSearchParams from 'url-search-params'
 import store from '../store'
 import { getToken, getUserId } from './auth'
-import sign from './sign'
+import signUtil from './sign'
 
 const service = Vue => {
   const axios = Axios.create({
@@ -12,25 +12,43 @@ const service = Vue => {
       osType: 'h5',
       merchantId: 1,
       appVersion: 1.0
-    },
-    params: {}
+    }
   })
 
   axios.interceptors.request.use(
     config => {
-      config.params['sign'] = sign()
-      config.params['timestamp'] = +new Date()
       if (store.getters.token) {
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
-
-      const params = new URLSearchParams()
-      for (let key in config.data) {
-        params.append(key, config.data[key])
+      if (config.method.toLowerCase() === 'get') {
+        if (!config.params) config.params = {}
+        Object.assign(config.params, {
+          merchantId: 1,
+          timestamp: +new Date()
+        })
+        let signData = signUtil(config.params)
+        Object.assign(config.params, {
+          sign: signData
+        })
       }
-      config.data = params
+      if (config.method.toLowerCase() === 'post') {
+        if (!config.data) config.data = {}
 
+        Object.assign(config.data, {
+          merchantId: 1,
+          timestamp: +new Date()
+        })
+        let signData = signUtil(config.data)
+        Object.assign(config.data, {
+          sign: signData
+        })
+      }
+      const dataParams = new URLSearchParams()
+      for (let key in config.data) {
+        dataParams.append(key, config.data[key])
+      }
+      config.data = dataParams
       return config
     },
     error => {

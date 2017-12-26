@@ -1,17 +1,23 @@
 import store from '../store'
 import { md5 } from 'vux'
+import _ from 'lodash'
+import { getUserInfo } from './auth'
 const validKey = ['merchantId', 'userId', 'userToken', 'cityName', 'cityCode', 'timestamp']
 const secretKey = '4165a8d240b29af3f41818d10599d0d1'
 
 const raw = args => {
-  let keys = Object.keys(args)
-  keys = keys.filter(key => {
-    return validKey.indexOf(key) > -1 && args[key] !== ''
-  })
+  // 规避非驼峰问题
+  const newObj = {}
+  for (let o in args) {
+    newObj[o.toLowerCase()] = args[o]
+  }
+  let keys = Object.keys(newObj)
+
   keys = keys.sort()
+
   let newArgs = {}
   keys.forEach(key => {
-    newArgs[key.toLowerCase()] = args[key]
+    newArgs[key.toLowerCase()] = newObj[key]
   })
 
   let string = ''
@@ -21,10 +27,16 @@ const raw = args => {
   return string
 }
 
-const sign = () => {
-  let userInfo = store.getters.userInfo
-  if (!userInfo) userInfo = {}
-  userInfo.timestamp = +new Date()
-  return md5(raw(userInfo) + secretKey)
+const sign = data => {
+  let signParams = data || {}
+  let userInfo = getUserInfo()
+  // 过滤空值
+  for (let info in userInfo) {
+    if (!(validKey.indexOf(info) > -1 && userInfo[info] !== '')) {
+      delete userInfo[info]
+    }
+  }
+  Object.assign(signParams, userInfo)
+  return md5(raw(signParams) + secretKey)
 }
 export default sign
