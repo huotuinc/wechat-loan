@@ -61,14 +61,14 @@ const service = Vue => {
     response => {
       const res = response.data
       if (res.resultCode !== 2000) {
-        Vue.$vux.toast.text(res.resultMsg)
-        return Promise.reject(new Error(res.resultMsg))
+        if (res.resultCode !== 4123) Vue.$vux.toast.text(res.resultMsg)
+        return Promise.reject(res)
       } else {
         return res.data
       }
     },
     error => {
-      console.log('err' + error)
+      console.log('err: ' + error)
       Vue.$vux.toast.text(error.message)
       return Promise.reject(error)
     }

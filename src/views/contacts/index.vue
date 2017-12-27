@@ -92,6 +92,10 @@ export default {
         this.$vux.toast.text('信息填写有误')
         return
       }
+      if (this.form[0].mobile === this.form[1].mobile) {
+        this.$vux.toast.text('手机号码重复')
+        return
+      }
       this.form[0].relation = findCode(relation, this.value[0])
       this.form[1].relation = findCode(relation, this.value1[0])
 

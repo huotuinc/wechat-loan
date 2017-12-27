@@ -67,11 +67,10 @@ export default {
         .catch(function(err) {})
     },
     success() {
-      this.$vux.toast.text(上传成功)
+      this.$vux.toast.text('上传成功')
     },
     error(err) {
-      console.log(err)
-      // this.$vux.toast.text(err)
+      this.$vux.toast.text('上传失败')
     }
   }
 }

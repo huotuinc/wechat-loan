@@ -136,10 +136,14 @@ const sendPayment = Mock.mock({
 })
 
 const receiveOrder = Mock.mock({
-  resultCode: 2000,
-  resultMsg: 'OK',
+  resultCode: 4123,
+  resultMsg: '用户未完成认证',
   data: {
-    userId: 111
+    userId: '@id',
+    merchantId: 1,
+    uname: '@cname',
+    userToken: '@guid',
+    headimg: '@IMG(30x30)'
   }
 })
 
@@ -154,7 +158,7 @@ const getLoansProductInfo = Mock.mock({
     loanAmount: '@float(10000, 99999, 2, 2)',
     payAmount: '@float(99999, 100000, 2, 2)',
     interestAmount: '@float(100, 500, 2, 2)',
-    loanDay: '@integer(1, 30)',
+    loanDayHtml: '@integer(1, 30)',
     overdueRate: '@float(0.1, 0.9, 1, 1)',
     repayAmount: '@float(99999, 100000, 2, 2)',
     overdueAmount: '@float(100, 500, 2, 2)',

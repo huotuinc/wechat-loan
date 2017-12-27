@@ -23,11 +23,11 @@
     <div class="res-bd">
       <div class="res-preview">
         <div class="preview-bd">
-          <div class="preview_item">
+          <div class="preview_item"  v-if="receive.grantTime">
               <label class="preview_label">出借时间</label>
               <span class="preview_value">{{receive.grantTime}}</span>
           </div>
-          <div class="preview_item">
+          <div class="preview_item" v-if="receive.agreedRepayTime">
               <label class="preview_label">还款时间</label>
               <span class="preview_value">{{receive.agreedRepayTime}}</span>
           </div>
@@ -288,6 +288,9 @@ export default {
     padding: 10px 15px;
     text-align: right;
     line-height: 1.5em;
+    .preview_item {
+      overflow: hidden;
+    }
     .preview_label {
       float: left;
       margin-right: 1em;

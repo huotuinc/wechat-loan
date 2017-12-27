@@ -78,7 +78,7 @@ Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
 Mock.mock(/\/api\/order\/receiveOrder/, 'post', orderApi.receiveOrder)
-Mock.mock(/\/api\/order\/receiveLoanOrder/, 'post', orderApi.receiveLoanOrder)
+Mock.mock(/\/api\/order\/receiveLoanOrder/, 'post', orderApi.receiveOrder)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultCode: 2000,

@@ -41,7 +41,8 @@ const esign = {
           method: 'get',
           params: {
             orderId: orderId
-          }
+          },
+          responseType: 'text'
         })
           .then(res => {
             resolve(res)

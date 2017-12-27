@@ -108,7 +108,7 @@ export default {
     cancelOrder(order) {
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '删除中' })
       this.$store.dispatch('cancelBorrow', order.id).then(() => {
-        this.$store.commit('UPDATE_LOADING', { isLoading: true })
+        this.$store.commit('UPDATE_LOADING', { isLoading: false })
         this.$vux.toast.text('取消成功')
         this.deleteOrder(order)
       })

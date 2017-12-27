@@ -50,8 +50,17 @@ export default {
           this.$router.replace('/orderList')
         })
         .catch(err => {
+          const vm = this
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$vux.toast.text('领取失败')
+          if (err.resultCode === 4123) {
+            this.$vux.alert.show({
+              title: '需要信用报告',
+              content: '请先注册认证',
+              onHide() {
+                vm.$router.replace('/login')
+              }
+            })
+          }
         })
     }
   }
