@@ -62,10 +62,7 @@ export default {
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
-      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '查询中' })
-      this.$store.dispatch('getIndex').then(() => {
-        this.$store.commit('UPDATE_LOADING', { isLoading: false })
-      })
+      this.$store.dispatch('getIndex')
     }
     this.$store.dispatch('templateData').then(res => {
       this.page = res
