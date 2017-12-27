@@ -4,7 +4,7 @@ import URLSearchParams from 'url-search-params'
 import { getToken, getUserId } from './auth'
 import signUtil from './sign'
 
-const noMsg = [4003, 4123]
+const noMsg = [4003, 4123, 4130]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://youxin.51morecash.com',
