@@ -1,8 +1,12 @@
 import request from '@/utils/request'
-import { SET_ORDER_LIST } from '../mutation-type'
+import { SET_ORDER_LIST, SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
+import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId, setUserInfo } from '../../utils/auth'
 
 const order = {
   state: {
+    userInfo: '',
+    token: getToken(),
+    userId: getUserId(),
     orderAll: {
       list: [],
       pageIndx: 1
@@ -48,6 +52,15 @@ const order = {
           state.orderAll.pageIndx++
           break
       }
+    },
+    [SET_USER_INFO](state, payload) {
+      state.userInfo = payload
+    },
+    [SET_TOKEN](state, payload) {
+      state.token = payload
+    },
+    [SET_USER_ID](state, payload) {
+      state.userId = payload
     }
   },
   actions: {
@@ -115,6 +128,7 @@ const order = {
       })
     },
     createOrder({}, orderData) {
+      console.log(orderData)
       return new Promise((resolve, reject) => {
         request({
           url: '/api/unifiedorder/create',
@@ -137,7 +151,7 @@ const order = {
           data: orderData
         })
           .then(response => {
-            commit(SET_ORDER_LIST, { list: response.list, status: orderData.grantStatus })
+            commit(SET_ORDER_LIST, { list: response.orderList, status: orderData.grantStatus })
             resolve(response.list)
           })
           .catch(error => {
@@ -160,7 +174,7 @@ const order = {
           })
       })
     },
-    receiveOrder({}, data) {
+    receiveOrder({ commit }, data) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/order/receiveOrder',
@@ -168,6 +182,12 @@ const order = {
           data: data
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {

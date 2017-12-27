@@ -83,7 +83,7 @@ Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultMsg: 'OK',
   data: {
     totalAmount: 1000,
-    'list|10': [
+    'orderList|10': [
       {
         orderId: '@id',
         orderName: '借给***的借条',
@@ -113,7 +113,6 @@ Mock.mock(/\/api\/user\/esign\/send/, 'post', orderApi.sendPayment)
 
 Mock.mock(/\/api\/user\/uploadHeadImg/, 'post', uploader.avatar)
 Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
-
 
 Mock.mock(/\/api\/user\/report\/riskCallList/, 'post', record.riskCallList)
 Mock.mock(/\/api\/user\/report\/emergencyContactList/, 'post', record.emergencyContactList)

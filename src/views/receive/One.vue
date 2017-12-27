@@ -32,12 +32,12 @@ export default {
       this.$store
         .dispatch('receiveOrder', data)
         .then(res => {
-          console.log(res)
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$router.replace('/orderList')
         })
         .catch(err => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$vux.toast.text(err)
+          this.$vux.toast.text('领取失败')
         })
     }
   }

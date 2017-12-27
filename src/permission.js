@@ -2,7 +2,7 @@ import router from './router'
 import store from './store'
 import { getToken } from './utils/auth'
 
-const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/favicon.ico']
+const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/favicon.ico', '/shareOrder']
 
 router.beforeEach((to, from, next) => {
   store.commit('UPDATE_LOADING', { isLoading: true })
