@@ -145,6 +145,21 @@ const order = {
           })
       })
     },
+    getShareOrder({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/getOrderInfo',
+          method: 'get',
+          params: data
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     receiveOrder({}, data) {
       return new Promise((resolve, reject) => {
         request({

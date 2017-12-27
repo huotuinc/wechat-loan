@@ -13,14 +13,16 @@ export default {
   },
   data() {
     return {
-      orderId: '',
+      requestData: {},
       orderInfo: {}
     }
   },
   created() {
-    this.orderId = this.$route.query.orderId
-    console.log(this.orderId)
-    this.$store.dispatch('getOrderInfo', this.$route.params.orderId).then(res => {
+    this.requestData.orderId = this.$route.query.orderId
+    this.requestData.from = this.$route.query.from
+    this.requestData.isappinstalled = this.$route.query.isappinstalled
+    console.log(this.requestData)
+    this.$store.dispatch('getShareOrder', this.requestData).then(res => {
       this.orderInfo = res
     })
   },

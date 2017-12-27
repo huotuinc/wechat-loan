@@ -10,7 +10,7 @@
       {{info.idNumber}}
     </cell>
     <cell title="手机号">
-      {{info.mobile}}元
+      {{info.mobile}}
     </cell>
     <cell title="微信号">
       {{info.wechatAccount}}
