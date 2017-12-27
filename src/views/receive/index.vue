@@ -47,7 +47,7 @@ export default {
         .dispatch(receiveUrl, data)
         .then(res => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$router.replace('/orderList')
+          this.$router.replace('/success')
         })
         .catch(err => {
           const vm = this

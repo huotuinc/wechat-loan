@@ -51,6 +51,23 @@ const esign = {
             reject(err)
           })
       })
+    },
+    templateData({}, orderId) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/esign/templateData',
+          method: 'get',
+          params: {
+            orderId: orderId
+          }
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   }
 }

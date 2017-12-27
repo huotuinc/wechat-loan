@@ -1,7 +1,6 @@
 import Axios from 'axios'
 import router from '../router'
 import URLSearchParams from 'url-search-params'
-import store from '../store'
 import { getToken, getUserId } from './auth'
 import signUtil from './sign'
 
@@ -19,7 +18,8 @@ const service = Vue => {
 
   axios.interceptors.request.use(
     config => {
-      if (store.getters.token) {
+      if (getToken()) {
+        console.log(getToken())
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }

@@ -96,8 +96,8 @@ const checkoutData = Mock.mock({
         remark: '@string(10,20)'
       },
       {
-        payType: 2,
-        name: '余额',
+        payType: 3,
+        name: '微信',
         remark: '@string(10,20)'
       }
     ]
@@ -178,6 +178,25 @@ const getLoansProductInfo = Mock.mock({
   }
 })
 
+const templateData = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    jfUserName: '1',
+    jfIdCardNo: '12154545',
+    jfMobile: '吴系挂',
+    yfUserName: 2,
+    yfIdCardNo: '1436864169',
+    yfMobile: '0',
+    loanMoney: '0',
+    loanDate: '0',
+    refundMode: '0',
+    refundDate: '0',
+    refundTotalAmount: '0',
+    annualRate: '0',
+    authDate: '0'
+  }
+})
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
@@ -187,5 +206,6 @@ export default {
   checkPayment: config => checkPayment,
   sendPayment: config => sendPayment,
   receiveOrder: config => receiveOrder,
-  getLoansProductInfo: config => getLoansProductInfo
+  getLoansProductInfo: config => getLoansProductInfo,
+  templateData: config => templateData
 }

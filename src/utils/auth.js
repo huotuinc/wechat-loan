@@ -48,6 +48,6 @@ export function setUserInfo(info) {
   }
 }
 
-export function removeInfo() {
+export function removeUserInfo() {
   return Cookies.remove(UserInfo)
 }

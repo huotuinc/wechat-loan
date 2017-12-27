@@ -11,7 +11,7 @@
           ref="email"
           required
           :show-clear="false"
-          v-model.trim="form.email">
+          v-model.trim="paymentForm.receiveEmail">
         </x-input>
         <popup-picker
           title="支付方式"
@@ -52,12 +52,8 @@ export default {
       tmp: [],
       value: [],
       pickList: [],
-      form: {
-        email: '',
-        payType: null,
-        money: null
-      },
       paymentForm: {
+        receiveEmail: '',
         tradeType: '',
         payType: '',
         redirectUrl: ''
@@ -93,6 +89,7 @@ export default {
           }
           ret.push(item.name)
         })
+        if (this.value) this.value.push(res.payments[0].name)
         this.pickList.push(ret)
         this.tmp = res.payments
         this.paymentMoney = res.finalAmount
@@ -131,7 +128,7 @@ export default {
     },
     validFormInput() {
       if (this.needEmail) {
-        return this.form.email && this.getEmailValid()
+        return this.paymentForm.receiveEmail && this.getEmailValid()
       } else {
         return true
       }

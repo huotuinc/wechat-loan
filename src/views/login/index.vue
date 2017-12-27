@@ -50,7 +50,7 @@
 
 <script>
 import { XInput, Group, XButton, Cell, md5 } from 'vux'
-import { removeToken, removeUserId, removeInfo } from '../../utils/auth'
+import { removeToken, removeUserId, removeUserInfo } from '../../utils/auth'
 
 export default {
   components: {
@@ -72,7 +72,7 @@ export default {
   created() {
     removeToken()
     removeUserId()
-    removeInfo()
+    removeUserInfo()
     this.$store.dispatch('init')
   },
   methods: {

@@ -19,14 +19,14 @@
         :class="fuzzyName ? 'weui-cell_up': 'weui-cell_down'"
         @click.native="toggleClass('fuzzyName')">
       </cell>
-      <cell class="weui-cell__sub"  v-show="fuzzyName" :title="risk.fuzzyNameHits.join('，')"> </cell>
+      <cell class="weui-cell__sub" v-if="fuzzyName" :title="risk.fuzzyNameHits.join('，')"> </cell>
       <cell
         title="手机号风险"
         is-link
         :class="phoneNumber ? 'weui-cell_up': 'weui-cell_down'"
         @click.native="toggleClass('phoneNumber')">
       </cell>
-      <cell class="weui-cell__sub" v-show="phoneNumber" :title="risk.phoneNumberRisks.join('，')">
+      <cell class="weui-cell__sub" v-if="phoneNumber" :title="risk.phoneNumberRisks.join('，')">
       </cell>
       <cell title="7天内小贷平台申请个数">
         {{risk.platformApply7}}

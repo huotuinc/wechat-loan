@@ -8,7 +8,7 @@ import {
   setUserInfo,
   removeToken,
   removeUserId,
-  removeInfo
+  removeUserInfo
 } from '../../utils/auth'
 
 const order = {

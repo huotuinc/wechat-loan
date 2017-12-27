@@ -188,6 +188,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/protocol',
+    name: 'Protocol',
+    component: _import('setting/Protocol'),
+    meta: {
+      title: '平台协议'
+    }
+  },
+  {
     path: '/download',
     name: 'Download',
     component: _import('download/index'),
@@ -287,6 +295,22 @@ export const constantRouterMap = [
     component: _import('receive/index'),
     eta: {
       title: '领取'
+    }
+  },
+  {
+    path: '/success',
+    name: 'ReceiveSuccess',
+    component: _import('receive/Success'),
+    eta: {
+      title: '领取成功'
+    }
+  },
+  {
+    path: '/case',
+    name: 'Case',
+    component: _import('case/index'),
+    meta: {
+      title: '成功案例'
     }
   },
   {
