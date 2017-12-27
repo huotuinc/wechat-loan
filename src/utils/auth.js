@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 const UserId = 'User-Id'
-const TokenKey = 'User-Tkoen'
+const TokenKey = 'User-ToKen'
 const UserInfo = 'User-Info'
 
 export function getUserId() {
@@ -46,4 +46,8 @@ export function setUserInfo(info) {
   } else {
     return Cookies.set(UserInfo, '')
   }
+}
+
+export function removeInfo() {
+  return Cookies.remove(UserInfo)
 }

@@ -1,6 +1,15 @@
 import request from '@/utils/request'
 import { SET_ORDER_LIST, SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
-import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId, setUserInfo } from '../../utils/auth'
+import {
+  getToken,
+  getUserId,
+  setToken,
+  setUserId,
+  setUserInfo,
+  removeToken,
+  removeUserId,
+  removeInfo
+} from '../../utils/auth'
 
 const order = {
   state: {
@@ -167,6 +176,9 @@ const order = {
           params: data
         })
           .then(response => {
+            removeToken()
+            removeUserId()
+            removeUserInfo()
             resolve(response)
           })
           .catch(error => {
@@ -182,6 +194,9 @@ const order = {
           params: data
         })
           .then(response => {
+            removeToken()
+            removeUserId()
+            removeUserInfo()
             resolve(response)
           })
           .catch(error => {

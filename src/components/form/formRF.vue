@@ -164,7 +164,7 @@ export default {
         this.$store
           .dispatch(action, form)
           .then(() => {
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/' })
           })
           .catch(err => {
             console.log(err)
@@ -182,7 +182,7 @@ export default {
       }
     },
     open() {
-      if(!this.iframe) return
+      if (!this.iframe) return
       this.popupShow = true
     }
   }

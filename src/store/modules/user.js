@@ -67,6 +67,12 @@ const user = {
           data: userInfo
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {
@@ -82,6 +88,12 @@ const user = {
           data: userInfo
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {
