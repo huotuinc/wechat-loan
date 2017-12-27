@@ -152,7 +152,7 @@ const order = {
         })
           .then(response => {
             commit(SET_ORDER_LIST, { list: response.orderList, status: orderData.grantStatus })
-            resolve(response.list)
+            resolve(response.orderList)
           })
           .catch(error => {
             reject(error)
@@ -174,10 +174,46 @@ const order = {
           })
       })
     },
+    getLoansProductInfo({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/getLoansProductInfo',
+          method: 'get',
+          params: data
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     receiveOrder({ commit }, data) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/order/receiveOrder',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    receiveLoanOrder({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/receiveLoanOrder',
           method: 'post',
           data: data
         })

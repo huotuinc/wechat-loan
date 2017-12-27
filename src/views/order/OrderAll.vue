@@ -61,7 +61,8 @@ export default {
     getOrderList() {
       this.$store.dispatch('getOrderList', this.requestData).then(newOrder => {
         this.orders = this.orders.concat(newOrder)
-        if(newOrder.length > 0) this.isEmpty = false
+        if (newOrder.length > 0) this.isEmpty = false
+        if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newOrder.length < this.requestData.pageSize) {
           this.$refs.scroll.forceUpdate()
         } else {

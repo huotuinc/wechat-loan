@@ -88,7 +88,7 @@ export default {
     },
     error(err) {
       console.log(err)
-      this.$vux.toast.text(err)
+      // this.$vux.toast.text(err)
     }
   }
 }

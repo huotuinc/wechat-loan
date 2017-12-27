@@ -66,6 +66,7 @@ Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
 
 // 借款单详情
 Mock.mock(/\/api\/order\/getOrderInfo/, 'get', orderApi.getOrderInfo)
+Mock.mock(/\/api\/order\/getLoansProductInfo/, 'get', orderApi.getLoansProductInfo)
 Mock.mock(/\/api\/order\/getOrderNotice/, 'get', orderApi.getOrderNotice)
 
 // 用户相关
@@ -77,6 +78,7 @@ Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
 Mock.mock(/\/api\/order\/receiveOrder/, 'post', orderApi.receiveOrder)
+Mock.mock(/\/api\/order\/receiveLoanOrder/, 'post', orderApi.receiveLoanOrder)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultCode: 2000,
@@ -87,7 +89,7 @@ Mock.mock(/\/api\/order\/getOrderList/, 'post', {
       {
         orderId: '@id',
         orderName: '借给***的借条',
-        userHeadImg: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
+        headImgURL: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
         userName: '13765281632',
         userRealName: '@cname',
         needAuth: true,

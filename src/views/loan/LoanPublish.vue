@@ -120,10 +120,16 @@ export default {
       this.obj.borrowUse = findCode(purpose, this.value[0])
 
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
-      this.$store.dispatch('saveInfo', this.obj).then(() => {
-        this.$store.commit('UPDATE_LOADING', { isLoading: false })
-        this.$router.push({ path: '/publishList' })
-      })
+      this.$store
+        .dispatch('saveInfo', this.obj)
+        .then(() => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$router.push({ path: '/publishList' })
+        })
+        .catch(err => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$vux.toast.text(err)
+        })
     }
   }
 }

@@ -11,7 +11,8 @@
           <div class="loan-card" :key="order.id">
             <div class="loan-card_hd loan-publish_hd clearfix">
               <span class="loan-hd_title">我的发布</span>
-              <span class="loan-hd_user" @click="del(order)" v-if="order.cancelable">删除</span>
+              <span class="loan-hd_user" @click="del(order)" v-if="order.cancelable">取消</span>
+              <span class="loan-hd_user" v-else>{{order.statusMsg}}</span>
             </div>
             <div class="loan-card_bd vux-1px-b">
               <div class="loan-bd_img">
@@ -86,6 +87,7 @@ export default {
       this.$store.dispatch('getBorrowList', this.requestData).then(newOrder => {
         this.orders = this.orders.concat(newOrder)
         if (newOrder.length > 0) this.isEmpty = false
+        if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newOrder.length < this.requestData.pageSize) {
           this.$refs.scroll.forceUpdate()
         } else {

@@ -9,7 +9,7 @@ import router from './router'
 import store from './store'
 import './assets/font/iconfont.css'
 // import './permission'
-import './mock'
+// import './mock'
 
 FastClick.attach(document.body)
 

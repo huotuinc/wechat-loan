@@ -70,7 +70,8 @@ export default {
       this.$vux.toast.text(上传成功)
     },
     error(err) {
-      this.$vux.toast.text(err)
+      console.log(err)
+      // this.$vux.toast.text(err)
     }
   }
 }

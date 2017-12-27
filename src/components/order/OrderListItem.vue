@@ -1,14 +1,14 @@
 <template>
   <div class="list-item">
     <template v-for="order in orders">
-      <router-link class="loan-card" :key="order.id" :to="{name:'OrderInfo', params: {orderId: order.orderId}}" >
+      <router-link class="loan-card" :key="order.orderId" :to="{name:'OrderInfo', params: {orderId: order.orderId}}" >
         <div class="loan-card_hd clearfix">
           <span class="loan-hd_title">订单</span>
           <span class="loan-hd_user">出借人：{{order.userRealName}}</span>
         </div>
         <div class="loan-card_bd vux-1px-b">
           <div class="loan-bd_img">
-            <img :src="order.userHeadImg ? order.userHeadImg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="">
+            <img :src="order.headImgURL ? order.headImgURL : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="">
           </div>
           <div class="loan-bd_content">
             <h4>{{order.userName}}</h4>
