@@ -84,9 +84,14 @@ export default {
       uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
     },
     success(res) {
-      console.log(res.resultMsg)
-      this.$vux.toast.text(res.resultMsg)
-      this.$router.back()
+      const vm = this
+      this.$vux.alert.show({
+        title: '验证结果',
+        content: res.resultMsg,
+        onHide() {
+          vm.$router.back()
+        }
+      })
     },
     error(err) {
       this.$vux.toast.text('上传失败')

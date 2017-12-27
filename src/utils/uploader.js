@@ -39,7 +39,7 @@ const uploader = (url, file, successCb, errorCb, progressCb) => {
       console.log(res.data)
       store.commit(UPDATE_LOADING, { isLoading: false })
       store.commit(UPDATE_PROGRESS, false)
-      successCb && successCb(res)
+      successCb && successCb(res.data)
     })
     .catch(err => {
       console.log(err)
