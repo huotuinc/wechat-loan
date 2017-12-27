@@ -33,6 +33,23 @@ const esign = {
             reject(err)
           })
       })
+    },
+    getEsign({}, orderId) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/esign/agreementLink',
+          method: 'get',
+          params: {
+            orderId: orderId
+          }
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   }
 }

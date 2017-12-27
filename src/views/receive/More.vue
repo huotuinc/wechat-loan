@@ -1,5 +1,5 @@
 <template>
-  <h1>领取</h1>
+  <h1>一对多领取</h1>
 </template>
 <script>
 export default {

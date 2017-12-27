@@ -7,7 +7,7 @@
         <span class="tel">{{personal.userName}}</span>
       </div>
       <div class="personal-header_avatar">
-        <img :src="personal.headimg" alt="头像">
+        <img :src="personal.headimg ? personal.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'"  alt="头像">
       </div>
     </div>
     <div class="personal-grid">

@@ -16,6 +16,7 @@ Mock.setup({
 
 // 登录相关
 Mock.mock(/\/api\/user\/login/, 'post', loginApi.login)
+Mock.mock(/\/api\/sys\/init/, 'post', loginApi.init)
 //发送验证码
 Mock.mock(/\/api\/user\/sendVerifyCode/, 'post', registerApi.sendCode)
 //注册
@@ -57,8 +58,8 @@ Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSe
 // 是否支付
 Mock.mock(/\/api\/authentication\/checkIsPay/, 'post', authenticationApi.isPay)
 
-Mock.mock(/\/api\/user\/certificationInfo/, 'post', authenticationApi.certificationInfo)
-Mock.mock(/\/api\/user\/creditReport/, 'post', authenticationApi.creditReport)
+Mock.mock(/\/api\/user\/report\/certificationInfo/, 'post', authenticationApi.certificationInfo)
+Mock.mock(/\/api\/user\/report\/creditReport/, 'post', authenticationApi.creditReport)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
@@ -75,6 +76,7 @@ Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail)
 Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
+Mock.mock(/\/api\/order\/receiveOrder/, 'post', orderApi.receiveOrder)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultCode: 2000,
@@ -113,6 +115,6 @@ Mock.mock(/\/api\/user\/uploadHeadImg/, 'post', uploader.avatar)
 Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
 
 
-Mock.mock(/\/api\/user\/riskCallList/, 'post', record.riskCallList)
-Mock.mock(/\/api\/user\/emergencyContactList/, 'post', record.emergencyContactList)
-Mock.mock(/\/api\/user\/consumeBillList/, 'post', record.consumeBillList)
+Mock.mock(/\/api\/user\/report\/riskCallList/, 'post', record.riskCallList)
+Mock.mock(/\/api\/user\/report\/emergencyContactList/, 'post', record.emergencyContactList)
+Mock.mock(/\/api\/user\/report\/consumeBillList/, 'post', record.consumeBillList)

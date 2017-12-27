@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import { SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
 import { md5 } from 'vux'
 import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId, setUserInfo } from '../../utils/auth'
+import { setAgreementLink, setLoanerQuestionLink, setLoanerRegisterLink, setAbout } from '../../utils/init.js'
 
 const user = {
   state: {
@@ -105,6 +106,24 @@ const user = {
           method: 'get'
         })
           .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    init({ commit }) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/sys/init',
+          method: 'POST'
+        })
+          .then(response => {
+            setAgreementLink(response.agreementLink)
+            setLoanerQuestionLink(response.loanerQuestionLink)
+            setLoanerRegisterLink(response.loanerRegisterLink)
+            setAbout(response.about)
             resolve(response)
           })
           .catch(error => {

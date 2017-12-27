@@ -84,14 +84,7 @@ export const constantRouterMap = [
       title: '忘记密码'
     }
   },
-  {
-    path: '/receive',
-    name: 'Receive',
-    component: _import('receive/index'),
-    meta: {
-      title: '领取'
-    }
-  },
+
   {
     path: '/orderList',
     component: _import('order/index'),
@@ -176,6 +169,22 @@ export const constantRouterMap = [
     component: _import('setting/index'),
     meta: {
       title: '系统设置'
+    }
+  },
+  {
+    path: '/question',
+    name: 'Question',
+    component: _import('setting/Question'),
+    meta: {
+      title: '常见问题'
+    }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: _import('setting/About'),
+    meta: {
+      title: '关于我们'
     }
   },
   {
@@ -270,6 +279,14 @@ export const constantRouterMap = [
     component:  _import('record/ConsumeBill'),
     eta: {
       title: '缴费记录'
+    }
+  },
+  {
+    path: '/shareOrder',
+    name: 'ShareOrderByOne',
+    component:  _import('receive/One'),
+    eta: {
+      title: '领取'
     }
   },
   {

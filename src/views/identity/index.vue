@@ -61,7 +61,6 @@ export default {
       }
     },
     photoSelf(value) {
-      console.log(value)
       if (value && this.front && this.back) {
         this.disabled = false
       }
@@ -82,9 +81,14 @@ export default {
         .catch(err => {})
     },
     uploadAll() {
-      uploader('/api/authentication/identityHtml', this.formData).then(() => {
-        vm.$router.back()
-      })
+      uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
+    },
+    success() {
+      this.$vux.toast.text(上传成功)
+    },
+    error(err) {
+      console.log(err)
+      this.$vux.toast.text(err)
     }
   }
 }

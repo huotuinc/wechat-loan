@@ -15,16 +15,17 @@ const getorderinfoData = Mock.mock({
     overdueRate: '@float(0.1, 0.9, 1, 1)',
     repayAmount: '@float(99999, 100000, 2, 2)',
     overdueAmount: '@float(100, 500, 2, 2)',
-    lenderUserName: '@cname',
-    loanerUserName: '@cname',
+    lenderUserName: '13767671212',
+    loanerUserName: '13565652323',
     needAuth: '@boolean',
     authStatus: '@boolean',
     grantTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")',
     agreedRepayTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")',
     repayTimeDays: '@integer(-30, 30)',
     loanerUserId: '@id',
-    remarks: '@string(10,20)',
+    remarks: '@ctitle(10,20)',
     repayType: '@pick(["等额本息","还本付息"])',
+    repayTypeName: '@pick(["等额本息","还本付息"])',
     repayTypeCode: '@integer(0, 1)',
     monthRepayMoney: '@float(100, 500, 2, 2)'
   }
@@ -134,6 +135,13 @@ const sendPayment = Mock.mock({
   data: {}
 })
 
+const receiveOrder = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    userId: 111
+  }
+})
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
@@ -141,5 +149,6 @@ export default {
   checkout: config => checkoutData,
   createOrder: config => createOrder,
   checkPayment: config => checkPayment,
-  sendPayment: config => sendPayment
+  sendPayment: config => sendPayment,
+  receiveOrder: config => receiveOrder
 }
