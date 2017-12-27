@@ -121,6 +121,7 @@ export default {
 
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
       this.$store.dispatch('saveInfo', this.obj).then(() => {
+        this.$store.commit('UPDATE_LOADING', { isLoading: false })
         this.$router.push({ path: '/publishList' })
       })
     }

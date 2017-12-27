@@ -29,6 +29,7 @@ const raw = args => {
 
 const sign = data => {
   let signParams = data || {}
+  delete signParams['sign']
   let userInfo = getUserInfo()
   // 过滤空值
   for (let info in userInfo) {

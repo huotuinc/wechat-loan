@@ -131,7 +131,6 @@ export default {
       this.$store
         .dispatch('authoperator')
         .then(res => {
-          // openWindow(res)
           window.location.href = res
         })
         .catch(err => {
@@ -142,7 +141,6 @@ export default {
       this.$store
         .dispatch('getSesameUrl')
         .then(res => {
-          // openWindow(res)
           window.location.href = res
         })
         .catch(err => {
