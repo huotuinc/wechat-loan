@@ -73,18 +73,18 @@ export default {
     if (this.emergencyList.length === 0) {
       this.$store.dispatch('emergencyContactList').then(res => {
         this.important = res.filter(function(p) {
-          if (p.isImportant) return p
+          if (p.important) return p
         })[0]
         this.other = res.filter(function(p) {
-          if (!p.isImportant) return p
+          if (!p.important) return p
         })[0]
       })
     } else {
       this.important = this.emergencyList.filter(function(p) {
-        if (p.isImportant) return p
+        if (p.important) return p
       })[0]
       this.other = res.filter(function(p) {
-        if (!p.isImportant) return p
+        if (!p.important) return p
       })[0]
     }
   },

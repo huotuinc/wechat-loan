@@ -22,7 +22,7 @@ const emergencyContactList = Mock.mock({
       relation: '父亲',
       name: '张三',
       mobile: '13100001234',
-      isImportant: true,
+      important: true,
       threeMonthCount: 4222,
       threeMonthTime: 33344,
       sixMonthCount: 6333,
@@ -34,7 +34,7 @@ const emergencyContactList = Mock.mock({
       relation: '同事',
       name: '李斯',
       mobile: '13100001234',
-      isImportant: false,
+      important: false,
       threeMonthCount: 4,
       threeMonthTime: 44,
       sixMonthCount: 6,
@@ -53,7 +53,7 @@ const consumeBillList = Mock.mock({
       month: '1月',
       consumeAmount: 11,
       rechargeAmount: 1,
-      rechargeCount: 2,
+      rechargeCount: 2
     }
   ]
 })

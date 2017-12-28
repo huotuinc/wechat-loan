@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 
 const getIndex = Mock.mock({
   resultCode: 2000,
-  resultMsg: 'OK',
+  resultMsg: 'Token失效',
   data: {
     loanAmount: '@float(10000, 99999, 2, 2)',
     loanTotalAmount: '@float(10000, 99999, 2, 2)',

@@ -1,6 +1,5 @@
 import request from '@/utils/request'
 import { SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
-import { md5 } from 'vux'
 import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId, setUserInfo } from '../../utils/auth'
 import { setAgreementLink, setLoanerQuestionLink, setLoanerRegisterLink, setAbout } from '../../utils/init.js'
 
@@ -68,6 +67,12 @@ const user = {
           data: userInfo
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {
@@ -83,6 +88,12 @@ const user = {
           data: userInfo
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {

@@ -66,10 +66,13 @@ Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
 
 // 借款单详情
 Mock.mock(/\/api\/order\/getOrderInfo/, 'get', orderApi.getOrderInfo)
+Mock.mock(/\/api\/order\/getLoansProductInfo/, 'get', orderApi.getLoansProductInfo)
 Mock.mock(/\/api\/order\/getOrderNotice/, 'get', orderApi.getOrderNotice)
 
 // 用户相关
 Mock.mock(/\/api\/user\/userIndex/, 'get', userApi.personal)
+
+Mock.mock(/\/api\/borrow\/hybrid\/cases/, 'post', userApi.cases)
 // 每月还款金额
 Mock.mock(/\/api\/order\/getRepayDetail/, 'get', orderApi.getRepayDetail)
 //查询电子签章的支付信息
@@ -77,17 +80,20 @@ Mock.mock(/\/api\/unifiedorder\/checkout/, 'post', orderApi.checkout)
 
 Mock.mock(/\/api\/unifiedorder\/create/, 'post', orderApi.createOrder)
 Mock.mock(/\/api\/order\/receiveOrder/, 'post', orderApi.receiveOrder)
+Mock.mock(/\/api\/order\/receiveLoanOrder/, 'post', orderApi.receiveOrder)
+
+Mock.mock(/\/api\/user\/esign\/templateData/, 'get', orderApi.templateData)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultCode: 2000,
   resultMsg: 'OK',
   data: {
     totalAmount: 1000,
-    'list|10': [
+    'orderList|10': [
       {
         orderId: '@id',
         orderName: '借给***的借条',
-        userHeadImg: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
+        headImgURL: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
         userName: '13765281632',
         userRealName: '@cname',
         needAuth: true,
@@ -113,7 +119,6 @@ Mock.mock(/\/api\/user\/esign\/send/, 'post', orderApi.sendPayment)
 
 Mock.mock(/\/api\/user\/uploadHeadImg/, 'post', uploader.avatar)
 Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
-
 
 Mock.mock(/\/api\/user\/report\/riskCallList/, 'post', record.riskCallList)
 Mock.mock(/\/api\/user\/report\/emergencyContactList/, 'post', record.emergencyContactList)

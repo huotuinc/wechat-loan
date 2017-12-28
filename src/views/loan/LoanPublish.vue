@@ -35,29 +35,38 @@
       </cell>
     </group>
     <div class="loan-publish_rule">
-      <span>已阅读并同意《借款条约》</span>
+      <span>已阅读并同意《<ins @click="open">借款条约</ins>》</span>
     </div>
     <div class="loan-publish_btn">
       <x-button @click.native="submit" class="btn-yellow">确认发布</x-button>
     </div>
+    <div v-transfer-dom>
+      <popup v-model="popupShow" position="bottom" max-height="50%">
+        <template-data :page="page"></template-data>
+      </popup>
+    </div>
   </div>
 </template>
 <script>
-import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
+import { TransferDom, Popup, XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
+import TemplateData from '../../components/template'
 import { mapGetters } from 'vuex'
 import { purpose, findCode } from '@/utils/enum'
 
 export default {
   name: 'loanPublish',
+  directives: {
+    TransferDom
+  },
   created() {
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
-      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '查询中' })
-      this.$store.dispatch('getIndex').then(() => {
-        this.$store.commit('UPDATE_LOADING', { isLoading: false })
-      })
+      this.$store.dispatch('getIndex')
     }
+    this.$store.dispatch('templateData').then(res => {
+      this.page = res
+    })
   },
   computed: {
     authText() {
@@ -74,7 +83,9 @@ export default {
     Group,
     Cell,
     PopupPicker,
-    Picker
+    Picker,
+    Popup,
+    TemplateData
   },
   data() {
     return {
@@ -85,7 +96,9 @@ export default {
         borrowMoney: null,
         borrowUse: 1,
         userType: 1
-      }
+      },
+      page: {},
+      popupShow: false
     }
   },
   methods: {
@@ -120,9 +133,19 @@ export default {
       this.obj.borrowUse = findCode(purpose, this.value[0])
 
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
-      this.$store.dispatch('saveInfo', this.obj).then(() => {
-        this.$router.push({ path: '/publishList' })
-      })
+      this.$store
+        .dispatch('saveInfo', this.obj)
+        .then(() => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$router.push({ path: '/publishList' })
+        })
+        .catch(err => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$vux.toast.text(err)
+        })
+    },
+    open() {
+      this.popupShow = true
     }
   }
 }

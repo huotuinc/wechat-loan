@@ -7,6 +7,7 @@ import order from './modules/order'
 import esign from './modules/esign'
 import credit from './modules/credit'
 import record from './modules/record'
+import cases from './modules/cases'
 import authentication from './modules/authentication'
 import getters from './getters'
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     esign,
     credit,
     vux,
-    record
+    record,
+    cases
   },
   getters
 })

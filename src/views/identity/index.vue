@@ -83,12 +83,13 @@ export default {
     uploadAll() {
       uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
     },
-    success() {
-      this.$vux.toast.text(上传成功)
+    success(res) {
+      console.log(res.resultMsg)
+      this.$vux.toast.text(res.resultMsg)
+      this.$router.back()
     },
     error(err) {
-      console.log(err)
-      this.$vux.toast.text(err)
+      this.$vux.toast.text('上传失败')
     }
   }
 }

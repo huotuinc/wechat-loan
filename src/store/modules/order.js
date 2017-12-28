@@ -1,8 +1,21 @@
 import request from '@/utils/request'
-import { SET_ORDER_LIST } from '../mutation-type'
+import { SET_ORDER_LIST, SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
+import {
+  getToken,
+  getUserId,
+  setToken,
+  setUserId,
+  setUserInfo,
+  removeToken,
+  removeUserId,
+  removeUserInfo
+} from '../../utils/auth'
 
 const order = {
   state: {
+    userInfo: '',
+    token: getToken(),
+    userId: getUserId(),
     orderAll: {
       list: [],
       pageIndx: 1
@@ -48,6 +61,15 @@ const order = {
           state.orderAll.pageIndx++
           break
       }
+    },
+    [SET_USER_INFO](state, payload) {
+      state.userInfo = payload
+    },
+    [SET_TOKEN](state, payload) {
+      state.token = payload
+    },
+    [SET_USER_ID](state, payload) {
+      state.userId = payload
     }
   },
   actions: {
@@ -115,6 +137,7 @@ const order = {
       })
     },
     createOrder({}, orderData) {
+      console.log(orderData)
       return new Promise((resolve, reject) => {
         request({
           url: '/api/unifiedorder/create',
@@ -137,15 +160,51 @@ const order = {
           data: orderData
         })
           .then(response => {
-            commit(SET_ORDER_LIST, { list: response.list, status: orderData.grantStatus })
-            resolve(response.list)
+            commit(SET_ORDER_LIST, { list: response.orderList, status: orderData.grantStatus })
+            resolve(response.orderList)
           })
           .catch(error => {
             reject(error)
           })
       })
     },
-    receiveOrder({}, data) {
+    getShareOrder({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/getOrderInfo',
+          method: 'get',
+          params: data
+        })
+          .then(response => {
+            removeToken()
+            removeUserId()
+            removeUserInfo()
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getLoansProductInfo({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/getLoansProductInfo',
+          method: 'get',
+          params: data
+        })
+          .then(response => {
+            removeToken()
+            removeUserId()
+            removeUserInfo()
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    receiveOrder({ commit }, data) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/order/receiveOrder',
@@ -153,6 +212,33 @@ const order = {
           data: data
         })
           .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    receiveLoanOrder({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/receiveLoanOrder',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
+            setUserInfo(response)
+            setToken(response.userToken)
+            setUserId(response.userId)
+            commit(SET_TOKEN, response.userToken)
+            commit(SET_USER_ID, response.userId)
+            commit(SET_USER_INFO, response)
             resolve(response)
           })
           .catch(error => {

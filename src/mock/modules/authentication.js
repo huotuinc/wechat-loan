@@ -119,7 +119,10 @@ const creditReport = Mock.mock({
       totalTime: 44,
       mutualCount: 10,
       avgMonthlyCost: 100,
-      avgMonthlyCount: 3
+      avgMonthlyCount: 3,
+      authMobile: '13158041234',
+      idNumber: '331312344943923893',
+      realName: '皮晴晴'
     },
     loan: {
       borrowIng: { num: 1, amount: 1000 },

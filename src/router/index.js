@@ -188,6 +188,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/protocol',
+    name: 'Protocol',
+    component: _import('setting/Protocol'),
+    meta: {
+      title: '平台协议'
+    }
+  },
+  {
     path: '/download',
     name: 'Download',
     component: _import('download/index'),
@@ -260,7 +268,7 @@ export const constantRouterMap = [
   {
     path: '/riskCall',
     name: 'RiskCall',
-    component:  _import('record/RiskCall'),
+    component: _import('record/RiskCall'),
     eta: {
       title: '风险通话记录'
     }
@@ -268,7 +276,7 @@ export const constantRouterMap = [
   {
     path: '/emergency',
     name: 'Emergency',
-    component:  _import('record/EmergencyContact'),
+    component: _import('record/EmergencyContact'),
     eta: {
       title: '紧急联系人通话'
     }
@@ -276,7 +284,7 @@ export const constantRouterMap = [
   {
     path: '/consume',
     name: 'ConsumeBill',
-    component:  _import('record/ConsumeBill'),
+    component: _import('record/ConsumeBill'),
     eta: {
       title: '缴费记录'
     }
@@ -284,9 +292,25 @@ export const constantRouterMap = [
   {
     path: '/shareOrder',
     name: 'ShareOrderByOne',
-    component:  _import('receive/One'),
+    component: _import('receive/index'),
     eta: {
       title: '领取'
+    }
+  },
+  {
+    path: '/success',
+    name: 'ReceiveSuccess',
+    component: _import('receive/Success'),
+    eta: {
+      title: '领取成功'
+    }
+  },
+  {
+    path: '/case',
+    name: 'Case',
+    component: _import('case/index'),
+    meta: {
+      title: '成功案例'
     }
   },
   {

@@ -15,7 +15,7 @@
           <span>借款利息</span>
           </div>
         <div class="bd-item">
-          <p>{{receive.loanDay}}元</p>
+          <p>{{receive.loanDayHtml}}</p>
           <span>借款期限</span>
         </div>
       </div>
@@ -23,11 +23,11 @@
     <div class="res-bd">
       <div class="res-preview">
         <div class="preview-bd">
-          <div class="preview_item">
+          <div class="preview_item"  v-if="receive.grantTime">
               <label class="preview_label">出借时间</label>
               <span class="preview_value">{{receive.grantTime}}</span>
           </div>
-          <div class="preview_item">
+          <div class="preview_item" v-if="receive.agreedRepayTime">
               <label class="preview_label">还款时间</label>
               <span class="preview_value">{{receive.agreedRepayTime}}</span>
           </div>
@@ -39,7 +39,7 @@
               <label class="preview_label">还款方式</label>
               <span class="preview_value">{{receive.repayTypeName}}</span>
           </div>
-          <div class="preview_item">
+          <div class="preview_item" v-if="receive.monthRepayMoney">
               <label class="preview_label">每月应还</label>
               <span class="preview_value">{{receive.monthRepayMoney}}元</span>
           </div>
@@ -64,9 +64,15 @@
           <div class="weui-cell__bd">
             <label class="weui-label">信用报告</label>
           </div>
-          <div class="weui-cell__ft">{{receive.isNeedAuth == 1 ? '需要':'不需要'}}</div>
+          <div class="weui-cell__ft">{{receive.needAuth == 1 ? '需要':'不需要'}}</div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell" v-if="isLoan">
+           <div class="weui-cell__hd"><label class="weui-label">借款人</label></div>
+           <div class="weui-cell__bd">
+             <input type="tel" placeholder="输入手机号" class="weui-input" v-model="receiveData.loanerMobile">
+          </div>
+        </div>
+        <div class="weui-cell" v-else>
           <div class="weui-cell__bd">
             <label class="weui-label">借款人</label>
           </div>
@@ -91,7 +97,8 @@
 export default {
   name: 'resTemplate',
   props: {
-    receive: Object
+    receive: Object,
+    isLoan: Boolean
   },
   data() {
     return {
@@ -100,16 +107,24 @@ export default {
       timer: '',
       sendButtonText: '获取验证码',
       receiveData: {
-        loanerMobile: '',
-        verifyCode: '',
-        orderId: ''
+        verifyCode: ''
       }
     }
   },
   watch: {
     receive() {
-      this.receiveData.loanerMobile = this.receive.loanerUserName
-      this.receiveData.orderId = this.receive.orderId
+      if (this.receive.orderId) {
+        this.receiveData.orderId = this.receive.orderId
+        this.receiveData.loanerMobile = this.receive.loanerUserName
+      } else {
+        delete this.receiveData.orderId
+      }
+
+      if (this.receive.loanId) {
+        this.receiveData.loanId = this.receive.loanId
+      } else {
+        delete this.receiveData.loanId
+      }
     }
   },
   methods: {
@@ -143,10 +158,14 @@ export default {
       }
     },
     receiveOrder() {
-      if (this.receiveData.loanerMobile && this.receiveData.verifyCode) {
-        this.$emit('receive-order', this.receiveData)
+      if (/^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/.test(this.receiveData.loanerMobile)) {
+        if (this.receiveData.verifyCode) {
+          this.$emit('receive-order', this.receiveData)
+        } else {
+          this.$vux.toast.text('请填写验证码')
+        }
       } else {
-        this.$vux.toast.text('请填写必要信息')
+        this.$vux.toast.text('手机号有误')
       }
     }
   }
@@ -269,6 +288,9 @@ export default {
     padding: 10px 15px;
     text-align: right;
     line-height: 1.5em;
+    .preview_item {
+      overflow: hidden;
+    }
     .preview_label {
       float: left;
       margin-right: 1em;

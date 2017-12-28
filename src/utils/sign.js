@@ -24,13 +24,21 @@ const raw = args => {
   for (let k in newArgs) {
     string += k + newArgs[k]
   }
+  console.log(string)
   return string
 }
 
 const sign = data => {
   let signParams = data || {}
+  delete signParams['sign']
   let userInfo = getUserInfo()
   // 过滤空值
+  for (let param in signParams) {
+    if (signParams[param] === '' || signParams[param] === undefined) {
+      delete signParams[param]
+    }
+  }
+
   for (let info in userInfo) {
     if (!(validKey.indexOf(info) > -1 && userInfo[info] !== '')) {
       delete userInfo[info]

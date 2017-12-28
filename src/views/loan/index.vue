@@ -5,7 +5,7 @@
           <img :src="page.headimg ? page.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
         </div>
         <p class="loan-head_title">我的负债</p>
-        <h2 class="loan-head_debt">{{page.loanAmount}}</h2>
+        <h2 class="loan-head_debt">{{page.myLoanAmount}}</h2>
         <span class="loan-head_my"><i class="iconfont icon-zhi-ma"></i>&nbsp;信用认证：{{page.authMsg}}</span>
     </div>
     <div class="loan-body loan-body-index">

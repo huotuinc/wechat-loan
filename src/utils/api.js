@@ -1,9 +1,10 @@
 import Axios from 'axios'
+import router from '../router'
 import URLSearchParams from 'url-search-params'
-import store from '../store'
 import { getToken, getUserId } from './auth'
 import signUtil from './sign'
 
+const noMsg = [4003, 4123, 4130]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://youxin.51morecash.com',
@@ -17,7 +18,8 @@ const service = Vue => {
 
   axios.interceptors.request.use(
     config => {
-      if (store.getters.token) {
+      if (getToken()) {
+        console.log(getToken())
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
@@ -61,14 +63,25 @@ const service = Vue => {
     response => {
       const res = response.data
       if (res.resultCode !== 2000) {
-        Vue.$vux.toast.text(res.resultMsg)
-        return Promise.reject(new Error(res.resultMsg))
+        if (noMsg.indexOf(res.resultCode) === -1) {
+          Vue.$vux.toast.text(res.resultMsg)
+        }
+        if (res.resultCode === 4003) {
+          Vue.$vux.alert.show({
+            title: '信息失效',
+            content: '请重新登录',
+            onHide() {
+              router.push('/login')
+            }
+          })
+        }
+        return Promise.reject(res)
       } else {
         return res.data
       }
     },
     error => {
-      console.log('err' + error)
+      console.log('err: ' + error)
       Vue.$vux.toast.text(error.message)
       return Promise.reject(error)
     }

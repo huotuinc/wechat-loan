@@ -1,6 +1,6 @@
 <template>
-  <div class="loan-wrap" style="padding-bottom: 80px;">
-    <div>{{html}}</div>
+  <div class="loan-wrap">
+    <template-data :page="page"></template-data>
     <div class="loan-treaty">
       <div class="loan-publish_btn">
         <x-button  class="loan-button btn-yellow" @click.native="submit">立即下载</x-button>
@@ -11,10 +11,12 @@
 
 <script>
 import { XButton } from 'vux'
+import TemplateData from '../../components/template'
 
 export default {
   components: {
-    XButton
+    XButton,
+    TemplateData
   },
   data() {
     return {
@@ -22,7 +24,7 @@ export default {
       hasPayed: false,
       receiveEmail: '',
       show: false,
-      html: ''
+      page: {}
     }
   },
   methods: {
@@ -44,8 +46,8 @@ export default {
   },
   created() {
     this.orderId = this.$route.params.orderId
-    this.$store.dispatch('getEsign', this.orderId).then(res => {
-      this.html = res
+    this.$store.dispatch('templateData', this.orderId).then(res => {
+      this.page = res
     })
     this.$store.dispatch('checkPayment', this.orderId).then(res => {
       this.hasPayed = res.hasPayed

@@ -161,13 +161,21 @@ export default {
         form.verifyCode = this.obj.verifyCode
       }
       if (this.validForm()) {
+        this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '处理中' })
         this.$store
           .dispatch(action, form)
           .then(() => {
-            this.$router.push({ path: '/login' })
+            if (this.$route.path === '/register') {
+              this.$router.push({ path: '/' })
+            }
+            if (this.$route.path === '/forget') {
+              this.$router.push({ path: '/login' })
+            }
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
           .catch(err => {
             console.log(err)
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
       } else {
         this.$vux.toast.text('注册信息有错误')
@@ -182,7 +190,7 @@ export default {
       }
     },
     open() {
-      if(!this.iframe) return
+      if (!this.iframe) return
       this.popupShow = true
     }
   }
