@@ -2,7 +2,7 @@
   <div class="loan-wrap">
     <img src="../../assets/bannerjk.jpg" width="100%">
   <p class="jk">
-    <router-link to="/login">我要借款</router-link>
+    <a @click="toIndex">我要借款</a>
   </p>
 
 	<div style="width: 100%; text-align: center; margin: 0 auto; border-top: 1px dashed #ddd; height: 15px"></div>
@@ -22,11 +22,21 @@
   </div>
 </template>
 <script>
+  import { getToken } from '@/utils/auth'
 export default {
   name: 'Case',
   data() {
     return {
       cases: {}
+    }
+  },
+  methods: {
+    toIndex() {
+      if (getToken()) {
+        this.$router.push({ path: '/' })
+      } else {
+        this.$router.push({ path: '/login' })
+      }
     }
   },
   created() {

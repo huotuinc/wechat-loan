@@ -8,6 +8,7 @@ const noMsg = [4003, 4123, 4130]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://youxin.51morecash.com',
+    // baseURL: 'http://localhost:8999',
     timeout: 15000,
     headers: {
       osType: 'h5',
@@ -66,7 +67,7 @@ const service = Vue => {
         if (noMsg.indexOf(res.resultCode) === -1) {
           Vue.$vux.toast.text(res.resultMsg)
         }
-        if (res.resultCode === 4003) {
+        if (res.resultCode === 4003 || res.resultCode === 4105) {
           Vue.$vux.alert.show({
             title: '信息失效',
             content: '请重新登录',
@@ -74,6 +75,9 @@ const service = Vue => {
               router.push('/login')
             }
           })
+        }
+        if (res.resultCode === 5000 && res.resultMsg.indexOf('request header') > 0){
+          router.push('/login')
         }
         return Promise.reject(res)
       } else {

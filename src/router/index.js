@@ -310,7 +310,7 @@ export const constantRouterMap = [
     name: 'Case',
     component: _import('case/index'),
     meta: {
-      title: '成功案例'
+      title: '过海有信'
     }
   },
   {

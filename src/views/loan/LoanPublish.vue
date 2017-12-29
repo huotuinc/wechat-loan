@@ -59,6 +59,9 @@ export default {
     TransferDom
   },
   created() {
+    if(this.authInfo === null) {
+      this.$router.push({ path: '/login' })
+    }
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
