@@ -24,7 +24,7 @@ const raw = args => {
   for (let k in newArgs) {
     string += k + newArgs[k]
   }
-  console.log(string)
+  console.debug(string)
   return string
 }
 

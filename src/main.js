@@ -3,12 +3,11 @@
 import Vue from 'vue'
 import { AlertPlugin, ConfirmPlugin, ToastPlugin, CloseDialogsPlugin } from 'vux'
 import FastClick from 'fastclick'
-import VueWechatTitle from 'vue-wechat-title'
 import App from './App'
 import router from './router'
 import store from './store'
 import './assets/font/iconfont.css'
-// import './permission'
+import './permission'
 // import './mock'
 
 FastClick.attach(document.body)
@@ -16,7 +15,6 @@ FastClick.attach(document.body)
 Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(ToastPlugin)
-Vue.use(VueWechatTitle)
 Vue.use(CloseDialogsPlugin, router)
 
 Vue.config.productionTip = false

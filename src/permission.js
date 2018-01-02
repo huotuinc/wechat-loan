@@ -2,17 +2,23 @@ import router from './router'
 import store from './store'
 import { getToken } from './utils/auth'
 
-const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/favicon.ico', '/shareOrder']
+const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/shareOrder']
 
 router.beforeEach((to, from, next) => {
-  console.log(getToken())
   store.commit('UPDATE_LOADING', { isLoading: true })
+  document.title = to.meta.title
   if (getToken()) {
-    next()
-    store.commit('UPDATE_LOADING', { isLoading: false })
+    if (to.path === '/login') {
+      next('/')
+    } else {
+      next()
+    }
   } else {
-    next('/login')
-    store.commit('UPDATE_LOADING', { isLoading: false })
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next('/login')
+    }
   }
 })
 

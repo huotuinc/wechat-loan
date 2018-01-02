@@ -1,7 +1,7 @@
 <template>
   <div id="app">
    <waiting :show="isLoading" :text="text" :progress="isProgress" :percent="percent"></waiting>
-    <router-view v-wechat-title="$route.meta.title" img-set="../logo.png"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
