@@ -7,6 +7,7 @@
         type="number"
         :show-clear="false"
         name="obj.borrowMoney"
+        placeholder="请填写大于0的整数"
         v-model.number="obj.borrowMoney">
         <span slot="right">元</span>
       </x-input>
@@ -16,6 +17,7 @@
         name="borrowTime"
         :show-clear="false"
         type="number"
+        placeholder="请填写大于0的整数"
         v-model.number="obj.borrowTime">
         <span slot="right">天</span>
       </x-input>
@@ -59,7 +61,7 @@ export default {
     TransferDom
   },
   created() {
-    if(this.authInfo === null) {
+    if (this.authInfo === null) {
       this.$router.push({ path: '/login' })
     }
     this._getPurposeList()
@@ -95,8 +97,8 @@ export default {
       value: [],
       list: [],
       obj: {
-        borrowTime: null,
-        borrowMoney: null,
+        borrowTime: '',
+        borrowMoney: '',
         borrowUse: 1,
         userType: 1
       },
@@ -113,24 +115,26 @@ export default {
       this.list.push(ret)
     },
     validFormInput() {
-      if (this.obj.borrowTime && this.obj.borrowMoney) {
-        return true
-      } else {
+      if (!/^[1-9]\d*$/.test(this.obj.borrowMoney)) {
+        this.$vux.toast.text('借款金额错误')
         return false
       }
+      if (!/^[1-9]\d*$/.test(this.obj.borrowTime)) {
+        this.$vux.toast.text('借款时长错误')
+        return false
+      }
+      return true
     },
     submit() {
+      if (!this.validFormInput()) {
+        return
+      }
       if (this.authNum !== 3) {
         this.$vux.toast.text('请先完成信用认证')
         return
       }
       if (this.value.length !== 1) {
         this.$vux.toast.text('请选择借款用途')
-        return
-      }
-
-      if (!this.validFormInput()) {
-        this.$vux.toast.text('借款信息填写有误')
         return
       }
       this.obj.borrowUse = findCode(purpose, this.value[0])
@@ -167,6 +171,10 @@ export default {
     input {
       text-align: right;
     }
+  }
+  .weui-input::-webkit-input-placeholder {
+    padding-right: 10px;
+    color: #ccc !important;
   }
 }
 .loan-publish_rule {
