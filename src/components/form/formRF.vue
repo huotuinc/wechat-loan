@@ -43,7 +43,9 @@
           <i slot="label" class="iconfont icon-password"></i>
         </x-input>
         <div class="login-agree">
-          <span>我已阅读并同意《<ins @click="open">注册服务协议</ins>》</span>
+          <check-icon :value.sync="hasChecked">
+            <span>我已阅读并同意《<ins @click="open">注册服务协议</ins>》</span>
+          </check-icon>
         </div>
       </group>
     </div>
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import { TransferDom, Popup, Cell, XInput, Group, XButton, md5 } from 'vux'
+import { TransferDom, Popup, Cell, XInput, Group, XButton, md5,CheckIcon } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init.js'
 
 export default {
@@ -77,13 +79,15 @@ export default {
     XButton,
     Group,
     Popup,
-    Cell
+    Cell,
+    CheckIcon
   },
   props: {
     type: String
   },
   data() {
     return {
+      hasChecked:true,
       disabled: false,
       time: 0,
       timer: '',
@@ -145,6 +149,10 @@ export default {
       }
     },
     submit() {
+      if(!this.hasChecked){
+        this.$vux.toast.text('请确认阅读并同意《注册服务协议》')
+        return
+      }
       let action
       let form = {}
       if (this.$route.path === '/register') {
@@ -178,7 +186,7 @@ export default {
             this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
       } else {
-        this.$vux.toast.text('注册信息有错误')
+        this.$vux.toast.text('信息填写有误')
       }
     },
     validForm() {
@@ -203,5 +211,9 @@ export default {
     width: 100%;
     height: 1000px;
   }
+}
+
+.vux-check-icon > .weui-icon-success:before, .vux-check-icon > .weui-icon-success-circle:before {
+  color: #ff9c00 !important;
 }
 </style>

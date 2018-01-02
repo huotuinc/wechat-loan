@@ -56,7 +56,7 @@
         {{borrowDetail.lenderUserName}}
       </cell>
       <template v-if="borrowDetail.grantStatus === 4 || borrowDetail.grantStatus === 5 || borrowDetail.grantStatus === 6">
-        <cell title="出借条约" is-link :link="{ name:'Treaty', params:{ orderId: borrowDetail.orderId } }">
+        <cell title="借款条约" is-link :link="{ name:'Treaty', params:{ orderId: borrowDetail.orderId } }">
           <span class="text-danger">立即查看</span>
         </cell>
       </template>
