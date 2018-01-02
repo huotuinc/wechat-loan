@@ -3,7 +3,7 @@
     <div class="loan-body">
       <group class="loan-body_item">
         <!-- 身份证识别 -->
-        <template v-if="status.idCardFlg === 3 || !isPay">
+        <template v-if="status.idCardFlg === 3">
           <cell title="身份证识别">
             <i class="iconfont icon-id-front" slot="icon"></i>
              <span class="text-success">{{status.idCardFlgMsg}}</span>
@@ -12,15 +12,15 @@
         <template v-else>
           <cell title="身份证识别" is-link link="/identity" v-if="isPay">
             <i class="iconfont icon-id-front" slot="icon"></i>
-            <span class="text-danger">{{status.idCardFlgMsg}}</span>
+            <span :class="status.idCardFlg === 1 ? 'text-primary' : 'text-danger'">{{status.idCardFlgMsg}}</span>
           </cell>
           <cell title="身份证识别" v-else>
             <i class="iconfont icon-id-front" slot="icon"></i>
-            <span class="text-danger">{{status.idCardFlgMsg}}</span>
+            <span :class="status.idCardFlg === 1 ? 'text-primary' : 'text-danger'">{{status.idCardFlgMsg}}</span>
           </cell>
         </template>
         <!-- 基本信息认证 -->
-        <template v-if="status.uinfoFlg === 3 || !isPay">
+        <template v-if="status.uinfoFlg === 3">
           <cell title="基本信息认证">
             <i class="iconfont icon-user-o" slot="icon"></i>
             <span class="text-success">{{status.uinfoFlgMsg}}</span>
@@ -29,15 +29,15 @@
         <template v-else>
           <cell title="基本信息认证" is-link link="/basicInfo" v-if="isPay">
             <i class="iconfont icon-user-o" slot="icon"></i>
-            <span class="text-danger">{{status.uinfoFlgMsg}}</span>
+            <span :class="status.uinfoFlg === 1 ? 'text-primary' : 'text-danger'">{{status.uinfoFlgMsg}}</span>
           </cell>
           <cell title="基本信息认证" v-else>
             <i class="iconfont icon-user-o" slot="icon"></i>
-            <span class="text-danger">{{status.uinfoFlgMsg}}</span>
+            <span :class="status.uinfoFlg === 1 ? 'text-primary' : 'text-danger'">{{status.uinfoFlgMsg}}</span>
           </cell>
         </template>
         <!-- 联系人信息 -->
-        <template v-if="status.contactFlg === 3 || !isPay">
+        <template v-if="status.contactFlg === 3">
           <cell title="联系人信息">
             <i class="iconfont icon-contacts" slot="icon"></i>
             <span class="text-success">{{status.contactFlgMsg}}</span>
@@ -46,15 +46,15 @@
         <template v-else>
           <cell title="联系人信息" is-link link="/contacts" v-if="isPay">
             <i class="iconfont icon-contacts" slot="icon"></i>
-            <span class="text-danger">{{status.contactFlgMsg}}</span>
+            <span :class="status.contactFlg === 1 ? 'text-primary' : 'text-danger'">{{status.contactFlgMsg}}</span>
           </cell>
           <cell title="联系人信息" v-else>
             <i class="iconfont icon-contacts" slot="icon"></i>
-            <span class="text-danger">{{status.contactFlgMsg}}</span>
+            <span :class="status.contactFlg === 1 ? 'text-primary' : 'text-danger'">{{status.contactFlgMsg}}</span>
           </cell>
         </template>
         <!-- 运营商认证 -->
-        <template v-if="status.carrierFlg === 3 || !isPay">
+        <template v-if="status.carrierFlg === 3">
           <cell title="运营商认证">
             <i class="iconfont icon-mobile" slot="icon"></i>
             <span class="text-success">{{status.carrierFlgMsg}}</span>
@@ -63,15 +63,15 @@
         <template v-else>
           <cell title="运营商认证" is-link @click.native="carrierHandleClick" v-if="isPay">
             <i class="iconfont icon-mobile" slot="icon"></i>
-            <span class="text-danger">{{status.carrierFlgMsg}}</span>
+            <span :class="status.carrierFlg === 1 ? 'text-primary' : 'text-danger'">{{status.carrierFlgMsg}}</span>
           </cell>
           <cell title="运营商认证" v-else>
             <i class="iconfont icon-mobile" slot="icon"></i>
-            <span class="text-danger">{{status.carrierFlgMsg}}</span>
+            <span :class="status.carrierFlg === 1 ? 'text-primary' : 'text-danger'">{{status.carrierFlgMsg}}</span>
           </cell>
         </template>
         <!-- 芝麻信用认证 -->
-        <template v-if="status.zhimaFlg === 3 || !isPay">
+        <template v-if="status.zhimaFlg === 3">
           <cell title="芝麻信用认证">
             <i class="iconfont icon-zhi-ma" slot="icon"></i>
             <span class="text-success">{{status.zhimaFlgMsg}}</span>
@@ -80,25 +80,25 @@
         <template v-else>
           <cell title="芝麻信用认证" is-link  @click.native="zhimaHandleClick"  v-if="isPay">
             <i class="iconfont icon-zhi-ma" slot="icon"></i>
-            <span class="text-danger">{{status.zhimaFlgMsg}}</span>
+            <span :class="status.zhimaFlg === 1 ? 'text-primary' : 'text-danger'">{{status.zhimaFlgMsg}}</span>
           </cell>
           <cell title="芝麻信用认证" v-else>
             <i class="iconfont icon-zhi-ma" slot="icon"></i>
-            <span class="text-danger">{{status.zhimaFlgMsg}}</span>
+            <span :class="status.zhimaFlg === 1 ? 'text-primary' : 'text-danger'">{{status.zhimaFlgMsg}}</span>
           </cell>
         </template>
       </group>
 
-      <div v-if="!isPay" @click="toPay" class="btn-yellow" style="text-align: center;width: 100%;position: absolute;bottom: 0;">
-          <div style="font-size: 20px">付费认证</div>
-          <div>(新用户需要进行信用认证)</div>
+      <div v-show="!isPay" @click="toPay" class="btn-yellow auth-btn">
+          <p>付费认证</p>
+          <span>（新用户需要进行信用认证）</span>
       </div>
     </div>
  </div>
 </template>
 
 <script>
-import { XInput, Group, Cell,XButton } from 'vux'
+import { XInput, Group, Cell, XButton } from 'vux'
 import openWindow from '@/utils/openWindow'
 
 export default {
@@ -112,7 +112,7 @@ export default {
       status: {},
       sesameUrl: '',
       carrierUrl: '',
-      isPay: false
+      isPay: true
     }
   },
   created() {
@@ -124,10 +124,6 @@ export default {
       .dispatch('checkIsPay')
       .then(res => {
         this.isPay = res
-//        if (!res) this.needPay()
-//        if (!res) {
-//          this.$router.push({ path: '/payment/1' })
-//        }
       })
       .catch(err => {
         console.log(err)
@@ -173,3 +169,19 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.auth-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 4px 0;
+  width: 100%;
+  text-align: center;
+  p {
+    font-size: 18px;
+  }
+  span {
+    font-size: 13px;
+  }
+}
+</style>

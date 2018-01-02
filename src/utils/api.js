@@ -67,7 +67,7 @@ const service = Vue => {
         if (noMsg.indexOf(res.resultCode) === -1) {
           Vue.$vux.toast.text(res.resultMsg)
         }
-        if (res.resultCode === 4003 || res.resultCode === 4105) {
+        if (res.resultCode === 4003) {
           Vue.$vux.alert.show({
             title: '信息失效',
             content: '请重新登录',
@@ -76,7 +76,7 @@ const service = Vue => {
             }
           })
         }
-        if (res.resultCode === 5000 && res.resultMsg.indexOf('request header') > 0){
+        if (res.resultCode === 5000 && res.resultMsg.indexOf('request header') > 0) {
           router.push('/login')
         }
         return Promise.reject(res)

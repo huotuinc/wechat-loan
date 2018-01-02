@@ -7,8 +7,8 @@
       </div>
       <div class="download-content">
         <div class="download-btn_app">
-          <a href="javascritp:;" class="btn">apple下载</a>
-          <a href="javascritp:;" class="btn btn-android">android下载</a>
+          <a href="javascritp:;" class="btn"><i class="iconfont icon-ios"></i> apple下载</a>
+          <a href="javascritp:;" class="btn btn-android"><i class="iconfont icon-android"></i> android下载</a>
         </div>
         <div class="download-about">
           <p>过海有信是集拓客、客户管理、风控支持等于一身的工具类软件，是杭州过海投资管理有限公司拥有所有权与经营权的产品。</p>
