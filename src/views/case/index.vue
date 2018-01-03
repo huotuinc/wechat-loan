@@ -41,6 +41,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.channelId) {
+      localStorage.setItem('channelId', this.$route.query.channelId)
+    }
     this.$store.dispatch('getCases').then(res => {
       this.cases = res
     })
