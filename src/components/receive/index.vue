@@ -89,7 +89,7 @@
       <p class="agreement">已阅读并同意《借款条约》</p>
     </div>
     <div class="res-ft">
-      <button type="button" class="apply-btn btn-yellow" @click="receiveOrder">立即申请</button>
+      <button type="button" class="apply-btn btn-yellow" @click="receiveOrder">立即领取</button>
     </div>
   </div>
 </template>

@@ -99,7 +99,6 @@
 
 <script>
 import { XInput, Group, Cell, XButton } from 'vux'
-import openWindow from '@/utils/openWindow'
 
 export default {
   components: {
@@ -152,19 +151,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    },
-    needPay() {
-      const vm = this
-      this.$vux.confirm.show({
-        title: '认证费',
-        content: '你未支付认证费',
-        onCancel() {
-          vm.$router.back()
-        },
-        onConfirm() {
-          vm.$router.push({ path: '/payment/1' })
-        }
-      })
     }
   }
 }

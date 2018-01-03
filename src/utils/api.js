@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import router from '../router'
-import URLSearchParams from 'url-search-params'
+import _ from 'lodash'
+import qs from 'qs'
 import { getToken, getUserId } from './auth'
 import signUtil from './sign'
 
@@ -13,45 +14,41 @@ const service = Vue => {
     headers: {
       osType: 'h5',
       merchantId: 1,
-      appVersion: 1.0
+      appVersion: '1.0.1'
     }
   })
 
   axios.interceptors.request.use(
     config => {
       if (getToken()) {
-        console.log(getToken())
         config.headers['userToken'] = getToken()
         config.headers['userId'] = getUserId()
       }
       if (config.method.toLowerCase() === 'get') {
         if (!config.params) config.params = {}
-        Object.assign(config.params, {
+        _.assign(config.params, {
           merchantId: 1,
           timestamp: +new Date()
         })
         let signData = signUtil(config.params)
-        Object.assign(config.params, {
+        _.assign(config.params, {
           sign: signData
         })
       }
       if (config.method.toLowerCase() === 'post') {
         if (!config.data) config.data = {}
 
-        Object.assign(config.data, {
+        _.assign(config.data, {
           merchantId: 1,
           timestamp: +new Date()
         })
         let signData = signUtil(config.data)
-        Object.assign(config.data, {
+        _.assign(config.data, {
           sign: signData
         })
       }
-      const dataParams = new URLSearchParams()
-      for (let key in config.data) {
-        dataParams.append(key, config.data[key])
-      }
-      config.data = dataParams
+
+      config.data = qs.stringify(config.data)
       return config
     },
     error => {

@@ -29,7 +29,7 @@
 <script>
 import { Tabbar, TabbarItem, ViewBox, Tab, TabItem } from 'vux'
 
-const list = () => ['全部', '待审核', '待还款', '已逾期', '已完成']
+const list = () => ['全部', '待审核', '待还款', '已逾期', '已结清']
 
 export default {
   name: 'Layout',
@@ -88,7 +88,7 @@ export default {
           this.activeTab = '已逾期'
           break
         case 'Complete':
-          this.activeTab = '已完成'
+          this.activeTab = '已结清'
           break
         default:
           break

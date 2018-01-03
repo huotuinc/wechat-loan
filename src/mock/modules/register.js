@@ -11,9 +11,10 @@ const registerData = Mock.mock({
   resultMsg: 'OK',
   data: {
     userId: '@id',
-    merchantId: '@id',
+    merchantId: 1,
     uname: '@cname',
-    token: '@guid'
+    userToken: '@guid',
+    headimg: '@IMG(30x30)'
   }
 })
 export default {

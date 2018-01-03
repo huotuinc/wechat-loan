@@ -22,7 +22,8 @@
   </div>
 </template>
 <script>
-  import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth'
+
 export default {
   name: 'Case',
   data() {
@@ -35,7 +36,7 @@ export default {
       if (getToken()) {
         this.$router.push({ path: '/' })
       } else {
-        this.$router.push({ path: '/login' })
+        this.$router.push({ path: '/register' })
       }
     }
   },

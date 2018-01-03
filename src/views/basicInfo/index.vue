@@ -1,31 +1,67 @@
 <template>
   <div class="loan-wrap">
-    <div style="overflow:hidden;">
-      <group title="* 恶意填写会对您的借款额度造成负面影响">
-        <x-address title="居住地区" v-model="value5" raw-value :list="addressData" value-text-align="center"></x-address>
-        <x-input title="详细地址" ref="homeAddress" :show-clear="false" v-model="form.homeAddress" placeholder="请输入详细地址"></x-input>
-        <popup-picker title="学历" :data="list1"
-                      v-model="value1"
-                      popup-title="学历"></popup-picker>
-        <popup-picker title="婚姻状况" :data="list"
-                      v-model="value"
-                      popup-title="婚姻状况"></popup-picker>
-        <popup-picker title="月薪范围" :data="list2"
-                      v-model="value2"
-                      popup-title="月薪范围"></popup-picker>
-        <popup-picker title="工龄" :data="list3"
-                      v-model="value3"
-                      popup-title="本单位工龄"></popup-picker>
-        <popup-picker title="房产状况" :data="list4"
-                      v-model="value4"
-                      popup-title="房产状况"></popup-picker>
-        <x-input title="单位名称" ref="unitName"  :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
-        <x-input title="单位地址" ref="unitAddress"  :show-clear="false" v-model="form.unitAddress" placeholder="请输入单位地址"></x-input>
-       <x-input title="微信号" ref="wechatNumber"  :show-clear="false" v-model="form.wechatNumber"></x-input>
+    <div class="loan-basic">
+      <group title="基本信息">
+        <x-address title="居住地区"
+          v-model="address"
+          raw-value
+          :list="addressData"
+          value-text-align="right">
+        </x-address>
+        <x-input
+          title="详细地址"
+          ref="homeAddress"
+          required
+          :show-clear="false"
+          v-model="form.homeAddress"
+          placeholder="请输入详细地址">
+        </x-input>
+        <popup-picker
+          title="学历"
+          :data="list1"
+          v-model="education"
+          @on-change="onEducationChange"
+          popup-title="学历">
+        </popup-picker>
+        <popup-picker
+          title="婚姻状况"
+          :data="list"
+          v-model="marry"
+          @on-change="onMarryChange"
+          popup-title="婚姻状况">
+        </popup-picker>
+        <popup-picker
+          title="月薪范围"
+          :data="list2"
+          v-model="annualIncome"
+          @on-change="onAnnualIncome"
+          popup-title="月薪范围">
+        </popup-picker>
+        <popup-picker
+          title="工龄"
+          :data="list3"
+          v-model="workTime"
+          @on-change="onWorkTime"
+          popup-title="本单位工龄">
+        </popup-picker>
+        <popup-picker
+          title="房产状况"
+          :data="list4"
+          v-model="realState"
+          @on-change="onRealState"
+          popup-title="房产状况">
+        </popup-picker>
+        <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
+        <x-input title="单位地址" ref="unitAddress" required :show-clear="false" v-model="form.unitAddress" placeholder="请输入单位地址"></x-input>
+       <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber" placeholder="请输入微信号"></x-input>
       </group>
     </div>
-     <div class="loan-publish_btn" style="padding:20px;">
-      <x-button @click.native="submit" class="btn-yellow">提交</x-button>
+    <ul class="basic-tips">
+      <li>1、恶意填写会对您的借款额度造成负面影响</li>
+      <li>2、您的私人信息不会对外公开，请放心填写。例如：住址、单位名称、单位地址、联系方式等隐私信息，会脱敏后展示，如：150*****183。</li>
+    </ul>
+    <div class="loan-publish_btn" style="padding:20px;">
+      <x-button @click.native="submit" class="btn-yellow" :disabled="isDisabled">提交</x-button>
     </div>
   </div>
 </template>
@@ -43,6 +79,7 @@ import {
   Value2nameFilter as value2name
 } from 'vux'
 import { marry, findCode, education, workAge, income, realState } from '@/utils/enum'
+
 export default {
   created() {
     this._getMarryList()
@@ -62,31 +99,64 @@ export default {
   },
   data() {
     return {
+      isDisabled: true,
       addressData: ChinaAddressV4Data,
-      value: [],
-      value1: [],
-      value2: [],
-      value3: [],
-      value4: [],
-      value5: [],
+      education: [],
+      marry: [],
+      annualIncome: [],
+      workTime: [],
+      realState: [],
+      address: [],
       list: [],
       list1: [],
       list2: [],
       list3: [],
       list4: [],
       form: {
-        wechatNumber: '',
+        homeAreaCode: '',
         homeArea: '',
         homeAddress: '',
+        education: '',
+        marry: '',
+        realStateStatus: '',
         unitAddress: '',
         unitName: '',
-        homeAreaCode: '',
-        marry: null,
-        realStateStatus: null,
-        workTime: null,
-        annualIncome: null,
-        education: null
+        workTime: '',
+        annualIncome: '',
+        wechatNumber: ''
       }
+    }
+  },
+  watch: {
+    address() {
+      this.validForm()
+    },
+    'form.wechatNumber'() {
+      this.validForm()
+    },
+    'form.homeAddress'() {
+      this.validForm()
+    },
+    'form.unitAddress'() {
+      this.validForm()
+    },
+    'form.unitName'() {
+      this.validForm()
+    },
+    'form.marry'() {
+      this.validForm()
+    },
+    'form.realStateStatus'() {
+      this.validForm()
+    },
+    'form.workTime'() {
+      this.validForm()
+    },
+    'form.annualIncome'() {
+      this.validForm()
+    },
+    'form.education'() {
+      this.validForm()
     }
   },
   methods: {
@@ -113,17 +183,8 @@ export default {
       list.push(ret)
     },
     submit() {
-      if (!this.validFormInput() || !this.validForm) {
-        this.$vux.toast.text('信息填写有误')
-        return
-      }
-      this.form.homeAreaCode = this.value5.join(',')
-      this.form.homeArea = this.getName(this.value5)
-      this.form.marry = findCode(marry, this.value[0])
-      this.form.realStateStatus = findCode(realState, this.value4[0])
-      this.form.workTime = findCode(workAge, this.value3[0])
-      this.form.annualIncome = findCode(income, this.value2[0])
-      this.form.education = findCode(education, this.value1[0])
+      this.form.homeAreaCode = this.address.join(',')
+      this.form.homeArea = this.getName(this.address)
       this.$store.dispatch('userinfoedit', this.form).then(() => {
         this.$vux.toast.text('提交成功')
         this.$router.back()
@@ -132,47 +193,95 @@ export default {
     getName(value) {
       return value2name(value, ChinaAddressV4Data)
     },
-    getWechatNumberValid() {
-      return this.$refs.wechatNumber.valid
+    onEducationChange(val) {
+      this.form.education = findCode(education, val[0])
     },
-    getUnitNameValid() {
-      return this.$refs.unitName.valid
+    onMarryChange(val) {
+      this.form.marry = findCode(marry, val[0])
     },
-    getUnitAddressValid() {
-      return this.$refs.unitAddress.valid
+    onAnnualIncome(val) {
+      this.form.annualIncome = findCode(income, val[0])
     },
-    getHomeAddressValid() {
-      return this.$refs.homeAddress.valid
+    onWorkTime(val) {
+      this.form.workTime = findCode(workAge, val[0])
     },
-    validFormInput() {
-      if (this.form.wechatNumber && this.form.unitName && this.form.unitAddress && this.form.homeAddress) {
-        if (
-          this.getWechatNumberValid() &&
-          this.getUnitNameValid() &&
-          this.getUnitAddressValid() &&
-          this.getUnitAddressValid() &&
-          this.getHomeAddressValid()
-        )
-          return true
-        return false
-      } else {
-        return false
-      }
+    onRealState(val) {
+      this.form.realStateStatus = findCode(realState, val[0])
     },
     validForm() {
-      if (
-        this.value.length !== 1 ||
-        this.value1.length !== 1 ||
-        this.value2.length !== 1 ||
-        this.value3.length !== 1 ||
-        this.value4.length !== 1 ||
-        this.value5 == ''
-      ) {
-        return false
-      } else {
-        return true
+      if (this.address == '') {
+        this.isDisabled = true
+        return
       }
+      if (this.form.homeAddress === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.wechatNumber === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.unitAddress === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.unitName === '') {
+        this.isDisabled = true
+        return
+      }
+
+      if (this.form.marry === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.realStateStatus === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.workTime === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.annualIncome === '') {
+        this.isDisabled = true
+        return
+      }
+      if (this.form.education === '') {
+        this.isDisabled = true
+        return
+      }
+      this.isDisabled = false
     }
   }
 }
 </script>
+<style lang="less">
+.loan-basic {
+  overflow: hidden;
+  // .weui-cells {
+  //   margin-top: 0 !important;
+  //   margin-bottom: 6px;
+  //   font-size: 14px;
+  // }
+
+  .weui-cell__bd {
+    input {
+      text-align: right;
+    }
+  }
+  // .weui-input::-webkit-input-placeholder {
+  //   padding-right: 10px;
+  //   color: #ccc !important;
+  // }
+  .weui-icon-warn {
+    display: none !important;
+  }
+}
+.basic-tips {
+  padding: 20px;
+  font-size: 13px;
+  color: #999;
+  list-style: none;
+}
+</style>
+

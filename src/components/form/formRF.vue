@@ -42,13 +42,14 @@
           class="login-input_last">
           <i slot="label" class="iconfont icon-password"></i>
         </x-input>
-        <div class="login-agree">
+        <div class="login-agree" v-if="type === 'register'">
           <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">注册服务协议</ins>》</span>
         </div>
       </group>
     </div>
     <div class="login-btn_warp">
        <x-button @click.native="submit" class="btn-yellow">{{type === 'register' ? '注册' : '提交'}}</x-button>
+       <x-button class="btn-white" link="/login" v-if="type === 'register'">已有帐号</x-button>
        <p class="login-tips">会员类型 - 借款人</p>
     </div>
     <div class="login-link">
@@ -97,7 +98,8 @@ export default {
         userType: 1
       },
       popupShow: false,
-      iframe: ''
+      iframe: '',
+      type: ''
     }
   },
   created() {
@@ -159,12 +161,14 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
+        this.type = 'register'
       }
       if (this.$route.path === '/forget') {
         action = 'forger'
         form.username = this.obj.username
         form.newPassword = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
+        this.type = 'forget'
       }
       if (this.validForm()) {
         this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '处理中' })
@@ -172,7 +176,7 @@ export default {
           .dispatch(action, form)
           .then(() => {
             if (this.$route.path === '/register') {
-              this.$router.push({ path: '/' })
+              this.$router.push({ path: '/publish' })
             }
             if (this.$route.path === '/forget') {
               this.$router.push({ path: '/login' })
@@ -217,6 +221,9 @@ export default {
 }
 .vux-check-icon {
   > .weui-icon-success {
+    font-size: 19px !important;
+  }
+  > .weui-icon-circle {
     font-size: 19px !important;
   }
 }

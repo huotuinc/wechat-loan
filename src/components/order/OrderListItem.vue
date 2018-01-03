@@ -29,7 +29,6 @@
           <div class="loan-ft_content">
             <span>逾期日期：<i class="text-danger">{{order.overdueDay}}天</i></span>
             <span>逾期利息：<i class="text-danger">{{order.overdueAmount}}元</i></span>
-            <span>已还金额：<i class="text-danger">{{order.rePayedAmount}}元</i></span>
           </div>
         </div>
       </router-link>

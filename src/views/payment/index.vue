@@ -32,7 +32,6 @@
 
 <script>
 import { XInput, Group, XButton, Cell, Picker, PopupPicker } from 'vux'
-import openWindow from '@/utils/openWindow'
 
 export default {
   created() {
@@ -120,9 +119,6 @@ export default {
           console.log(err)
         })
     },
-    openPaymentPage(url) {
-      openWindow(url)
-    },
     getEmailValid() {
       return this.$refs.email.valid
     },
@@ -134,7 +130,16 @@ export default {
       }
     },
     getRedirectUrl() {
-      this.paymentForm.redirectUrl = window.location.origin
+      switch (this.$route.params.tradeType) {
+        case 1:
+          this.paymentForm.redirectUrl = `${window.location.origin}/authentication`
+          break
+        case 3:
+          this.paymentForm.redirectUrl = `${window.location.origin}/treaty/${this.$route.params.orderId}`
+          break
+        default:
+          this.paymentForm.redirectUrl = window.location.origin
+      }
     },
     validForm() {
       return this.value.length > 0

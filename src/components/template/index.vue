@@ -19,7 +19,7 @@
     还款方式：<span>{{page.refundMode}}</span><br>
     还款日期：<span>{{page.refundDate}}</span><br>
     年化利率：<span>{{page.annualRate}}</span><br>
-    还款总额：<span>page.refundTotalAmount</span><br>
+    还款总额：<span>{{page.refundTotalAmount}}</span><br>
     注：还款总额=借款金额*（1+借款时长/365）*年化利率，其中借款时长为借款日期和还款日期间的天数；此处的“借款日期”是指乙方向甲方实际支付借款且借款已到账的日期。 借款人可多次还款直至待还本息全部还清，但提前还款并不减少待还本息。<br><br>
 
     二、借款流程 <br>
