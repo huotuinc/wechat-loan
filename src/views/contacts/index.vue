@@ -2,38 +2,58 @@
   <div class="loan-wrap loan-contact">
     <div style="overflow:hidden;">
     <group title="主要联系人信息(需直系亲属)">
-      <popup-picker title="关系" :data="list"
-                    v-model="value"
-                    popup-title="关系"></popup-picker>
-      <x-input title="姓名" ref="name"  :show-clear="false" v-model.trim="form[0].name"></x-input>
+      <popup-picker
+        title="关系"
+        :data="list"
+        v-model="value"
+        @on-change="onMainChange"
+        popup-title="关系">
+      </popup-picker>
+      <x-input
+        title="姓名"
+        :show-clear="false"
+        required
+        v-model.trim="form[0].name">
+      </x-input>
       <x-input
         title="手机号"
         name="mobile"
         keyboard="number"
         is-type="china-mobile"
-        ref="mobile"
+        ref="mobile1"
         :show-clear="false"
+        required
         v-model.trim="form[0].mobile">
       </x-input>
     </group>
     <group title="其他联系人信息">
-      <popup-picker title="关系" :data="list"
-                    v-model="value1"
-                    popup-title="关系"></popup-picker>
-      <x-input title="姓名" ref="name"  :show-clear="false" v-model.trim="form[1].name"></x-input>
+      <popup-picker
+        title="关系"
+        :data="list"
+        v-model="value1"
+        @on-change="onOtherChange"
+        popup-title="关系">
+      </popup-picker>
       <x-input
-        name="mobile"
+        title="姓名"
+        :show-clear="false"
+        required
+        v-model.trim="form[1].name">
+      </x-input>
+      <x-input
+        name="mobile2"
         title="手机号"
         keyboard="number"
         is-type="china-mobile"
-        ref="mobile"
+        ref="mobile2"
         :show-clear="false"
+        required
         v-model.trim="form[1].mobile">
       </x-input>
     </group>
     </div>
     <div class="loan-publish_btn" style="padding:20px;">
-      <x-button @click.native="submit" class="btn-yellow">提交</x-button>
+      <x-button @click.native="submit" class="btn-yellow" :disabled="isDisabled">提交</x-button>
     </div>
   </div>
 </template>
@@ -55,6 +75,7 @@ export default {
   },
   data() {
     return {
+      isDisabled: true,
       value: [],
       value1: [],
       list: [],
@@ -63,17 +84,25 @@ export default {
           contactId: 0,
           name: '',
           mobile: '',
-          relation: null,
+          relation: '',
           isImportant: 1
         },
         {
           contactId: 0,
           name: '',
           mobile: '',
-          relation: null,
+          relation: '',
           isImportant: 0
         }
       ]
+    }
+  },
+  watch: {
+    form: {
+      handler: function(val, oldVal) {
+        this.validForm()
+      },
+      deep: true
     }
   },
   methods: {
@@ -88,16 +117,10 @@ export default {
       list.push(ret)
     },
     submit() {
-      if (!this.validFormInput() || !this.validForm) {
-        this.$vux.toast.text('信息填写有误')
-        return
-      }
       if (this.form[0].mobile === this.form[1].mobile) {
         this.$vux.toast.text('手机号码重复')
         return
       }
-      this.form[0].relation = findCode(relation, this.value[0])
-      this.form[1].relation = findCode(relation, this.value1[0])
 
       let req = {
         requestData: JSON.stringify(this.form)
@@ -107,26 +130,37 @@ export default {
         this.$router.back()
       })
     },
-    getNameValid() {
-      return this.$refs.name.valid
+    getMobile1Valid() {
+      return this.$refs.mobile1.valid
     },
-    getMobileValid() {
-      return this.$refs.mobile.valid
+    getMobile2Valid() {
+      return this.$refs.mobile2.valid
     },
-    validFormInput() {
-      if (this.form[0].name && this.form[0].mobile && this.form[1].name && this.form[1].mobile) {
-        if (this.getNameValid() && this.getMobileValid()) return true
-        return false
-      } else {
-        return false
-      }
+    onMainChange(val) {
+      this.form[0].relation = findCode(relation, val[0])
+    },
+    onOtherChange(val) {
+      this.form[1].relation = findCode(relation, val[0])
     },
     validForm() {
-      if (this.value.length !== 1 || this.value1.length !== 1) {
-        return false
-      } else {
-        return true
+      if (
+        !(
+          this.form[0].name &&
+          this.form[0].mobile &&
+          this.form[0].relation &&
+          this.form[1].name &&
+          this.form[1].mobile &&
+          this.form[1].relation
+        )
+      ) {
+        this.isDisabled = true
+        return
       }
+      if (!(this.getMobile1Valid() && this.getMobile2Valid())) {
+        this.isDisabled = true
+        return
+      }
+      this.isDisabled = false
     }
   }
 }
