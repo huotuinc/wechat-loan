@@ -185,8 +185,9 @@ export default {
     submit() {
       this.form.homeAreaCode = this.address.join(',')
       this.form.homeArea = this.getName(this.address)
+      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '认证中' })
       this.$store.dispatch('userinfoedit', this.form).then(() => {
-        this.$vux.toast.text('提交成功')
+        this.$store.commit('UPDATE_LOADING', { isLoading: false })
         this.$router.back()
       })
     },

@@ -28,7 +28,7 @@
       <popup-picker
         title="借款用途"
         :data="list"
-        v-model="value"
+        v-model="useArray"
         @on-change="onChange"
         popup-title="借款用途">
       </popup-picker>
@@ -66,17 +66,19 @@ export default {
     TransferDom
   },
   created() {
-    if (this.authInfo === null) {
-      this.$router.push({ path: '/login' })
-    }
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
-      this.$store.dispatch('getIndex')
+      this.$store.dispatch('getIndex').then(() => {
+        this.validForm()
+      })
     }
     this.$store.dispatch('templateData').then(res => {
       this.page = res
     })
+    if (sessionStorage.getItem('use')) this.useArray = [sessionStorage.getItem('use')]
+    if (sessionStorage.getItem('borrowMoney')) this.obj.borrowMoney = sessionStorage.getItem('borrowMoney')
+    if (sessionStorage.getItem('borrowTime')) this.obj.borrowTime = sessionStorage.getItem('borrowTime')
   },
   computed: {
     authText() {
@@ -102,7 +104,7 @@ export default {
     return {
       hasChecked: true,
       list: [],
-      value: [],
+      useArray: [],
       obj: {
         borrowMoney: '',
         borrowTime: '',
@@ -121,10 +123,12 @@ export default {
     }
   },
   watch: {
-    'obj.borrowMoney'() {
+    'obj.borrowMoney'(val) {
+      sessionStorage.setItem('borrowMoney', val)
       this.validForm()
     },
-    'obj.borrowTime'() {
+    'obj.borrowTime'(val) {
+      sessionStorage.setItem('borrowTime', val)
       this.validForm()
     },
     'obj.borrowUse'() {
@@ -132,6 +136,10 @@ export default {
     },
     hasChecked() {
       this.validForm()
+    },
+    useArray(val) {
+      this.onChange(val)
+      sessionStorage.setItem('use', val)
     }
   },
   methods: {
@@ -149,6 +157,7 @@ export default {
         .then(() => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
           this.$router.push({ path: '/publishList' })
+          sessionStorage.clear()
         })
         .catch(err => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
