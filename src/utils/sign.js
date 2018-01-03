@@ -44,7 +44,8 @@ const sign = data => {
       delete userInfo[info]
     }
   }
-  _.assign(signParams, userInfo)
-  return md5(raw(signParams) + secretKey)
+  const newParams = JSON.parse(JSON.stringify(signParams))
+  _.assign(newParams, userInfo)
+  return md5(raw(newParams) + secretKey)
 }
 export default sign

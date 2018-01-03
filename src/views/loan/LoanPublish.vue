@@ -151,6 +151,7 @@ export default {
       this.list.push(ret)
     },
     submit() {
+      console.log(this.obj)
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
       this.$store
         .dispatch('saveInfo', this.obj)

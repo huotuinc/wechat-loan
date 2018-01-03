@@ -34,6 +34,7 @@ const service = Vue => {
         _.assign(config.params, {
           sign: signData
         })
+        delete config.params['merchantId']
       }
       if (config.method.toLowerCase() === 'post') {
         if (!config.data) config.data = {}
@@ -46,6 +47,7 @@ const service = Vue => {
         _.assign(config.data, {
           sign: signData
         })
+        delete config.data['merchantId']
       }
 
       config.data = qs.stringify(config.data)
