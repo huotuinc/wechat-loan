@@ -2,7 +2,7 @@ import Axios from 'axios'
 import router from '../router'
 import _ from 'lodash'
 import qs from 'qs'
-import { getToken, getUserId } from './auth'
+import { getToken, getUserId, removeToken, removeUserId, removeUserInfo } from './auth'
 import signUtil from './sign'
 
 const noMsg = [4003, 4123, 4130]
@@ -68,6 +68,9 @@ const service = Vue => {
           Vue.$vux.toast.text(res.resultMsg)
         }
         if (res.resultCode === 4003) {
+          removeToken()
+          removeUserId()
+          removeUserInfo()
           Vue.$vux.alert.show({
             title: '信息失效',
             content: '请重新登录',
