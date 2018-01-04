@@ -73,7 +73,7 @@ const getSesameUrlData = Mock.mock({
 const isPay = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
-  data: true
+  data: false
 })
 
 const certificationInfo = Mock.mock({

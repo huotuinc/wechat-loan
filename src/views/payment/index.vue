@@ -130,7 +130,7 @@ export default {
       }
     },
     getRedirectUrl() {
-      switch (this.$route.params.tradeType) {
+      switch (Number(this.$route.params.tradeType)) {
         case 1:
           this.paymentForm.redirectUrl = `${window.location.origin}/authentication`
           break

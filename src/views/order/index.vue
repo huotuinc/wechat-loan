@@ -10,17 +10,13 @@
         </keep-alive>
       </div>
       <tabbar>
-        <tabbar-item link="/">
-          <i slot="icon" class="iconfont icon-loan-o"></i>
-          <span slot="label">借款</span>
+        <tabbar-item :selected="name === 'Loan'" link="/">
+          <i slot="icon" class="iconfont icon-home"></i>
+          <span slot="label">首页</span>
         </tabbar-item>
-        <tabbar-item link="/todo">
-          <i slot="icon" class="iconfont icon-todo"></i>
-          <span slot="label">待办事项</span>
-        </tabbar-item>
-        <tabbar-item link="/personal">
-          <i slot="icon" class="iconfont icon-personal"></i>
-          <span slot="label">个人中心</span>
+        <tabbar-item :selected="name === 'Publish'" link="/publish">
+          <i slot="icon" class="iconfont icon-borrow"></i>
+          <span slot="label">我要借款</span>
         </tabbar-item>
       </tabbar>
     </view-box>

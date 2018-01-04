@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout'
+import Layout from '@/views/layout/Layout'
 
 const _import = require('./_import')
 
@@ -9,49 +9,43 @@ Vue.use(Router)
 export const constantRouterMap = [
   {
     path: '/',
-    alias: '/loan',
-    name: 'Loan',
-    component: _import('loan/index'),
-    meta: {
-      title: '首页'
-    }
-  },
-  {
-    path: '/publish',
-    name: 'Publish',
-    component: _import('loan/LoanPublish'),
-    meta: {
-      title: '我要借款'
-    }
-  },
-  {
-    path: '/publishList',
-    name: 'PublishList',
-    component: _import('loan/LoanPublishList'),
-    meta: {
-      title: '发布'
-    }
-  },
-  {
-    path: '/todo',
     component: Layout,
     children: [
       {
         path: '',
+        alias: '/loan',
+        name: 'Loan',
+        component: _import('loan/index'),
+        meta: {
+          title: '首页'
+        }
+      },
+      {
+        path: 'publish',
+        name: 'Publish',
+        component: _import('loan/LoanPublish'),
+        meta: {
+          title: '我要借款'
+        }
+      },
+      {
+        path: 'publishList',
+        name: 'PublishList',
+        component: _import('loan/LoanPublishList'),
+        meta: {
+          title: '发布'
+        }
+      },
+      {
+        path: 'todo',
         name: 'Todo',
         component: _import('todo/index'),
         meta: {
           title: '待办事项'
         }
-      }
-    ]
-  },
-  {
-    path: '/personal',
-    component: Layout,
-    children: [
+      },
       {
-        path: '',
+        path: 'personal',
         name: 'Personal',
         component: _import('personal/index'),
         meta: {

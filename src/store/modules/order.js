@@ -137,7 +137,6 @@ const order = {
       })
     },
     createOrder({}, orderData) {
-      console.log(orderData)
       return new Promise((resolve, reject) => {
         request({
           url: '/api/unifiedorder/create',

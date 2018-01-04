@@ -10,7 +10,7 @@
     </div>
     <div class="loan-body loan-body-index">
       <group class="loan-body_item">
-        <cell is-link title="借款次数" :value="page.loanNum">
+        <cell title="借款次数" :value="page.loanNum">
           <i class="iconfont icon-my-loan" slot="icon"></i>
         </cell>
       </group>
@@ -45,9 +45,9 @@
         </grid>
       </div>
     </div>
-    <div class="loan-footer">
+    <!-- <div class="loan-footer">
         <x-button class="loan-button btn-yellow" link="/publish">我要借款</x-button>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
