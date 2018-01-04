@@ -199,6 +199,16 @@ const templateData = Mock.mock({
     authDate: '0'
   }
 })
+const orderLog = Mock.mock({
+  resultCode: 2000,
+  resultMsg: 'OK',
+  'data|5-10': [
+    {
+      logTime: '@datetime',
+      logInfo: '@ctitle'
+    }
+  ]
+})
 export default {
   getOrderInfo: config => getorderinfoData,
   getRepayDetail: config => getRepayDetailData,
@@ -209,5 +219,6 @@ export default {
   sendPayment: config => sendPayment,
   receiveOrder: config => receiveOrder,
   getLoansProductInfo: config => getLoansProductInfo,
-  templateData: config => templateData
+  templateData: config => templateData,
+  orderLog: config => orderLog
 }

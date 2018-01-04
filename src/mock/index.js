@@ -83,6 +83,7 @@ Mock.mock(/\/api\/order\/receiveOrder/, 'post', orderApi.receiveOrder)
 Mock.mock(/\/api\/order\/receiveLoanOrder/, 'post', orderApi.receiveOrder)
 
 Mock.mock(/\/api\/user\/esign\/templateData/, 'get', orderApi.templateData)
+Mock.mock(/\/api\/order\/getOrderLog/, 'get', orderApi.orderLog)
 
 Mock.mock(/\/api\/order\/getOrderList/, 'post', {
   resultCode: 2000,

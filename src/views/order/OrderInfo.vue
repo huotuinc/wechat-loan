@@ -60,7 +60,7 @@
           <span class="text-danger">立即查看</span>
         </cell>
       </template>
-      <cell title="日志" is-link v-if="borrowDetail.grantStatus === 4 || borrowDetail.grantStatus === 5 || borrowDetail.grantStatus === 6" link="/credit"></cell>
+      <cell title="日志" is-link :link="{ name:'Log', params:{ orderId: borrowDetail.orderId } }"></cell>
       <x-textarea :max="100" name="description" placeholder="补充说明" :value="borrowDetail.remarks" readonly></x-textarea>
     </group>
   </div>

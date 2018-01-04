@@ -308,6 +308,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/log/:orderId',
+    name: 'Log',
+    component: _import('logs/index'),
+    meta: {
+      title: '日志'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

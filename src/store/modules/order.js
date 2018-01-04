@@ -244,6 +244,23 @@ const order = {
             reject(error)
           })
       })
+    },
+    orderLog({}, orderId) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/order/getOrderLog',
+          method: 'get',
+          params: {
+            orderId: orderId
+          }
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

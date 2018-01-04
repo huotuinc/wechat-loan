@@ -10,11 +10,11 @@
         </keep-alive>
       </div>
       <tabbar>
-        <tabbar-item :selected="name === 'Loan'" link="/">
+        <tabbar-item link="/">
           <i slot="icon" class="iconfont icon-home"></i>
           <span slot="label">首页</span>
         </tabbar-item>
-        <tabbar-item :selected="name === 'Publish'" link="/publish">
+        <tabbar-item link="/publish">
           <i slot="icon" class="iconfont icon-borrow"></i>
           <span slot="label">我要借款</span>
         </tabbar-item>

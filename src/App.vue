@@ -27,6 +27,7 @@ export default {
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
 @import './style/variable.less';
 @import './style/index.less';
 </style>
