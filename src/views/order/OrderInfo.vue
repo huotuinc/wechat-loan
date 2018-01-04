@@ -2,8 +2,8 @@
   <div class="loan-wrap">
     <div class="loan-body">
       <group class="loan-body_item">
-        <cell :title="orderTitle">
-          <i class="iconfont icon-msg" slot="icon"></i>
+        <cell :title="orderTitle" class="order-header">
+          <i class="iconfont icon-order order-icon" slot="icon"></i>
           {{borrowDetail.orderStatus}}
         </cell>
       </group>
@@ -60,6 +60,7 @@
           <span class="text-danger">立即查看</span>
         </cell>
       </template>
+      <cell title="日志" is-link v-if="borrowDetail.grantStatus === 4 || borrowDetail.grantStatus === 5 || borrowDetail.grantStatus === 6" link="/credit"></cell>
       <x-textarea :max="100" name="description" placeholder="补充说明" :value="borrowDetail.remarks" readonly></x-textarea>
     </group>
   </div>
@@ -71,16 +72,7 @@ import { XInput, Group, Cell, dateFormat, XTextarea } from 'vux'
 export default {
   computed: {
     orderTitle() {
-      let status = this.borrowDetail.grantStatus
-      let repayDate = dateFormat(new Date(this.borrowDetail.agreedRepayTime), 'MM-DD')
-      let days = Math.abs(this.borrowDetail.repayTimeDays)
-      if (status === 5) {
-        return '还款日' + repayDate + '   已逾期' + days + '天'
-      }
-      if (status === 4) {
-        return '还款日' + repayDate + '   ' + days + '天后逾期'
-      }
-      return '订单状态'
+      return this.borrowDetail.repayTimeHtml || '订单状态'
     }
   },
   created() {
@@ -110,6 +102,17 @@ export default {
 .loan-body_item {
   .weui-cells {
     margin-top: 6px;
+  }
+}
+.order-icon {
+  color: #ff9c00 !important;
+  background: #fff !important;
+  margin-right: 4px !important;
+  font-size: 24px !important;
+}
+.order-header {
+  .vux-label {
+    font-size: 14px !important;
   }
 }
 </style>

@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     receiveOrder(data) {
-      console.log(data)
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '领取中' })
       let receiveUrl = this.requestData.orderId ? 'receiveOrder' : 'receiveLoanOrder'
       this.$store

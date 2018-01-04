@@ -73,9 +73,6 @@ export default {
         this.validForm()
       })
     }
-    this.$store.dispatch('templateData').then(res => {
-      this.page = res
-    })
     if (sessionStorage.getItem('use')) this.useArray = [sessionStorage.getItem('use')]
     if (sessionStorage.getItem('borrowMoney')) this.obj.borrowMoney = sessionStorage.getItem('borrowMoney')
     if (sessionStorage.getItem('borrowTime')) this.obj.borrowTime = sessionStorage.getItem('borrowTime')

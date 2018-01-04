@@ -27,7 +27,8 @@ const getorderinfoData = Mock.mock({
     repayType: '@pick(["等额本息","还本付息"])',
     repayTypeName: '@pick(["等额本息","还本付息"])',
     repayTypeCode: '@integer(0, 1)',
-    monthRepayMoney: '@float(100, 500, 2, 2)'
+    monthRepayMoney: '@float(100, 500, 2, 2)',
+    repayTimeHtml: '还款日：2017-12-13 20天后到期'
   }
 })
 
@@ -151,6 +152,7 @@ const getLoansProductInfo = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
   data: {
+    orderId: '@name',
     loanId: '@id',
     orderName: '@name',
     orderStatus: '@pick(["待审核","待还款","已拒绝","已完成","已取消","已逾期"])',

@@ -86,29 +86,51 @@
           </div>
         </div>
       </div>
-      <p class="agreement">已阅读并同意《借款条约》</p>
+      <div class="agreement loan-publish_rule">
+        <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">借款条约</ins>》</span>
+      </div>
     </div>
     <div class="res-ft">
-      <button type="button" class="apply-btn btn-yellow" @click="receiveOrder">立即领取</button>
+      <button type="button" class="apply-btn btn-yellow" @click="receiveOrder" :disabled="isDisabled">立即领取</button>
+    </div>
+    <div v-transfer-dom>
+      <popup v-model="popupShow" position="bottom" max-height="50%">
+        <template-data :page="page"></template-data>
+      </popup>
     </div>
   </div>
 </template>
 <script>
+import { TransferDom, Popup, CheckIcon } from 'vux'
+import TemplateData from '../../components/template'
+
 export default {
   name: 'resTemplate',
+  directives: {
+    TransferDom
+  },
   props: {
     receive: Object,
     isLoan: Boolean
   },
+  components: {
+    CheckIcon,
+    Popup,
+    TemplateData
+  },
   data() {
     return {
+      hasChecked: true,
       disabled: false,
       time: 0,
       timer: '',
       sendButtonText: '获取验证码',
       receiveData: {
         verifyCode: ''
-      }
+      },
+      popupShow: false,
+      page: {},
+      isDisabled: false
     }
   },
   watch: {
@@ -125,6 +147,9 @@ export default {
       } else {
         delete this.receiveData.loanId
       }
+    },
+    hasChecked(val) {
+      this.isDisabled = !val
     }
   },
   methods: {
@@ -142,7 +167,7 @@ export default {
           .catch(err => {
             this.disabled = false
             console.log(err)
-            this.$vux.toast.text('系统异常')
+            this.$vux.toast.text(err.resultMsg)
           })
       }
     },
@@ -167,11 +192,14 @@ export default {
       } else {
         this.$vux.toast.text('手机号有误')
       }
+    },
+    open() {
+      this.popupShow = true
     }
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '../../style/variable.less';
 
 .res-hd {
@@ -426,7 +454,20 @@ export default {
   font-size: 12px;
   text-align: center;
   color: #999999;
+  .vux-check-icon {
+    > .weui-icon-success {
+      font-size: 14px !important;
+    }
+    > .weui-icon-circle {
+      font-size: 14px !important;
+    }
+  }
+  .vux-check-icon > .weui-icon-success:before,
+  .vux-check-icon > .weui-icon-success-circle:before {
+    color: #ff9c00 !important;
+  }
 }
+
 .res-ft {
   position: absolute;
   left: 0;
