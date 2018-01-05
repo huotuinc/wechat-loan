@@ -1,6 +1,16 @@
 import request from '@/utils/request'
 import { SET_TOKEN, SET_USER_ID, SET_USER_INFO } from '../mutation-type'
-import { getToken, getUserId, setToken, setUserId, removeToken, removeUserId, setUserInfo } from '../../utils/auth'
+import {
+  getToken,
+  getUserId,
+  setToken,
+  setUserId,
+  removeToken,
+  removeUserId,
+  setUserInfo,
+  getChannelId,
+  setChannelId
+} from '../../utils/auth'
 import { setAgreementLink, setLoanerQuestionLink, setLoanerRegisterLink, setAbout } from '../../utils/init.js'
 
 const user = {
@@ -64,7 +74,10 @@ const user = {
         request({
           url: '/api/user/register',
           method: 'post',
-          data: userInfo
+          data: userInfo,
+          headers: {
+            channelId: getChannelId()
+          }
         })
           .then(response => {
             setUserInfo(response)
@@ -73,6 +86,7 @@ const user = {
             commit(SET_TOKEN, response.userToken)
             commit(SET_USER_ID, response.userId)
             commit(SET_USER_INFO, response)
+            setChannelId('default')
             resolve(response)
           })
           .catch(error => {

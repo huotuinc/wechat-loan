@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 const UserId = 'User-Id'
 const TokenKey = 'User-ToKen'
 const UserInfo = 'User-Info'
+const ChannelId = 'channelId'
 
 export function getUserId() {
   return Cookies.get(UserId)
@@ -50,4 +51,16 @@ export function setUserInfo(info) {
 
 export function removeUserInfo() {
   return Cookies.remove(UserInfo)
+}
+
+export function setChannelId(channelId) {
+  return Cookies.set(ChannelId, channelId)
+}
+
+export function getChannelId(channelId) {
+  return Cookies.getJSON(ChannelId)
+}
+
+export function removeChannelId() {
+  return Cookies.remove(ChannelId)
 }

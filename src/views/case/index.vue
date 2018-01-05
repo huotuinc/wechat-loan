@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import { getToken } from '@/utils/auth'
+import { getToken, setChannelId } from '@/utils/auth'
 
 export default {
   name: 'Case',
@@ -42,7 +42,9 @@ export default {
   },
   created() {
     if (this.$route.query.channelId) {
-      localStorage.setItem('channelId', this.$route.query.channelId)
+      setChannelId(this.$route.query.channelId)
+    } else {
+      setChannelId('default')
     }
     this.$store.dispatch('getCases').then(res => {
       this.cases = res

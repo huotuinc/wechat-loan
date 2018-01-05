@@ -14,8 +14,7 @@ const service = Vue => {
     headers: {
       osType: 'h5',
       merchantId: 1,
-      appVersion: '1.0.1',
-      channelId: encodeURIComponent(localStorage.getItem('channelId')) || 'default'
+      appVersion: '1.0.1'
     }
   })
 
