@@ -206,6 +206,7 @@ export default {
   padding: 25px 0;
   background-color: @loan-red;
   color: #fff;
+  overflow: hidden;
   .hd {
     text-align: center;
     margin-bottom: 25px;
@@ -239,8 +240,12 @@ export default {
 }
 .res-bd {
   padding-bottom: 50px;
+  .weui-cells {
+    position: relative;
+  }
 }
 .res-preview {
+  position: relative;
   margin-bottom: 6px;
   position: relative;
   background-color: #ffffff;
@@ -469,11 +474,12 @@ export default {
 }
 
 .res-ft {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
+  z-index: 9999;
 }
 
 .apply-btn {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <waiting :show="isLoading" :text="text" :progress="isProgress" :percent="percent"></waiting>
+    <waiting :show="isLoading" :text="text" :progress="isProgress" :percent="percent"></waiting>
     <router-view></router-view>
   </div>
 </template>

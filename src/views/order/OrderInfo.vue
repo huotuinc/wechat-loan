@@ -99,6 +99,13 @@ export default {
 }
 </script>
 <style lang="less">
+.vux-no-group-title,
+.order-header {
+  &::before {
+    height: 0 !important;
+    border-top: none !important;
+  }
+}
 .loan-body_item {
   .weui-cells {
     margin-top: 6px;
