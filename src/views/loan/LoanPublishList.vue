@@ -106,16 +106,18 @@ export default {
       })
     },
     cancelOrder(order) {
-      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '删除中' })
+      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '取消中' })
       this.$store.dispatch('cancelBorrow', order.id).then(() => {
         this.$store.commit('UPDATE_LOADING', { isLoading: false })
         this.$vux.toast.text('取消成功')
-        this.deleteOrder(order)
+        this.changeOrder(order)
       })
     },
-    deleteOrder(order) {
-      this.orders.splice(this.orders.indexOf(order), 1)
-      if (this.orders.length === 0) this.isEmpty = true
+    changeOrder(order) {
+      order.statusCode = 2
+      order.statusMsg = '已取消'
+      order.cancelable = false
+      this.orders.splice(this.orders.indexOf(order), 1, order)
     }
   }
 }
