@@ -159,7 +159,7 @@ export default {
         })
         .catch(err => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$vux.toast.text(err)
+          this.$vux.toast.text(err.resultMsg)
         })
     },
     open() {
