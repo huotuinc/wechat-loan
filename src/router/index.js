@@ -316,6 +316,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/follow',
+    name: 'Follow',
+    component: _import('follow/index'),
+    meta: {
+      title: '关注我们'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

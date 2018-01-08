@@ -2,7 +2,7 @@ import router from './router'
 import store from './store'
 import { getToken } from './utils/auth'
 
-const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/shareOrder', '/case']
+const whiteList = ['/login', '/register', '/receive', '/forget', '/download', '/shareOrder', '/case', '/success']
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || ''

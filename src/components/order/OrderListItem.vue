@@ -4,7 +4,7 @@
       <router-link class="loan-card" :key="order.orderId" :to="{name:'OrderInfo', params: {orderId: order.orderId}}" >
         <div class="loan-card_hd clearfix">
           <span class="loan-hd_title">订单</span>
-          <span class="loan-hd_user">借款人：{{order.userRealName}}</span>
+          <span class="loan-hd_user">出借人：{{order.userRealName}}</span>
         </div>
         <div class="loan-card_bd vux-1px-b">
           <div class="loan-bd_img">

@@ -1,7 +1,7 @@
 <template>
     <div v-transfer-dom>
-      <popup v-model="popupShow" position="bottom" max-height="100%">
-        <iframe :src="src" frameborder="0"></iframe>
+      <popup v-model="popupShow" position="bottom" height="100vh">
+        <iframe :src="src" frameborder="0"  scrolling="auto"></iframe>
       </popup>
     </div>
 </template>
@@ -30,9 +30,6 @@ export default {
 iframe {
   display: block;
   width: 100%;
-  height: 100%;
-}
-.vux-popup-dialog {
-  height: 100% !important;
+  height: 100vh;
 }
 </style>

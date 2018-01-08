@@ -31,6 +31,11 @@
           <i class="iconfont icon-add" slot="icon"></i>
         </cell>
       </group>
+      <group class="loan-body_item">
+        <cell is-link title="关注我们" link="/follow">
+          <i class="iconfont icon-wechat" slot="icon"></i>
+        </cell>
+      </group>
       <div class="loan-body_grid">
         <grid>
           <grid-item label="我的借条" link="/orderList">
@@ -76,6 +81,7 @@ export default {
 </script>
 <style lang="less">
 .loan-body-index {
+  padding-bottom: 60px;
   min-height: 400px;
 }
 </style>

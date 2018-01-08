@@ -1,18 +1,16 @@
 <template>
   <div class="loan-wrap">
-    <view-box>
-      <router-view />
-      <tabbar>
-        <tabbar-item :selected="name === 'Loan'" link="/">
-          <i slot="icon" class="iconfont icon-home"></i>
-          <span slot="label">首页</span>
-        </tabbar-item>
-        <tabbar-item :selected="name === 'Publish'" link="/publish">
-          <i slot="icon" class="iconfont icon-borrow"></i>
-          <span slot="label">我要借款</span>
-        </tabbar-item>
-      </tabbar>
-    </view-box>
+    <router-view />
+    <tabbar>
+      <tabbar-item :selected="name === 'Loan'" link="/">
+        <i slot="icon" class="iconfont icon-home"></i>
+        <span slot="label">首页</span>
+      </tabbar-item>
+      <tabbar-item :selected="name === 'Publish'" link="/publish">
+        <i slot="icon" class="iconfont icon-borrow"></i>
+        <span slot="label">我要借款</span>
+      </tabbar-item>
+    </tabbar>
   </div>
 </template>
 
