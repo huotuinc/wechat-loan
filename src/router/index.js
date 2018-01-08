@@ -17,7 +17,7 @@ export const constantRouterMap = [
         name: 'Loan',
         component: _import('loan/index'),
         meta: {
-          title: '首页'
+          title: '过海有信'
         }
       },
       {
