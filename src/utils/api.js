@@ -10,7 +10,7 @@ const noMsg = [4003, 4123, 4130]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://youxin.51morecash.com',
-    // baseURL: 'http://localhost:8999',
+    // baseURL: '/apis',
     timeout: 15000,
     headers: {
       osType: 'h5',
