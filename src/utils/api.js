@@ -4,6 +4,7 @@ import _ from 'lodash'
 import qs from 'qs'
 import { getToken, getUserId, removeToken, removeUserId, removeUserInfo } from './auth'
 import signUtil from './sign'
+import device from './device'
 
 const noMsg = [4003, 4123, 4130]
 const service = Vue => {
@@ -14,7 +15,8 @@ const service = Vue => {
     headers: {
       osType: 'h5',
       merchantId: 1,
-      appVersion: '1.0.3'
+      appVersion: '1.0.3',
+      mobileType: device()
     }
   })
 
