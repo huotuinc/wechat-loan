@@ -36,7 +36,6 @@ const init = Mock.mock({
     }
   }
 })
-
 export default {
   login: config => loginData,
   init: config => init

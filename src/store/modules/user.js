@@ -101,14 +101,8 @@ const user = {
           method: 'post',
           data: userInfo
         })
-          .then(response => {
-            setUserInfo(response)
-            setToken(response.userToken)
-            setUserId(response.userId)
-            commit(SET_TOKEN, response.userToken)
-            commit(SET_USER_ID, response.userId)
-            commit(SET_USER_INFO, response)
-            resolve(response)
+          .then(() => {
+            resolve()
           })
           .catch(error => {
             reject(error)

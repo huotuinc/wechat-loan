@@ -21,6 +21,7 @@ Mock.mock(/\/api\/sys\/init/, 'post', loginApi.init)
 Mock.mock(/\/api\/user\/sendVerifyCode/, 'post', registerApi.sendCode)
 //注册
 Mock.mock(/\/api\/user\/register/, 'post', registerApi.register)
+Mock.mock(/\/api\/user\/updatePassword/, 'post', registerApi.forgerPass)
 
 //我要借款
 Mock.mock(/\/api\/borrow\/saveInfo/, 'post', borrowApi.saveInfo)

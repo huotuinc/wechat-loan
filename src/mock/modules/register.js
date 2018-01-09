@@ -17,7 +17,10 @@ const registerData = Mock.mock({
     headimg: '@IMG(30x30)'
   }
 })
+
+const forgerPass = Mock.mock({ resultCode: 2000, resultMsg: '操作成功', data: null })
 export default {
   sendCode: config => sendData,
-  register: config => registerData
+  register: config => registerData,
+  forgerPass: config => forgerPass
 }

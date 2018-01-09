@@ -81,9 +81,6 @@ export default {
     Cell,
     CheckIcon
   },
-  props: {
-    type: String
-  },
   data() {
     return {
       hasChecked: true,
@@ -104,6 +101,12 @@ export default {
   },
   created() {
     this.iframe = getLoanerRegisterLink()
+    if (this.$route.path === '/register') {
+      this.type = 'register'
+    }
+    if (this.$route.path === '/forget') {
+      this.type = 'forget'
+    }
   },
   methods: {
     getMobileValid() {
@@ -155,30 +158,28 @@ export default {
       }
       let action
       let form = {}
-      if (this.$route.path === '/register') {
+      if (this.type === 'register') {
         action = 'register'
         form.username = this.obj.username
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
-        this.type = 'register'
       }
-      if (this.$route.path === '/forget') {
+      if (this.type === 'forget') {
         action = 'forger'
         form.username = this.obj.username
         form.newPassword = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
-        this.type = 'forget'
       }
       if (this.validForm()) {
         this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '处理中' })
         this.$store
           .dispatch(action, form)
           .then(() => {
-            if (this.$route.path === '/register') {
+            if (this.type === 'register') {
               this.$router.push({ path: '/publish' })
             }
-            if (this.$route.path === '/forget') {
+            if (this.type === 'forget') {
               this.$router.push({ path: '/login' })
             }
             this.$store.commit('UPDATE_LOADING', { isLoading: false })
