@@ -7,13 +7,15 @@
       </div>
       <div class="download-content">
         <div class="download-btn_app">
-          <a href="javascritp:;" class="btn"><i class="iconfont icon-ios"></i> apple下载</a>
-          <a href="javascritp:;" class="btn btn-android"><i class="iconfont icon-android"></i> android下载</a>
+          <a href="https://fir.im/jre5" class="btn"><i class="iconfont icon-ios"></i> apple下载</a>
+          <a href="http://s.huobanmall.com/yxdownload.html " class="btn btn-android"><i class="iconfont icon-android"></i> android下载</a>
         </div>
-        <div class="download-about">
-          <p>过海有信是集拓客、客户管理、风控支持等于一身的工具类软件，是杭州过海投资管理有限公司拥有所有权与经营权的产品。</p>
-          <p>过海有信致力于帮助有信用的个人和企业解决资金问题，我们助力创建一个诚信的社会。</p>
-        </div>
+      </div>
+      <div class="install vux-1px-t">
+        <h4>
+          <span>iOS系统安装说明</span>
+        </h4>
+        <img src="../../assets/explain.jpg" alt="安装说明">
       </div>
     </div>
   </div>
@@ -36,11 +38,11 @@ export default {
   }
 }
 .download-content {
-  margin: 0 auto;
+  margin: 0 auto 20px;
   width: 264px;
 }
 .download-btn_app {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   overflow: hidden;
   .btn {
     display: inline-block;
@@ -65,6 +67,26 @@ export default {
   p {
     margin-bottom: 25px;
     font-size: 12px;
+  }
+}
+.install {
+  text-align: center;
+  &::before {
+    left: 20px;
+    right: 20px;
+  }
+  h4 {
+    position: relative;
+    display: inline-block;
+    top: -12px;
+    padding: 0 0.55em;
+    color: #999999;
+    font-size: 14px;
+    background: #fff;
+  }
+  img {
+    display: block;
+    width: 100%;
   }
 }
 </style>

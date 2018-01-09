@@ -54,7 +54,7 @@
     </div>
     <div class="login-link">
     <p>
-      <!-- <router-link to="/download">我是出借人</router-link> -->
+      <router-link to="/download">我是出借人</router-link>
     </p>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
