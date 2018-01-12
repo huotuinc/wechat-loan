@@ -324,6 +324,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/test',
+    name: 'Test',
+    component: _import('identity/test'),
+    meta: {
+      title: '测试'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

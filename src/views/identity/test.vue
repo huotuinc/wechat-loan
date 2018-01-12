@@ -69,15 +69,9 @@ export default {
     upload(e) {
       let fileDOM = e.target
       if (!fileDOM.files[0]) return
-      let vm = this
-      lrz(fileDOM.files[0], { width: 1980 })
-        .then(rst => {
-          vm.formData.append(fileDOM.name, rst.file, rst.origin.name)
-          vm[fileDOM.name] = true
-          vm[`${fileDOM.name}Name`] = '等待上传'
-          fileDOM.value = ''
-        })
-        .catch(err => {})
+      this.formData.append(fileDOM.name, fileDOM.files[0], fileDOM.name)
+      this[fileDOM.name] = true
+      this[`${fileDOM.name}Name`] = '等待上传'
     },
     uploadAll() {
       uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
