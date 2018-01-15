@@ -21,7 +21,7 @@
       <img src="../../assets/demo.png" alt="">
     </div>
     <div class="loan-publish_btn" style="padding:20px;">
-      <x-button @click.native="uploadAll" class="btn-yellow" :disabled="disabled">确定提交</x-button>
+      <x-button @click.native.prevent="uploadAll" class="btn-yellow" :disabled="disabled">确定提交</x-button>
     </div>
   </div>
 </template>
@@ -72,12 +72,16 @@ export default {
       let vm = this
       lrz(fileDOM.files[0], { width: 1980 })
         .then(rst => {
+          if (vm.formData.has(fileDOM.name)) vm.formData.delete(fileDOM.name)
           vm.formData.append(fileDOM.name, rst.file, rst.origin.name)
           vm[fileDOM.name] = true
-          vm[`${fileDOM.name}Name`] = '等待上传'
-          fileDOM.value = ''
+          vm[`${fileDOM.name}Name`] = '等待验证'
         })
-        .catch(err => {})
+        .catch(err => {
+          console.log(err)
+        })
+      fileDOM.value = ''
+      console.log(fileDOM.files[0])
     },
     uploadAll() {
       uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
