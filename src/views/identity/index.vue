@@ -81,7 +81,6 @@ export default {
           console.log(err)
         })
       fileDOM.value = ''
-      console.log(fileDOM.files[0])
     },
     uploadAll() {
       uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
