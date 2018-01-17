@@ -13,7 +13,6 @@ const uploader = (url, file, successCb, errorCb, progressCb) => {
     userToken: getToken(),
     userId: getUserId()
   })
-  store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
   axios
     .post(url, qs.stringify(file), {
       headers: {
