@@ -59,7 +59,7 @@ export default {
     upload(e) {
       if (!e.target.files[0]) return
       let vm = this
-      lrz(e.target.files[0], { width: 1980 })
+      lrz(e.target.files[0], { width: 1024 })
         .then(function(rst) {
           rst.formData.append('img', rst.file, rst.origin.name)
           uploader('/api/user/uploadHeadImg', rst.formData, vm.success, vm.error)

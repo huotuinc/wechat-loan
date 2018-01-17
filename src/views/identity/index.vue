@@ -70,9 +70,8 @@ export default {
       let fileDOM = e.target
       if (!fileDOM.files[0]) return
       let vm = this
-      lrz(fileDOM.files[0], { width: 1980 })
+      lrz(fileDOM.files[0], { width: 1024 })
         .then(rst => {
-          if (vm.formData.has(fileDOM.name)) vm.formData.delete(fileDOM.name)
           vm.formData.append(fileDOM.name, rst.file, rst.origin.name)
           vm[fileDOM.name] = true
           vm[`${fileDOM.name}Name`] = '等待验证'
@@ -169,4 +168,3 @@ export default {
   cursor: pointer;
 }
 </style>
-
