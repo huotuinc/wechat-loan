@@ -316,6 +316,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/test',
+    name: 'Test',
+    component: _import('setting/test'),
+    meta: {
+      title: '测试'
+    }
+  },
+  {
     path: '/follow',
     name: 'Follow',
     component: _import('follow/index'),

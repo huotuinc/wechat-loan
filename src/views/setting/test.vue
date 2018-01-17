@@ -22,7 +22,7 @@
 import { XInput, Group, XButton, Cell } from 'vux'
 import { mapGetters } from 'vuex'
 import lrz from 'lrz'
-import uploader from '@/utils/uploaderV2'
+import uploader from '@/utils/uploader'
 
 export default {
   props: {
@@ -57,21 +57,17 @@ export default {
       })
     },
     upload(e) {
-      if (!e.target.files[0]) return
+      let fileDOM = e.target
+      let file = fileDOM.files[0]
+      if (!file) return
+      console.log(file)
       let vm = this
-      lrz(e.target.files[0], { width: 1000 })
-        .then(function(rst) {
-          rst.formData.append('img', rst.file, rst.origin.name)
-          console.log(rst)
-          console.log(rst.base64)
-          console.log(rst.base64Len)
-          // uploader('/api/user/uploadHeadImg', rst.formData, vm.success, vm.error)
-          uploader('/api/authentication/uploadImage', { imageValue: rst.base64 }, vm.success, vm.error)
-        })
-        .catch(function(err) {})
+      let formData = new FormData()
+      formData.append('img', file, file.name)
+      uploader('/api/user/uploadHeadImg', formData, vm.success, vm.error)
+      fileDOM.value = ''
     },
-    success(res) {
-      console.log(res)
+    success() {
       this.$vux.toast.text('上传成功')
     },
     error(err) {
