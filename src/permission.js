@@ -15,22 +15,19 @@ const whiteList = [
 ]
 
 router.beforeEach((to, from, next) => {
+  store.commit('UPDATE_LOADING', { isLoading: true })
   document.title = to.meta.title || ''
   if (getToken()) {
     if (to.path === '/login') {
       next('/')
-      store.commit('UPDATE_LOADING', { isLoading: false })
     } else {
       next()
-      store.commit('UPDATE_LOADING', { isLoading: false })
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
-      store.commit('UPDATE_LOADING', { isLoading: false })
     } else {
       next('/login')
-      store.commit('UPDATE_LOADING', { isLoading: false })
     }
   }
 })

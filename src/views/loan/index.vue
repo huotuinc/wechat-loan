@@ -85,4 +85,3 @@ export default {
   min-height: 400px;
 }
 </style>
-

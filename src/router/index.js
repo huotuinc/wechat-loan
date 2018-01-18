@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout/Layout'
+import Layout from '@/views/layout'
 
 const _import = require('./_import')
 
@@ -15,7 +15,7 @@ export const constantRouterMap = [
         path: '',
         alias: '/loan',
         name: 'Loan',
-        component: _import('loan/index'),
+        component: _import('loan/indexV2'),
         meta: {
           title: '过海有信'
         }
