@@ -51,6 +51,7 @@
 <script>
 import { XInput, Group, XButton, Cell, md5 } from 'vux'
 import { removeToken, removeUserId, removeUserInfo } from '../../utils/auth'
+import { isWechat } from '../../utils/isWechat'
 
 export default {
   components: {
@@ -92,7 +93,11 @@ export default {
         this.$store
           .dispatch('login', login)
           .then(() => {
-            this.$router.push({ path: '/' })
+            if (isWechat()) {
+              this.$router.push({ path: '/' })
+            } else {
+              this.$router.push({ path: '/splash', query: { to: 'loan' } })
+            }
           })
           .catch(err => {
             console.log(err)

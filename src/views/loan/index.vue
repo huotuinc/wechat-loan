@@ -50,13 +50,10 @@
         </grid>
       </div>
     </div>
-    <!-- <div class="loan-footer">
-        <x-button class="loan-button btn-yellow" link="/publish">我要借款</x-button>
-    </div> -->
   </div>
 </template>
 <script>
-import { Group, Cell, Grid, GridItem, XButton } from 'vux'
+import { Group, Cell, Grid, GridItem } from 'vux'
 
 export default {
   name: 'Loan',
@@ -64,8 +61,7 @@ export default {
     Group,
     Cell,
     Grid,
-    GridItem,
-    XButton
+    GridItem
   },
   data() {
     return {
@@ -85,4 +81,3 @@ export default {
   min-height: 400px;
 }
 </style>
-

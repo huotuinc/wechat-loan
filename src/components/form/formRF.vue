@@ -67,7 +67,8 @@
 
 <script>
 import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon } from 'vux'
-import { getLoanerRegisterLink } from '../../utils/init.js'
+import { getLoanerRegisterLink } from '../../utils/init'
+import { isWechat } from '../../utils/isWechat'
 
 export default {
   directives: {
@@ -177,7 +178,11 @@ export default {
           .dispatch(action, form)
           .then(() => {
             if (this.type === 'register') {
-              this.$router.push({ path: '/publish' })
+              if (isWechat()) {
+                this.$router.push({ path: '/publish' })
+              } else {
+                this.$router.push({ path: '/splash', query: { to: 'publish' } })
+              }
             }
             if (this.type === 'forget') {
               this.$router.push({ path: '/login' })

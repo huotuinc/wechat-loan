@@ -324,6 +324,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/splash',
+    name: 'Splash',
+    component: _import('splash/index'),
+    meta: {
+      title: '关注我们'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: _import('404'),

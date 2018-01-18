@@ -78,6 +78,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.$vux.toast.text('图片读取失败')
         })
       fileDOM.value = ''
     },
