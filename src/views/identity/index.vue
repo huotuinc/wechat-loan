@@ -119,9 +119,9 @@ export default {
     },
     uploadAll() {
       const data = {}
-      data.front = this.frontUrl
-      data.back = this.backUrl
-      data.photoSelf = this.photoSelfUrl
+      data.frontUrl = this.frontUrl
+      data.backUrl = this.backUrl
+      data.selfUrl = this.photoSelfUrl
       console.log(data)
       // uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
     },

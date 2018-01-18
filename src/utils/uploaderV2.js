@@ -39,4 +39,9 @@ const uploader = (url, file, successCb, errorCb, progressCb) => {
     })
 }
 
-export default uploader
+const authUpload = (url, data) => {}
+
+exports = {
+  uploader,
+  authUpload
+}
