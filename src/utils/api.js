@@ -14,7 +14,7 @@ const service = Vue => {
     headers: {
       osType: 'h5',
       merchantId: 1,
-      appVersion: '1.0.3',
+      appVersion: '1.1.1',
       mobileType: device()
     }
   })
