@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '../store'
-import { getToken, getUserId } from './auth'
+import { getToken, getUserId, removeToken, removeUserId, removeUserInfo } from './auth'
 import { UPDATE_LOADING } from '../store/mutation-type'
 import signUtil from './sign'
 
@@ -29,6 +29,11 @@ export const uploader = (url, file, successCb, errorCb) => {
     })
     .then(res => {
       console.log(res.data)
+      if (res.data.resultCode === 4003) {
+        removeToken()
+        removeUserId()
+        removeUserInfo()
+      }
       store.commit(UPDATE_LOADING, { isLoading: false })
       successCb && successCb(res.data)
     })

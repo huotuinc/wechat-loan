@@ -89,7 +89,6 @@ export default {
         default:
           type = ''
       }
-      console.log(type)
       lrz(fileDOM.files[0], { width: 1024 })
         .then(rst => {
           uploader(
@@ -101,6 +100,16 @@ export default {
               fileName: rst.origin.name
             },
             res => {
+              if (res.resultCode === 4003) {
+                vm.$vux.alert.show({
+                  title: '信息失效',
+                  content: res.resultMsg,
+                  onHide() {
+                    vm.$router.push({ path: '/login' })
+                  }
+                })
+                return
+              }
               vm[fileDOM.name] = true
               vm[`${fileDOM.name}Name`] = '图片上传成功，等待认证'
               vm[`${fileDOM.name}Url`] = res.data.imageUrl
@@ -109,9 +118,8 @@ export default {
           )
         })
         .catch(err => {
-          this.$vux.toast.text('加载图片失败')
           console.log(err)
-          this.$vux.toast.text('图片读取失败')
+          vm.$vux.toast.text('图片读取失败')
         })
         .always(() => {
           fileDOM.value = ''
@@ -125,7 +133,9 @@ export default {
       data.backUrl = this.backUrl
       data.selfUrl = this.photoSelfUrl
       vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '认证中' })
-      authUpload('/api/authentication/identityHtmlBase', data, vm.success)
+      authUpload('/api/authentication/identityHtmlBase', data, vm.success, () => {
+        vm.$vux.toast.text('认证失败')
+      })
     },
     success(res) {
       const vm = this

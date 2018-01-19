@@ -232,7 +232,8 @@ export const constantRouterMap = [
   {
     path: '/identity',
     name: 'Identity',
-    component: _import('identity/index'),
+    // component: _import('identity/index'),
+    component: _import('update'),
     meta: {
       title: '身份证识别'
     }
@@ -315,12 +316,20 @@ export const constantRouterMap = [
       title: '日志'
     }
   },
+  // {
+  //   path: '/test',
+  //   name: 'Test',
+  //   component: _import('setting/test'),
+  //   meta: {
+  //     title: '测试'
+  //   }
+  // },
   {
-    path: '/test',
-    name: 'Test',
-    component: _import('setting/test'),
+    path: '/feedback',
+    name: 'Feedback',
+    component: _import('feedback/index'),
     meta: {
-      title: '测试'
+      title: '问题反馈'
     }
   },
   {
