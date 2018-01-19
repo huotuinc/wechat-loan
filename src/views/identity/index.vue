@@ -28,7 +28,8 @@
 <script>
 import { Group, XButton } from 'vux'
 import lrz from 'lrz'
-import uploader from '@/utils/uploader'
+import { uploader, authUpload } from '@/utils/uploaderV2'
+import { UPDATE_LOADING } from '@/store/mutation-type'
 
 export default {
   name: 'identity',
@@ -45,7 +46,10 @@ export default {
       disabled: true,
       frontName: '',
       backName: '',
-      photoSelfName: ''
+      photoSelfName: '',
+      frontUrl: '',
+      backUrl: '',
+      photoSelfUrl: ''
     }
   },
   watch: {
@@ -70,20 +74,58 @@ export default {
       let fileDOM = e.target
       if (!fileDOM.files[0]) return
       let vm = this
+      let type
+      vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
+      switch (fileDOM.name) {
+        case 'front':
+          type = 1
+          break
+        case 'back':
+          type = 2
+          break
+        case 'photoSelf':
+          type = 3
+          break
+        default:
+          type = ''
+      }
+      console.log(type)
       lrz(fileDOM.files[0], { width: 1024 })
         .then(rst => {
-          vm.formData.append(fileDOM.name, rst.file, rst.origin.name)
-          vm[fileDOM.name] = true
-          vm[`${fileDOM.name}Name`] = '等待验证'
+          uploader(
+            '/api/user/uploadImage',
+            {
+              imgStr: rst.base64,
+              imgStrSize: rst.base64Len,
+              type: type,
+              fileName: rst.origin.name
+            },
+            res => {
+              vm[fileDOM.name] = true
+              vm[`${fileDOM.name}Name`] = '图片上传成功，等待认证'
+              vm[`${fileDOM.name}Url`] = res.data.imageUrl
+            },
+            vm.error
+          )
         })
         .catch(err => {
+          this.$vux.toast.text('加载图片失败')
           console.log(err)
           this.$vux.toast.text('图片读取失败')
+        })
+        .always(() => {
+          fileDOM.value = ''
         })
       fileDOM.value = ''
     },
     uploadAll() {
-      uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
+      var vm = this
+      const data = {}
+      data.frontUrl = this.frontUrl
+      data.backUrl = this.backUrl
+      data.selfUrl = this.photoSelfUrl
+      vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '认证中' })
+      authUpload('/api/authentication/identityHtmlBase', data, vm.success)
     },
     success(res) {
       const vm = this

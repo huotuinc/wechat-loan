@@ -22,8 +22,7 @@
 import { XInput, Group, XButton, Cell } from 'vux'
 import { mapGetters } from 'vuex'
 import lrz from 'lrz'
-import { uploader } from '@/utils/uploaderV2'
-import { UPDATE_LOADING } from '@/store/mutation-type'
+import uploader from '@/utils/uploader'
 
 export default {
   props: {
@@ -58,26 +57,17 @@ export default {
       })
     },
     upload(e) {
-      if (!e.target.files[0]) return
+      let fileDOM = e.target
+      let file = fileDOM.files[0]
+      if (!file) return
+      console.log(file)
       let vm = this
-      vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '上传中' })
-      lrz(e.target.files[0], { width: 1024 })
-        .then(function(rst) {
-          uploader(
-            '/api/user/uploadImage',
-            {
-              imgStr: rst.base64,
-              imgStrSize: rst.base64Len,
-              type: 0,
-              fileName: rst.origin.name
-            },
-            vm.success,
-            vm.error
-          )
-        })
-        .catch(function(err) {})
+      let formData = new FormData()
+      formData.append('img', file, file.name)
+      uploader('/api/user/uploadHeadImg', formData, vm.success, vm.error)
+      fileDOM.value = ''
     },
-    success(res) {
+    success() {
       this.$vux.toast.text('上传成功')
     },
     error(err) {
