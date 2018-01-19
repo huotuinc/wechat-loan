@@ -28,7 +28,7 @@
 <script>
 import { Group, XButton } from 'vux'
 import lrz from 'lrz'
-import uploader from '@/utils/uploaderV2'
+import { uploader, authUpload } from '@/utils/uploaderV2'
 import { UPDATE_LOADING } from '@/store/mutation-type'
 
 export default {
@@ -118,22 +118,23 @@ export default {
       fileDOM.value = ''
     },
     uploadAll() {
+      var vm = this
       const data = {}
       data.frontUrl = this.frontUrl
       data.backUrl = this.backUrl
       data.selfUrl = this.photoSelfUrl
-      console.log(data)
-      // uploader('/api/authentication/identityHtml', this.formData, this.success, this.error)
+      vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '认证中' })
+      authUpload('/api/authentication/identityHtmlBase', data, vm.success)
     },
     success(res) {
       const vm = this
-      // this.$vux.alert.show({
-      //   title: '验证结果',
-      //   content: res.resultMsg,
-      //   onHide() {
-      //     vm.$router.back()
-      //   }
-      // })
+      this.$vux.alert.show({
+        title: '验证结果',
+        content: res.resultMsg,
+        onHide() {
+          vm.$router.back()
+        }
+      })
     },
     error(err) {
       this.$vux.toast.text('上传失败')
