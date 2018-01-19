@@ -55,6 +55,14 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/loaner',
+    name: 'Loaner',
+    component: _import('loan/Loaner'),
+    meta: {
+      title: '出借人信息'
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: _import('login/index'),
