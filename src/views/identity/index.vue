@@ -28,7 +28,7 @@
 <script>
 import { Group, XButton } from 'vux'
 import lrz from 'lrz'
-import { uploader, authUpload } from '@/utils/uploaderV2'
+import uploader from '@/utils/uploaderV2'
 import { UPDATE_LOADING } from '@/store/mutation-type'
 
 export default {
@@ -132,20 +132,29 @@ export default {
       data.frontUrl = this.frontUrl
       data.backUrl = this.backUrl
       data.selfUrl = this.photoSelfUrl
-      vm.$store.commit(UPDATE_LOADING, { isLoading: true, text: '认证中' })
-      authUpload('/api/authentication/identityHtmlBase', data, vm.success, () => {
-        vm.$vux.toast.text('认证失败')
-      })
-    },
-    success(res) {
-      const vm = this
-      this.$vux.alert.show({
-        title: '验证结果',
-        content: res.resultMsg,
-        onHide() {
-          vm.$router.back()
-        }
-      })
+      this.$store.commit(UPDATE_LOADING, { isLoading: true, text: '认证中' })
+      this.$store
+        .dispatch('authUpload', data)
+        .then(res => {
+          this.store.commit(UPDATE_LOADING, { isLoading: false })
+          this.$vux.alert.show({
+            title: '验证结果',
+            content: res.resultMsg,
+            onHide() {
+              vm.$router.back()
+            }
+          })
+        })
+        .catch(err => {
+          this.$store.commit(UPDATE_LOADING, { isLoading: false })
+          this.$vux.alert.show({
+            title: '验证结果',
+            content: err.resultMsg,
+            onHide() {
+              vm.$router.back()
+            }
+          })
+        })
     },
     error(err) {
       this.$vux.toast.text('上传失败')

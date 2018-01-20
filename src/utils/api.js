@@ -6,7 +6,7 @@ import { getToken, getUserId, removeToken, removeUserId, removeUserInfo } from '
 import signUtil from './sign'
 import device from './device'
 
-const noMsg = [4003, 4123, 4130]
+const noMsg = [4003, 4123, 4130, 4410, 4408, 4405, 4406, 4407, 4412]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://192.168.1.48:8888',

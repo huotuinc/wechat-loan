@@ -73,7 +73,7 @@ const getSesameUrlData = Mock.mock({
 const isPay = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
-  data: false
+  data: true
 })
 
 const certificationInfo = Mock.mock({
@@ -133,6 +133,11 @@ const creditReport = Mock.mock({
     }
   }
 })
+const authUpload = Mock.mock({
+  resultCode: 4410,
+  resultMsg: '身份证号已存在',
+  data: {}
+})
 export default {
   certificationAll: config => certificationAllData,
   userinfoedit: config => userinfoeditData,
@@ -141,5 +146,6 @@ export default {
   getSesameUrl: config => getSesameUrlData,
   isPay: config => isPay,
   certificationInfo: config => certificationInfo,
-  creditReport: config => creditReport
+  creditReport: config => creditReport,
+  authUpload: config => authUpload
 }

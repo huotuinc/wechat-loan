@@ -58,13 +58,20 @@ Mock.mock(/\/api\/user\/authOperator/, 'post', authenticationApi.authoperator)
 Mock.mock(/\/api\/authentication\/getSesameUrl/, 'post', authenticationApi.getSesameUrl)
 // 是否支付
 Mock.mock(/\/api\/authentication\/checkIsPay/, 'post', authenticationApi.isPay)
+Mock.mock(/\/api\/authentication\/identityHtmlBase/, 'post', authenticationApi.authUpload)
 
 Mock.mock(/\/api\/user\/report\/certificationInfo/, 'post', authenticationApi.certificationInfo)
 Mock.mock(/\/api\/user\/report\/creditReport/, 'post', authenticationApi.creditReport)
 
 // 借款相关
 Mock.mock(/\/api\/user\/index/, 'get', loanApi.index)
-
+Mock.mock(/\/api\/user\/uploadImage/, 'post', {
+  resultCode: 2000,
+  resultMsg: '操作成功',
+  data: {
+    imageUrl: 'http://cdn1.51morecash.com/image/template/1/idcard/36/back-20180120135983.jpg'
+  }
+})
 // 借款单详情
 Mock.mock(/\/api\/order\/getOrderInfo/, 'get', orderApi.getOrderInfo)
 Mock.mock(/\/api\/order\/getLoansProductInfo/, 'get', orderApi.getLoansProductInfo)

@@ -107,6 +107,21 @@ const authentication = {
             reject(error)
           })
       })
+    },
+    authUpload({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/authentication/identityHtmlBase',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }
