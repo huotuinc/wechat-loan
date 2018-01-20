@@ -25,6 +25,13 @@
       <div class="contact-title">- TA的出借 -</div>
       <Card />
     </div>
+     <div class="loaner-list">
+      <div class="contact-title">- TA的更多出借 -</div>
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+    </div>
   </div>
 </template>
 <script>
