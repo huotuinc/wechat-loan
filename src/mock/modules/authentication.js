@@ -134,7 +134,7 @@ const creditReport = Mock.mock({
   }
 })
 const authUpload = Mock.mock({
-  resultCode: 4410,
+  resultCode: 2000,
   resultMsg: '身份证号已存在',
   data: {}
 })

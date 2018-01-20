@@ -136,10 +136,10 @@ export default {
       this.$store
         .dispatch('authUpload', data)
         .then(res => {
-          this.store.commit(UPDATE_LOADING, { isLoading: false })
+          this.$store.commit(UPDATE_LOADING, { isLoading: false })
           this.$vux.alert.show({
             title: '验证结果',
-            content: res.resultMsg,
+            content: '认证成功',
             onHide() {
               vm.$router.back()
             }
