@@ -4,14 +4,16 @@
       <img src="../../assets/logo.png" alt="Logo">
     </div>
     <div class="splash-text">
-      <p>查看更多低息出借信息，<br/>请关注公众号<span>“过海有信”</span></p>
+      <p>您已注册成功，<br/>发起5000借款或查看更多低息出借信息。</p>
+      <p>请搜索并关注公众号<span>“过海有信”</span></p>
     </div>
     <div class="splash-qrcode">
       <img src="../../assets/qrcode.jpg" alt="二维码">
     </div>
-    <div class="splash-button">
+    <p class="tips">扫描关注</p>
+    <!-- <div class="splash-button">
       <a :href="to">跳过</a>
-    </div>
+    </div> -->
     <div class="splash-footer">Copyright &copy; 杭州过海投资管理有限公司</div>
   </div>
 </template>
@@ -87,6 +89,9 @@ export default {
   right: 0;
   font-size: 12px;
   color: #888;
+  text-align: center;
+}
+.tips {
   text-align: center;
 }
 @media only screen and (min-width: 320px) and (max-width: 568px) and (-webkit-device-pixel-ratio: 2) {
