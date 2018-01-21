@@ -40,11 +40,11 @@
       </div>
     </div>
     <div class="loan-body">
-      <!-- <group class="loan-body_item">
-        <cell is-link title="系统消息">
-          <i class="iconfont icon-msg" slot="icon"></i>
+      <group class="loan-body_item">
+        <cell is-link title="借款申请记录" link="/applyList">
+          <i class="iconfont icon-list" slot="icon"></i>
         </cell>
-      </group> -->
+      </group>
       <group class="loan-body_item">
         <cell is-link title="发布记录" link="/publishList">
           <i class="iconfont icon-add" slot="icon"></i>

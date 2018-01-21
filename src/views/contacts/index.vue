@@ -125,10 +125,17 @@ export default {
       let req = {
         requestData: JSON.stringify(this.form)
       }
-      this.$store.dispatch('editcontacts', req).then(() => {
-        this.$vux.toast.text('提交成功')
-        this.$router.back()
-      })
+      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '认证中' })
+      this.$store
+        .dispatch('editcontacts', req)
+        .then(() => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$router.back()
+        })
+        .catch(err => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          console.log(err)
+        })
     },
     getMobile1Valid() {
       return this.$refs.mobile1.valid

@@ -186,10 +186,16 @@ export default {
       this.form.homeAreaCode = this.address.join(',')
       this.form.homeArea = this.getName(this.address)
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '认证中' })
-      this.$store.dispatch('userinfoedit', this.form).then(() => {
-        this.$store.commit('UPDATE_LOADING', { isLoading: false })
-        this.$router.back()
-      })
+      this.$store
+        .dispatch('userinfoedit', this.form)
+        .then(() => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          this.$router.back()
+        })
+        .catch(err => {
+          this.$store.commit('UPDATE_LOADING', { isLoading: false })
+          console.log(err)
+        })
     },
     getName(value) {
       return value2name(value, ChinaAddressV4Data)
@@ -285,4 +291,3 @@ export default {
   list-style: none;
 }
 </style>
-

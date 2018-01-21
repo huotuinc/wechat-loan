@@ -37,11 +37,11 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'todo',
-        name: 'Todo',
-        component: _import('todo/index'),
+        path: 'applyList',
+        name: 'ApplyList',
+        component: _import('personal/ApplyLogs'),
         meta: {
-          title: '待办事项'
+          title: '借款申请记录'
         }
       },
       {
@@ -129,6 +129,28 @@ export const constantRouterMap = [
         component: _import('order/OrderComplete'),
         meta: {
           title: '已完成'
+        }
+      }
+    ]
+  },
+  {
+    path: '/message',
+    component: _import('message/index'),
+    children:[
+      {
+        path: 'todo',
+        name: 'Todo',
+        component: _import('message/Todo'),
+        meta: {
+          title: '待处理'
+        }
+      },
+      {
+        path: 'notice',
+        name: 'Notice',
+        component: _import('message/Notice'),
+        meta: {
+          title: '通知'
         }
       }
     ]
