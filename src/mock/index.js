@@ -125,3 +125,28 @@ Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
 Mock.mock(/\/api\/user\/report\/riskCallList/, 'post', record.riskCallList)
 Mock.mock(/\/api\/user\/report\/emergencyContactList/, 'post', record.emergencyContactList)
 Mock.mock(/\/api\/user\/report\/consumeBillList/, 'post', record.consumeBillList)
+
+Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    userInfo: {
+      userId: 0,
+      realName: '张三',
+      mobile: '13000000000',
+      nums: 10,
+      friend: true,
+      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+    },
+    'lendInfoList|5-10': [
+      {
+        lendId: '@id',
+        lendAmount: '5000',
+        lendDays: '10',
+        interestRate: '10',
+        receivedCount: 10,
+        repayType: '本额等系'
+      }
+    ]
+  }
+})

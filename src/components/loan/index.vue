@@ -1,5 +1,5 @@
 <template>
-  <div class="loaner-item">
+  <router-link class="loaner-item" to="/lender/x45645f46464">
     <div class="hd">
       <img src="http://resali.huobanplus.com/cdn/avatar.png" alt="头像">
     </div>
@@ -11,11 +11,11 @@
       <a href="/" class="contact-btn">找TA借</a>
       <span><i class="num">10</i>人申请</span>
     </div>
-  </div>
+  </router-link>
 </template>
 <script>
 export default {
-  name: 'Loaner'
+  name: 'Lender'
 }
 </script>
 <style lang="less">
@@ -67,6 +67,7 @@ export default {
     }
     span {
       font-size: 11px;
+      color: #000;
     }
     .num {
       font-style: normal;

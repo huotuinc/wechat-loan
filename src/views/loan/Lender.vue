@@ -4,43 +4,63 @@
       <div class="background"></div>
       <div class="info">
         <div class="avatar">
-          <img src="http://resali.huobanplus.com/cdn/avatar.png" alt="头像">
+          <img :src="userInfo.headimg ? userInfo.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
         </div>
         <div class="desc vux-1px-b">
           <div class="item item-name">
             <i class="iconfont icon-personal-o"></i>
-            <span>叶*天</span>
+            <span>{{userInfo.realName}}</span>
             <a href="/" class="btn"><i class="iconfont icon-msg-more"></i>&nbsp;联系他</a>
           </div>
           <div class="item item-tel">
             <i class="iconfont icon-mobile"></i>
-            <span>157****7845</span>
-            <a href="/" class="btn"><i class="iconfont icon-add-friends"></i>&nbsp;添加好友</a>
+            <span>{{userInfo.mobile}}</span>
+            <a href="/" class="btn" v-if="!userInfo.friend"><i class="iconfont icon-add-friends"></i>&nbsp;添加好友</a>
           </div>
         </div>
-        <p class="success">成功借出<span>10</span>笔</p>
+        <p class="success">成功借出<span>{{userInfo.nums}}</span>笔</p>
       </div>
     </div>
     <div class="loaner-active">
       <div class="contact-title">- TA的出借 -</div>
-      <Card />
+      <!-- <Card /> -->
     </div>
-     <div class="loaner-list">
+     <div>
       <div class="contact-title">- TA的更多出借 -</div>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <Card v-for="lendInfo in lendInfoList" :lendInfo="lendInfo" :avatar="userInfo.headimg" :key="lendInfo.lendId"/>
     </div>
   </div>
 </template>
 <script>
 import Card from '../../components/loan/Card'
+import { getUserInfo } from '../../utils/auth'
 
 export default {
   name: 'LoanerDetail',
   components: {
     Card
+  },
+  data() {
+    return {
+      userInfo: {},
+      lendInfoList: []
+    }
+  },
+  created() {
+    const { userName } = getUserInfo()
+    const lenderId = this.$route.params.lenderId
+    this.$store
+      .dispatch('getLenderById', {
+        userName: userName,
+        lenderId: lenderId
+      })
+      .then(res => {
+        this.userInfo = res.userInfo
+        this.lendInfoList = res.lendInfoList
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>

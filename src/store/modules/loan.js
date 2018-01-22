@@ -71,6 +71,21 @@ const loan = {
             reject(error)
           })
       })
+    },
+    getLenderById({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/lenderDetail',
+          method: 'post',
+          data: data
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

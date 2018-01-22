@@ -3,28 +3,28 @@
     <div class="card-hd">
       <div class="bd">
         <h6>可借额度</h6>
-        <p>3000.00-9000.00元</p>
+        <p>{{lendInfo.lendAmount}}元</p>
       </div>
       <div class="ft">
-        <img src="http://resali.huobanplus.com/cdn/avatar.png" alt="头像">
+        <img :src="avatar ? avatar : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
       </div>
     </div>
     <div class="card-bd vux-1px-b">
       <div class="bd-item">
-        <h6>一个月-六个月</h6>
+        <h6>{{lendInfo.lendDays}}</h6>
         <p>出借时长</p>
       </div>
       <div class="bd-item">
-        <h6>24%</h6>
+        <h6>{{lendInfo.interestRate}}%</h6>
         <p>年利率</p>
       </div>
       <div class="bd-item">
-        <h6>等息本额</h6>
+        <h6>{{lendInfo.repayType}}</h6>
         <p>还款方式</p>
       </div>
   </div>
     <div class="card-ft">
-      <div class="bd"><span>10</span>人申请</div>
+      <div class="bd"><span>{{lendInfo.receivedCount}}</span>人申请</div>
       <div class="ft">
         <a href="javascript:;" class="apply-btn">立即申请</a>
       </div>
@@ -33,7 +33,11 @@
 </template>
 <script>
 export default {
-  name: 'LoanerCard'
+  name: 'LoanerCard',
+  props: {
+    lendInfo: Object,
+    avatar: String
+  }
 }
 </script>
 <style lang="less">
