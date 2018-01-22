@@ -5,7 +5,7 @@
         <router-link to="/"><i class="iconfont icon-feedback"></i> 问题反馈</router-link>
       </div>
       <div class="auth-item">
-        <a :href="isPay && status.idCardFlg !== 3 ? '/identity' : 'javascript:;'" :class="classNames(isPay, status.idCardFlg)">
+        <a :href="isPay && status.idCardFlg !== 3 ? '/identity' : 'javascript:;'" :class="classNames(status.idCardFlg)">
           <div class="icon">
             <i class="iconfont icon-photo"></i>
             <div class="result">{{status.idCardFlgMsg}}</div>
@@ -14,7 +14,7 @@
         </a>
       </div>
       <div class="auth-item">
-        <a :href="isPay && status.uinfoFlg !== 3 ? '/basicInfo' : 'javascript:;'" :class="classNames(isPay, status.uinfoFlg)">
+        <a :href="isPay && status.uinfoFlg !== 3 ? '/basicInfo' : 'javascript:;'" :class="classNames(status.uinfoFlg)">
           <div class="icon">
             <i class="iconfont icon-user-o"></i>
             <div class="result">{{status.uinfoFlgMsg}}</div>
@@ -23,7 +23,7 @@
         </a>
       </div>
       <div class="auth-item">
-        <a :href="isPay && status.contactFlg !== 3 ? '/contacts' : 'javascript:;'" :class="classNames(isPay, status.contactFlg)">
+        <a :href="isPay && status.contactFlg !== 3 ? '/contacts' : 'javascript:;'" :class="classNames(status.contactFlg)">
           <div class="icon">
             <i class="iconfont icon-contacts"></i>
             <div class="result">{{status.contactFlgMsg}}</div>
@@ -32,7 +32,7 @@
         </a>
       </div>
       <div class="auth-item">
-        <a href="javascript:;" @click.prevent="carrierHandleClick(isPay, status.carrierFlg)" :class="classNames(isPay, status.carrierFlg)">
+        <a href="javascript:;" @click.prevent="carrierHandleClick(isPay, status.carrierFlg)" :class="classNames(status.carrierFlg)">
           <div class="icon">
             <i class="iconfont icon-mobile"></i>
             <div class="result">{{status.carrierFlgMsg}}</div>
@@ -41,7 +41,7 @@
         </a>
       </div>
       <div class="auth-item">
-        <a href="javascript:;" @click.prevent="sesameHandleClick(isPay, status.zhimaFlg)" :class="classNames(isPay, status.zhimaFlg)">
+        <a href="javascript:;" @click.prevent="sesameHandleClick(isPay, status.zhimaFlg)" :class="classNames(status.zhimaFlg)">
           <div class="icon">
             <i class="iconfont icon-zhi-ma"></i>
             <div class="result">{{status.zhimaFlgMsg}}</div>
@@ -50,7 +50,7 @@
         </a>
       </div>
     </div>
-    <div v-show="!isPay" @click="toPay" class="auth-btn">
+    <div v-show="isShowPay()" @click="toPay" class="auth-btn">
       <p class="btn-yellow">付费认证</p>
     </div>
   </div>
@@ -114,11 +114,25 @@ export default {
           })
       }
     },
-    classNames(isPay, flag) {
+    classNames(flag) {
       return {
-        'is-pay': isPay,
+        'is-pay': true,
         'is-success': flag === 3,
         'is-failure': flag === 2 || flag === 4
+      }
+    },
+    isShowPay() {
+      if (
+        this.status.idCardFlg === 3 &&
+        this.status.uinfoFlg === 3 &&
+        this.status.contactFlg === 3 &&
+        this.status.carrierFlg === 3 &&
+        this.status.zhimaFlg === 3
+      ) {
+        console.log(1)
+        return false
+      } else {
+        return !this.isPay
       }
     }
   }
@@ -181,7 +195,7 @@ export default {
       line-height: 24px;
       font-size: 12px;
       color: #fff;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
     }
   }
   .is-pay {

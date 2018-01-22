@@ -136,7 +136,7 @@ export const constantRouterMap = [
   {
     path: '/message',
     component: _import('message/index'),
-    children:[
+    children: [
       {
         path: 'todo',
         name: 'Todo',
@@ -232,7 +232,15 @@ export const constantRouterMap = [
     name: 'Authentication',
     component: _import('authentication/indexV2'),
     meta: {
-      title: '信用报告'
+      title: '信用认证'
+    }
+  },
+  {
+    path: '/invite',
+    name: 'Invite',
+    component: _import('authentication/Invite'),
+    meta: {
+      title: '信用认证'
     }
   },
   {
