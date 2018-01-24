@@ -11,6 +11,7 @@ const whiteList = [
   '/shareOrder',
   '/case',
   '/success',
+  '/invite',
   '/test'
 ]
 

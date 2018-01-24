@@ -43,15 +43,21 @@ export default {
   top: 0;
   bottom: 0;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.4);
+  background: transparent;
 }
 .v-loading-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
+  padding-top: 20px;
+  width: 7.6em;
+  min-height: 7.6em;
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
   color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 .weui-progress {
   position: absolute;

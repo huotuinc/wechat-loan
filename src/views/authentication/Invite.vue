@@ -3,7 +3,7 @@
     <div class="auth-head">
       <div class="hd"><i class="iconfont icon-smile"></i></div>
       <div class="bd">
-        <h6>{{showInviter()}}</h6>
+        <h6>{{mobile}}</h6>
         <p>申请查看您的信用报告，同意点击请前往认证</p>
       </div>
     </div>
@@ -59,28 +59,25 @@ export default {
   name: 'Authentication',
   data() {
     return {
-      inviter: ''
+      inviter: '',
+      mobile: ''
     }
   },
   created() {
     this.inviter = this.$route.query.i
+    this.$store.dispatch('getLenderById', { lenderId: this.inviter }).then(res => {
+      console.log(res)
+      this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+    })
   },
   methods: {
     toAuth() {
       if (!this.inviter) {
         this.$vux.toast.text('缺少必要参数')
+        return
       }
-    },
-    showInviter() {
-      if (this.inviter) {
-        if (this.inviter.length === 11) {
-          return this.inviter.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-        } else {
-          return '***********'
-        }
-      } else {
-        return '***********'
-      }
+      localStorage.setItem('inviter', this.inviter)
+      this.$router.push('/register')
     }
   }
 }
