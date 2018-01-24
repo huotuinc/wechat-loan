@@ -1,21 +1,24 @@
 <template>
-  <router-link class="loaner-item" to="/lender/x45645f46464">
+  <router-link class="loaner-item" :to="'/lender/'+lender.lenderId + '/'+lender.lendId">
     <div class="hd">
-      <img src="http://resali.huobanplus.com/cdn/avatar.png" alt="头像">
+      <img :src="lender.lenderHeadimg" alt="头像">
     </div>
     <div class="bd">
-      <h4>王**</h4>
-      <p>3000-5000元</p>
+      <h4>{{lender.lenderName}}</h4>
+      <p>{{lender.lendAmount}}元</p>
     </div>
     <div class="ft">
       <a href="/" class="contact-btn">找TA借</a>
-      <span><i class="num">10</i>人申请</span>
+      <span><i class="num">{{lender.receivedCount}}</i>人申请</span>
     </div>
   </router-link>
 </template>
 <script>
 export default {
-  name: 'Lender'
+  name: 'Lender',
+  props: {
+    lender: Object
+  }
 }
 </script>
 <style lang="less">

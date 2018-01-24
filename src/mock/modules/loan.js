@@ -11,7 +11,7 @@ const getIndex = Mock.mock({
     authCode: 1,
     authMsg: '@pick(["已认证","未认证"])',
     headimg: '@img(80x80)',
-    offlineMsgCount: 99
+    offlineMsgCount: 50
   }
 })
 

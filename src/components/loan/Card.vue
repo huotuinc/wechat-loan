@@ -6,7 +6,7 @@
         <p>{{lendInfo.lendAmount}}元</p>
       </div>
       <div class="ft">
-        <img :src="avatar ? avatar : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
+        <img :src="lendInfo.lenderHeadimg ? lendInfo.lenderHeadimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
       </div>
     </div>
     <div class="card-bd vux-1px-b">
@@ -35,8 +35,7 @@
 export default {
   name: 'LoanerCard',
   props: {
-    lendInfo: Object,
-    avatar: String
+    lendInfo: Object
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
-    <scroll ref="scroll"
-      :data="orders"
-      :pullUpLoad="pullUpLoadObj"
-      @pullingUp="onPullingUp"
-    >
+  <scroll ref="scroll"
+    :data="orders"
+    :pullUpLoad="pullUpLoadObj"
+    @pullingUp="onPullingUp"
+  >
     <order-list :orders="orders"></order-list>
     <empty :empty="isEmpty"></empty>
   </scroll>
@@ -73,4 +73,3 @@ export default {
   }
 }
 </script>
-

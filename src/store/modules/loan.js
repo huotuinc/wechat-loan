@@ -86,6 +86,39 @@ const loan = {
             reject(error)
           })
       })
+    },
+    getMessage({}, startTime) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/sys/getMessageCount',
+          method: 'get',
+          params: {
+            startTime: startTime
+          }
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getLenderList({}, data) {
+      console.log(data)
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/lenderList',
+          method: 'post',
+          data: data
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

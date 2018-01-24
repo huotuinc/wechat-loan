@@ -150,3 +150,31 @@ Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
     ]
   }
 })
+
+Mock.mock(/\/api\/sys\/getMessageCount/, 'get', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    countNum: '@integer(10, 999)'
+  }
+})
+
+Mock.mock(/\/api\/user\/lenderList/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    'list|10': [
+      {
+        'lendId|+1': 1,
+        lendAmount: '5000',
+        lendDays: '10',
+        interestRate: '10',
+        receivedCount: 10,
+        repayType: '本额等系',
+        lenderId: '@id',
+        lenderName: '@cname',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+      }
+    ]
+  }
+})

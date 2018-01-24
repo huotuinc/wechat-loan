@@ -1,5 +1,10 @@
 <template>
-  <div class="loan-wrap">
+  <div class="js-scroll-wrap">
+    <scroll ref="scroll"
+        :data="lenderList"
+        :pullUpLoad="pullUpLoadObj"
+        @pullingUp="onPullingUp"
+      >
     <div class="loaner-head">
       <div class="background"></div>
       <div class="info">
@@ -27,28 +32,61 @@
     </div>
      <div>
       <div class="contact-title">- TA的更多出借 -</div>
-      <Card v-for="lendInfo in lendInfoList" :lendInfo="lendInfo" :avatar="userInfo.headimg" :key="lendInfo.lendId"/>
+      <Card v-for="lendInfo in lenderList" :lendInfo="lendInfo" :key="lendInfo.lendId"/>
     </div>
+    </scroll>
   </div>
 </template>
 <script>
+import Scroll from '../../components/scroll/scroll'
 import Card from '../../components/loan/Card'
 import { getUserInfo } from '../../utils/auth'
 
 export default {
   name: 'LoanerDetail',
   components: {
-    Card
+    Card,
+    Scroll
   },
   data() {
     return {
       userInfo: {},
-      lendInfoList: []
+      lenderList: [],
+      pullUpLoad: true,
+      pullUpLoadThreshold: 0,
+      pullUpLoadMoreTxt: '加载更多',
+      pullUpLoadNoMoreTxt: '没有更多数据了',
+      orders: [],
+      requestData: {
+        lenderId: 0,
+        pageIndex: 1,
+        pageSize: 10
+      }
     }
+  },
+  watch: {
+    pullUpLoadObj: {
+      handler() {
+        this.rebuildScroll()
+      },
+      deep: true
+    }
+  },
+  computed: {
+    pullUpLoadObj() {
+      return {
+        threshold: parseInt(this.pullUpLoadThreshold),
+        txt: { more: this.pullUpLoadMoreTxt, noMore: this.pullUpLoadNoMoreTxt }
+      }
+    }
+  },
+  mounted() {
+    this.getLenderList()
   },
   created() {
     const { userName } = getUserInfo()
     const lenderId = this.$route.params.lenderId
+    const lendId = this.$route.params.lendId
     this.$store
       .dispatch('getLenderById', {
         userName: userName,
@@ -56,15 +94,40 @@ export default {
       })
       .then(res => {
         this.userInfo = res.userInfo
-        this.lendInfoList = res.lendInfoList
       })
       .catch(err => {
         console.log(err)
       })
+    this.requestData.lenderId = lenderId
+  },
+  methods: {
+    onPullingUp() {
+      this.getLenderList()
+    },
+    getLenderList() {
+      this.$store.dispatch('getLenderList', this.requestData).then(res => {
+        let newList = res.list
+        this.lenderList = this.lenderList.concat(newList)
+        if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
+        if (newList.length < this.requestData.pageSize) {
+          this.$refs.scroll.forceUpdate()
+        } else {
+          this.requestData.pageIndex++
+        }
+      })
+    }
   }
 }
 </script>
 <style lang="less">
+.js-scroll-wrap {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.list-wrapper {
+  background: #fbf9fe !important;
+}
 .loaner-head {
   overflow: hidden;
   .background {
