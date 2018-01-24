@@ -51,6 +51,18 @@
         </cell>
       </group>
       <group class="loan-body_item">
+        <template v-if="personal.authReport">
+          <cell is-link title="信用报告" link="/credit">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
+        <template v-else>
+          <cell is-link title="信用报告" link="/authentication">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
+      </group>
+      <group class="loan-body_item">
         <cell is-link title="设置" link="/setting">
           <i class="iconfont icon-setting" slot="icon"></i>
         </cell>
@@ -87,6 +99,3 @@ export default {
   }
 }
 </style>
-
-
-

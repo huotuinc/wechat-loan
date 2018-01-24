@@ -64,3 +64,11 @@ export function getChannelId(channelId) {
 export function removeChannelId() {
   return Cookies.remove(ChannelId)
 }
+
+export function setFollow() {
+  return Cookies.set('isHidden', true, { expires: 1 })
+}
+
+export function getFollow() {
+  return Cookies.getJSON('isHidden')
+}

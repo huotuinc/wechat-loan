@@ -12,7 +12,7 @@
     </div>
     <div class="loan-msg">
       <div class="loan-msg_item">
-        <p>10</p>
+        <p>{{page.offlineMsgCount}}</p>
         <span>好友消息</span>
       </div>
       <div class="loan-msg_item">
@@ -41,6 +41,8 @@
 <script>
 import { Group, Cell, Grid, GridItem, XButton } from 'vux'
 import Loaner from '../../components/loan'
+import { getFollow, setFollow } from '../../utils/auth'
+
 export default {
   name: 'Loan',
   components: {
@@ -61,10 +63,12 @@ export default {
     this.$store.dispatch('getIndex').then(res => {
       this.page = res
     })
+    this.show = !getFollow()
   },
   methods: {
     closeFollow() {
       this.show = !this.show
+      setFollow()
     }
   }
 }

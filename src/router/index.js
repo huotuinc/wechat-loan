@@ -230,7 +230,7 @@ export const constantRouterMap = [
   {
     path: '/authentication',
     name: 'Authentication',
-    component: _import('authentication/indexV2'),
+    component: _import('authentication/index'),
     meta: {
       title: '信用认证'
     }
