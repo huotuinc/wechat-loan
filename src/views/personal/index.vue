@@ -40,15 +40,27 @@
       </div>
     </div>
     <div class="loan-body">
-      <!-- <group class="loan-body_item">
-        <cell is-link title="系统消息">
-          <i class="iconfont icon-msg" slot="icon"></i>
+      <group class="loan-body_item">
+        <cell is-link title="借款申请记录" link="/applyList">
+          <i class="iconfont icon-list" slot="icon"></i>
         </cell>
-      </group> -->
+      </group>
       <group class="loan-body_item">
         <cell is-link title="发布记录" link="/publishList">
           <i class="iconfont icon-add" slot="icon"></i>
         </cell>
+      </group>
+      <group class="loan-body_item">
+        <template v-if="personal.authReport">
+          <cell is-link title="信用报告" link="/credit">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
+        <template v-else>
+          <cell is-link title="信用报告" link="/authentication">
+            <i class="iconfont icon-report" slot="icon"></i>
+          </cell>
+        </template>
       </group>
       <group class="loan-body_item">
         <cell is-link title="设置" link="/setting">
@@ -87,6 +99,3 @@ export default {
   }
 }
 </style>
-
-
-

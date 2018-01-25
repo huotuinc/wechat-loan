@@ -25,11 +25,14 @@ const loan = {
           })
       })
     },
-    getIndex({ commit }) {
+    getIndex({ commit }, startTime) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/index',
-          method: 'get'
+          method: 'get',
+          params: {
+            startTime: startTime
+          }
         })
           .then(res => {
             commit(AUTH_INFO, res)
@@ -66,6 +69,51 @@ const loan = {
         })
           .then(res => {
             resolve()
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getLenderById({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/lenderDetail',
+          method: 'post',
+          data: data
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getLenderList({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/lenderList',
+          method: 'post',
+          data: data
+        })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    findOneLend({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/lend/lendInfo',
+          method: 'post',
+          data: data
+        })
+          .then(res => {
+            resolve(res)
           })
           .catch(error => {
             reject(error)

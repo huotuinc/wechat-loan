@@ -165,6 +165,7 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
+        form.inviter = localStorage.getItem('inviter')
       }
       if (this.type === 'forget') {
         action = 'forger'
@@ -179,7 +180,13 @@ export default {
           .then(() => {
             if (this.type === 'register') {
               if (isWechat()) {
-                this.$router.push({ path: '/publish' })
+                if (form.inviter) {
+                  history.replaceState(null, '过海有信', '/')
+                  this.$router.push({ path: '/authentication' })
+                  localStorage.removeItem('inviter')
+                } else {
+                  this.$router.push({ path: '/publish' })
+                }
               } else {
                 this.$router.push({ path: '/splash', query: { to: 'publish' } })
               }

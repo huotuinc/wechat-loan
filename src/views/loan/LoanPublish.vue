@@ -45,7 +45,7 @@
       <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">借款条约</ins>》</span>
     </div>
     <div class="loan-publish_btn">
-      <x-button @click.native="submit" class="btn-yellow" :disabled="isDisabled">确认发布</x-button>
+      <x-button @click.native="submit" class="btn-yellow" :disabled="isDisabled">{{obj.lendId !== 0 ? '确认申请' : '确认发布'}}</x-button>
     </div>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
@@ -73,6 +73,11 @@ export default {
         this.validForm()
       })
     }
+    if (this.$route.name === 'Subscribe') {
+      this.obj.lendId = this.$route.params.lendId || 0
+      this.obj.lendUserId = this.$route.params.lenderId || 0
+    }
+
     if (sessionStorage.getItem('use')) this.useArray = [sessionStorage.getItem('use')]
     if (sessionStorage.getItem('borrowMoney')) this.obj.borrowMoney = sessionStorage.getItem('borrowMoney')
     if (sessionStorage.getItem('borrowTime')) this.obj.borrowTime = sessionStorage.getItem('borrowTime')
@@ -106,7 +111,9 @@ export default {
         borrowMoney: '',
         borrowTime: '',
         borrowUse: '',
-        userType: 1
+        userType: 1,
+        lendId: 0,
+        lendUserId: 0
       },
       page: {},
       popupShow: false,
@@ -137,6 +144,16 @@ export default {
     useArray(val) {
       this.onChange(val)
       sessionStorage.setItem('use', val)
+    },
+    $route(val) {
+      if (val.name === 'Publish') {
+        this.obj.lendId = 0
+        this.obj.lendUserId = 0
+      }
+      if (val.name === 'Subscribe') {
+        this.obj.lendId = this.$route.params.lendId || 0
+        this.obj.lendUserId = this.$route.params.lenderId || 0
+      }
     }
   },
   methods: {

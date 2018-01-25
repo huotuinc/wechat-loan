@@ -7,7 +7,7 @@ const personal = Mock.mock({
     headimg: 'http://iph.href.lu/80x80?text=%E5%B8%B8',
     loanAmount: '@float(99999, 100000, 2, 2)',
     userName: '15856562514',
-    authReport: false,
+    authReport: '@boolean',
     countMsg: '@integer(0, 10)',
     countNoComplete: '@integer(0, 10)',
     countRepayment: '@integer(0, 10)',
