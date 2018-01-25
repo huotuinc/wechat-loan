@@ -26,7 +26,7 @@
     <div class="card-ft">
       <div class="bd"><span>{{lendInfo.receivedCount}}</span>人申请</div>
       <div class="ft">
-        <a href="javascript:;" class="apply-btn">立即申请</a>
+        <a href="javascript:;" @click="goPublish" class="apply-btn">立即申请</a>
       </div>
     </div>
   </div>
@@ -36,6 +36,15 @@ export default {
   name: 'LoanerCard',
   props: {
     lendInfo: Object
+  },
+  methods: {
+    goPublish() {
+      if (!this.lendInfo.lendId) return
+      this.$router.push({
+        name: 'Subscribe',
+        params: { lenderId: this.lendInfo.lenderId, lendId: this.lendInfo.lenderId }
+      })
+    }
   }
 }
 </script>

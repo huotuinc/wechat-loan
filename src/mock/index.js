@@ -178,3 +178,19 @@ Mock.mock(/\/api\/user\/lenderList/, 'post', {
     ]
   }
 })
+
+Mock.mock(/\/api\/lend\/lendInfo/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    lendId: '@id',
+    lendAmount: '5000',
+    lendDays: '10',
+    interestRate: '10',
+    receivedCount: 10,
+    repayType: '本额等系',
+    lenderId: '@id',
+    lenderName: '@cname',
+    lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+  }
+})

@@ -25,7 +25,7 @@
         <span>借款次数</span>
       </div>
       <div class="loan-msg_item">
-        <p>{{message}}</p>
+        <p>{{(page.annceCount||0) + (page.orderNoticeCount||0)}}</p>
         <span>通知</span>
       </div>
     </div>
@@ -38,7 +38,7 @@
         </transition>
       </div>
       <div class="loaner-list">
-        <Loaner v-for="lender in lenderList" :lender="lender" :key="lender.lendId"/>
+         <Loaner v-for="lender in lenderList" :lender="lender" :key="lender.lendId"/>
       </div>
     </div>
     </scroll>
@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       page: {},
-      message: 0,
       lenderList: [],
       show: true,
       pullUpLoad: true,
@@ -94,11 +93,8 @@ export default {
   },
   created() {
     let lastTime = localStorage.getItem('lastLogin') ? localStorage.getItem('lastLogin') : ''
-    this.$store.dispatch('getIndex').then(res => {
+    this.$store.dispatch('getIndex', lastTime).then(res => {
       this.page = res
-    })
-    this.$store.dispatch('getMessage', lastTime).then(res => {
-      this.message = res.countNum
       localStorage.setItem('lastLogin', parseTime(new Date()))
     })
     this.show = !getFollow()

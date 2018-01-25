@@ -28,7 +28,7 @@
     </div>
     <div class="loaner-active">
       <div class="contact-title">- TA的出借 -</div>
-      <!-- <Card /> -->
+      <Card :lendInfo="oneLendInfo"/>
     </div>
      <div>
       <div class="contact-title">- TA的更多出借 -</div>
@@ -61,7 +61,8 @@ export default {
         lenderId: 0,
         pageIndex: 1,
         pageSize: 10
-      }
+      },
+      oneLendInfo: {}
     }
   },
   watch: {
@@ -80,9 +81,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getLenderList()
-  },
   created() {
     const { userName } = getUserInfo()
     const lenderId = this.$route.params.lenderId
@@ -99,6 +97,22 @@ export default {
         console.log(err)
       })
     this.requestData.lenderId = lenderId
+    this.$store
+      .dispatch('findOneLend', {
+        lendId: lendId,
+        lenderId: lenderId
+      })
+      .then(res => {
+        this.oneLendInfo = res
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.getLenderList()
+    })
   },
   methods: {
     onPullingUp() {

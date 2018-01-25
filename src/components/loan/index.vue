@@ -1,5 +1,5 @@
 <template>
-  <router-link class="loaner-item" :to="'/lender/'+lender.lenderId + '/'+lender.lendId">
+  <a href="javascript:;" class="loaner-item" @click="goLender">
     <div class="hd">
       <img :src="lender.lenderHeadimg" alt="头像">
     </div>
@@ -8,16 +8,21 @@
       <p>{{lender.lendAmount}}元</p>
     </div>
     <div class="ft">
-      <a href="/" class="contact-btn">找TA借</a>
+      <a href="javascript:;" class="contact-btn">找TA借</a>
       <span><i class="num">{{lender.receivedCount}}</i>人申请</span>
     </div>
-  </router-link>
+  </a>
 </template>
 <script>
 export default {
   name: 'Lender',
   props: {
     lender: Object
+  },
+  methods: {
+    goLender() {
+      this.$router.push({ name: 'Lender', params: { lenderId: this.lender.lenderId, lendId: this.lender.lenderId } })
+    }
   }
 }
 </script>
