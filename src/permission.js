@@ -22,6 +22,7 @@ router.beforeEach((to, from, next) => {
   if (getToken()) {
     if (to.path === '/login') {
       next('/')
+      store.commit('UPDATE_LOADING', { isLoading: false })
     } else {
       next()
     }
