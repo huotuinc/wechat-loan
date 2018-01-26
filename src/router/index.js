@@ -164,6 +164,14 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/announce',
+    name: 'Announce',
+    component: _import('message/Announce'),
+    meta: {
+      title: '公告'
+    }
+  },
+  {
     path: '/orderInfo/:orderId',
     name: 'OrderInfo',
     component: _import('order/OrderInfo'),

@@ -127,6 +127,9 @@ export default {
 .loan-wrap {
   background: #fbf9fe;
   height: 100vh;
+  .list-wrapper {
+    background: #fbf9fe;
+  }
 }
 .loan-list {
   padding: 10px 5px;

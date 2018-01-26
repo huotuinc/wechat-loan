@@ -201,3 +201,26 @@ Mock.mock(/\/api\/lend\/lendInfo/, 'post', {
     lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
   }
 })
+
+Mock.mock(/\/api\/sys\/getAnnouceList/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  'data|10': [
+    {
+      annId: '@id',
+      title: '@ctitle',
+      infoType: '@pick([6,8])',
+      createTime: '2017-11-12 11:22：45'
+    }
+  ]
+})
+Mock.mock(/\/api\/sys\/getAnnouceInfo/, 'get', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    annId: '@id',
+    title: '@ctitle',
+    content: '@cparagraph',
+    createTime: '2017-11-12 11:22：45'
+  }
+})

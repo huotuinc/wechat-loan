@@ -261,6 +261,36 @@ const order = {
             reject(error)
           })
       })
+    },
+    getNotice({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/sys/getAnnouceList',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    getAnnounce({}, params) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/sys/getAnnouceInfo',
+          method: 'get',
+          params: params
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

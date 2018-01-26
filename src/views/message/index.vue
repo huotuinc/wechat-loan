@@ -57,10 +57,10 @@ export default {
     pageChange(index) {
       switch (index) {
         case 0:
-          this.$router.push({ path: '/message/todo' })
+          this.$router.replace({ path: '/message/todo' })
           break
         case 1:
-          this.$router.push({ path: '/message/notice' })
+          this.$router.replace({ path: '/message/notice' })
           break
         default:
           break
@@ -90,5 +90,3 @@ export default {
   overflow-y: auto;
 }
 </style>
-
-

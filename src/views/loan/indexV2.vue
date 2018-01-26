@@ -17,14 +17,14 @@
     </div>
     <div class="loan-msg vux-1px-b">
       <div class="loan-msg_item">
-        <p><span class="loan-msg_num">10<span class="vux-badge vux-badge-single" v-show="page.offlineMsgCount > 10">&middot;&middot;&middot;</span></span></p>
+        <p><span class="loan-msg_num">{{page.offlineMsgCount}}<span class="vux-badge vux-badge-single" v-show="page.offlineMsgCount > 10">&middot;&middot;&middot;</span></span></p>
         <span>好友消息</span>
       </div>
       <div class="loan-msg_item">
-        <p>1</p>
+        <p>{{page.loanNum}}</p>
         <span>借款次数</span>
       </div>
-      <div class="loan-msg_item">
+      <div class="loan-msg_item" @click="goToMessage">
         <p>{{(page.annceCount||0) + (page.orderNoticeCount||0)}}</p>
         <span>通知</span>
       </div>
@@ -122,6 +122,9 @@ export default {
           this.requestData.pageIndex++
         }
       })
+    },
+    goToMessage() {
+      this.$router.push({ path: '/message/todo' })
     }
   }
 }

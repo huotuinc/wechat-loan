@@ -57,19 +57,19 @@ export default {
     pageChange(index) {
       switch (index) {
         case 0:
-          this.$router.push({ path: '/orderList' })
+          this.$router.replace({ path: '/orderList' })
           break
         case 1:
-          this.$router.push({ path: '/orderList/pending' })
+          this.$router.replace({ path: '/orderList/pending' })
           break
         case 2:
-          this.$router.push({ path: '/orderList/repayment' })
+          this.$router.replace({ path: '/orderList/repayment' })
           break
         case 3:
-          this.$router.push({ path: '/orderList/overdue' })
+          this.$router.replace({ path: '/orderList/overdue' })
           break
         case 4:
-          this.$router.push({ path: '/orderList/complete' })
+          this.$router.replace({ path: '/orderList/complete' })
           break
         default:
           break
@@ -108,5 +108,3 @@ export default {
   overflow-y: auto;
 }
 </style>
-
-

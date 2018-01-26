@@ -11,7 +11,7 @@
           <div class="loan-card" :key="order.id">
             <div class="loan-card_hd clearfix">
               <span class="loan-hd_title">申请对象：龙*天</span>
-              <span class="loan-hd_user">已拒绝出借</span>
+              <span class="loan-hd_user">{{order.statusMsg}}</span>
             </div>
             <div class="loan-card_bd vux-1px-b">
               <div class="loan-bd_img">
@@ -56,7 +56,8 @@ export default {
       orders: [],
       requestData: {
         pageIndex: 1,
-        pageSize: 10
+        pageSize: 10,
+        source: 1
       },
       isEmpty: true
     }
@@ -100,6 +101,9 @@ export default {
 }
 </script>
 <style lang="less">
+.list-wrapper {
+  background: #fbf9fe !important;
+}
 .loan-list {
   padding: 10px 5px;
   background: #fbf9fe;

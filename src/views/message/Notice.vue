@@ -1,52 +1,103 @@
 <template>
-  <div>
-    <div class="loan-todo vux-1px-b" v-if="messageList.length > 0">
-      <template v-for="message in messageList" >
-        <router-link :to="{name: 'OrderInfo', params:{orderId: message.orderId}}" class="loan-todo_item vux-1px-t" :key="message.orderId" >
-          <div class="loan-todo_hd">
-            <i class="iconfont icon-msg"></i>
-          </div>
-          <div class="loan-todo_bd">
-            <h4>{{message.noticeTitle}}</h4>
-            <p>{{message.noticeContent}}</p>
-            <span>{{message.noticeActTime}}</span>
-          </div>
-          <div class="loan-todo_ft">
-              <button type="button">立即查看</button>
-          </div>
-        </router-link>
-      </template>
-    </div>
-    <empty :empty="messageList.length === 0" text="暂无消息"></empty>
-  </div>
+  <scroll ref="scroll"
+    :data="notice"
+    :pullUpLoad="pullUpLoadObj"
+    @pullingUp="onPullingUp"
+  >
+    <template v-for="message in notice" >
+      <div class="loan-todo_item vux-1px-t" :key="message.annId" @click="goPage(message.infoType, message.annId)">
+        <div class="loan-todo_hd">
+          <i class="iconfont icon-msg"></i>
+        </div>
+        <div class="loan-todo_bd">
+          <h4>{{message.title + message.infoType}}</h4>
+          <span>{{message.createTime}}</span>
+        </div>
+        <div class="loan-todo_ft">
+            <button type="button">立即查看</button>
+        </div>
+      </div>
+    </template>
+    <empty :empty="isEmpty"></empty>
+  </scroll>
 </template>
 <script>
+import Scroll from '../../components/scroll/scroll'
+import OrderList from '../../components/order/OrderList'
 import Empty from '@/components/empty'
 
 export default {
-  name: 'Todo',
   components: {
+    OrderList,
+    Scroll,
     Empty
   },
   data() {
     return {
-      messageList: []
+      pullUpLoad: true,
+      pullUpLoadThreshold: 0,
+      pullUpLoadMoreTxt: '加载更多',
+      pullUpLoadNoMoreTxt: '没有更多数据了',
+      notice: [],
+      requestData: {
+        pageIndex: 1,
+        pageSize: 10,
+        startTime: localStorage.getItem('lastLogin')
+      },
+      isEmpty: true
     }
   },
-  created() {
-    this.$store.dispatch('getOrderNotice').then(res => {
-      this.messageList = res
-    })
+  mounted() {
+    this.getNoticeList()
+  },
+  watch: {
+    pullUpLoadObj: {
+      handler() {
+        this.rebuildScroll()
+      },
+      deep: true
+    }
+  },
+  computed: {
+    pullUpLoadObj() {
+      return {
+        threshold: parseInt(this.pullUpLoadThreshold),
+        txt: { more: this.pullUpLoadMoreTxt, noMore: this.pullUpLoadNoMoreTxt }
+      }
+    }
+  },
+  methods: {
+    onPullingUp() {
+      this.getNoticeList()
+    },
+    getNoticeList() {
+      this.$store.dispatch('getNotice', this.requestData).then(newOrder => {
+        this.notice = this.notice.concat(newOrder)
+        if (newOrder.length > 0) this.isEmpty = false
+        if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
+        if (newOrder.length < this.requestData.pageSize) {
+          this.$refs.scroll.forceUpdate()
+        } else {
+          this.requestData.pageIndex++
+        }
+      })
+    },
+    goPage(type, id) {
+      if (type === 6) {
+        this.$router.push({ path: '/applyList' })
+      }
+      if (type === 8) {
+        this.$router.push({ path: '/announce', query: { annId: id } })
+      }
+    }
   }
 }
 </script>
 <style lang="less">
 @import '../../style/variable.less';
 
-.loan-todo {
-  background: #fff;
-}
 .loan-todo_item {
+  background: #fff;
   &:active {
     background-color: #ececec;
   }
@@ -127,4 +178,3 @@ export default {
   }
 }
 </style>
-
