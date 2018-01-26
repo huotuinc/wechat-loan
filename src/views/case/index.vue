@@ -1,6 +1,6 @@
 <template>
   <div class="loan-wrap">
-    <img src="../../assets/bannerjk.jpg" width="100%">
+    <img :src="isDefault ? require('../../assets/bannerjk.jpg' ):  require('../../assets/case.jpg')" width="100%">
   <p class="jk">
     <a @click="toIndex">我要借款</a>
   </p>
@@ -28,7 +28,8 @@ export default {
   name: 'Case',
   data() {
     return {
-      cases: {}
+      cases: {},
+      isDefault: true
     }
   },
   methods: {
@@ -42,8 +43,10 @@ export default {
   },
   created() {
     if (this.$route.query.channelId) {
+      this.isDefault = false
       setChannelId(this.$route.query.channelId)
     } else {
+      this.isDefault = true
       setChannelId('default')
     }
     this.$store.dispatch('getCases').then(res => {
