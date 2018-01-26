@@ -102,6 +102,7 @@ export default {
 <style lang="less">
 .loan-list {
   padding: 10px 5px;
+  background: #fbf9fe;
 }
 .loan-apply_ft {
   padding: 9px !important;

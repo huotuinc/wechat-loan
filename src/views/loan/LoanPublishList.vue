@@ -55,7 +55,8 @@ export default {
       orders: [],
       requestData: {
         pageIndex: 1,
-        pageSize: 10
+        pageSize: 10,
+        source: 2
       },
       isEmpty: true
     }
@@ -123,7 +124,12 @@ export default {
 }
 </script>
 <style lang="less">
+.loan-wrap {
+  background: #fbf9fe;
+  height: 100vh;
+}
 .loan-list {
   padding: 10px 5px;
+  background: #fbf9fe;
 }
 </style>
