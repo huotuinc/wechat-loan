@@ -42,7 +42,7 @@ export default {
       if (!this.lendInfo.lendId) return
       this.$router.push({
         name: 'Subscribe',
-        params: { lenderId: this.lendInfo.lenderId, lendId: this.lendInfo.lenderId }
+        params: { lenderId: this.lendInfo.lenderId, lendId: this.lendInfo.lendId }
       })
     }
   }

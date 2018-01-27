@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     goLender() {
-      this.$router.push({ name: 'Lender', params: { lenderId: this.lender.lenderId, lendId: this.lender.lenderId } })
+      this.$router.push({ name: 'Lender', params: { lenderId: this.lender.lenderId, lendId: this.lender.lendId } })
     }
   }
 }
