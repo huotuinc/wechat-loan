@@ -31,8 +31,11 @@
       <cell title="7天内小贷平台申请个数">
         {{risk.platformApply7}}
       </cell>
-      <cell title="1个月内小贷平台申请个数">
+      <cell title="30天内小贷平台申请个数">
         {{risk.platformApply30}}
+      </cell>
+        <cell title="90天内小贷平台申请个数">
+        {{risk.platformApply90}}
       </cell>
     </group>
     <group title="运营商信息">
@@ -44,6 +47,9 @@
       </cell>
       <cell title="运营商登记姓名">
         {{carrier.realName}}
+      </cell>
+      <cell title="手机号归属地">
+        {{carrier.mobileAddress}}
       </cell>
       <cell title="当前状态">
         {{carrier.status}}
@@ -112,4 +118,3 @@ export default {
   }
 }
 </script>
-

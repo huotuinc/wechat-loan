@@ -37,7 +37,7 @@ export default {
       pullUpLoad: true,
       pullUpLoadThreshold: 0,
       pullUpLoadMoreTxt: '加载更多',
-      pullUpLoadNoMoreTxt: '没有更多数据了',
+      pullUpLoadNoMoreTxt: '没有更多通知了',
       notice: [],
       requestData: {
         pageIndex: 1,

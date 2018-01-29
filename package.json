@@ -16,6 +16,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
     "lrz": "^4.9.40",
+    "minimist": "^1.2.0",
     "qs": "^6.5.1",
     "vue": "^2.5.2",
     "vue-loading-template": "^0.1.7",

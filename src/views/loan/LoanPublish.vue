@@ -171,7 +171,11 @@ export default {
         .dispatch('saveInfo', this.obj)
         .then(() => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$router.push({ path: '/publishList' })
+          if (this.obj.lendUserId !== 0) {
+            this.$router.push({ path: '/applyList' })
+          } else {
+            this.$router.push({ path: '/publishList' })
+          }
           sessionStorage.clear()
         })
         .catch(err => {

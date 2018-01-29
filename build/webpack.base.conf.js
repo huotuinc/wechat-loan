@@ -10,6 +10,26 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
+let original = JSON.parse(process.env.npm_config_argv).original
+let minimist = require('minimist')
+let args = minimist(original.slice(2))
+let branch = args.b || 'production'
+
+function assetsCDNPath(b) {
+  let path
+  switch (b) {
+    case 'A':
+      path = 'http://static.51morecash.com/'
+      break
+    case 'B':
+      path = 'http://static.51huotao.com/'
+      break
+    default:
+      path = config.build.assetsPublicPath
+  }
+  return path
+}
+
 let webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -18,7 +38,7 @@ let webpackConfig = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production' ? assetsCDNPath(branch) : config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
