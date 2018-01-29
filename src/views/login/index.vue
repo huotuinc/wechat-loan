@@ -16,6 +16,7 @@
           ref="username"
           :show-clear="false"
           required
+          type="tel"
           v-model.trim="form.username"
           class="login-input">
           <i slot="label" class="iconfont icon-mobile"></i>

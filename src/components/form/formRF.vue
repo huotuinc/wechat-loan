@@ -10,6 +10,7 @@
           ref="username"
           required
           :show-clear="false"
+          type="tel"
           v-model="obj.username">
           <i slot="label" class="iconfont icon-mobile"></i>
         </x-input>
@@ -18,6 +19,7 @@
           name="authCode"
           placeholder="请输入验证码"
           required
+          type="tel"
           class="weui-vcode"
           :show-clear="false"
           v-model="obj.verifyCode">
