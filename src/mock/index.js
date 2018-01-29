@@ -142,7 +142,7 @@ Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
       realName: '张三',
       mobile: '13000000000',
       nums: 10,
-      friend: true,
+      friend: '@boolean',
       headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
     },
     'lendInfoList|5-10': [
