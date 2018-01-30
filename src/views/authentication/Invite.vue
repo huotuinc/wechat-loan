@@ -66,7 +66,6 @@ export default {
   created() {
     this.inviter = this.$route.query.i
     this.$store.dispatch('getLenderById', { lenderId: this.inviter }).then(res => {
-      console.log(res)
       this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     })
   },

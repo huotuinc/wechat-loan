@@ -10,6 +10,7 @@ import './assets/font/iconfont.css'
 import './permission'
 // import './mock'
 
+window.MODE_ENV = process.env.NODE_ENV
 FastClick.attach(document.body)
 
 Vue.use(AlertPlugin)

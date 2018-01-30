@@ -18,10 +18,10 @@ let branch = args.b || 'production'
 function assetsCDNPath(b) {
   let path
   switch (b) {
-    case 'A':
+    case 'master':
       path = 'http://static.51morecash.com/'
       break
-    case 'B':
+    case 'dev':
       path = 'http://static.51huotao.com/'
       break
     default:

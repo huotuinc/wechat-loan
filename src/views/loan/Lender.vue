@@ -71,6 +71,12 @@ export default {
         this.rebuildScroll()
       },
       deep: true
+    },
+    oneLendInfo() {
+      this.filterList()
+    },
+    lenderList() {
+      this.filterList()
     }
   },
   computed: {
@@ -129,6 +135,14 @@ export default {
           this.requestData.pageIndex++
         }
       })
+    },
+    filterList() {
+      if (this.lenderList.length > 0 && Object.keys(this.oneLendInfo).length > 0) {
+        let index = this.lenderList.indexOf(this.oneLendInfo)
+        if (index !== -1) {
+          this.lenderList.splice(index, 1)
+        }
+      }
     }
   }
 }

@@ -6,7 +6,7 @@
         <i slot="icon" class="iconfont icon-home"></i>
         <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item link="/forend/project/list?userId=339">
+      <tabbar-item :link="market">
         <i slot="icon" class="iconfont icon-loan-mk"></i>
         <span slot="label">贷款广场</span>
       </tabbar-item>
@@ -24,7 +24,7 @@
 
 <script>
 import { Tabbar, TabbarItem, ViewBox } from 'vux'
-
+import { getUserId } from '../../utils/auth'
 export default {
   name: 'Layout',
   components: {
@@ -34,11 +34,18 @@ export default {
   },
   data() {
     return {
-      name: ''
+      name: '',
+      market: ''
     }
   },
   created() {
     this.name = this.$route.name
+    let userId = getUserId()
+    if (window.MODE_ENV === 'development') {
+      this.market = `http://market.51huotao.com/forend/project/list?userId=${userId}`
+    } else {
+      this.market = `http://market.51morecash.com/forend/project/list?userId=${userId}`
+    }
   }
 }
 </script>
