@@ -143,7 +143,7 @@ export default {
         maxDays: -1
       },
       borrowMoneyPlace: '请填写大于0的整数金额',
-      borrowTimePlace: '请填写大于0的整数天数'
+      borrowTimePlace: '请填写大于0的整数天'
     }
   },
   watch: {
@@ -217,9 +217,21 @@ export default {
         this.isDisabled = true
         return
       }
+      if (this.validData.minAmount > -1 && this.validData.maxAmount > -1) {
+        if (this.obj.borrowMoney < this.validData.minAmount || this.obj.borrowMoney > this.validData.maxAmount) {
+          this.isDisabled = true
+          return
+        }
+      }
       if (!/^[1-9]\d*$/.test(this.obj.borrowTime)) {
         this.isDisabled = true
         return
+      }
+      if (this.validData.minDays > -1 && this.validData.maxDays > -1) {
+        if (this.obj.borrowTime < this.validData.minDays || this.obj.borrowTime > this.validData.maxDays) {
+          this.isDisabled = true
+          return
+        }
       }
       if (this.obj.borrowUse === '') {
         this.isDisabled = true
@@ -236,7 +248,10 @@ export default {
       this.validData.minAmount = amount[0]
       this.validData.maxAmount = amount[1]
       this.borrowMoneyPlace = `请填写${this.validData.minAmount}-${this.validData.maxAmount}的整数金额`
-      this._transformDay(data.lendDays)
+      const { minDays, maxDays } = this._transformDay(data.lendDays)
+      this.validData.minDays = minDays
+      this.validData.maxDays = maxDays
+      this.borrowTimePlace = `请填写${this.validData.minDays}-${this.validData.maxDays}的整数天`
     },
     _transformDay(day) {
       let dayArr = day.split('-')
@@ -255,22 +270,31 @@ export default {
         unit = '天'
         maxDay = parseInt(dayArr[1])
       }
-      console.log(+dayArr[0])
       if (isNaN(+dayArr[0])) {
-        if (dayArr[1].indexOf('年') !== -1) {
-          unit = '年'
-          maxDay = parseInt(dayArr[1]) * 365
+        if (dayArr[0].indexOf('年') !== -1) {
+          minDay = parseInt(dayArr[0]) * 365
         }
-        if (dayArr[1].indexOf('月') !== -1) {
-          unit = '月'
-          maxDay = parseInt(dayArr[1]) * 30
+        if (dayArr[0].indexOf('月') !== -1) {
+          minDay = parseInt(dayArr[0]) * 30
         }
-        if (dayArr[1].indexOf('天') !== -1) {
-          unit = '天'
-          maxDay = parseInt(dayArr[1])
+        if (dayArr[0].indexOf('天') !== -1) {
+          minDay = parseInt(dayArr[0])
         }
       } else {
-        console.log('同样的数据')
+        if (unit === '年') {
+          minDay = parseInt(dayArr[0]) * 365
+        }
+        if (unit === '月') {
+          minDay = parseInt(dayArr[0]) * 30
+        }
+        if (unit === '天') {
+          minDay = parseInt(dayArr[0])
+        }
+      }
+
+      return {
+        minDays: minDay,
+        maxDays: maxDay
       }
     }
   }

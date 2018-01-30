@@ -304,7 +304,7 @@ Mock.mock(/\/api\/lend\/lendInfo/, 'post', {
     lenderName: '张婷婷',
     lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/26/20180103105328.png',
     lendAmount: '10000-20000',
-    lendDays: '6-12个月',
+    lendDays: '3-12个月',
     interestRate: 24.0,
     receivedCount: 0,
     lendStatus: 1,
