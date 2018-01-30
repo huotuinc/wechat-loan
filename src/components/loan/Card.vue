@@ -26,7 +26,11 @@
     <div class="card-ft">
       <div class="bd"><span>{{lendInfo.receivedCount}}</span>人申请</div>
       <div class="ft">
-        <a href="javascript:;" @click="goPublish" class="apply-btn">立即申请</a>
+        <a href="javascript:;"
+          @click="goPublish(lendInfo.applyStatus)"
+          class="apply-btn"
+          :class="lendInfo.applyStatus !==0 ? 'no-border' : ''"
+        >{{applyText(lendInfo.applyStatus)}}</a>
       </div>
     </div>
   </div>
@@ -38,12 +42,25 @@ export default {
     lendInfo: Object
   },
   methods: {
-    goPublish() {
+    goPublish(status) {
       if (!this.lendInfo.lendId) return
+      if (status) return
       this.$router.push({
         name: 'Subscribe',
         params: { lenderId: this.lendInfo.lenderId, lendId: this.lendInfo.lendId }
       })
+    },
+    applyText(status) {
+      if (status === 0) {
+        return '立即申请'
+      }
+      if (status === 1) {
+        return '已申请'
+      }
+      if (status === 2) {
+        return '已拒绝'
+      }
+      return ''
     }
   }
 }
@@ -134,6 +151,9 @@ export default {
       border-radius: 5px;
       text-align: center;
       font-size: 14px;
+    }
+    .no-border {
+      border: none;
     }
   }
 }

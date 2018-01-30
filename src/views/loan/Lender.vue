@@ -15,12 +15,12 @@
           <div class="item item-name">
             <i class="iconfont icon-personal-o"></i>
             <span>{{userInfo.realName}}</span>
-            <a href="/" class="btn"><i class="iconfont icon-msg-more"></i>&nbsp;联系他</a>
+            <!-- <a href="/" class="btn"><i class="iconfont icon-msg-more"></i>&nbsp;联系他</a> -->
           </div>
           <div class="item item-tel">
             <i class="iconfont icon-mobile"></i>
             <span>{{userInfo.mobile}}</span>
-            <a href="/" class="btn" v-if="!userInfo.friend"><i class="iconfont icon-add-friends"></i>&nbsp;添加好友</a>
+            <!-- <a href="/" class="btn" v-if="!userInfo.friend"><i class="iconfont icon-add-friends"></i>&nbsp;添加好友</a> -->
           </div>
         </div>
         <p class="success">成功借出<span>{{userInfo.nums}}</span>笔</p>
@@ -52,6 +52,7 @@ export default {
     return {
       userInfo: {},
       lenderList: [],
+      newLenderList: [],
       pullUpLoad: true,
       pullUpLoadThreshold: 0,
       pullUpLoadMoreTxt: '加载更多',
@@ -62,7 +63,9 @@ export default {
         pageIndex: 1,
         pageSize: 10
       },
-      oneLendInfo: {}
+      oneLendInfo: {},
+      lenderId: '',
+      lendId: ''
     }
   },
   watch: {
@@ -71,12 +74,6 @@ export default {
         this.rebuildScroll()
       },
       deep: true
-    },
-    oneLendInfo() {
-      this.filterList()
-    },
-    lenderList() {
-      this.filterList()
     }
   },
   computed: {
@@ -91,6 +88,10 @@ export default {
     const { userName } = getUserInfo()
     const lenderId = this.$route.params.lenderId
     const lendId = this.$route.params.lendId
+
+    this.lenderId = lenderId
+    this.lendId = lendId
+
     this.$store
       .dispatch('getLenderById', {
         userName: userName,
@@ -103,21 +104,21 @@ export default {
         console.log(err)
       })
     this.requestData.lenderId = lenderId
-    this.$store
-      .dispatch('findOneLend', {
-        lendId: lendId,
-        lenderId: lenderId
-      })
-      .then(res => {
-        this.oneLendInfo = res
-      })
-      .catch(err => {
-        console.log(err)
-      })
   },
   mounted() {
     this.$nextTick(() => {
-      this.getLenderList()
+      this.$store
+        .dispatch('findOneLend', {
+          lendId: this.lendId,
+          lenderId: this.lenderId
+        })
+        .then(res => {
+          this.oneLendInfo = res
+          this.getLenderList()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     })
   },
   methods: {
@@ -127,6 +128,12 @@ export default {
     getLenderList() {
       this.$store.dispatch('getLenderList', this.requestData).then(res => {
         let newList = res.list
+        let index = newList.findIndex(l => {
+          return (l.lendId = this.oneLendInfo.lendId)
+        })
+        if (index !== -1) {
+          newList.splice(index, 1)
+        }
         this.lenderList = this.lenderList.concat(newList)
         if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newList.length < this.requestData.pageSize) {
@@ -135,14 +142,6 @@ export default {
           this.requestData.pageIndex++
         }
       })
-    },
-    filterList() {
-      if (this.lenderList.length > 0 && Object.keys(this.oneLendInfo).length > 0) {
-        let index = this.lenderList.indexOf(this.oneLendInfo)
-        if (index !== -1) {
-          this.lenderList.splice(index, 1)
-        }
-      }
     }
   }
 }

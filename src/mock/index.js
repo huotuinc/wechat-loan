@@ -168,19 +168,128 @@ Mock.mock(/\/api\/sys\/getMessageCount/, 'get', {
 
 Mock.mock(/\/api\/user\/lenderList/, 'post', {
   resultCode: 2000,
-  resultMsg: 'OK',
+  resultMsg: '操作成功',
   data: {
-    'list|10': [
+    list: [
       {
-        'lendId|+1': 1,
-        lendAmount: '5000',
-        lendDays: '10',
-        interestRate: '10',
-        receivedCount: 10,
-        repayType: '本额等系',
-        lenderId: '@id',
-        lenderName: '@cname',
-        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+        lendId: 16,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '10000-20000',
+        lendDays: '6-12个月',
+        interestRate: 24.0,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '1天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 13,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '20000-50000',
+        lendDays: '1-7天',
+        interestRate: 1.0,
+        receivedCount: 1,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 12,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '300-3000',
+        lendDays: '1-6个月',
+        interestRate: 1.0,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '分期等额还款',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 11,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '20000-50000',
+        lendDays: '1-6个月',
+        interestRate: 1.0,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '分期等额还款',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 10,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '5000-10000',
+        lendDays: '1-6个月',
+        interestRate: 1.0,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '分期等额还款',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 9,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '5000-10000',
+        lendDays: '14天-1个月',
+        interestRate: 1.0,
+        receivedCount: 1,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 8,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '300-3000',
+        lendDays: '1-6个月',
+        interestRate: 1.0,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '分期等额还款',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 7,
+        lenderId: 26,
+        lenderName: '张婷婷',
+        lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+        lendAmount: '300-3000',
+        lendDays: '1-6个月',
+        interestRate: 1.0,
+        receivedCount: 1,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '分期等额还款',
+        endTimeHtml: '7天后到期',
+        applyStatus: 0
       }
     ]
   }
@@ -188,17 +297,21 @@ Mock.mock(/\/api\/user\/lenderList/, 'post', {
 
 Mock.mock(/\/api\/lend\/lendInfo/, 'post', {
   resultCode: 2000,
-  resultMsg: 'OK',
+  resultMsg: '操作成功',
   data: {
-    lendId: '@id',
-    lendAmount: '5000',
-    lendDays: '10',
-    interestRate: '10',
-    receivedCount: 10,
-    repayType: '本额等系',
-    lenderId: '@id',
-    lenderName: '@cname',
-    lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+    lendId: 16,
+    lenderId: 26,
+    lenderName: '张婷婷',
+    lenderHeadimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+    lendAmount: '10000-20000',
+    lendDays: '6-12个月',
+    interestRate: 24.0,
+    receivedCount: 0,
+    lendStatus: 1,
+    lendStatusHtml: '上架',
+    repayType: '一次偿还本息',
+    endTimeHtml: '1天后到期',
+    applyStatus: 0
   }
 })
 

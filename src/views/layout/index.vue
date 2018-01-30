@@ -41,10 +41,15 @@ export default {
   created() {
     this.name = this.$route.name
     let userId = getUserId()
-    if (window.MODE_ENV === 'development') {
-      this.market = `http://market.51huotao.com/forend/project/list?userId=${userId}`
-    } else {
-      this.market = `http://market.51morecash.com/forend/project/list?userId=${userId}`
+    switch (window.MODE_BRANCH) {
+      case 'master':
+        this.market = `http://market.51morecash.com/forend/project/list?userId=${userId}`
+        break
+      case 'dev':
+        this.market = `http://market.51huotao.com/forend/project/list?userId=${userId}`
+        break
+      default:
+        this.market = '/'
     }
   }
 }
