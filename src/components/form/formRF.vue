@@ -167,7 +167,7 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
-        form.inviter = localStorage.getItem('inviter')
+        if (localStorage.getItem('inviter')) form.inviter = localStorage.getItem('inviter')
       }
       if (this.type === 'forget') {
         action = 'forger'
