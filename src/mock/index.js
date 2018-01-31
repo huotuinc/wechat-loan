@@ -144,17 +144,7 @@ Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
       nums: 10,
       friend: '@boolean',
       headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
-    },
-    'lendInfoList|5-10': [
-      {
-        lendId: '@id',
-        lendAmount: '5000',
-        lendDays: '10',
-        interestRate: '10',
-        receivedCount: 10,
-        repayType: '本额等系'
-      }
-    ]
+    }
   }
 })
 

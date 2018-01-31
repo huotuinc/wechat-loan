@@ -2,7 +2,6 @@
   <div class="error-page">
     <img src="../assets/404.png" alt="">
     <p>页面未找到</p>
-    <x-button mini @click.native="goBack">返回</x-button>
   </div>
 </template>
 <script>
@@ -12,11 +11,6 @@ export default {
   name: 'error404',
   components: {
     XButton
-  },
-  methods: {
-    goBack() {
-      this.$router.go(-1)
-    }
   }
 }
 </script>
@@ -32,4 +26,3 @@ export default {
   margin-bottom: 20px;
 }
 </style>
-

@@ -29,14 +29,6 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'subscribe/:lenderId/lend/:lendId',
-        name: 'Subscribe',
-        component: _import('loan/LoanPublish'),
-        meta: {
-          title: '我要借款'
-        }
-      },
-      {
         path: 'publishList',
         name: 'PublishList',
         component: _import('loan/LoanPublishList'),
@@ -68,6 +60,14 @@ export const constantRouterMap = [
     component: _import('loan/Lender'),
     meta: {
       title: '出借人信息'
+    }
+  },
+  {
+    path: 'subscribe/:lenderId/lend/:lendId',
+    name: 'Subscribe',
+    component: _import('loan/LoanPublish'),
+    meta: {
+      title: '我要借款'
     }
   },
   {

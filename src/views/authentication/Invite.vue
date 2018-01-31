@@ -1,5 +1,5 @@
 <template>
-  <div class="loan-wrap">
+  <div class="loan-wrap" v-show="isLoading">
     <div class="auth-head">
       <div class="hd"><i class="iconfont icon-smile"></i></div>
       <div class="bd">
@@ -60,14 +60,21 @@ export default {
   data() {
     return {
       inviter: '',
-      mobile: ''
+      mobile: '',
+      isLoading: false
     }
   },
   created() {
     this.inviter = this.$route.query.i
-    this.$store.dispatch('getLenderById', { lenderId: this.inviter }).then(res => {
-      this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-    })
+    this.$store
+      .dispatch('getLenderById', { lenderId: this.inviter })
+      .then(res => {
+        this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+        this.isLoading = true
+      })
+      .catch(err => {
+        this.$router.replace('/404')
+      })
   },
   methods: {
     toAuth() {
