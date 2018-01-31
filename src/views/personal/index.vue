@@ -7,7 +7,7 @@
         <span class="tel">{{personal.userName}}</span>
       </div>
       <div class="personal-header_avatar">
-        <img :src="personal.headimg ? personal.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'"  alt="头像">
+        <img :src="personal.headimg ? personal.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'"  @error="onError" alt="头像">
       </div>
     </div>
     <div class="personal-grid">
@@ -89,6 +89,14 @@ export default {
     this.$store.dispatch('personalIndex').then(res => {
       this.personal = res
     })
+  },
+  methods: {
+    onError(e) {
+      let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
+      if (e.target.src !== defaultURL) {
+        e.target.src = defaultURL
+      }
+    }
   }
 }
 </script>

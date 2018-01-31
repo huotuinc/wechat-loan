@@ -6,7 +6,7 @@
         <p>{{lendInfo.lendAmount}}元</p>
       </div>
       <div class="ft">
-        <img :src="lendInfo.lenderHeadimg ? lendInfo.lenderHeadimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
+        <img :src="lendInfo.lenderHeadimg ? lendInfo.lenderHeadimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
       </div>
     </div>
     <div class="card-bd vux-1px-b">
@@ -61,6 +61,12 @@ export default {
         return '已拒绝'
       }
       return ''
+    },
+    onError(e) {
+      let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
+      if (e.target.src !== defaultURL) {
+        e.target.src = defaultURL
+      }
     }
   }
 }

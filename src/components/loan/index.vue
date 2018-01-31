@@ -1,7 +1,7 @@
 <template>
   <a href="javascript:;" class="loaner-item" @click="goLender">
     <div class="hd">
-      <img :src="lender.lenderHeadimg" alt="头像">
+      <img :src="lender.lenderHeadimg ? lender.lenderHeadimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
     </div>
     <div class="bd">
       <h4>{{lender.lenderName}}</h4>
@@ -22,6 +22,12 @@ export default {
   methods: {
     goLender() {
       this.$router.push({ name: 'Lender', params: { lenderId: this.lender.lenderId, lendId: this.lender.lendId } })
+    },
+    onError(e) {
+      let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
+      if (e.target.src !== defaultURL) {
+        e.target.src = defaultURL
+      }
     }
   }
 }

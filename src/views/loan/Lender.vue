@@ -9,7 +9,7 @@
       <div class="background"></div>
       <div class="info">
         <div class="avatar">
-          <img :src="userInfo.headimg ? userInfo.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
+          <img :src="userInfo.headimg ? userInfo.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
         </div>
         <div class="desc vux-1px-b">
           <div class="item item-name">
@@ -142,6 +142,12 @@ export default {
           this.requestData.pageIndex++
         }
       })
+    },
+    onError(e) {
+      let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
+      if (e.target.src !== defaultURL) {
+        e.target.src = defaultURL
+      }
     }
   }
 }

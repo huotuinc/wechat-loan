@@ -7,7 +7,7 @@
         >
     <div class="loan-head vux-1px-b">
         <div class="loan-head_hd">
-          <img :src="page.headimg ? page.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" alt="头像">
+          <img :src="page.headimg ? page.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
         </div>
         <div class="loan-head_bd">
           <p class="loan-head_title">我的负债</p>
@@ -16,10 +16,10 @@
         </div>
     </div>
     <div class="loan-msg vux-1px-b">
-      <div class="loan-msg_item">
+      <!-- <div class="loan-msg_item">
         <p><span class="loan-msg_num">{{page.offlineMsgCount}}<span class="vux-badge vux-badge-single" v-show="page.offlineMsgCount > 10">&middot;&middot;&middot;</span></span></p>
         <span>好友消息</span>
-      </div>
+      </div> -->
       <div class="loan-msg_item">
         <p>{{page.loanNum}}</p>
         <span>借款次数</span>
@@ -125,6 +125,12 @@ export default {
     },
     goToMessage() {
       this.$router.push({ path: '/message/todo' })
+    },
+    onError(e) {
+      let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
+      if (e.target.src !== defaultURL) {
+        e.target.src = defaultURL
+      }
     }
   }
 }
