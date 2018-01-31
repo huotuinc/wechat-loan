@@ -63,7 +63,7 @@ export const constantRouterMap = [
     }
   },
   {
-    path: 'subscribe/:lenderId/lend/:lendId',
+    path: '/subscribe/:lenderId/lend/:lendId',
     name: 'Subscribe',
     component: _import('loan/LoanPublish'),
     meta: {

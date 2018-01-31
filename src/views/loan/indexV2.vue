@@ -69,7 +69,8 @@ export default {
         lenderId: 0,
         pageIndex: 1,
         pageSize: 10
-      }
+      },
+      more: true
     }
   },
   watch: {
@@ -109,7 +110,11 @@ export default {
       this.$router.push({ path: '/follow' })
     },
     onPullingUp() {
-      this.getLenderList()
+      if (this.more) {
+        this.getLenderList()
+      } else {
+        this.$refs.scroll.forceUpdate()
+      }
     },
     getLenderList() {
       this.$store.dispatch('getLenderList', this.requestData).then(res => {
@@ -117,7 +122,7 @@ export default {
         this.lenderList = this.lenderList.concat(newList)
         if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newList.length < this.requestData.pageSize) {
-          this.$refs.scroll.forceUpdate()
+          this.more = false
         } else {
           this.requestData.pageIndex++
         }

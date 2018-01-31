@@ -59,7 +59,8 @@ export default {
         pageSize: 10,
         source: 1
       },
-      isEmpty: true
+      isEmpty: true,
+      more: true
     }
   },
   mounted() {
@@ -83,7 +84,11 @@ export default {
   },
   methods: {
     onPullingUp() {
-      this.getOrderList()
+      if (this.more) {
+        this.getOrderList()
+      } else {
+        this.$refs.scroll.forceUpdate()
+      }
     },
     getOrderList() {
       this.$store.dispatch('getBorrowList', this.requestData).then(newOrder => {
@@ -91,7 +96,7 @@ export default {
         if (newOrder.length > 0) this.isEmpty = false
         if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newOrder.length < this.requestData.pageSize) {
-          this.$refs.scroll.forceUpdate()
+          this.more = false
         } else {
           this.requestData.pageIndex++
         }

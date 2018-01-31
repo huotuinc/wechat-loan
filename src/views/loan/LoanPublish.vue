@@ -83,7 +83,7 @@ export default {
         })
         .then(res => {
           this.oneLendInfo = res
-          this._valve(res)
+          // this._valve(res)
         })
         .catch(err => {
           console.log(err)

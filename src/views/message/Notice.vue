@@ -44,7 +44,8 @@ export default {
         pageSize: 10,
         startTime: localStorage.getItem('lastLogin')
       },
-      isEmpty: true
+      isEmpty: true,
+      more: true
     }
   },
   mounted() {
@@ -68,7 +69,11 @@ export default {
   },
   methods: {
     onPullingUp() {
-      this.getNoticeList()
+      if (this.more) {
+        this.getNoticeList()
+      } else {
+        this.$refs.scroll.forceUpdate()
+      }
     },
     getNoticeList() {
       this.$store.dispatch('getNotice', this.requestData).then(newOrder => {
@@ -76,7 +81,7 @@ export default {
         if (newOrder.length > 0) this.isEmpty = false
         if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newOrder.length < this.requestData.pageSize) {
-          this.$refs.scroll.forceUpdate()
+          this.more = false
         } else {
           this.requestData.pageIndex++
         }

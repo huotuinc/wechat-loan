@@ -65,7 +65,8 @@ export default {
       },
       oneLendInfo: {},
       lenderId: '',
-      lendId: ''
+      lendId: '',
+      more: true
     }
   },
   watch: {
@@ -123,13 +124,17 @@ export default {
   },
   methods: {
     onPullingUp() {
-      this.getLenderList()
+      if (this.more) {
+        this.getLenderList()
+      } else {
+        this.$refs.scroll.forceUpdate()
+      }
     },
     getLenderList() {
       this.$store.dispatch('getLenderList', this.requestData).then(res => {
         let newList = res.list
         let index = newList.findIndex(l => {
-          return (l.lendId = this.oneLendInfo.lendId)
+          return l.lendId === this.oneLendInfo.lendId
         })
         if (index !== -1) {
           newList.splice(index, 1)
@@ -137,7 +142,7 @@ export default {
         this.lenderList = this.lenderList.concat(newList)
         if (this.requestData.pageIndex === 1) this.requestData.pageIndex++
         if (newList.length < this.requestData.pageSize) {
-          this.$refs.scroll.forceUpdate()
+          this.more = false
         } else {
           this.requestData.pageIndex++
         }
