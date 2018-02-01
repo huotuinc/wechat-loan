@@ -18,7 +18,7 @@
                 <img :src="order.headimg ? order.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'"  alt="">
               </div>
               <div class="loan-bd_content">
-                <p>联系电话：<span>{{order.lenderUserName}}</span></p>
+                <p>联系电话：<span>{{order.lenderUserName ? order.lenderUserName.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : ''}}</span></p>
                 <p>借款金额：<span>{{order.money}}元</span>&nbsp;&nbsp;&nbsp;&nbsp;借款时长：<span>{{order.interval}}天</span></p>
                 <p>借款用途：<span>{{order.purpose}}</span></p>
               </div>

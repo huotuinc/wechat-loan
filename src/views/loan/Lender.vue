@@ -19,7 +19,7 @@
           </div>
           <div class="item item-tel">
             <i class="iconfont icon-mobile"></i>
-            <span>{{userInfo.mobile}}</span>
+            <span>{{userInfo.mobile ? userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : ''}}</span>
             <!-- <a href="/" class="btn" v-if="!userInfo.friend"><i class="iconfont icon-add-friends"></i>&nbsp;添加好友</a> -->
           </div>
         </div>
