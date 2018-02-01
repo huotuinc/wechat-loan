@@ -28,7 +28,7 @@
 <script>
 import { Group, XButton } from 'vux'
 import lrz from 'lrz'
-import uploader from '@/utils/uploaderV2'
+import uploader from '@/utils/uploader'
 import { UPDATE_LOADING } from '@/store/mutation-type'
 
 export default {

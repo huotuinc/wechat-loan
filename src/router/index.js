@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout/Layout'
+import Layout from '@/views/layout'
 
 const _import = require('./_import')
 
@@ -15,7 +15,7 @@ export const constantRouterMap = [
         path: '',
         alias: '/loan',
         name: 'Loan',
-        component: _import('loan/index'),
+        component: _import('loan/indexV2'),
         meta: {
           title: '过海有信'
         }
@@ -37,11 +37,11 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'todo',
-        name: 'Todo',
-        component: _import('todo/index'),
+        path: 'applyList',
+        name: 'ApplyList',
+        component: _import('personal/ApplyLogs'),
         meta: {
-          title: '待办事项'
+          title: '借款申请记录'
         }
       },
       {
@@ -53,6 +53,22 @@ export const constantRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/lender/:lenderId/lend/:lendId',
+    name: 'Lender',
+    component: _import('loan/Lender'),
+    meta: {
+      title: '出借人信息'
+    }
+  },
+  {
+    path: '/subscribe/:lenderId/lend/:lendId',
+    name: 'Subscribe',
+    component: _import('loan/LoanPublish'),
+    meta: {
+      title: '我要借款'
+    }
   },
   {
     path: '/login',
@@ -124,6 +140,36 @@ export const constantRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/message',
+    component: _import('message/index'),
+    children: [
+      {
+        path: 'todo',
+        name: 'Todo',
+        component: _import('message/Todo'),
+        meta: {
+          title: '待处理'
+        }
+      },
+      {
+        path: 'notice',
+        name: 'Notice',
+        component: _import('message/Notice'),
+        meta: {
+          title: '通知'
+        }
+      }
+    ]
+  },
+  {
+    path: '/announce',
+    name: 'Announce',
+    component: _import('message/Announce'),
+    meta: {
+      title: '公告'
+    }
   },
   {
     path: '/orderInfo/:orderId',
@@ -202,7 +248,15 @@ export const constantRouterMap = [
     name: 'Authentication',
     component: _import('authentication/index'),
     meta: {
-      title: '信用报告'
+      title: '信用认证'
+    }
+  },
+  {
+    path: '/invite',
+    name: 'Invite',
+    component: _import('authentication/Invite'),
+    meta: {
+      title: '信用认证'
     }
   },
   {

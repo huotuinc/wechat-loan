@@ -4,11 +4,21 @@ const loginData = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
   data: {
-    userId: '@id',
+    authIdCard: false,
+    education: 1,
+    headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+    homeAddress: null,
+    marry: false,
     merchantId: 1,
-    uname: '@cname',
-    userToken: '@guid',
-    headimg: '@IMG(30x30)'
+    qq: null,
+    realEstate: 3,
+    realEstateType: 10,
+    realName: null,
+    userCardNo: null,
+    userId: 29,
+    userName: '15670007176',
+    userToken: 'c21326b5-cbc7-4154-ad46-6e68e41a86bb',
+    userType: 0
   }
 })
 

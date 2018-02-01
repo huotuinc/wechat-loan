@@ -132,3 +132,123 @@ Mock.mock(/\/api\/authentication\/identityHtml/, 'post', uploader.identity)
 Mock.mock(/\/api\/user\/report\/riskCallList/, 'post', record.riskCallList)
 Mock.mock(/\/api\/user\/report\/emergencyContactList/, 'post', record.emergencyContactList)
 Mock.mock(/\/api\/user\/report\/consumeBillList/, 'post', record.consumeBillList)
+
+Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    userInfo: {
+      userId: 0,
+      realName: '张三',
+      mobile: '13000000000',
+      nums: 10,
+      friend: '@boolean',
+      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+    }
+  }
+})
+
+Mock.mock(/\/api\/sys\/getMessageCount/, 'get', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    countNum: '@integer(10, 999)'
+  }
+})
+
+Mock.mock(/\/api\/user\/lenderList/, 'post', {
+  resultCode: 2000,
+  resultMsg: '操作成功',
+  data: {
+    list: [
+      {
+        lendId: 28,
+        lenderId: 51,
+        lenderName: '陈洁',
+        lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
+        lendAmount: '5000-10000',
+        lendDays: '14天-1个月',
+        interestRate: 24.0,
+        receivedCount: 1,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '1天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 27,
+        lenderId: 51,
+        lenderName: '陈洁',
+        lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
+        lendAmount: '3000-5000',
+        lendDays: '7-14天',
+        interestRate: 24,
+        receivedCount: 0,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '1天后到期',
+        applyStatus: 0
+      },
+      {
+        lendId: 26,
+        lenderId: 51,
+        lenderName: '陈洁',
+        lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
+        lendAmount: '300-3000',
+        lendDays: '1-7天',
+        interestRate: 24.0,
+        receivedCount: 1,
+        lendStatus: 1,
+        lendStatusHtml: '上架',
+        repayType: '一次偿还本息',
+        endTimeHtml: '1天后到期',
+        applyStatus: 1
+      }
+    ]
+  }
+})
+
+Mock.mock(/\/api\/lend\/lendInfo/, 'post', {
+  resultCode: 2000,
+  resultMsg: '操作成功',
+  data: {
+    lendId: 26,
+    lenderId: 51,
+    lenderName: '陈洁',
+    lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
+    lendAmount: '300-3000',
+    lendDays: '1-7天',
+    interestRate: 24.0,
+    receivedCount: 1,
+    lendStatus: 1,
+    lendStatusHtml: '上架',
+    repayType: '一次偿还本息',
+    endTimeHtml: '1天后到期',
+    applyStatus: 0
+  }
+})
+
+Mock.mock(/\/api\/sys\/getAnnouceList/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  'data|10': [
+    {
+      annId: '@id',
+      title: '@ctitle',
+      infoType: '@pick([6,8])',
+      createTime: '2017-11-12 11:22：45'
+    }
+  ]
+})
+Mock.mock(/\/api\/sys\/getAnnouceInfo/, 'get', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    annId: '@id',
+    title: '@ctitle',
+    content: '@cparagraph',
+    createTime: '2017-11-12 11:22：45'
+  }
+})

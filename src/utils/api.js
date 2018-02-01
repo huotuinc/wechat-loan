@@ -10,7 +10,7 @@ const noMsg = [4003, 4123, 4130, 4410, 4408, 4405, 4406, 4407, 4412]
 const service = Vue => {
   const axios = Axios.create({
     // baseURL: 'http://192.168.1.48:8888',
-    timeout: 15000,
+    timeout: 10000,
     headers: {
       osType: 'h5',
       merchantId: 1,

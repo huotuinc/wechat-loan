@@ -35,7 +35,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getOrderNotice').then(res => {
-      this.messageList = []
+      this.messageList = res
     })
   }
 }
@@ -127,4 +127,3 @@ export default {
   }
 }
 </style>
-

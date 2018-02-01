@@ -12,6 +12,7 @@ const whiteList = [
   '/case',
   '/success',
   '/splash',
+  '/invite',
   '/test'
 ]
 

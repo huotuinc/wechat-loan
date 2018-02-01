@@ -22,7 +22,7 @@
 import { XInput, Group, XButton, Cell } from 'vux'
 import { mapGetters } from 'vuex'
 import lrz from 'lrz'
-import uploader from '@/utils/uploaderV2'
+import uploader from '@/utils/uploader'
 import { UPDATE_LOADING } from '@/store/mutation-type'
 
 export default {

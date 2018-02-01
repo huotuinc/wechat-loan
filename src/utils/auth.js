@@ -6,7 +6,7 @@ const UserInfo = 'User-Info'
 const ChannelId = 'channelId'
 
 export function getUserId() {
-  return Cookies.get(UserId)
+  return Cookies.get(UserId) || ''
 }
 
 export function setUserId(id) {
@@ -22,7 +22,7 @@ export function removeUserId() {
 }
 
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return Cookies.get(TokenKey) || ''
 }
 
 export function setToken(token) {
@@ -58,9 +58,17 @@ export function setChannelId(channelId) {
 }
 
 export function getChannelId(channelId) {
-  return Cookies.getJSON(ChannelId)
+  return Cookies.getJSON(ChannelId) || 'default'
 }
 
 export function removeChannelId() {
   return Cookies.remove(ChannelId)
+}
+
+export function setFollow() {
+  return Cookies.set('isHidden', true, { expires: 1 })
+}
+
+export function getFollow() {
+  return Cookies.getJSON('isHidden')
 }

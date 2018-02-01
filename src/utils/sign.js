@@ -34,11 +34,10 @@ const sign = data => {
   let userInfo = getUserInfo()
   // 过滤空值
   for (let param in signParams) {
-    if (signParams[param] === '' || signParams[param] === undefined) {
+    if (signParams[param] === '' || signParams[param] === undefined || signParams[param] === null) {
       delete signParams[param]
     }
   }
-
   for (let info in userInfo) {
     if (!(validKey.indexOf(info) > -1 && userInfo[info] !== '')) {
       delete userInfo[info]

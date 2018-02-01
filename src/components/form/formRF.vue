@@ -10,6 +10,7 @@
           ref="username"
           required
           :show-clear="false"
+          type="tel"
           v-model="obj.username">
           <i slot="label" class="iconfont icon-mobile"></i>
         </x-input>
@@ -18,6 +19,7 @@
           name="authCode"
           placeholder="请输入验证码"
           required
+          type="tel"
           class="weui-vcode"
           :show-clear="false"
           v-model="obj.verifyCode">
@@ -165,6 +167,7 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
+        if (localStorage.getItem('inviter')) form.inviter = localStorage.getItem('inviter')
       }
       if (this.type === 'forget') {
         action = 'forger'
@@ -179,7 +182,13 @@ export default {
           .then(() => {
             if (this.type === 'register') {
               if (isWechat()) {
-                this.$router.push({ path: '/publish' })
+                if (form.inviter) {
+                  history.replaceState(null, '过海有信', '/')
+                  this.$router.push({ path: '/authentication' })
+                  localStorage.removeItem('inviter')
+                } else {
+                  this.$router.push({ path: '/publish' })
+                }
               } else {
                 this.$router.push({ path: '/splash', query: { to: 'publish' } })
               }

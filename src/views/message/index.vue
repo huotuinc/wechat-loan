@@ -1,6 +1,6 @@
 <template>
   <view-box>
-    <tab :line-width="2" active-color="#ff9c00" v-model="index" custom-bar-width="40px">
+    <tab :line-width="2" active-color="#ff9c00" v-model="index">
       <tab-item class="vux-center" :selected="activeTab === item" v-for="(item, index) in tabList" @on-item-click="pageChange" :key="index">{{item}}</tab-item>
     </tab>
     <div class="loan-list-wrap">
@@ -31,7 +31,7 @@
 <script>
 import { Tabbar, TabbarItem, ViewBox, Tab, TabItem } from 'vux'
 
-const list = () => ['全部', '待审核', '待还款', '已逾期', '已结清']
+const list = () => ['待处理', '通知']
 
 export default {
   name: 'Layout',
@@ -46,7 +46,7 @@ export default {
     return {
       index01: 0,
       tabList: list(),
-      activeTab: '全部',
+      activeTab: '待处理',
       index: 0
     }
   },
@@ -57,19 +57,10 @@ export default {
     pageChange(index) {
       switch (index) {
         case 0:
-          this.$router.replace({ path: '/orderList' })
+          this.$router.replace({ path: '/message/todo' })
           break
         case 1:
-          this.$router.replace({ path: '/orderList/pending' })
-          break
-        case 2:
-          this.$router.replace({ path: '/orderList/repayment' })
-          break
-        case 3:
-          this.$router.replace({ path: '/orderList/overdue' })
-          break
-        case 4:
-          this.$router.replace({ path: '/orderList/complete' })
+          this.$router.replace({ path: '/message/notice' })
           break
         default:
           break
@@ -77,20 +68,11 @@ export default {
     },
     changeTable() {
       switch (this.$route.name) {
-        case 'ALL':
-          this.activeTab = '全部'
+        case 'TODO':
+          this.activeTab = '待处理'
           break
-        case 'Pending':
-          this.activeTab = '待审核'
-          break
-        case 'Repayment':
-          this.activeTab = '待还款'
-          break
-        case 'Overdue':
-          this.activeTab = '已逾期'
-          break
-        case 'Complete':
-          this.activeTab = '已结清'
+        case 'Notice':
+          this.activeTab = '通知'
           break
         default:
           break

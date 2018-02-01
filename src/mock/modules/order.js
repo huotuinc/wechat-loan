@@ -72,7 +72,7 @@ const getRepayDetailData = Mock.mock({
 const orderNotice = Mock.mock({
   resultCode: 2000,
   resultMsg: 'OK',
-  'data|0-5': [
+  'data|10-15': [
     {
       noticeTitle: '@ctitle',
       noticeContent: '@csentence',
