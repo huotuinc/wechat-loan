@@ -7,7 +7,7 @@
       </div>
       <div class="download-content">
         <div class="download-btn_app">
-          <a href="https://fir.im/jre5" class="btn"><i class="iconfont icon-ios"></i> apple下载</a>
+          <a href="https://fir.im/m63p" class="btn"><i class="iconfont icon-ios"></i> apple下载</a>
           <a href="http://s.huobanmall.com/yxdownload.html " class="btn btn-android"><i class="iconfont icon-android"></i> android下载</a>
         </div>
       </div>
