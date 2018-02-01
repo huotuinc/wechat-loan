@@ -4,7 +4,7 @@
       <img :src="lender.lenderHeadimg ? lender.lenderHeadimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
     </div>
     <div class="bd">
-      <h4>{{lender.lenderName}}</h4>
+      <h4>{{replaceName(lender.lenderName)}}</h4>
       <p>{{lender.lendAmount}}元</p>
     </div>
     <div class="ft">
@@ -27,6 +27,13 @@ export default {
       let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
       if (e.target.src !== defaultURL) {
         e.target.src = defaultURL
+      }
+    },
+    replaceName(name) {
+      if (name.length === 2) {
+        return name.substr(0, 1) + new Array(name.length).join('*')
+      } else {
+        return name.substr(0, 1) + new Array(name.length - 1).join('*') + name.substr(-1)
       }
     }
   }

@@ -99,7 +99,10 @@ export default {
         lenderId: lenderId
       })
       .then(res => {
-        this.userInfo = res.userInfo
+        let realName = this.replaceName(res.userInfo.realName)
+        this.userInfo = Object.assign(res.userInfo, {
+          realName: realName
+        })
       })
       .catch(err => {
         console.log(err)
@@ -115,6 +118,7 @@ export default {
         })
         .then(res => {
           this.oneLendInfo = res
+
           this.getLenderList()
         })
         .catch(err => {
@@ -152,6 +156,13 @@ export default {
       let defaultURL = 'http://resali.huobanplus.com/cdn/avatar.png'
       if (e.target.src !== defaultURL) {
         e.target.src = defaultURL
+      }
+    },
+    replaceName(name) {
+      if (name.length === 2) {
+        return name.substr(0, 1) + new Array(name.length).join('*')
+      } else {
+        return name.substr(0, 1) + new Array(name.length - 1).join('*') + name.substr(-1)
       }
     }
   }
