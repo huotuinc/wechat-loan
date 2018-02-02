@@ -38,6 +38,11 @@ export default {
       market: ''
     }
   },
+  watch: {
+    $route(route) {
+      this.name = route.name
+    }
+  },
   created() {
     this.name = this.$route.name
     let userId = getUserId()
