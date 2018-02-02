@@ -15,7 +15,7 @@
         <h4>
           <span>iOS系统安装说明</span>
         </h4>
-        <img src="../../assets/explain.jpg" alt="安装说明">
+        <img src="../../assets/explain.png" alt="安装说明">
       </div>
     </div>
   </div>
@@ -90,5 +90,3 @@ export default {
   }
 }
 </style>
-
-
