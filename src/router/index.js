@@ -15,7 +15,7 @@ export const constantRouterMap = [
         path: '',
         alias: '/loan',
         name: 'Loan',
-        component: _import('loan/indexV2'),
+        component: _import('loan/index'),
         meta: {
           title: '过海有信'
         }
