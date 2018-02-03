@@ -106,6 +106,10 @@ export default {
     freeScroll: {
       type: Boolean,
       default: false
+    },
+    mouseWheel: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -121,18 +125,12 @@ export default {
   },
   computed: {
     pullUpTxt() {
-      const moreTxt =
-        (this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.more) ||
-        this.$i18n.t('scrollComponent.defaultLoadTxtMore')
-
-      const noMoreTxt =
-        (this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.noMore) ||
-        this.$i18n.t('scrollComponent.defaultLoadTxtNoMore')
-
+      const moreTxt = (this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.more) || '加载更多'
+      const noMoreTxt = (this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.noMore) || '没有更多数据了'
       return this.pullUpDirty ? moreTxt : noMoreTxt
     },
     refreshTxt() {
-      return (this.pullDownRefresh && this.pullDownRefresh.txt) || this.$i18n.t('scrollComponent.defaultRefreshTxt')
+      return (this.pullDownRefresh && this.pullDownRefresh.txt) || '刷新成功'
     }
   },
   created() {
@@ -161,7 +159,8 @@ export default {
         pullDownRefresh: this.pullDownRefresh,
         pullUpLoad: this.pullUpLoad,
         startY: this.startY,
-        freeScroll: this.freeScroll
+        freeScroll: this.freeScroll,
+        mouseWheel: this.mouseWheel
       }
 
       this.scroll = new BScroll(this.$refs.wrapper, options)
@@ -284,14 +283,10 @@ export default {
 
 <style lang="less">
 .list-wrapper {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  height: 100%;
   overflow: hidden;
   background: #fff;
-
   .scroll-content {
     position: relative;
     z-index: 1;
@@ -322,6 +317,7 @@ export default {
   transition: all;
 
   .after-trigger {
+    padding-bottom: 10px;
     margin-top: 10px;
   }
 }

@@ -2,7 +2,9 @@
   <div class="js-scroll-wrap">
     <scroll ref="scroll"
           :data="lenderList"
+          :pullDownRefresh="pullDownRefreshObj"
           :pullUpLoad="pullUpLoadObj"
+          @pullingDown="onPullingDown"
           @pullingUp="onPullingUp"
         >
     <div class="loan-head vux-1px-b">
@@ -61,6 +63,9 @@ export default {
       page: {},
       lenderList: [],
       show: true,
+      pullDownRefresh: true,
+      pullDownRefreshThreshold: 90,
+      pullDownRefreshStop: 40,
       pullUpLoad: true,
       pullUpLoadThreshold: 0,
       pullUpLoadMoreTxt: '加载更多',
@@ -74,6 +79,12 @@ export default {
     }
   },
   watch: {
+    pullDownRefreshObj: {
+      handler() {
+        this.rebuildScroll()
+      },
+      deep: true
+    },
     pullUpLoadObj: {
       handler() {
         this.rebuildScroll()
@@ -82,6 +93,14 @@ export default {
     }
   },
   computed: {
+    pullDownRefreshObj: function() {
+      return this.pullDownRefresh
+        ? {
+            threshold: parseInt(this.pullDownRefreshThreshold),
+            stop: parseInt(this.pullDownRefreshStop)
+          }
+        : false
+    },
     pullUpLoadObj() {
       return {
         threshold: parseInt(this.pullUpLoadThreshold),
@@ -102,12 +121,24 @@ export default {
   },
   methods: {
     closeFollow() {
-      console.debug('Ok')
       this.show = !this.show
       setFollow()
     },
     goToFollow() {
       this.$router.push({ path: '/follow' })
+    },
+    onPullingDown() {
+      this.requestData.pageIndex = 1
+      this.$store.dispatch('getLenderList', this.requestData).then(res => {
+        let newList = res.list
+        this.lenderList = newList
+        if (newList.length < this.requestData.pageSize) {
+          this.more = false
+        } else {
+          this.more = true
+          this.requestData.pageIndex++
+        }
+      })
     },
     onPullingUp() {
       if (this.more) {

@@ -160,11 +160,11 @@ Mock.mock(/\/api\/user\/lenderList/, 'post', {
   resultCode: 2000,
   resultMsg: '操作成功',
   data: {
-    list: [
+    'list|9-10': [
       {
-        lendId: 28,
+        lendId: '@id',
         lenderId: 51,
-        lenderName: '陈洁',
+        lenderName: '@cname',
         lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
         lendAmount: '5000-10000',
         lendDays: '14天-1个月',
@@ -175,36 +175,6 @@ Mock.mock(/\/api\/user\/lenderList/, 'post', {
         repayType: '一次偿还本息',
         endTimeHtml: '1天后到期',
         applyStatus: 0
-      },
-      {
-        lendId: 27,
-        lenderId: 51,
-        lenderName: '陈洁',
-        lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
-        lendAmount: '3000-5000',
-        lendDays: '7-14天',
-        interestRate: 24,
-        receivedCount: 0,
-        lendStatus: 1,
-        lendStatusHtml: '上架',
-        repayType: '一次偿还本息',
-        endTimeHtml: '1天后到期',
-        applyStatus: 0
-      },
-      {
-        lendId: 26,
-        lenderId: 51,
-        lenderName: '陈洁',
-        lenderHeadimg: 'http://cdn1.51huotao.com/superloan/image/1/head/51/20180129170592.png',
-        lendAmount: '300-3000',
-        lendDays: '1-7天',
-        interestRate: 24.0,
-        receivedCount: 1,
-        lendStatus: 1,
-        lendStatusHtml: '上架',
-        repayType: '一次偿还本息',
-        endTimeHtml: '1天后到期',
-        applyStatus: 1
       }
     ]
   }
