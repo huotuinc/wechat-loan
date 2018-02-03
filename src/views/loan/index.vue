@@ -128,10 +128,10 @@ export default {
       this.$router.push({ path: '/follow' })
     },
     onPullingDown() {
+      this.requestData.pageIndex = 1
       this.$store.dispatch('getLenderList', this.requestData).then(res => {
         let newList = res.list
         this.lenderList = newList
-        this.requestData.pageIndex = 1
         if (newList.length < this.requestData.pageSize) {
           this.more = false
         } else {
