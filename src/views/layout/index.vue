@@ -48,7 +48,7 @@ export default {
     let userId = getUserId()
     switch (window.MODE_BRANCH) {
       case 'master':
-        this.market = `http://market.51morecash.com/forend/project/list?userId=${userId}`
+        this.market = `http://loanmarket.51morecash.com/forend/project/list?userId=${userId}`
         break
       case 'dev':
         this.market = `http://market.51huotao.com/forend/project/list?userId=${userId}`
