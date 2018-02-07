@@ -104,6 +104,11 @@ export default {
   },
   created() {
     this.iframe = getLoanerRegisterLink()
+    if (!this.iframe) {
+      this.$store.dispatch('init').then(() => {
+        this.iframe = getLoanerRegisterLink()
+      })
+    }
     if (this.$route.path === '/register') {
       this.type = 'register'
     }

@@ -13,7 +13,10 @@ const whiteList = [
   '/success',
   '/splash',
   '/invite',
-  '/test'
+  '/test',
+  '/loan',
+  '/',
+  '/follow'
 ]
 
 router.beforeEach((to, from, next) => {
