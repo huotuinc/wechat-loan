@@ -13,10 +13,10 @@
         <i slot="icon" class="iconfont icon-home"></i>
         <span slot="label">首页</span>
       </tabbar-item>
-      <!-- <tabbar-item link="/">
+      <tabbar-item link="/">
         <i slot="icon" class="iconfont icon-loan-mk"></i>
         <span slot="label">贷款广场</span>
-      </tabbar-item> -->
+      </tabbar-item>
       <tabbar-item link="/publish">
         <i slot="icon" class="iconfont icon-borrow"></i>
         <span slot="label">我要借款</span>
