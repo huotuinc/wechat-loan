@@ -318,7 +318,7 @@ export const constantRouterMap = [
     path: '/riskCall',
     name: 'RiskCall',
     component: _import('record/RiskCall'),
-    eta: {
+    meta: {
       title: '风险通话记录'
     }
   },
@@ -326,7 +326,7 @@ export const constantRouterMap = [
     path: '/emergency',
     name: 'Emergency',
     component: _import('record/EmergencyContact'),
-    eta: {
+    meta: {
       title: '紧急联系人通话'
     }
   },
@@ -334,7 +334,7 @@ export const constantRouterMap = [
     path: '/consume',
     name: 'ConsumeBill',
     component: _import('record/ConsumeBill'),
-    eta: {
+    meta: {
       title: '缴费记录'
     }
   },
@@ -342,7 +342,7 @@ export const constantRouterMap = [
     path: '/shareOrder',
     name: 'ShareOrderByOne',
     component: _import('receive/index'),
-    eta: {
+    meta: {
       title: '领取'
     }
   },
@@ -350,7 +350,7 @@ export const constantRouterMap = [
     path: '/success',
     name: 'ReceiveSuccess',
     component: _import('receive/Success'),
-    eta: {
+    meta: {
       title: '领取成功'
     }
   },
