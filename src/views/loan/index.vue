@@ -8,14 +8,9 @@
           @pullingUp="onPullingUp"
         >
     <div class="loan-head vux-1px-b">
-        <div class="loan-head_hd">
-          <img :src="page.headimg ? page.headimg : 'http://resali.huobanplus.com/cdn/avatar.png'" @error="onError" alt="头像">
-        </div>
-        <div class="loan-head_bd">
-          <p class="loan-head_title">我的负债</p>
-          <h2 class="loan-head_debt">{{page.myLoanAmount}}</h2>
-          <span class="loan-head_my"><i class="iconfont icon-zhi-ma"></i>&nbsp;信用认证：</span><span>{{page.authMsg}}</span>
-        </div>
+      <div class="loan-btn-wrap">
+        <x-button @click.native="goToPublish" class="btn-yellow">我要借款</x-button>
+      </div>
     </div>
     <div class="loan-msg vux-1px-b">
       <!-- <div class="loan-msg_item">
@@ -47,6 +42,7 @@
   </div>
 </template>
 <script>
+import { XButton } from 'vux'
 import Scroll from '../../components/scroll/scroll'
 import Loaner from '../../components/loan'
 import { getFollow, setFollow } from '../../utils/auth'
@@ -56,7 +52,8 @@ export default {
   name: 'Loan',
   components: {
     Scroll,
-    Loaner
+    Loaner,
+    XButton
   },
   data() {
     return {
@@ -127,6 +124,9 @@ export default {
     goToFollow() {
       this.$router.push({ path: '/follow' })
     },
+    goToPublish() {
+      this.$router.push({ path: '/publish' })
+    },
     onPullingDown() {
       this.requestData.pageIndex = 1
       this.$store.dispatch('getLenderList', this.requestData).then(res => {
@@ -186,7 +186,7 @@ export default {
   display: -webkit-flex;
   display: flex;
   background: #fff;
-  min-height: 91px;
+  min-height: 60px;
   .loan-head_hd {
     margin-right: 10px;
     width: 74px;
@@ -219,6 +219,11 @@ export default {
   }
   .loan-head_my {
     color: #ff9c00 !important;
+  }
+  .loan-btn-wrap {
+    margin: 12px auto 0;
+    width: 300px;
+    height: 46px;
   }
 }
 .loan-msg {

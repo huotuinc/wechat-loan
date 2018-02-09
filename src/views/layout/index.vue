@@ -10,9 +10,9 @@
         <i slot="icon" class="iconfont icon-loan-mk"></i>
         <span slot="label">贷款广场</span>
       </tabbar-item>
-      <tabbar-item :selected="name === 'Publish'" link="/publish">
-        <i slot="icon" class="iconfont icon-borrow"></i>
-        <span slot="label">我要借款</span>
+      <tabbar-item :selected="name === 'PublishList'" link="/publishList">
+        <i slot="icon" class="iconfont icon-list"></i>
+        <span slot="label">发布记录</span>
       </tabbar-item>
       <tabbar-item :selected="name === 'Personal'" link="/personal">
         <i slot="icon" class="iconfont icon-personal"></i>
@@ -48,10 +48,10 @@ export default {
     let userId = getUserId()
     switch (window.MODE_BRANCH) {
       case 'master':
-        this.market = `http://loanmarket.51morecash.com/forend/project/list?userId=${userId}`
+        this.market = `http://loanmarket.51morecash.com/forend/project/list`
         break
       case 'dev':
-        this.market = `http://market.51huotao.com/forend/project/list?userId=${userId}`
+        this.market = `http://market.51huotao.com/forend/project/list`
         break
       default:
         this.market = '/'
