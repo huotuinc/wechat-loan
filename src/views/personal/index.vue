@@ -46,11 +46,6 @@
         </cell>
       </group>
       <group class="loan-body_item">
-        <cell is-link title="发布记录" link="/publishList">
-          <i class="iconfont icon-add" slot="icon"></i>
-        </cell>
-      </group>
-      <group class="loan-body_item">
         <template v-if="personal.authReport">
           <cell is-link title="信用报告" link="/credit">
             <i class="iconfont icon-report" slot="icon"></i>
