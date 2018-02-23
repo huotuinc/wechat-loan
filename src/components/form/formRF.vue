@@ -51,13 +51,13 @@
     </div>
     <div class="login-btn_warp">
        <x-button @click.native="submit" class="btn-yellow">{{type === 'register' ? '注册' : '提交'}}</x-button>
-       <x-button class="btn-white" link="/login" v-if="type === 'register'">已有帐号</x-button>
-       <p class="login-tips">会员类型 - 借款人</p>
+       <x-button class="btn-white" link="/login" v-if="type === 'register' && !obj.inviter">已有帐号</x-button>
+       <p class="login-tips" v-if="!obj.inviter">会员类型 - 借款人</p>
     </div>
-    <div class="login-link">
-    <p>
-      <router-link to="/download">我是出借人</router-link>
-    </p>
+    <div class="login-link" v-if="!obj.inviter">
+      <p>
+        <router-link to="/download">我是出借人</router-link>
+      </p>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
         <iframe :src="iframe" frameborder="0"></iframe>
@@ -95,7 +95,8 @@ export default {
         username: '',
         password: '',
         verifyCode: '',
-        userType: 1
+        userType: 1,
+        inviter: ''
       },
       popupShow: false,
       iframe: '',
@@ -104,6 +105,9 @@ export default {
   },
   created() {
     this.iframe = getLoanerRegisterLink()
+    console.log(this.obj.inviter)
+    this.obj.inviter = sessionStorage.getItem('inviter')
+    console.log(this.obj.inviter)
     if (!this.iframe) {
       this.$store.dispatch('init').then(() => {
         this.iframe = getLoanerRegisterLink()
@@ -172,7 +176,7 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
-        if (localStorage.getItem('inviter')) form.inviter = localStorage.getItem('inviter')
+        if (this.obj.inviter) form.inviter = this.obj.inviter
       }
       if (this.type === 'forget') {
         action = 'forger'
@@ -190,7 +194,7 @@ export default {
                 if (form.inviter) {
                   history.replaceState(null, '过海有信', '/')
                   this.$router.push({ path: '/authentication' })
-                  localStorage.removeItem('inviter')
+                  sessionStorage.removeItem('inviter')
                 } else {
                   this.$router.push({ path: '/publish' })
                 }

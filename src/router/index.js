@@ -287,7 +287,6 @@ export const constantRouterMap = [
     path: '/identity',
     name: 'Identity',
     component: _import('identity/index'),
-    // component: _import('update'),
     meta: {
       title: '身份证识别'
     }

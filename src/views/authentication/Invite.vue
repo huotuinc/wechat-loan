@@ -82,7 +82,7 @@ export default {
         this.$vux.toast.text('缺少必要参数')
         return
       }
-      localStorage.setItem('inviter', this.inviter)
+      sessionStorage.setItem('inviter', this.inviter)
       this.$router.push('/register')
     }
   }
