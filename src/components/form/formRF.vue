@@ -190,11 +190,11 @@ export default {
           .dispatch(action, form)
           .then(() => {
             if (this.type === 'register') {
+              sessionStorage.removeItem('inviter')
               if (isWechat()) {
                 if (form.inviter) {
                   history.replaceState(null, '过海有信', '/')
                   this.$router.push({ path: '/authentication' })
-                  sessionStorage.removeItem('inviter')
                 } else {
                   this.$router.push({ path: '/publish' })
                 }
