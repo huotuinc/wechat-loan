@@ -183,14 +183,10 @@ export default {
       }
     },
     receiveOrder() {
-      if (/^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/.test(this.receiveData.loanerMobile)) {
-        if (this.receiveData.verifyCode) {
-          this.$emit('receive-order', this.receiveData)
-        } else {
-          this.$vux.toast.text('请填写验证码')
-        }
+      if (this.receiveData.verifyCode) {
+        this.$emit('receive-order', this.receiveData)
       } else {
-        this.$vux.toast.text('手机号有误')
+        this.$vux.toast.text('请填写验证码')
       }
     },
     open() {
