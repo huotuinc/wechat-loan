@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 import './assets/font/iconfont.css'
 import './permission'
-// import './mock'
+import './mock'
 
 window.MODE_BRANCH = process.env.MODE_BRANCH
 FastClick.attach(document.body)
