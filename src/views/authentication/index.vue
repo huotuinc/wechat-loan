@@ -1,10 +1,10 @@
 <template>
-  <div class="loan-wrap">
+  <div class="loan-wrap" v-show="isLoading">
     <div class="auth-list clearfix">
       <div class="auth-feedback">
         <router-link to="/feedback"><i class="iconfont icon-feedback"></i> 问题反馈</router-link>
       </div>
-      <div class="auth-item">
+      <div class="auth-item" @click="payTips">
         <a :href="isPay && status.idCardFlg !== 3 ? '/identity' : 'javascript:;'" :class="classNames(status.idCardFlg)">
           <div class="icon">
             <i class="iconfont icon-photo"></i>
@@ -13,7 +13,7 @@
           <p>身份信息识别</p>
         </a>
       </div>
-      <div class="auth-item">
+      <div class="auth-item" @click="payTips">
         <a :href="isPay && status.uinfoFlg !== 3 ? '/basicInfo' : 'javascript:;'" :class="classNames(status.uinfoFlg)">
           <div class="icon">
             <i class="iconfont icon-user-o"></i>
@@ -22,7 +22,7 @@
           <p>基本信息认证</p>
         </a>
       </div>
-      <div class="auth-item">
+      <div class="auth-item" @click="payTips">
         <a :href="isPay && status.contactFlg !== 3 ? '/contacts' : 'javascript:;'" :class="classNames(status.contactFlg)">
           <div class="icon">
             <i class="iconfont icon-contacts"></i>
@@ -31,7 +31,7 @@
           <p>联系人信息</p>
         </a>
       </div>
-      <div class="auth-item">
+      <div class="auth-item" @click="payTips">
         <a href="javascript:;" @click.prevent="carrierHandleClick(isPay, status.carrierFlg)" :class="classNames(status.carrierFlg)">
           <div class="icon">
             <i class="iconfont icon-mobile"></i>
@@ -40,7 +40,7 @@
           <p>运营商认证</p>
         </a>
       </div>
-      <div class="auth-item">
+      <div class="auth-item" @click="payTips">
         <a href="javascript:;" @click.prevent="sesameHandleClick(isPay, status.zhimaFlg)" :class="classNames(status.zhimaFlg)">
           <div class="icon">
             <i class="iconfont icon-zhi-ma"></i>
@@ -50,6 +50,10 @@
         </a>
       </div>
     </div>
+    <ul class="basic-tips" v-show="!isShowPay()">
+      <li v-if="isSpecial"><strong style="color:#dc3545;">提示：</strong>点击图标进行认证。</li>
+      <li v-else><strong style="color:#dc3545;">注意：</strong>每次付费认证共有三次失败机会，即任何一项认证失败三次视为本次认证失败，需要重新付费。</li>
+    </ul>
     <div v-show="isShowPay()" @click="toPay" class="auth-btn">
       <p class="btn-yellow">付费认证</p>
     </div>
@@ -63,7 +67,9 @@ export default {
       status: {},
       sesameUrl: '',
       carrierUrl: '',
-      isPay: true
+      isPay: true,
+      isLoading: false,
+      isSpecial: false
     }
   },
   created() {
@@ -71,14 +77,31 @@ export default {
       this.status = res
     })
 
-    this.$store
-      .dispatch('checkIsPay')
-      .then(res => {
-        this.isPay = res
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.$store.dispatch('checkFree').then(res => {
+      console.log(`IsWakaka: ${res}`)
+      if (res) {
+        this.$store
+          .dispatch('createOrder', this.paymentForm)
+          .then(() => {
+            this.isSpecial = true
+            this.isLoading = true
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        this.$store
+          .dispatch('checkIsPay')
+          .then(res => {
+            console.log(`IsPay: ${res}`)
+            this.isPay = res
+            this.isLoading = true
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    })
   },
   methods: {
     toPay() {
@@ -116,7 +139,7 @@ export default {
     },
     classNames(flag) {
       return {
-        'is-pay': true,
+        'is-pay': this.isPay,
         'is-success': flag === 3,
         'is-failure': flag === 2 || flag === 4
       }
@@ -129,11 +152,14 @@ export default {
         this.status.carrierFlg === 3 &&
         this.status.zhimaFlg === 3
       ) {
-        console.log(1)
         return false
       } else {
         return !this.isPay
       }
+    },
+    payTips() {
+      if (this.isPay) return
+      this.$vux.toast.text('请先付费')
     }
   }
 }
@@ -242,6 +268,13 @@ export default {
     font-size: 18px;
     text-align: center;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
   }
+}
+.basic-tips {
+  padding: 20px;
+  font-size: 13px;
+  color: #999;
+  list-style: none;
 }
 </style>

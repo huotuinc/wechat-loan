@@ -222,3 +222,9 @@ Mock.mock(/\/api\/sys\/getAnnouceInfo/, 'get', {
     createTime: '2017-11-12 11:22：45'
   }
 })
+// 是否是免费用户
+Mock.mock(/\/api\/authentication\/checkFree/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: '@boolean'
+})
