@@ -65,7 +65,7 @@ export default {
     }
   },
   created() {
-    this.inviter = this.$route.query.i
+    this.inviter = encodeURIComponent(this.$route.query.i)
     this.$store
       .dispatch('getLenderById', { inviter: this.inviter })
       .then(res => {
