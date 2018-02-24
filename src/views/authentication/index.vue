@@ -81,30 +81,34 @@ export default {
       this.status = res
     })
 
+    /**
+     * 第一步，判断是否是特殊用户
+     * 第二部，判断有没有付款
+     * 1、特，付 -> oK
+     * 2、特，未付 -> 创建订单
+     * 3、非特，付 -> OK
+     * 4、非特，未付 -> 付款
+     */
     this.$store.dispatch('checkFree').then(res => {
+      this.isSpecial = res
       console.log(`IsWakaka: ${res}`)
-      if (res) {
-        this.$store
-          .dispatch('createOrder', this.paymentForm)
-          .then(() => {
-            this.isSpecial = true
+      this.$store.dispatch('checkIsPay').then(res => {
+        this.isPay = res
+        console.log(`IsPay: ${res}`)
+        if (!this.isPay) {
+          if (this.isSpecial) {
+            this.$store.dispatch('createOrder', this.paymentForm).then(() => {
+              console.log('创建订单完成')
+              this.isLoading = true
+              this.isPay = true
+            })
+          } else {
             this.isLoading = true
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        this.$store
-          .dispatch('checkIsPay')
-          .then(res => {
-            console.log(`IsPay: ${res}`)
-            this.isPay = res
-            this.isLoading = true
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+          }
+        } else {
+          this.isLoading = true
+        }
+      })
     })
   },
   methods: {
