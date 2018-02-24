@@ -402,12 +402,16 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '*',
+    path: '/404',
     name: '404',
     component: _import('404'),
     meta: {
       title: '404'
     }
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 

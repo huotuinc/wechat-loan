@@ -16,7 +16,8 @@ const whiteList = [
   '/test',
   '/loan',
   '/',
-  '/follow'
+  '/follow',
+  '/404'
 ]
 
 router.beforeEach((to, from, next) => {
