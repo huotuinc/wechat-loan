@@ -69,7 +69,11 @@ export default {
       carrierUrl: '',
       isPay: true,
       isLoading: false,
-      isSpecial: false
+      isSpecial: false,
+      paymentForm: {
+        tradeType: 1,
+        payType: 2
+      }
     }
   },
   created() {
