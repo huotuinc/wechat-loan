@@ -122,6 +122,20 @@ const authentication = {
             reject(error)
           })
       })
+    },
+    checkFree({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/authentication/checkFree',
+          method: 'post'
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 }

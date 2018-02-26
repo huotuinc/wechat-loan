@@ -18,12 +18,16 @@
         <span>好友消息</span>
       </div> -->
       <div class="loan-msg_item">
-        <p>{{page.loanNum}}</p>
+        <p>{{page.loanNum || 0}}</p>
         <span>借款次数</span>
       </div>
       <div class="loan-msg_item" @click="goToMessage">
         <p>{{(page.annceCount||0) + (page.orderNoticeCount||0)}}</p>
         <span>通知</span>
+      </div>
+      <div class="loan-msg_item" @click="goToAuth">
+        <p>{{page.authMsg || '未认证'}}</p>
+        <span>信用认证</span>
       </div>
     </div>
     <div class="loan-body vux-1px-b">
@@ -126,6 +130,9 @@ export default {
     },
     goToPublish() {
       this.$router.push({ path: '/publish' })
+    },
+    goToAuth() {
+      this.$router.push({ path: '/authentication' })
     },
     onPullingDown() {
       this.requestData.pageIndex = 1

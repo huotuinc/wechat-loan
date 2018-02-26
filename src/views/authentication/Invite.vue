@@ -61,16 +61,23 @@ export default {
     return {
       inviter: '',
       mobile: '',
-      isLoading: false
+      isLoading: false,
+      vip: false
     }
   },
   created() {
-    this.inviter = this.$route.query.i
+    this.inviter = encodeURIComponent(this.$route.query.i)
     this.$store
-      .dispatch('getLenderById', { lenderId: this.inviter })
+      .dispatch('getLenderById', { inviter: this.inviter })
       .then(res => {
+        if (res.invalidRequest) {
+          this.$router.replace('/404')
+          return
+        }
         this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
         this.isLoading = true
+        this.vip = res.userInfo.vip
+        console.log(this.vip)
       })
       .catch(err => {
         this.$router.replace('/404')
@@ -82,8 +89,12 @@ export default {
         this.$vux.toast.text('缺少必要参数')
         return
       }
-      localStorage.setItem('inviter', this.inviter)
-      this.$router.push('/register')
+      sessionStorage.setItem('inviter', this.inviter)
+      if (this.vip) {
+        this.$router.push('/signUp')
+      } else {
+        this.$router.push('/register')
+      }
     }
   }
 }
@@ -221,6 +232,7 @@ export default {
     font-size: 18px;
     text-align: center;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
   }
 }
 </style>

@@ -143,7 +143,8 @@ Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
       mobile: '13000000000',
       nums: 10,
       friend: '@boolean',
-      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+      vip: '@boolean'
     }
   }
 })
@@ -221,4 +222,10 @@ Mock.mock(/\/api\/sys\/getAnnouceInfo/, 'get', {
     content: '@cparagraph',
     createTime: '2017-11-12 11:22：45'
   }
+})
+// 是否是免费用户
+Mock.mock(/\/api\/authentication\/checkFree/, 'post', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: '@boolean'
 })

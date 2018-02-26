@@ -79,9 +79,25 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/signIn',
+    name: 'SignIn',
+    component: _import('express/login'),
+    meta: {
+      title: '登录'
+    }
+  },
+  {
     path: '/register',
     name: 'Register',
     component: _import('register/index'),
+    meta: {
+      title: '用户注册'
+    }
+  },
+  {
+    path: '/signUp',
+    name: 'SignUp',
+    component: _import('express/register'),
     meta: {
       title: '用户注册'
     }
@@ -94,7 +110,14 @@ export const constantRouterMap = [
       title: '忘记密码'
     }
   },
-
+  {
+    path: '/findPassword',
+    name: 'Password',
+    component: _import('express/register'),
+    meta: {
+      title: '忘记密码'
+    }
+  },
   {
     path: '/orderList',
     component: _import('order/index'),
@@ -287,7 +310,6 @@ export const constantRouterMap = [
     path: '/identity',
     name: 'Identity',
     component: _import('identity/index'),
-    // component: _import('update'),
     meta: {
       title: '身份证识别'
     }
@@ -403,12 +425,16 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '*',
+    path: '/404',
     name: '404',
     component: _import('404'),
     meta: {
       title: '404'
     }
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 

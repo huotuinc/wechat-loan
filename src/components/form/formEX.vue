@@ -51,13 +51,7 @@
     </div>
     <div class="login-btn_warp">
        <x-button @click.native="submit" class="btn-yellow">{{type === 'register' ? '注册' : '提交'}}</x-button>
-       <x-button class="btn-white" link="/login" v-if="type === 'register'">已有帐号</x-button>
-       <p class="login-tips">会员类型 - 借款人</p>
-    </div>
-    <div class="login-link">
-      <p>
-        <router-link to="/download">我是出借人</router-link>
-      </p>
+       <a href="javascript:;" class="btn-inline" @click="goToExpress">已有帐号</a>
     </div>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
@@ -70,7 +64,6 @@
 <script>
 import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
-import { isWechat } from '../../utils/isWechat'
 
 export default {
   directives: {
@@ -111,10 +104,10 @@ export default {
         this.iframe = getLoanerRegisterLink()
       })
     }
-    if (this.$route.path === '/register') {
+    if (this.$route.path === '/signUp') {
       this.type = 'register'
     }
-    if (this.$route.path === '/forget') {
+    if (this.$route.path === '/findPassword') {
       this.type = 'forget'
     }
   },
@@ -189,19 +182,11 @@ export default {
           .then(() => {
             if (this.type === 'register') {
               sessionStorage.removeItem('inviter')
-              if (isWechat()) {
-                if (form.inviter) {
-                  history.replaceState(null, '过海有信', '/')
-                  this.$router.push({ path: '/authentication' })
-                } else {
-                  this.$router.push({ path: '/publish' })
-                }
-              } else {
-                this.$router.push({ path: '/splash', query: { to: 'publish' } })
-              }
+              history.replaceState(null, '过海有信', '/')
+              this.$router.push({ path: '/authentication' })
             }
             if (this.type === 'forget') {
-              this.$router.push({ path: '/login' })
+              this.$router.push({ path: '/signIn' })
             }
             this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
@@ -226,7 +211,7 @@ export default {
       this.popupShow = true
     },
     goToExpress() {
-      this.$router.push({ path: '/express' })
+      this.$router.push({ path: '/signIn' })
     }
   }
 }
