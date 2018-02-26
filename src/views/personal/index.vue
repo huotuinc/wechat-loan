@@ -52,7 +52,7 @@
           </cell>
         </template>
         <template v-else>
-          <cell is-link title="信用报告" link="/authentication">
+          <cell is-link title="信用认证" link="/authentication">
             <i class="iconfont icon-report" slot="icon"></i>
           </cell>
         </template>
