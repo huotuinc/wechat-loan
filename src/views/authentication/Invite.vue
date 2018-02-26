@@ -61,7 +61,8 @@ export default {
     return {
       inviter: '',
       mobile: '',
-      isLoading: false
+      isLoading: false,
+      vip: false
     }
   },
   created() {
@@ -75,6 +76,8 @@ export default {
         }
         this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
         this.isLoading = true
+        this.vip = res.userInfo.vip
+        console.log(this.vip)
       })
       .catch(err => {
         this.$router.replace('/404')
@@ -87,7 +90,11 @@ export default {
         return
       }
       sessionStorage.setItem('inviter', this.inviter)
-      this.$router.push('/register')
+      if (this.vip) {
+        this.$router.push('/signUp')
+      } else {
+        this.$router.push('/register')
+      }
     }
   }
 }

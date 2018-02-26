@@ -143,7 +143,8 @@ Mock.mock(/\/api\/user\/lenderDetail/, 'post', {
       mobile: '13000000000',
       nums: 10,
       friend: '@boolean',
-      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png'
+      headimg: 'http://cdn1.51morecash.com/image/1/head/29/20180120134903.png',
+      vip: '@boolean'
     }
   }
 })
