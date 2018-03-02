@@ -1,6 +1,6 @@
 <template>
   <div class="loan-wrap" v-show="isLoading">
-    <div class="auth-head">
+    <div class="auth-head" v-show="!vip">
       <div class="hd"><i class="iconfont icon-smile"></i></div>
       <div class="bd">
         <h6>{{mobile}}</h6>
@@ -50,7 +50,8 @@
       </div>
     </div>
     <div @click="toAuth" class="auth-btn">
-      <p class="btn-yellow">立即认证</p>
+      <p class="btn-yellow" v-if="vip">我要借钱，免费认证</p>
+      <p class="btn-yellow" v-else>立即认证</p>
     </div>
   </div>
 </template>
@@ -67,6 +68,7 @@ export default {
   },
   created() {
     this.inviter = encodeURIComponent(this.$route.query.i)
+    this.vip = this.$route.query.v === '1'
     this.$store
       .dispatch('getLenderById', { inviter: this.inviter })
       .then(res => {
@@ -77,7 +79,6 @@ export default {
         this.mobile = res.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
         this.isLoading = true
         this.vip = res.userInfo.vip
-        console.log(this.vip)
       })
       .catch(err => {
         this.$router.replace('/404')
