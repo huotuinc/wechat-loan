@@ -279,7 +279,7 @@ export const constantRouterMap = [
     name: 'Invite',
     component: _import('authentication/Invite'),
     meta: {
-      title: '信用认证'
+      title: '快来征信'
     }
   },
   {
