@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 const UserId = 'User-Id'
-const TokenKey = 'User-ToKen'
+const TokenKey = 'User-Token'
 const UserInfo = 'User-Info'
 const ChannelId = 'channelId'
 

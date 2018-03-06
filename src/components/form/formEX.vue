@@ -44,6 +44,19 @@
           class="login-input_last">
           <i slot="label" class="iconfont icon-password"></i>
         </x-input>
+        <popup-picker
+          v-if="type === 'register'"
+          :data="sesameList"
+          v-model="sesame"
+          popup-title="芝麻分数"
+          class="login-input_last">
+          <template slot="title" slot-scope="props">
+            <span :class="props.labelClass">
+              <i class="iconfont icon-zhi-ma" style="color: #999;vertical-align: middle;"></i>
+              <span style="vertical-align:middle;">芝麻分数</span>
+            </span>
+          </template>
+        </popup-picker>
         <div class="login-agree" v-if="type === 'register'">
           <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">注册服务协议</ins>》</span>
         </div>
@@ -62,7 +75,7 @@
 </template>
 
 <script>
-import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon } from 'vux'
+import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon, Picker, PopupPicker } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
 
 export default {
@@ -75,7 +88,9 @@ export default {
     Group,
     Popup,
     Cell,
-    CheckIcon
+    CheckIcon,
+    Picker,
+    PopupPicker
   },
   data() {
     return {
@@ -89,11 +104,19 @@ export default {
         password: '',
         verifyCode: '',
         userType: 1,
-        inviter: ''
+        inviter: '',
+        zmfScore: ''
       },
       popupShow: false,
       iframe: '',
-      type: ''
+      type: '',
+      sesameList: [['500以下', '500-549', '550-600', '600以上']],
+      sesame: []
+    }
+  },
+  watch: {
+    sesame(val) {
+      this.obj.zmfScore = this.sesame[0]
     }
   },
   created() {
@@ -167,6 +190,7 @@ export default {
         form.password = md5(this.obj.password)
         form.verifyCode = this.obj.verifyCode
         form.userType = this.obj.userType
+        form.zmfScore = this.obj.zmfScore
         if (this.obj.inviter) form.inviter = this.obj.inviter
       }
       if (this.type === 'forget') {
@@ -199,7 +223,7 @@ export default {
       }
     },
     validForm() {
-      if (this.obj.username && this.obj.password && this.obj.verifyCode) {
+      if (this.obj.username && this.obj.password && this.obj.verifyCode && !!this.sesame.length) {
         if (this.getMobileValid() && this.getPwdValid() && this.getAuthValid()) return true
         return false
       } else {
@@ -247,5 +271,15 @@ export default {
   float: right;
   color: #000;
   text-decoration: underline;
+}
+.login-input_last {
+  > .vux-tap-active {
+    .weui-label {
+      width: auto;
+    }
+  }
+}
+.vux-cell-box.login-input_last::before {
+  border-top: none !important;
 }
 </style>

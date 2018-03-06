@@ -24,7 +24,48 @@
           popup-title="婚姻状况">
         </popup-picker>
         <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
-       <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber" placeholder="请输入微信号"></x-input>
+        <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber" placeholder="请输入微信号"></x-input>
+        <selector placeholder="请选择收款账户" v-model="form.gatheringType" title="收款方式" :options="gatheringList" direction="rtl"></selector>
+        <template v-if="form.gatheringType === 0">
+          <x-input
+            title="支付宝账号"
+            required
+            :show-clear="false"
+            v-model="form.alipayNum"
+            placeholder="请输入支付宝账号">
+          </x-input>
+        </template>
+        <template v-if="form.gatheringType === 1">
+          <x-input
+            title="开户银行"
+            required
+            :show-clear="false"
+            v-model="form.accountBank"
+            placeholder="请输入开户银行">
+          </x-input>
+          <x-input
+            title="银行卡号"
+            required
+            :show-clear="false"
+            v-model="form.bankNum"
+            placeholder="请输入银行卡号">
+          </x-input>
+          <x-address
+            class="vux-1px-t vux-address"
+            title="开户城市"
+            v-model="bankCity"
+            raw-value
+            :list="addressData"
+            value-text-align="right">
+          </x-address>
+          <x-input
+            title="开户支行"
+            required
+            :show-clear="false"
+            v-model="form.accountSubBranch"
+            placeholder="请输入开户支行">
+          </x-input>
+        </template>
       </group>
     </div>
     <ul class="basic-tips">
@@ -39,6 +80,7 @@
 
 <script>
 import {
+  Selector,
   XInput,
   Group,
   XButton,
@@ -62,7 +104,8 @@ export default {
     Cell,
     PopupPicker,
     Picker,
-    XAddress
+    XAddress,
+    Selector
   },
   data() {
     return {
@@ -70,6 +113,7 @@ export default {
       addressData: ChinaAddressV4Data,
       marry: [],
       address: [],
+      bankCity: [],
       list: [],
       form: {
         homeAreaCode: '',
@@ -77,12 +121,22 @@ export default {
         homeAddress: '',
         marry: '',
         unitName: '',
-        wechatNumber: ''
-      }
+        wechatNumber: '',
+        gatheringType: 0,
+        alipayNum: '',
+        accountBank: '',
+        bankNum: '',
+        accountSubBranch: '',
+        bankCity: ''
+      },
+      gatheringList: [{ key: 0, value: '支付宝 ' }, { key: 1, value: '银行卡' }]
     }
   },
   watch: {
     address() {
+      this.validForm()
+    },
+    bankCity() {
       this.validForm()
     },
     'form.wechatNumber'() {
@@ -95,6 +149,18 @@ export default {
       this.validForm()
     },
     'form.marry'() {
+      this.validForm()
+    },
+    'form.alipayNum'() {
+      this.validForm()
+    },
+    'form.accountBank'() {
+      this.validForm()
+    },
+    'form.bankNum'() {
+      this.validForm()
+    },
+    'form.accountSubBranch'() {
       this.validForm()
     }
   },
@@ -110,6 +176,7 @@ export default {
       list.push(ret)
     },
     submit() {
+      this.form.bankCity = this.getName(this.bankCity)
       this.form.homeAreaCode = this.address.join(',')
       this.form.homeArea = this.getName(this.address)
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '认证中' })
@@ -152,6 +219,30 @@ export default {
         this.isDisabled = true
         return
       }
+      if (this.form.gatheringType === 0) {
+        if (this.form.alipayNum === '') {
+          this.isDisabled = true
+          return
+        }
+      }
+      if (this.form.gatheringType === 1) {
+        if (this.form.accountBank === '') {
+          this.isDisabled = true
+          return
+        }
+        if (this.form.bankNum === '') {
+          this.isDisabled = true
+          return
+        }
+        if (this.form.accountSubBranch === '') {
+          this.isDisabled = true
+          return
+        }
+        if (this.bankCity == '') {
+          this.isDisabled = true
+          return
+        }
+      }
       this.isDisabled = false
     }
   }
@@ -174,5 +265,8 @@ export default {
   font-size: 13px;
   color: #999;
   list-style: none;
+}
+.vux-address::before {
+  left: 15px !important;
 }
 </style>
