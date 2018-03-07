@@ -119,12 +119,14 @@ export default {
       iframe: '',
       type: '',
       sesameList: [['500以下', '500-549', '550-600', '600以上']],
-      sesame: []
+      sesame: [],
+      sesameValue: ['500以下', '500-549', '550-600', '600以上']
     }
   },
   watch: {
     sesame(val) {
-      this.obj.zmfScore = this.sesame[0]
+      const index = this.sesameValue.indexOf(this.sesame[0])
+      this.obj.zmfScore = index + 1
     }
   },
   created() {
