@@ -1,8 +1,8 @@
 <template>
 <div class="loan-wrap credit-wrap">
     <tab :line-width="2" active-color="#ff9c00" class="credit-tab">
-      <tab-item class="vux-center" :selected="selected ==='CreditInfo'"><router-link to="/credit">认证信息</router-link></tab-item>
-      <tab-item class="vux-center" :selected="selected ==='CreditReport'"><router-link to="/credit/report">信用信息</router-link></tab-item>
+      <tab-item class="vux-center" :selected="selected ==='CreditInfo'"><router-link to="/credit" replace>认证信息</router-link></tab-item>
+      <tab-item class="vux-center" :selected="selected ==='CreditReport'"><router-link to="/credit/report" replace>信用信息</router-link></tab-item>
     </tab>
     <keep-alive>
       <router-view></router-view>

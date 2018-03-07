@@ -160,6 +160,7 @@ export default {
         this.status.carrierFlg === 3 &&
         this.status.zhimaFlg === 3
       ) {
+        this.$router.replace({ path: '/authSuccess' })
         return false
       } else {
         return !this.isPay

@@ -283,6 +283,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/authSuccess',
+    name: 'AuthSuccess',
+    component: _import('authentication/Success'),
+    meta: {
+      title: '认证完成'
+    }
+  },
+  {
     path: '/treaty/:orderId',
     name: 'Treaty',
     component: _import('treaty/index'),
