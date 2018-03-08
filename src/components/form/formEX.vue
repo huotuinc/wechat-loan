@@ -221,17 +221,39 @@ export default {
             console.log(err)
             this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
-      } else {
-        this.$vux.toast.text('信息填写有误')
       }
     },
     validForm() {
-      if (this.obj.username && this.obj.password && this.obj.verifyCode && !!this.sesame.length) {
-        if (this.getMobileValid() && this.getPwdValid() && this.getAuthValid()) return true
-        return false
-      } else {
+      if (!/^1([34578])\d{9}$/.test(this.obj.username)) {
+        this.$vux.toast.text('手机号错误')
         return false
       }
+      if (this.obj.verifyCode == '') {
+        this.$vux.toast.text('验证码错误')
+        return false
+      }
+      if (!this.getAuthValid()) {
+        this.$vux.toast.text('验证码错误')
+        return false
+      }
+
+      if (this.obj.password == '') {
+        this.$vux.toast.text('密码设置错误')
+        return false
+      }
+
+      if (!this.getPwdValid()) {
+        this.$vux.toast.text('密码设置错误')
+        return false
+      }
+
+      if (this.type === 'register') {
+        if (this.sesame.length == 0) {
+          this.$vux.toast.text('请选择芝麻分数')
+          return false
+        }
+      }
+      return true
     },
     open() {
       if (!this.iframe) return

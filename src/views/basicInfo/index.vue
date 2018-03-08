@@ -45,6 +45,7 @@
           </x-input>
           <x-input
             title="银行卡号"
+            type="number"
             required
             :show-clear="false"
             v-model="form.bankNum"

@@ -492,7 +492,7 @@ export const constantRouterMap = [
   },
   {
     path: '/third/login',
-    name: 'T-Register',
+    name: 'T-Login',
     component: _import('third/Login'),
     meta: {
       title: '登录',

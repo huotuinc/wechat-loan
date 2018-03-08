@@ -25,7 +25,11 @@
         <p>{{(page.annceCount||0) + (page.orderNoticeCount||0)}}</p>
         <span>通知</span>
       </div>
-      <div class="loan-msg_item" @click="goToAuth">
+      <div class="loan-msg_item" @click="goToAuth" v-if="page.authCode === 3">
+        <p>{{page.authMsg || '未认证'}}</p>
+        <span>信用报告</span>
+      </div>
+        <div class="loan-msg_item" @click="goToAuth" v-else>
         <p>{{page.authMsg || '未认证'}}</p>
         <span>信用认证</span>
       </div>
@@ -132,7 +136,11 @@ export default {
       this.$router.push({ path: '/publish' })
     },
     goToAuth() {
-      this.$router.push({ path: '/authentication' })
+      if (this.page.authCode === 3) {
+        this.$router.push({ path: '/credit' })
+      } else {
+        this.$router.push({ path: '/authentication' })
+      }
     },
     onPullingDown() {
       this.requestData.pageIndex = 1
