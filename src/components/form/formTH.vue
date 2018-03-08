@@ -39,10 +39,9 @@
           placeholder="请设置密码"
           v-model="obj.password"
           ref="password"
-          class="login-input_last"
           :min="6"
           required
-         >
+          class="login-input_last">
           <i slot="label" class="iconfont icon-password"></i>
         </x-input>
         <popup-picker
@@ -58,25 +57,11 @@
             </span>
           </template>
         </popup-picker>
-        <div class="login-agree" v-if="type === 'register'">
-          <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">注册服务协议</ins>》</span>
-        </div>
       </group>
     </div>
     <div class="login-btn_warp">
        <x-button @click.native="submit" class="btn-yellow">{{type === 'register' ? '注册' : '提交'}}</x-button>
-       <x-button class="btn-white" link="/login" v-if="type === 'register'">已有帐号</x-button>
-       <p class="login-tips">会员类型 - 借款人</p>
-    </div>
-    <div class="login-link">
-      <p>
-        <router-link to="/download">我是出借人</router-link>
-      </p>
-    </div>
-    <div v-transfer-dom>
-      <popup v-model="popupShow" position="bottom" max-height="50%">
-        <iframe :src="iframe" frameborder="0"></iframe>
-      </popup>
+       <a href="javascript:;" class="btn-inline" @click="goToExpress">已有帐号</a>
     </div>
   </div>
 </template>
@@ -84,7 +69,6 @@
 <script>
 import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon, Picker, PopupPicker } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
-import { isWechat } from '../../utils/isWechat'
 
 export default {
   directives: {
@@ -102,7 +86,6 @@ export default {
   },
   data() {
     return {
-      hasChecked: true,
       disabled: false,
       time: 0,
       timer: '',
@@ -130,17 +113,12 @@ export default {
     }
   },
   created() {
-    this.iframe = getLoanerRegisterLink()
     this.obj.inviter = sessionStorage.getItem('inviter')
-    if (!this.iframe) {
-      this.$store.dispatch('init').then(() => {
-        this.iframe = getLoanerRegisterLink()
-      })
-    }
-    if (this.$route.path === '/register') {
+
+    if (this.$route.name === 'T-Register') {
       this.type = 'register'
     }
-    if (this.$route.path === '/forget') {
+    if (this.$route.name === 'T-Forget') {
       this.type = 'forget'
     }
   },
@@ -161,7 +139,8 @@ export default {
           this.disabled = true
           this.$store
             .dispatch('sendVerifyCode', {
-              mobile: this.obj.username
+              mobile: this.obj.username,
+              smsProviderType: 1
             })
             .then(() => {
               this.$vux.toast.text('发送成功')
@@ -190,10 +169,6 @@ export default {
       }
     },
     submit() {
-      if (!this.hasChecked) {
-        this.$vux.toast.text('请确认阅读并同意《注册服务协议》')
-        return
-      }
       let action
       let form = {}
       if (this.type === 'register') {
@@ -218,20 +193,10 @@ export default {
           .then(() => {
             if (this.type === 'register') {
               sessionStorage.removeItem('inviter')
-              if (isWechat()) {
-                if (form.inviter) {
-                  sessionStorage.removeItem('inviter')
-                  history.replaceState(null, '过海有信', '/')
-                  this.$router.push({ path: '/authentication' })
-                } else {
-                  this.$router.push({ path: '/publish' })
-                }
-              } else {
-                this.$router.push({ path: '/splash', query: { to: 'publish' } })
-              }
+              this.$router.push({ path: '/authentication' })
             }
             if (this.type === 'forget') {
-              this.$router.push({ path: '/login' })
+              this.$router.push({ path: '/third/login' })
             }
             this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
@@ -251,12 +216,8 @@ export default {
         return false
       }
     },
-    open() {
-      if (!this.iframe) return
-      this.popupShow = true
-    },
     goToExpress() {
-      this.$router.push({ path: '/express' })
+      this.$router.push({ path: '/third/login' })
     }
   }
 }

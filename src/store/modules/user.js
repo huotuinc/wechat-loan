@@ -52,14 +52,12 @@ const user = {
           })
       })
     },
-    sendVerifyCode({}, mobile) {
+    sendVerifyCode({}, data) {
       return new Promise((resolve, reject) => {
         request({
           url: '/api/user/sendVerifyCode',
           method: 'post',
-          data: {
-            mobile: mobile
-          }
+          data: data
         })
           .then(response => {
             resolve(response)

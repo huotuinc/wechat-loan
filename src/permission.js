@@ -2,27 +2,6 @@ import router from './router'
 import store from './store'
 import { getToken } from './utils/auth'
 
-const whiteList = [
-  '/login',
-  '/register',
-  '/receive',
-  '/forget',
-  '/download',
-  '/shareOrder',
-  '/case',
-  '/success',
-  '/splash',
-  '/invite',
-  '/test',
-  '/loan',
-  '/',
-  '/follow',
-  '/404',
-  '/signUp',
-  '/signIn',
-  '/findPassword'
-]
-
 router.beforeEach((to, from, next) => {
   store.commit('UPDATE_LOADING', { isLoading: true })
   document.title = to.meta.title || ''
@@ -34,7 +13,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (!to.meta.auth) {
       next()
     } else {
       next('/login')

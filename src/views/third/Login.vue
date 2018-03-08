@@ -1,49 +1,38 @@
 <template>
   <div class="login-wrapper">
-    <div class="login-hd">
-      <div class="logo-wrapper">
-        <img class="logo" src="../../assets/logo.png" alt="有信">
-      </div>
-    </div>
-
-    <div>
-      <group label-width="4.5em" label-margin-right="2em" class="login-group">
-         <x-input
-          name="username"
-          placeholder="请输入手机号码"
-          keyboard="number"
-          is-type="china-mobile"
-          ref="username"
-          :show-clear="false"
-          required
-          type="tel"
-          v-model.trim="form.username"
-          class="login-input">
-          <i slot="label" class="iconfont icon-mobile"></i>
-        </x-input>
+    <group label-width="4.5em" label-margin-right="2em" class="login-group">
         <x-input
-          type="password"
-          name="input"
-          placeholder="请输入密码"
-          v-model.trim="form.input"
-          ref="input"
-          required
-          :min="6"
-          class="login-input_last">
-          <i slot="label" class="iconfont icon-password"></i>
-        </x-input>
-      </group>
-    </div>
+        name="username"
+        placeholder="请输入手机号码"
+        keyboard="number"
+        is-type="china-mobile"
+        ref="username"
+        :show-clear="false"
+        required
+        type="tel"
+        v-model.trim="form.username"
+        class="login-input">
+        <i slot="label" class="iconfont icon-mobile"></i>
+      </x-input>
+      <x-input
+        type="password"
+        name="input"
+        placeholder="请输入密码"
+        v-model.trim="form.input"
+        ref="input"
+        required
+        :min="6"
+        class="login-input_last">
+        <i slot="label" class="iconfont icon-password"></i>
+      </x-input>
+    </group>
     <div class="login-btn_warp">
       <x-button @click.native="submit" class="btn-yellow">登录</x-button>
-      <x-button class="btn-white" link="/register">新用户注册</x-button>
+      <x-button class="btn-white" link="/third/register">新用户注册</x-button>
     </div>
     <div class="login-link">
       <p>
-        <router-link to="/download">我是出借人</router-link>
-      </p>
-      <p>
-        <router-link to="/forget">忘记密码</router-link>
+        <router-link to="/third/forget">忘记密码</router-link>
       </p>
     </div>
   </div>
@@ -94,11 +83,7 @@ export default {
         this.$store
           .dispatch('login', login)
           .then(() => {
-            if (isWechat()) {
-              this.$router.push({ path: '/' })
-            } else {
-              this.$router.push({ path: '/splash', query: { to: 'loan' } })
-            }
+            this.$router.push({ path: '/authentication' })
           })
           .catch(err => {
             console.log(err)

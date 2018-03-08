@@ -110,9 +110,9 @@ export default {
       popupShow: false,
       iframe: '',
       type: '',
-      sesameList: [['500以下', '500-549', '550-600', '600以上']],
+      sesameList: [['550以下', '550-599', '600-650', '650以上']],
       sesame: [],
-      sesameValue: ['500以下', '500-549', '550-600', '600以上']
+      sesameValue: ['550以下', '550-599', '600-650', '650以上']
     }
   },
   watch: {
@@ -152,7 +152,9 @@ export default {
         if (this.obj.username && this.getMobileValid()) {
           this.disabled = true
           this.$store
-            .dispatch('sendVerifyCode', this.obj.username)
+            .dispatch('sendVerifyCode', {
+              mobile: this.obj.username
+            })
             .then(() => {
               this.$vux.toast.text('发送成功')
               this.time = 60
@@ -208,7 +210,6 @@ export default {
           .then(() => {
             if (this.type === 'register') {
               sessionStorage.removeItem('inviter')
-              history.replaceState(null, '过海有信', '/')
               this.$router.push({ path: '/authentication' })
             }
             if (this.type === 'forget') {

@@ -17,7 +17,8 @@ export const constantRouterMap = [
         name: 'Loan',
         component: _import('loan/index'),
         meta: {
-          title: '过海有信'
+          title: '过海有信',
+          auth: false
         }
       },
       {
@@ -25,7 +26,8 @@ export const constantRouterMap = [
         name: 'Publish',
         component: _import('loan/LoanPublish'),
         meta: {
-          title: '我要借款'
+          title: '我要借款',
+          auth: true
         }
       },
       {
@@ -33,7 +35,8 @@ export const constantRouterMap = [
         name: 'PublishList',
         component: _import('loan/LoanPublishList'),
         meta: {
-          title: '发布'
+          title: '发布',
+          auth: true
         }
       },
       {
@@ -41,7 +44,8 @@ export const constantRouterMap = [
         name: 'ApplyList',
         component: _import('personal/ApplyLogs'),
         meta: {
-          title: '借款申请记录'
+          title: '借款申请记录',
+          auth: true
         }
       },
       {
@@ -49,7 +53,8 @@ export const constantRouterMap = [
         name: 'Personal',
         component: _import('personal/index'),
         meta: {
-          title: '个人中心'
+          title: '个人中心',
+          auth: true
         }
       }
     ]
@@ -59,7 +64,8 @@ export const constantRouterMap = [
     name: 'Lender',
     component: _import('loan/Lender'),
     meta: {
-      title: '出借人信息'
+      title: '出借人信息',
+      auth: true
     }
   },
   {
@@ -67,7 +73,8 @@ export const constantRouterMap = [
     name: 'Subscribe',
     component: _import('loan/LoanPublish'),
     meta: {
-      title: '我要借款'
+      title: '我要借款',
+      auth: true
     }
   },
   {
@@ -75,7 +82,8 @@ export const constantRouterMap = [
     name: 'Login',
     component: _import('login/index'),
     meta: {
-      title: '登录'
+      title: '登录',
+      auth: false
     }
   },
   {
@@ -83,7 +91,8 @@ export const constantRouterMap = [
     name: 'SignIn',
     component: _import('express/login'),
     meta: {
-      title: '登录'
+      title: '登录',
+      auth: false
     }
   },
   {
@@ -91,7 +100,8 @@ export const constantRouterMap = [
     name: 'Register',
     component: _import('register/index'),
     meta: {
-      title: '用户注册'
+      title: '用户注册',
+      auth: false
     }
   },
   {
@@ -99,7 +109,8 @@ export const constantRouterMap = [
     name: 'SignUp',
     component: _import('express/register'),
     meta: {
-      title: '用户注册'
+      title: '用户注册',
+      auth: false
     }
   },
   {
@@ -107,7 +118,8 @@ export const constantRouterMap = [
     name: 'Forget',
     component: _import('forget/index'),
     meta: {
-      title: '忘记密码'
+      title: '忘记密码',
+      auth: false
     }
   },
   {
@@ -115,7 +127,8 @@ export const constantRouterMap = [
     name: 'Password',
     component: _import('express/register'),
     meta: {
-      title: '忘记密码'
+      title: '忘记密码',
+      auth: false
     }
   },
   {
@@ -127,7 +140,8 @@ export const constantRouterMap = [
         name: 'All',
         component: _import('order/OrderAll'),
         meta: {
-          title: '我的借款'
+          title: '我的借款',
+          auth: true
         }
       },
       {
@@ -135,7 +149,8 @@ export const constantRouterMap = [
         name: 'Pending',
         component: _import('order/OrderPending'),
         meta: {
-          title: '待审核'
+          title: '待审核',
+          auth: true
         }
       },
       {
@@ -143,7 +158,8 @@ export const constantRouterMap = [
         name: 'Repayment',
         component: _import('order/OrderRepayment'),
         meta: {
-          title: '待还款'
+          title: '待还款',
+          auth: true
         }
       },
       {
@@ -151,7 +167,8 @@ export const constantRouterMap = [
         name: 'Overdue',
         component: _import('order/OrderOverdue'),
         meta: {
-          title: '已逾期'
+          title: '已逾期',
+          auth: true
         }
       },
       {
@@ -159,7 +176,8 @@ export const constantRouterMap = [
         name: 'Complete',
         component: _import('order/OrderComplete'),
         meta: {
-          title: '已完成'
+          title: '已完成',
+          auth: true
         }
       }
     ]
@@ -173,7 +191,8 @@ export const constantRouterMap = [
         name: 'Todo',
         component: _import('message/Todo'),
         meta: {
-          title: '待处理'
+          title: '待处理',
+          auth: true
         }
       },
       {
@@ -181,7 +200,8 @@ export const constantRouterMap = [
         name: 'Notice',
         component: _import('message/Notice'),
         meta: {
-          title: '通知'
+          title: '通知',
+          auth: true
         }
       }
     ]
@@ -191,7 +211,8 @@ export const constantRouterMap = [
     name: 'Announce',
     component: _import('message/Announce'),
     meta: {
-      title: '公告'
+      title: '公告',
+      auth: true
     }
   },
   {
@@ -199,7 +220,8 @@ export const constantRouterMap = [
     name: 'OrderInfo',
     component: _import('order/OrderInfo'),
     meta: {
-      title: '借款信息'
+      title: '借款信息',
+      auth: true
     }
   },
   {
@@ -207,7 +229,8 @@ export const constantRouterMap = [
     name: 'Installment',
     component: _import('installment/index'),
     meta: {
-      title: '每月还款金额'
+      title: '每月还款金额',
+      auth: true
     }
   },
   {
@@ -215,7 +238,8 @@ export const constantRouterMap = [
     name: 'Payment',
     component: _import('payment/index'),
     meta: {
-      title: '支付'
+      title: '支付',
+      auth: true
     }
   },
   {
@@ -223,7 +247,8 @@ export const constantRouterMap = [
     name: 'PaymentWithId',
     component: _import('payment/index'),
     meta: {
-      title: '支付'
+      title: '支付',
+      auth: true
     }
   },
   {
@@ -231,7 +256,8 @@ export const constantRouterMap = [
     name: 'Setting',
     component: _import('setting/index'),
     meta: {
-      title: '系统设置'
+      title: '系统设置',
+      auth: true
     }
   },
   {
@@ -239,7 +265,8 @@ export const constantRouterMap = [
     name: 'Question',
     component: _import('setting/Question'),
     meta: {
-      title: '常见问题'
+      title: '常见问题',
+      auth: true
     }
   },
   {
@@ -247,7 +274,8 @@ export const constantRouterMap = [
     name: 'About',
     component: _import('setting/About'),
     meta: {
-      title: '关于我们'
+      title: '关于我们',
+      auth: false
     }
   },
   {
@@ -255,7 +283,8 @@ export const constantRouterMap = [
     name: 'Protocol',
     component: _import('setting/Protocol'),
     meta: {
-      title: '平台协议'
+      title: '平台协议',
+      auth: false
     }
   },
   {
@@ -263,7 +292,8 @@ export const constantRouterMap = [
     name: 'Download',
     component: _import('download/index'),
     meta: {
-      title: '软件下载'
+      title: '软件下载',
+      auth: false
     }
   },
   {
@@ -271,7 +301,8 @@ export const constantRouterMap = [
     name: 'Authentication',
     component: _import('authentication/index'),
     meta: {
-      title: '信用认证'
+      title: '信用认证',
+      auth: true
     }
   },
   {
@@ -279,7 +310,8 @@ export const constantRouterMap = [
     name: 'Invite',
     component: _import('authentication/Invite'),
     meta: {
-      title: '快来征信'
+      title: '快来征信',
+      auth: false
     }
   },
   {
@@ -287,7 +319,8 @@ export const constantRouterMap = [
     name: 'AuthSuccess',
     component: _import('authentication/Success'),
     meta: {
-      title: '认证完成'
+      title: '认证完成',
+      auth: false
     }
   },
   {
@@ -295,7 +328,8 @@ export const constantRouterMap = [
     name: 'Treaty',
     component: _import('treaty/index'),
     meta: {
-      title: '借款条约'
+      title: '借款条约',
+      auth: true
     }
   },
   {
@@ -303,7 +337,8 @@ export const constantRouterMap = [
     name: 'BasicInfo',
     component: _import('basicInfo/index'),
     meta: {
-      title: '基本信息认证'
+      title: '基本信息认证',
+      auth: true
     }
   },
   {
@@ -311,7 +346,8 @@ export const constantRouterMap = [
     name: 'Contacts',
     component: _import('contacts/index'),
     meta: {
-      title: '联系人信息'
+      title: '联系人信息',
+      auth: true
     }
   },
   {
@@ -319,7 +355,8 @@ export const constantRouterMap = [
     name: 'Identity',
     component: _import('identity/index'),
     meta: {
-      title: '身份证识别'
+      title: '身份证识别',
+      auth: true
     }
   },
   {
@@ -331,7 +368,8 @@ export const constantRouterMap = [
         name: 'CreditInfo',
         component: _import('credit/info'),
         meta: {
-          title: '认证信息'
+          title: '认证信息',
+          auth: true
         }
       },
       {
@@ -339,7 +377,8 @@ export const constantRouterMap = [
         name: 'CreditReport',
         component: _import('credit/report'),
         meta: {
-          title: '信用信息'
+          title: '信用信息',
+          auth: true
         }
       }
     ]
@@ -349,7 +388,8 @@ export const constantRouterMap = [
     name: 'RiskCall',
     component: _import('record/RiskCall'),
     meta: {
-      title: '风险通话记录'
+      title: '风险通话记录',
+      auth: true
     }
   },
   {
@@ -357,7 +397,8 @@ export const constantRouterMap = [
     name: 'Emergency',
     component: _import('record/EmergencyContact'),
     meta: {
-      title: '紧急联系人通话'
+      title: '紧急联系人通话',
+      auth: true
     }
   },
   {
@@ -365,7 +406,8 @@ export const constantRouterMap = [
     name: 'ConsumeBill',
     component: _import('record/ConsumeBill'),
     meta: {
-      title: '缴费记录'
+      title: '缴费记录',
+      auth: true
     }
   },
   {
@@ -373,7 +415,8 @@ export const constantRouterMap = [
     name: 'ShareOrderByOne',
     component: _import('receive/index'),
     meta: {
-      title: '领取'
+      title: '领取',
+      auth: false
     }
   },
   {
@@ -381,7 +424,8 @@ export const constantRouterMap = [
     name: 'ReceiveSuccess',
     component: _import('receive/Success'),
     meta: {
-      title: '领取成功'
+      title: '领取成功',
+      auth: false
     }
   },
   {
@@ -389,7 +433,8 @@ export const constantRouterMap = [
     name: 'Case',
     component: _import('case/index'),
     meta: {
-      title: '过海有信'
+      title: '过海有信',
+      auth: false
     }
   },
   {
@@ -397,7 +442,8 @@ export const constantRouterMap = [
     name: 'Log',
     component: _import('logs/index'),
     meta: {
-      title: '日志'
+      title: '日志',
+      auth: true
     }
   },
   // {
@@ -413,7 +459,8 @@ export const constantRouterMap = [
     name: 'Feedback',
     component: _import('feedback/index'),
     meta: {
-      title: '问题反馈'
+      title: '问题反馈',
+      auth: true
     }
   },
   {
@@ -421,7 +468,8 @@ export const constantRouterMap = [
     name: 'Follow',
     component: _import('follow/index'),
     meta: {
-      title: '关注我们'
+      title: '关注我们',
+      auth: false
     }
   },
   {
@@ -429,7 +477,44 @@ export const constantRouterMap = [
     name: 'Splash',
     component: _import('splash/index'),
     meta: {
-      title: '关注我们'
+      title: '关注我们',
+      auth: false
+    }
+  },
+  {
+    path: '/third/case',
+    name: 'T-Case',
+    component: _import('third/Case'),
+    meta: {
+      title: '快了征信',
+      auth: false
+    }
+  },
+  {
+    path: '/third/login',
+    name: 'T-Register',
+    component: _import('third/Login'),
+    meta: {
+      title: '登录',
+      auth: false
+    }
+  },
+  {
+    path: '/third/register',
+    name: 'T-Register',
+    component: _import('third/Register'),
+    meta: {
+      title: '注册',
+      auth: false
+    }
+  },
+  {
+    path: '/third/forget',
+    name: 'T-Forget',
+    component: _import('third/Register'),
+    meta: {
+      title: '忘记密码',
+      auth: false
     }
   },
   {
@@ -437,7 +522,8 @@ export const constantRouterMap = [
     name: '404',
     component: _import('404'),
     meta: {
-      title: '404'
+      title: '404',
+      auth: false
     }
   },
   {

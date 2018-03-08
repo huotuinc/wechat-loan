@@ -51,14 +51,14 @@
           </div>
         </div>
       </div>
-      <div class="weui-cells__title">补充说明</div>
+      <!-- <div class="weui-cells__title">补充说明</div>
       <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <textarea class="weui-textarea" rows="1" readonly v-model="receive.remarks"></textarea>
             </div>
         </div>
-      </div>
+      </div> -->
       <div class="weui-cells">
         <div class="weui-cell">
           <div class="weui-cell__bd">
