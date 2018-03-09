@@ -486,7 +486,7 @@ export const constantRouterMap = [
     name: 'T-Case',
     component: _import('third/Case'),
     meta: {
-      title: '快了征信',
+      title: '拿去花',
       auth: false
     }
   },
