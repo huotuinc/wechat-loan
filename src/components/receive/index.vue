@@ -158,7 +158,9 @@ export default {
         clearTimeout(this.timer)
         this.disabled = true
         this.$store
-          .dispatch('sendVerifyCode', this.receiveData.loanerMobile)
+          .dispatch('sendVerifyCode', {
+            mobile: this.receiveData.loanerMobile
+          })
           .then(() => {
             this.$vux.toast.text('发送成功')
             this.time = 60
