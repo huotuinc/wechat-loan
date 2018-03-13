@@ -67,7 +67,7 @@ export default {
     }
   },
   created() {
-    this.inviter = encodeURIComponent(this.$route.query.i)
+    this.inviter = this.$route.query.i
     this.vip = this.$route.query.v === '1'
     this.$store
       .dispatch('getLenderById', { inviter: this.inviter })
