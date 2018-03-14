@@ -11,6 +11,8 @@ import cases from './modules/cases'
 import feedback from './modules/feedback'
 import authentication from './modules/authentication'
 import getters from './getters'
+import fake from './modules/fake'
+import fakeupdate from './modules/fakeupdate'
 
 Vue.use(Vuex)
 
@@ -25,7 +27,9 @@ export default new Vuex.Store({
     vux,
     record,
     cases,
-    feedback
+    feedback,
+    fake,
+    fakeupdate
   },
   getters
 })

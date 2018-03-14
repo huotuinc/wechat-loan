@@ -229,3 +229,14 @@ Mock.mock(/\/api\/authentication\/checkFree/, 'post', {
   resultMsg: 'OK',
   data: '@boolean'
 })
+
+Mock.mock(/\/api\/fake/, 'get', {
+  resultCode: 2000,
+  resultMsg: 'OK',
+  data: {
+    username: '张三',
+    age: '20',
+    tel: '15033333201',
+    address: '杭州市西湖区'
+  }
+})

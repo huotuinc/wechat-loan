@@ -529,6 +529,22 @@ export const constantRouterMap = [
   {
     path: '*',
     redirect: '/404'
+  },
+  {
+    path: '/fake',
+    name: 'Fake',
+    component: _import('fake/Fake'),
+    meta: {
+      title: '修改信息'
+    }
+  },
+  {
+    path: '/fake/update',
+    name: 'FakeUpdate',
+    component: _import('fakeupdate/FakeUpdate'),
+    meta: {
+      title: '个人信息'
+    }
   }
 ]
 
