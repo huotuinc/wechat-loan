@@ -85,6 +85,7 @@
 import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon, Picker, PopupPicker } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
 import { isWechat } from '../../utils/isWechat'
+import { log } from 'util';
 
 export default {
   directives: {
@@ -155,6 +156,8 @@ export default {
       return this.$refs.authCode.valid
     },
     sendCode() {
+      // console.log(1);
+      
       if (!this.disabled) {
         clearTimeout(this.timer)
         if (this.obj.username && this.getMobileValid()) {
