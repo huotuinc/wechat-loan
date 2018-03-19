@@ -25,7 +25,22 @@
         </popup-picker>
         <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
         <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber" placeholder="请输入微信号"></x-input>
-        <selector placeholder="请选择收款账户" v-model="form.gatheringType" title="收款方式" :options="gatheringList" direction="rtl"></selector>
+        <x-input 
+          placeholder="请选择收款账户" 
+          v-model="form.gatheringType" 
+          title="收款方式"  
+          direction="rtl" 
+          disabled 
+          :style="{color:'#000'}">
+        </x-input>
+        <x-input
+          title="支付宝账号"
+          required
+          :show-clear="false"
+          v-model="form.alipayNum"
+          placeholder="请输入支付宝账号">
+        </x-input>
+        <!-- <selector placeholder="请选择收款账户" v-model="form.gatheringType" title="收款方式" :options="gatheringList" direction="rtl"></selector>
         <template v-if="form.gatheringType === 0">
           <x-input
             title="支付宝账号"
@@ -66,7 +81,7 @@
             v-model="form.accountSubBranch"
             placeholder="请输入开户支行">
           </x-input>
-        </template>
+        </template> -->
       </group>
     </div>
     <ul class="basic-tips">
@@ -91,12 +106,12 @@ import {
   XAddress,
   ChinaAddressV4Data,
   Value2nameFilter as value2name
-} from 'vux'
-import { marry, findCode } from '@/utils/enum'
+} from "vux";
+import { marry, findCode } from "@/utils/enum";
 
 export default {
   created() {
-    this._getMarryList()
+    this._getMarryList();
   },
   components: {
     XInput,
@@ -117,137 +132,137 @@ export default {
       bankCity: [],
       list: [],
       form: {
-        homeAreaCode: '',
-        homeArea: '',
-        homeAddress: '',
-        marry: '',
-        unitName: '',
-        wechatNumber: '',
-        gatheringType: 0,
-        alipayNum: '',
-        accountBank: '',
-        bankNum: '',
-        accountSubBranch: '',
-        bankCity: ''
-      },
-      gatheringList: [{ key: 0, value: '支付宝 ' }, { key: 1, value: '银行卡' }]
-    }
+        homeAreaCode: "",
+        homeArea: "",
+        homeAddress: "",
+        marry: "",
+        unitName: "",
+        wechatNumber: "",
+        gatheringType: "支付宝",
+        alipayNum: ""
+        // accountBank: "",
+        // bankNum: "",
+        // accountSubBranch: "",
+        // bankCity: ""
+      }
+      // gatheringList: [{ key: 0, value: '支付宝 ' }, { key: 1, value: '银行卡' }]
+    };
   },
   watch: {
     address() {
-      this.validForm()
+      this.validForm();
     },
     bankCity() {
-      this.validForm()
+      this.validForm();
     },
-    'form.wechatNumber'() {
-      this.validForm()
+    "form.wechatNumber"() {
+      this.validForm();
     },
-    'form.homeAddress'() {
-      this.validForm()
+    "form.homeAddress"() {
+      this.validForm();
     },
-    'form.unitName'() {
-      this.validForm()
+    "form.unitName"() {
+      this.validForm();
     },
-    'form.marry'() {
-      this.validForm()
+    "form.marry"() {
+      this.validForm();
     },
-    'form.alipayNum'() {
-      this.validForm()
-    },
-    'form.accountBank'() {
-      this.validForm()
-    },
-    'form.bankNum'() {
-      this.validForm()
-    },
-    'form.accountSubBranch'() {
-      this.validForm()
+    "form.alipayNum"() {
+      this.validForm();
     }
+    // "form.accountBank"() {
+    //   this.validForm();
+    // },
+    // "form.bankNum"() {
+    //   this.validForm();
+    // },
+    // "form.accountSubBranch"() {
+    //   this.validForm();
+    // }
   },
   methods: {
     _getMarryList() {
-      this._getDescList(this.list, marry)
+      this._getDescList(this.list, marry);
     },
     _getDescList(list, enums) {
-      let ret = []
+      let ret = [];
       enums.forEach(item => {
-        ret.push(item.desc)
-      })
-      list.push(ret)
+        ret.push(item.desc);
+      });
+      list.push(ret);
     },
     submit() {
-      this.form.bankCity = this.getName(this.bankCity)
-      this.form.homeAreaCode = this.address.join(',')
-      this.form.homeArea = this.getName(this.address)
-      this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '认证中' })
+      this.form.bankCity = this.getName(this.bankCity);
+      this.form.homeAreaCode = this.address.join(",");
+      this.form.homeArea = this.getName(this.address);
+      this.$store.commit("UPDATE_LOADING", { isLoading: true, text: "认证中" });
       this.$store
-        .dispatch('userinfoedit', this.form)
+        .dispatch("userinfoedit", this.form)
         .then(() => {
-          this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          this.$router.back()
+          this.$store.commit("UPDATE_LOADING", { isLoading: false });
+          this.$router.back();
         })
         .catch(err => {
-          this.$store.commit('UPDATE_LOADING', { isLoading: false })
-          console.log(err)
-        })
+          this.$store.commit("UPDATE_LOADING", { isLoading: false });
+          console.log(err);
+        });
     },
     getName(value) {
-      return value2name(value, ChinaAddressV4Data)
+      return value2name(value, ChinaAddressV4Data);
     },
     onMarryChange(val) {
-      this.form.marry = findCode(marry, val[0])
+      this.form.marry = findCode(marry, val[0]);
     },
     validForm() {
-      if (this.address == '') {
-        this.isDisabled = true
-        return
+      if (this.address == "") {
+        this.isDisabled = true;
+        return;
       }
-      if (this.form.homeAddress === '') {
-        this.isDisabled = true
-        return
+      if (this.form.homeAddress === "") {
+        this.isDisabled = true;
+        return;
       }
-      if (this.form.wechatNumber === '') {
-        this.isDisabled = true
-        return
+      if (this.form.wechatNumber === "") {
+        this.isDisabled = true;
+        return;
       }
 
-      if (this.form.unitName === '') {
-        this.isDisabled = true
-        return
+      if (this.form.unitName === "") {
+        this.isDisabled = true;
+        return;
       }
-      if (this.form.marry === '') {
-        this.isDisabled = true
-        return
+      if (this.form.marry === "") {
+        this.isDisabled = true;
+        return;
       }
-      if (this.form.gatheringType === 0) {
-        if (this.form.alipayNum === '') {
-          this.isDisabled = true
-          return
-        }
-      }
-      if (this.form.gatheringType === 1) {
-        if (this.form.accountBank === '') {
-          this.isDisabled = true
-          return
-        }
-        if (this.form.bankNum === '') {
-          this.isDisabled = true
-          return
-        }
-        if (this.form.accountSubBranch === '') {
-          this.isDisabled = true
-          return
-        }
-        if (this.bankCity == '') {
-          this.isDisabled = true
-          return
+      if (this.form.gatheringType === '支付宝') {
+        if (this.form.alipayNum === "") {
+          this.isDisabled = true;
+          return;
         }
       }
-      this.isDisabled = false
+      // if (this.form.gatheringType === 1) {
+      //   if (this.form.accountBank === "") {
+      //     this.isDisabled = true;
+      //     return;
+      //   }
+      //   if (this.form.bankNum === "") {
+      //     this.isDisabled = true;
+      //     return;
+      //   }
+      //   if (this.form.accountSubBranch === "") {
+      //     this.isDisabled = true;
+      //     return;
+      //   }
+      //   if (this.bankCity == "") {
+      //     this.isDisabled = true;
+      //     return;
+      //   }
+      // }
+      // this.isDisabled = false;
     }
   }
-}
+};
 </script>
 <style lang="less">
 .loan-basic {
