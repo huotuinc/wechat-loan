@@ -429,7 +429,7 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/spread',
+    path: '/case',
     name: 'Case',
     component: _import('case/index'),
     meta: {
@@ -482,7 +482,7 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/spread/case',
+    path: '/third/case',
     name: 'T-Case',
     component: _import('third/Case'),
     meta: {
@@ -516,10 +516,6 @@ export const constantRouterMap = [
       title: '忘记密码',
       auth: false
     }
-  },
-  {
-    path: '/case',
-    redirect: 'https://itunes.apple.com/cn/app/%E8%BF%87%E6%B5%B7%E5%BE%81%E4%BF%A1/id1346399726?mt=8'
   },
   {
     path: '/404',
