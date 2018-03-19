@@ -517,10 +517,10 @@ export const constantRouterMap = [
       auth: false
     }
   },
-  // {
-  //   path: '/case',
-  //   redirect: 'https://itunes.apple.com/cn/app/%E8%BF%87%E6%B5%B7%E5%BE%81%E4%BF%A1/id1346399726?mt=8'
-  // },
+  {
+    path: '/case',
+    redirect: 'https://itunes.apple.com/cn/app/%E8%BF%87%E6%B5%B7%E5%BE%81%E4%BF%A1/id1346399726?mt=8'
+  },
   {
     path: '/404',
     name: '404',
