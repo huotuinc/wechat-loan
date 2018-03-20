@@ -25,23 +25,23 @@
         </popup-picker>
         <x-input title="单位名称" ref="unitName" required :show-clear="false" v-model="form.unitName" placeholder="请输入单位名称"></x-input>
         <x-input title="微信号" ref="wechatNumber" required :show-clear="false" v-model="form.wechatNumber" placeholder="请输入微信号"></x-input>
-        <x-input 
-          placeholder="请选择收款账户" 
-          v-model="form.gatheringType" 
-          title="收款方式"  
+        <!-- <x-input 
+          placeholder="支付宝" 
+          title="收款方式"
+          v-model="form.gatheringType"
+          disabled  
           direction="rtl" 
-          disabled 
           :style="{color:'#000'}">
-        </x-input>
+        </x-input> -->
+        <selector placeholder="请选择收款账户" v-model="form.gatheringType" title="收款方式" :options="gatheringList" direction="rtl" readonly></selector>
         <x-input
           title="支付宝账号"
           required
           :show-clear="false"
-          v-model="form.alipayNum"
+          v-model="form.alipayNum" 
           placeholder="请输入支付宝账号">
         </x-input>
-        <!-- <selector placeholder="请选择收款账户" v-model="form.gatheringType" title="收款方式" :options="gatheringList" direction="rtl"></selector>
-        <template v-if="form.gatheringType === 0">
+        <!-- <template v-if="form.gatheringType === 0">
           <x-input
             title="支付宝账号"
             required
@@ -138,14 +138,14 @@ export default {
         marry: "",
         unitName: "",
         wechatNumber: "",
-        gatheringType: "支付宝",
+        gatheringType: 0,
         alipayNum: ""
         // accountBank: "",
         // bankNum: "",
         // accountSubBranch: "",
         // bankCity: ""
-      }
-      // gatheringList: [{ key: 0, value: '支付宝 ' }, { key: 1, value: '银行卡' }]
+      },
+      gatheringList: [{ key: 0, value: '支付宝 ' }]
     };
   },
   watch: {
@@ -235,12 +235,20 @@ export default {
         this.isDisabled = true;
         return;
       }
-      if (this.form.gatheringType === '支付宝') {
-        if (this.form.alipayNum === "") {
+      if (this.form.alipayNum === "") {
           this.isDisabled = true;
           return;
-        }
       }
+      if(this.form.gatheringType === 0){
+        this.isDisabled = false;
+        return;
+      }
+      // if (this.form.gatheringType === '支付宝') {
+      //   if (this.form.alipayNum === "") {
+      //     this.isDisabled = true;
+      //     return;
+      //   }
+      // }
       // if (this.form.gatheringType === 1) {
       //   if (this.form.accountBank === "") {
       //     this.isDisabled = true;
