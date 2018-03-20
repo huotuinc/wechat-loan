@@ -1,6 +1,6 @@
 <template>
   <div class="loan-wrap">
-    <img src="../../assets/third.jpg" width="100%">
+    <img src="../../assets/thirdCase.jpg" width="100%">
   <p class="jk">
     <a @click="toIndex">我要借款</a>
   </p>
