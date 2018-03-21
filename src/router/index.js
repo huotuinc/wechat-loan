@@ -324,6 +324,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/authThirdSuccess',
+    name: 'AuthThirdSuccess',
+    component: _import('authentication/ThirdSuccess'),
+    meta: {
+      title: '认证完成',
+      auth: false
+    }
+  },
+  {
     path: '/treaty/:orderId',
     name: 'Treaty',
     component: _import('treaty/index'),
@@ -491,6 +500,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/fourth/case',
+    name: 'F-Case',
+    component: _import('fourth/Case'),
+    meta: {
+      title: '过海有信',
+      auth: false
+    }
+  },
+  {
     path: '/third/login',
     name: 'T-Login',
     component: _import('third/Login'),
@@ -512,6 +530,33 @@ export const constantRouterMap = [
     path: '/third/forget',
     name: 'T-Forget',
     component: _import('third/Register'),
+    meta: {
+      title: '忘记密码',
+      auth: false
+    }
+  },
+  {
+    path: '/fourth/login',
+    name: 'F-Login',
+    component: _import('fourth/Login'),
+    meta: {
+      title: '登录',
+      auth: false
+    }
+  },
+  {
+    path: '/fourth/register',
+    name: 'F-Register',
+    component: _import('fourth/Register'),
+    meta: {
+      title: '注册',
+      auth: false
+    }
+  },
+  {
+    path: '/fourth/forget',
+    name: 'F-Forget',
+    component: _import('fourth/Register'),
     meta: {
       title: '忘记密码',
       auth: false
