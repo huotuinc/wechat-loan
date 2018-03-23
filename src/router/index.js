@@ -375,7 +375,7 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'CreditInfo',
-        component: _import('credit/info'),
+        component: _import('credit/infoModify'),
         meta: {
           title: '认证信息',
           auth: true
