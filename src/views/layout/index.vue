@@ -6,7 +6,7 @@
         <i slot="icon" class="iconfont icon-home"></i>
         <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item :link="market">
+      <tabbar-item link="http://loanmarket.51morecash.com/forend/project/list">
         <i slot="icon" class="iconfont icon-loan-mk"></i>
         <span slot="label">贷款广场</span>
       </tabbar-item>
@@ -47,14 +47,14 @@ export default {
     this.name = this.$route.name
     let userId = getUserId()
     switch (window.MODE_BRANCH) {
-      case 'master':
-        this.market = `http://loanmarket.51morecash.com/forend/project/list`
-        break
+      // case 'master':
+      //   this.market = `http://loanmarket.51morecash.com/forend/project/list`
+      //   break
       case 'dev':
         this.market = `http://market.51huotao.com/forend/project/list`
         break
       default:
-        this.market = '/'
+        this.market = 'http://loanmarket.51morecash.com/forend/project/list'
     }
   }
 }
