@@ -33,7 +33,7 @@
     </group>
     <div class="login-btn_warp">
       <x-button @click.native="submit" class="btn-yellow">登录</x-button>
-      <x-button class="btn-white" link="/third/register">新用户注册</x-button>
+      <x-button class="btn-white" link="/fourth/register">新用户注册</x-button>
     </div>
     <div class="login-link">
       <p>
