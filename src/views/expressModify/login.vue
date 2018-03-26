@@ -29,7 +29,7 @@
           type="tel"
           class="weui-vcode"
           :show-clear="false"
-          v-model="form.verifyCode">
+          v-model="form.input">
           <i slot="label" class="iconfont icon-msg-o"></i>
           <x-button
             slot="right"
@@ -68,8 +68,8 @@ export default {
       sendButtonText: '获取验证码',
       form: {
         username: '',
-        verifyCode: '',
-        loginType: 0,
+        input: '',
+        loginType: 1,
         userType: 1
       }
     }
@@ -129,7 +129,7 @@ export default {
     submit() {
       let login = {}
       login.username = this.form.username
-      login.verifyCode = this.form.verifyCode
+      login.input = this.form.input
       login.loginType = this.form.loginType
       login.userType = this.form.userType
       if (this.validForm()) {
@@ -146,7 +146,7 @@ export default {
       }
     },
     validForm() {
-      if (this.form.username && this.form.verifyCode) {
+      if (this.form.username && this.form.input) {
         if (this.getMobileValid() && this.getAuthValid()) return true
         return false
       } else {

@@ -67,7 +67,7 @@ export default {
       form: {
         username: '',
         verifyCode: '',
-        loginType: 0,
+        loginType: 1,
         userType: 1
       }
     }
@@ -127,7 +127,7 @@ export default {
     submit() {
       let login = {}
       login.username = this.form.username
-      login.verifyCode = this.form.verifyCode
+      login.input = this.form.verifyCode
       login.loginType = this.form.loginType
       login.userType = this.form.userType
       if (this.validForm()) {

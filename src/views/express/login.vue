@@ -62,7 +62,7 @@ export default {
       form: {
         username: '',
         input: '',
-        loginType: 0,
+        loginType: 1,
         userType: 1
       }
     }
