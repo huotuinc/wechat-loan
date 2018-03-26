@@ -253,7 +253,12 @@ export default {
     }
   }
 }
+.vux-cell-box:not(:first-child):before {
+  width: auto !important;
+}
 .vux-cell-box.login-input_last::before {
-  border-top: none !important;
+  border-top: 1px solid #d9d9d9 !important;
+  left: 50px !important;
+  right: 50px !important;
 }
 </style>
