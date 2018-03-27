@@ -80,7 +80,7 @@ export const constantRouterMap = [
   {
     path: '/login',
     name: 'Login',
-    component: _import('login/index'),
+    component: _import('login/indexModify'),
     meta: {
       title: '登录',
       auth: false
@@ -89,7 +89,7 @@ export const constantRouterMap = [
   {
     path: '/signIn',
     name: 'SignIn',
-    component: _import('express/login'),
+    component: _import('expressModify/login'),
     meta: {
       title: '登录',
       auth: false
@@ -98,7 +98,7 @@ export const constantRouterMap = [
   {
     path: '/register',
     name: 'Register',
-    component: _import('register/index'),
+    component: _import('register/indexModify'),
     meta: {
       title: '用户注册',
       auth: false
@@ -107,30 +107,30 @@ export const constantRouterMap = [
   {
     path: '/signUp',
     name: 'SignUp',
-    component: _import('express/register'),
+    component: _import('expressModify/register'),
     meta: {
       title: '用户注册',
       auth: false
     }
   },
-  {
-    path: '/forget',
-    name: 'Forget',
-    component: _import('forget/index'),
-    meta: {
-      title: '忘记密码',
-      auth: false
-    }
-  },
-  {
-    path: '/findPassword',
-    name: 'Password',
-    component: _import('express/register'),
-    meta: {
-      title: '忘记密码',
-      auth: false
-    }
-  },
+  // {
+  //   path: '/forget',
+  //   name: 'Forget',
+  //   component: _import('forget/index'),
+  //   meta: {
+  //     title: '忘记密码',
+  //     auth: false
+  //   }
+  // },
+  // {
+  //   path: '/findPassword',
+  //   name: 'Password',
+  //   component: _import('express/register'),
+  //   meta: {
+  //     title: '忘记密码',
+  //     auth: false
+  //   }
+  // },
   {
     path: '/orderList',
     component: _import('order/index'),
@@ -493,7 +493,7 @@ export const constantRouterMap = [
   {
     path: '/third/case',
     name: 'T-Case',
-    component: _import('third/Case'),
+    component: _import('thirdModify/Case'),
     meta: {
       title: '拿去花',
       auth: false
@@ -502,7 +502,7 @@ export const constantRouterMap = [
   {
     path: '/fourth/case',
     name: 'F-Case',
-    component: _import('fourth/Case'),
+    component: _import('fourthModify/Case'),
     meta: {
       title: '过海有信',
       auth: false
@@ -511,7 +511,7 @@ export const constantRouterMap = [
   {
     path: '/third/login',
     name: 'T-Login',
-    component: _import('third/Login'),
+    component: _import('thirdModify/Login'),
     meta: {
       title: '登录',
       auth: false
@@ -520,25 +520,25 @@ export const constantRouterMap = [
   {
     path: '/third/register',
     name: 'T-Register',
-    component: _import('third/Register'),
+    component: _import('thirdModify/Register'),
     meta: {
       title: '注册',
       auth: false
     }
   },
-  {
-    path: '/third/forget',
-    name: 'T-Forget',
-    component: _import('third/Register'),
-    meta: {
-      title: '忘记密码',
-      auth: false
-    }
-  },
+  // {
+  //   path: '/third/forget',
+  //   name: 'T-Forget',
+  //   component: _import('third/Register'),
+  //   meta: {
+  //     title: '忘记密码',
+  //     auth: false
+  //   }
+  // },
   {
     path: '/fourth/login',
     name: 'F-Login',
-    component: _import('fourth/Login'),
+    component: _import('fourthModify/Login'),
     meta: {
       title: '登录',
       auth: false
@@ -547,21 +547,21 @@ export const constantRouterMap = [
   {
     path: '/fourth/register',
     name: 'F-Register',
-    component: _import('fourth/Register'),
+    component: _import('fourthModify/Register'),
     meta: {
       title: '注册',
       auth: false
     }
   },
-  {
-    path: '/fourth/forget',
-    name: 'F-Forget',
-    component: _import('fourth/Register'),
-    meta: {
-      title: '忘记密码',
-      auth: false
-    }
-  },
+  // {
+  //   path: '/fourth/forget',
+  //   name: 'F-Forget',
+  //   component: _import('fourth/Register'),
+  //   meta: {
+  //     title: '忘记密码',
+  //     auth: false
+  //   }
+  // },
   {
     path: '/404',
     name: '404',

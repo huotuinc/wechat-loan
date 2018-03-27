@@ -70,7 +70,7 @@ const user = {
     register({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/register',
+          url: '/api/user/loginByVerifyCode',
           method: 'post',
           data: userInfo,
           headers: {
