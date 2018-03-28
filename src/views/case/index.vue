@@ -37,7 +37,7 @@ export default {
       if (getToken()) {
         this.$router.push({ path: '/' })
       } else {
-        this.$router.push({ path: '/register' })
+        this.$router.push({ path: '/login' })
       }
     }
   },

@@ -1,14 +1,9 @@
 <template>
   <div class="login-wrapper">
-    <div class="login-hd">
-      <div class="logo-wrapper">
-        <img class="logo" src="../../assets/logo.png" alt="有信">
-      </div>
-    </div>
-
     <div>
 
       <group label-width="4.5em" label-margin-right="2em" class="login-group">
+         <h1 class="h-title">欢迎使用过海有信</h1>
         <x-input
           name="username"
           placeholder="手机号码"
@@ -54,13 +49,25 @@
             </span>
           </template>
         </popup-picker>
-
+        <div class="login-agree" v-if="!checkReg">
+          <check-icon :value.sync="hasChecked"><span>我已阅读并同意</span></check-icon><span>《<ins @click="open">注册服务协议</ins>》</span>
+        </div>
       </group>
     </div>
     <div class="login-btn_warp">
        <x-button @click.native="submit" class="btn-yellow">注册/登录</x-button>
+       <p class="login-tips">会员类型 - 借款人</p>
     </div>
-
+    <div class="login-link">
+      <p>
+        <router-link to="/download">我是出借人</router-link>
+      </p>
+    </div>
+    <div v-transfer-dom>
+      <popup v-model="popupShow" position="bottom" max-height="50%">
+        <iframe :src="iframe" frameborder="0"></iframe>
+      </popup>
+    </div>
   </div>
 </template>
 
@@ -175,6 +182,10 @@ export default {
       }
     },
     submit() {
+      if (!this.hasChecked) {
+        this.$vux.toast.text('请确认阅读并同意《注册服务协议》')
+        return
+      }
       let action = 'register'
       let form = {}
       form.username = this.obj.username
@@ -184,13 +195,27 @@ export default {
       if (this.obj.inviter) form.inviter = this.obj.inviter
 
       if (this.validForm()) {
+        this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '处理中' })
         this.$store
           .dispatch(action, form)
           .then(() => {
-            this.$router.push({ path: '/authentication' })
+            sessionStorage.removeItem('inviter')
+            if (isWechat()) {
+              if (form.inviter) {
+                sessionStorage.removeItem('inviter')
+                history.replaceState(null, '过海有信', '/')
+                this.$router.push({ path: '/authentication' })
+              } else {
+                this.$router.push({ path: '/publish' })
+              }
+            } else {
+              this.$router.push({ path: '/splash', query: { to: 'publish' } })
+            }
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
           .catch(err => {
             console.log(err)
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
           })
       }
     },
@@ -215,11 +240,19 @@ export default {
         }
       }
       return true
+    },
+    open() {
+      if (!this.iframe) return
+      this.popupShow = true
     }
   }
 }
 </script>
 <style lang="less">
+h1 {
+  padding-bottom: 30px;
+  padding-left: 20px;
+}
 .vux-popup-dialog {
   iframe {
     display: block;
@@ -265,10 +298,5 @@ export default {
   border-top: 1px solid #d9d9d9 !important;
   left: 50px !important;
   right: 50px !important;
-}
-.login-group .weui-cells:after {
-  border-bottom: 1px solid #d9d9d9 !important;
-  left: 50px;
-  right: 50px;
 }
 </style>

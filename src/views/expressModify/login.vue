@@ -20,6 +20,14 @@
           v-model.trim="form.username"
           class="login-input">
           <i slot="label" class="iconfont icon-mobile"></i>
+           <x-button
+            slot="right"
+            mini
+            class="login-auto-btn"
+            :disabled="disabled"
+            @click.native="sendCode"
+            >{{sendButtonText}}
+          </x-button>
         </x-input>
        <x-input
           ref="authCode"
@@ -31,20 +39,25 @@
           :show-clear="false"
           v-model="form.input">
           <i slot="label" class="iconfont icon-msg-o"></i>
-          <x-button
-            slot="right"
-            mini
-            class="login-auto-btn"
-            :disabled="disabled"
-            @click.native="sendCode"
-            >{{sendButtonText}}
-          </x-button>
         </x-input>
+         <popup-picker
+          v-if="!checkReg"
+          :data="sesameList"
+          v-model="sesame"
+          popup-title="芝麻分数"
+          class="login-input_last"
+          aria-disabled="true">
+          <template slot="title" slot-scope="props">
+            <span :class="props.labelClass">
+              <i class="iconfont icon-zhi-ma" style="color: #999;vertical-align: middle;"></i>
+              <span style="vertical-align:middle;">芝麻分数</span>
+            </span>
+          </template>
+        </popup-picker>
       </group>
     </div>
     <div class="login-btn_warp">
-      <x-button @click.native="submit" class="btn-yellow">登录</x-button>
-      <x-button class="btn-white" link="/signUp">用户注册</x-button>
+      <x-button @click.native="submit" class="btn-yellow">登录/注册</x-button>
     </div>
   </div>
 </template>
@@ -65,12 +78,14 @@ export default {
       disabled: false,
       time: 0,
       timer: '',
+      checkReg: true,
       sendButtonText: '获取验证码',
       form: {
         username: '',
-        input: '',
-        loginType: 1,
-        userType: 1
+        verifyCode: '',
+        userType: 1,
+        inviter: '',
+        zmfScore: ''
       }
     }
   },
@@ -90,6 +105,14 @@ export default {
 
     sendCode() {
       // console.log(1);
+      this.$store
+        .dispatch('checkReg', {
+          username: this.obj.username
+        })
+        .then(res => {
+          console.log(res)
+          this.checkReg = res.regStatus
+        })
 
       if (!this.disabled) {
         clearTimeout(this.timer)
@@ -129,12 +152,12 @@ export default {
     submit() {
       let login = {}
       login.username = this.form.username
-      login.input = this.form.input
-      login.loginType = this.form.loginType
+      login.verifyCode = this.form.verifyCode
       login.userType = this.form.userType
+      login.zmfScore = this.form.zmfScore
       if (this.validForm()) {
         this.$store
-          .dispatch('login', login)
+          .dispatch('loginByVerifyCode', login)
           .then(() => {
             this.$router.push({ path: '/authentication' })
           })
@@ -146,12 +169,26 @@ export default {
       }
     },
     validForm() {
-      if (this.form.username && this.form.input) {
-        if (this.getMobileValid() && this.getAuthValid()) return true
-        return false
-      } else {
+      if (!/^1([34578])\d{9}$/.test(this.obj.username)) {
+        this.$vux.toast.text('手机号错误')
         return false
       }
+      if (this.obj.verifyCode == '') {
+        this.$vux.toast.text('验证码错误')
+        return false
+      }
+      if (!this.getAuthValid()) {
+        this.$vux.toast.text('验证码错误')
+        return false
+      }
+
+      if (!this.checkReg) {
+        if (this.sesame.length == 0) {
+          this.$vux.toast.text('请选择芝麻分数')
+          return false
+        }
+      }
+      return true
     }
   }
 }

@@ -37,7 +37,7 @@ export default {
       if (getToken()) {
         this.$router.push({ path: '/authentication' })
       } else {
-        this.$router.push({ path: '/fourth/register' })
+        this.$router.push({ path: '/fourth/login' })
       }
     }
   },

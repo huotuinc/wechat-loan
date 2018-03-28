@@ -31,27 +31,27 @@ const user = {
     }
   },
   actions: {
-    login({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        request({
-          url: '/api/user/login',
-          method: 'post',
-          data: userInfo
-        })
-          .then(response => {
-            setUserInfo(response)
-            setToken(response.userToken)
-            setUserId(response.userId)
-            commit(SET_TOKEN, response.userToken)
-            commit(SET_USER_ID, response.userId)
-            commit(SET_USER_INFO, response)
-            resolve(response)
-          })
-          .catch(error => {
-            reject(error)
-          })
-      })
-    },
+    // login({ commit }, userInfo) {
+    //   return new Promise((resolve, reject) => {
+    //     request({
+    //       url: '/api/user/login',
+    //       method: 'post',
+    //       data: userInfo
+    //     })
+    //       .then(response => {
+    //         setUserInfo(response)
+    //         setToken(response.userToken)
+    //         setUserId(response.userId)
+    //         commit(SET_TOKEN, response.userToken)
+    //         commit(SET_USER_ID, response.userId)
+    //         commit(SET_USER_INFO, response)
+    //         resolve(response)
+    //       })
+    //       .catch(error => {
+    //         reject(error)
+    //       })
+    //   })
+    // },
     sendVerifyCode({}, data) {
       return new Promise((resolve, reject) => {
         request({
@@ -70,7 +70,7 @@ const user = {
     register({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/api/user/register',
+          url: '/api/user/loginByVerifyCode',
           method: 'post',
           data: userInfo,
           headers: {
@@ -92,21 +92,21 @@ const user = {
           })
       })
     },
-    forger({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        request({
-          url: '/api/user/updatePassword',
-          method: 'post',
-          data: userInfo
-        })
-          .then(() => {
-            resolve()
-          })
-          .catch(error => {
-            reject(error)
-          })
-      })
-    },
+    // forger({ commit }, userInfo) {
+    //   return new Promise((resolve, reject) => {
+    //     request({
+    //       url: '/api/user/updatePassword',
+    //       method: 'post',
+    //       data: userInfo
+    //     })
+    //       .then(() => {
+    //         resolve()
+    //       })
+    //       .catch(error => {
+    //         reject(error)
+    //       })
+    //   })
+    // },
     logout({ commit }) {
       return new Promise(resolve => {
         commit(SET_TOKEN, '')
@@ -141,6 +141,21 @@ const user = {
             setLoanerQuestionLink(response.loanerQuestionLink)
             setLoanerRegisterLink(response.loanerRegisterLink)
             setAbout(response.about)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    checkReg({}, data) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/user/checkReg',
+          method: 'post',
+          data: data
+        })
+          .then(response => {
             resolve(response)
           })
           .catch(error => {
