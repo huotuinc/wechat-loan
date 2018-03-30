@@ -94,6 +94,21 @@ const authentication = {
           })
       })
     },
+    getIndustryUrl({ commit }) {
+      return new Promise((resolve, reject) => {
+        request({
+          url: '/api/authentication/getIndustryUrl',
+          method: 'post'
+        })
+          .then(response => {
+            commit(SESAME_URL, response)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     checkIsPay({ commit }) {
       return new Promise((resolve, reject) => {
         request({

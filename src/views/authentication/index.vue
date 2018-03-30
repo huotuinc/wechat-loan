@@ -49,6 +49,15 @@
           <p>芝麻信用认证</p>
         </a>
       </div>
+       <!-- <div class="auth-item" @click="payTips">
+        <a href="javascript:;" @click.prevent="blackListClick(isPay, status.zhimaIndustryFlg)" :class="classNames(status.zhimaIndustryFlg)">
+          <div class="icon">
+            <i class="iconfont icon-heimingdan"></i>
+            <div class="result">{{status.zhimaIndustryMsg}}</div>
+          </div>
+          <p>行业黑名单</p>
+        </a>
+      </div> -->
     </div>
     <ul class="basic-tips" v-show="!isShowPay()">
       <li v-if="isSpecial"><strong style="color:#dc3545;">提示：</strong>点击图标进行认证。</li>
@@ -79,6 +88,7 @@ export default {
   created() {
     this.$store.dispatch('certificationAll').then(res => {
       this.status = res
+      console.log(res)
     })
 
     /**
@@ -145,6 +155,21 @@ export default {
           })
       }
     },
+    blackListClick(isPay, flag) {
+      if (isPay && flag !== 3) {
+        this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '跳转中' })
+        this.$store
+          .dispatch('getIndustryUrl')
+          .then(res => {
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
+            window.location.href = res
+          })
+          .catch(err => {
+            this.$store.commit('UPDATE_LOADING', { isLoading: false })
+            console.log(err)
+          })
+      }
+    },
     classNames(flag) {
       return {
         'is-pay': this.isPay,
@@ -158,7 +183,8 @@ export default {
         this.status.uinfoFlg === 3 &&
         this.status.contactFlg === 3 &&
         this.status.carrierFlg === 3 &&
-        this.status.zhimaFlg === 3
+        this.status.zhimaFlg === 3 &&
+        this.status.zhimaIndustryFlg === 3
       ) {
         this.$router.replace({ path: '/authSuccess' })
         return false
