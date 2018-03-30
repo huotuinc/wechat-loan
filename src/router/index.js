@@ -572,6 +572,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/cookie',
+    name: 'cookie',
+    component: _import('cookieTest/cookie'),
+    meta: {
+      title: '测试',
+      auth: false
+    }
+  },
+  {
     path: '*',
     redirect: '/404'
   }
