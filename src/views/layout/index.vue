@@ -1,7 +1,7 @@
 <template>
   <div class="loan-wrap">
     <router-view />
-    <tabbar>
+    <tabbar v-if="!showmenu">
       <tabbar-item :selected="name === 'Loan'" link="/">
         <i slot="icon" class="iconfont icon-home"></i>
         <span slot="label">首页</span>
@@ -24,7 +24,7 @@
 
 <script>
 import { Tabbar, TabbarItem, ViewBox } from 'vux'
-import { getUserId } from '../../utils/auth'
+import { getUserId, getShowMenu } from '../../utils/auth'
 export default {
   name: 'Layout',
   components: {
@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       name: '',
-      market: ''
+      market: '',
+      showmenu: ''
     }
   },
   watch: {
@@ -44,6 +45,7 @@ export default {
     }
   },
   created() {
+    this.showmenu = getShowMenu()
     this.name = this.$route.name
     let userId = getUserId()
     switch (window.MODE_BRANCH) {

@@ -3,11 +3,12 @@
     <li>{{from.id}}</li>
     <li>{{from.token}}</li>
     <li>{{from.info}}</li>
+    <li>{{from.showmenu}}</li>
   </ul>
 </template>
 
 <script>
-import { getUserId, getUserInfo, getToken } from '../../utils/auth'
+import { getUserId, getUserInfo, getToken, getShowMenu } from '../../utils/auth'
 
 export default {
   data() {
@@ -15,7 +16,8 @@ export default {
       from: {
         id: '',
         info: '',
-        token: ''
+        token: '',
+        showmenu: ''
       }
     }
   },
@@ -23,7 +25,7 @@ export default {
     this.from.id = getUserId()
     this.from.info = getUserInfo()
     this.from.token = getToken()
-  },
-  mounted() {}
+    this.from.showmenu = getShowMenu()
+  }
 }
 </script>

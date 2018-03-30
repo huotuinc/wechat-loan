@@ -4,6 +4,7 @@ const UserId = 'User-Id'
 const TokenKey = 'User-Token'
 const UserInfo = 'User-Info'
 const ChannelId = 'channelId'
+const showmenu = 'showmenu'
 
 export function getUserId() {
   return Cookies.get(UserId) || ''
@@ -71,4 +72,11 @@ export function setFollow() {
 
 export function getFollow() {
   return Cookies.getJSON('isHidden')
+}
+
+export function getShowMenu() {
+  return Cookies.get(showmenu) || ''
+}
+export function removeShowMenu() {
+  return Cookies.remove(showmenu)
 }
