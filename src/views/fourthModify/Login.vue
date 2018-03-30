@@ -5,9 +5,7 @@
         <img class="logo" src="../../assets/logo.png" alt="有信">
       </div>
     </div>
-
     <div>
-
       <group label-width="4.5em" label-margin-right="2em" class="login-group">
         <x-input
           name="username"
@@ -19,7 +17,6 @@
           :show-clear="false"
           type="tel"
           v-model="obj.username">
-          <i slot="label" class="iconfont icon-mobile"></i>
           <x-button
             slot="right"
             mini
@@ -29,38 +26,40 @@
             >{{sendButtonText}}
           </x-button>
         </x-input>
+
         <x-input
           ref="authCode"
           name="authCode"
-          placeholder="请输入验证码"
+          placeholder="输入短信验证码"
           required
           type="tel"
           class="weui-vcode"
+          :max = 4
           :show-clear="false"
           v-model="obj.verifyCode">
-          <i slot="label" class="iconfont icon-msg-o"></i>
         </x-input>
+
         <popup-picker
           v-if="!checkReg"
           :data="sesameList"
           v-model="sesame"
           popup-title="芝麻分数"
+          placeholder="填选芝麻信用分"
           class="login-input_last"
+          value-text-align="left"
           aria-disabled="true">
           <template slot="title" slot-scope="props">
             <span :class="props.labelClass">
-              <i class="iconfont icon-zhi-ma" style="color: #999;vertical-align: middle;"></i>
-              <span style="vertical-align:middle;">芝麻分数</span>
+              <!-- <span style="vertical-align:middle;">芝麻分数</span> -->
             </span>
           </template>
         </popup-picker>
-
       </group>
-    </div>
-    <div class="login-btn_warp">
-       <x-button @click.native="submit" class="btn-yellow">注册/登录</x-button>
-    </div>
+        <div class="login-btn_warp">
+          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px;" :disabled="isDisabled">注册&nbsp;/&nbsp;登录</x-button>
+        </div>
 
+  </div>
   </div>
 </template>
 
@@ -69,6 +68,7 @@ import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon, Picke
 import { getLoanerRegisterLink } from '../../utils/init'
 import { isWechat } from '../../utils/isWechat'
 import { log } from 'util'
+import { removeUserId, removeToken, removeUserInfo } from '../../utils/auth'
 
 export default {
   directives: {
@@ -86,11 +86,12 @@ export default {
   },
   data() {
     return {
+      isDisabled: true,
       hasChecked: true,
       disabled: false,
       time: 0,
       timer: '',
-      checkReg: true,
+      checkReg: false,
       sendButtonText: '获取验证码',
       obj: {
         username: '',
@@ -111,6 +112,15 @@ export default {
     sesame(val) {
       const index = this.sesameValue.indexOf(this.sesame[0])
       this.obj.zmfScore = index + 1
+    },
+    'obj.username'() {
+      this.checkIsDisabled()
+    },
+    'obj.verifyCode'() {
+      this.checkIsDisabled()
+    },
+    'obj.zmfScore'() {
+      this.checkIsDisabled()
     }
   },
   created() {
@@ -121,6 +131,10 @@ export default {
         this.iframe = getLoanerRegisterLink()
       })
     }
+    removeUserId()
+    removeToken()
+    removeUserInfo()
+    // this.$store.dispatch('init')
   },
   methods: {
     getMobileValid() {
@@ -215,11 +229,40 @@ export default {
         }
       }
       return true
+    },
+    open() {
+      if (!this.iframe) return
+      this.popupShow = true
+    },
+    checkIsDisabled() {
+      if (!/^1([34578])\d{9}$/.test(this.obj.username)) {
+        this.isDisabled = true
+        return
+      }
+      if (this.obj.verifyCode == '') {
+        this.isDisabled = true
+        return
+      }
+      if (!this.getAuthValid()) {
+        this.isDisabled = true
+        return
+      }
+
+      if (!this.checkReg) {
+        if (this.sesame.length == 0) {
+          this.isDisabled = true
+          return
+        }
+      }
+      this.isDisabled = false
     }
   }
 }
 </script>
 <style lang="less">
+.weui-cells {
+  font-size: 14px !important;
+}
 .vux-popup-dialog {
   iframe {
     display: block;
@@ -242,7 +285,7 @@ export default {
 }
 .vux-check-icon > .weui-icon-success:before,
 .vux-check-icon > .weui-icon-success-circle:before {
-  color: #ff9c00 !important;
+  color: #00a7fd !important;
 }
 .btn-inline {
   margin-top: 5px;
@@ -261,14 +304,63 @@ export default {
 .vux-cell-box:not(:first-child):before {
   width: auto !important;
 }
+.login-group .weui-cell::before {
+  left: 20px !important;
+  right: 20px !important;
+}
+.vux-check-icon > .weui-icon-success,
+.vux-check-icon > .weui-icon-circle {
+  font-size: 17px !important;
+}
 .vux-cell-box.login-input_last::before {
   border-top: 1px solid #d9d9d9 !important;
-  left: 50px !important;
-  right: 50px !important;
+  left: 20px !important;
+  right: 20px !important;
 }
+.login-group .login-input_last:after {
+  border: none !important;
+}
+
 .login-group .weui-cells:after {
   border-bottom: 1px solid #d9d9d9 !important;
-  left: 50px;
-  right: 50px;
+  left: 20px !important;
+  right: 20px !important;
+}
+.login-agree {
+  text-align: center;
+  margin-top: 10px;
+}
+.weui-btn:after {
+  border: none !important;
+}
+.login-group .login-auto-btn {
+  background: #fff !important;
+  border-radius: none !important;
+  color: #00a7fd !important;
+}
+.login-btn_warp {
+  padding: 30px 25px 0;
+  margin-bottom: 15px;
+}
+.weui-cell_access .weui-cell__ft:after {
+  display: none !important;
+}
+ins {
+  text-decoration: none;
+}
+
+.login-group .login-auto-btn {
+  border-radius: none !important;
+}
+
+.login-agree {
+  font-size: 12px;
+  color: #666;
+  > span {
+    color: #00a7fd;
+  }
+}
+.login-link {
+  margin-top: 20px;
 }
 </style>

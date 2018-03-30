@@ -5,22 +5,19 @@
         <img class="logo" src="../../assets/logo.png" alt="有信">
       </div>
     </div>
-
     <div>
       <group label-width="4.5em" label-margin-right="2em" class="login-group">
-         <x-input
+        <x-input
           name="username"
           placeholder="手机号码"
           keyboard="number"
           is-type="china-mobile"
           ref="username"
-          :show-clear="false"
           required
+          :show-clear="false"
           type="tel"
-          v-model.trim="form.username"
-          class="login-input">
-          <i slot="label" class="iconfont icon-mobile"></i>
-           <x-button
+          v-model="obj.username">
+          <x-button
             slot="right"
             mini
             class="login-auto-btn"
@@ -29,71 +26,115 @@
             >{{sendButtonText}}
           </x-button>
         </x-input>
-       <x-input
+
+        <x-input
           ref="authCode"
           name="authCode"
-          placeholder="请输入验证码"
+          placeholder="输入短信验证码"
           required
           type="tel"
           class="weui-vcode"
+          :max = 4
           :show-clear="false"
-          v-model="form.input">
-          <i slot="label" class="iconfont icon-msg-o"></i>
+          v-model="obj.verifyCode">
         </x-input>
-         <popup-picker
+
+        <popup-picker
           v-if="!checkReg"
           :data="sesameList"
           v-model="sesame"
           popup-title="芝麻分数"
+          placeholder="填选芝麻信用分"
           class="login-input_last"
+          value-text-align="left"
           aria-disabled="true">
           <template slot="title" slot-scope="props">
             <span :class="props.labelClass">
-              <i class="iconfont icon-zhi-ma" style="color: #999;vertical-align: middle;"></i>
-              <span style="vertical-align:middle;">芝麻分数</span>
+              <!-- <span style="vertical-align:middle;">芝麻分数</span> -->
             </span>
           </template>
         </popup-picker>
       </group>
-    </div>
-    <div class="login-btn_warp">
-      <x-button @click.native="submit" class="btn-yellow">登录/注册</x-button>
-    </div>
+        <div class="login-btn_warp">
+          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px;" :disabled="isDisabled">注册&nbsp;/&nbsp;登录</x-button>
+        </div>
+
+  </div>
   </div>
 </template>
 
 <script>
-import { XInput, Group, XButton, Cell, md5 } from 'vux'
-import { removeToken, removeUserId, removeUserInfo } from '../../utils/auth'
+import { TransferDom, Popup, Cell, XInput, Group, XButton, md5, CheckIcon, Picker, PopupPicker } from 'vux'
+import { getLoanerRegisterLink } from '../../utils/init'
+import { isWechat } from '../../utils/isWechat'
+import { log } from 'util'
+import { removeUserId, removeToken, removeUserInfo } from '../../utils/auth'
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     XInput,
     XButton,
     Group,
-    Cell
+    Popup,
+    Cell,
+    CheckIcon,
+    Picker,
+    PopupPicker
   },
   data() {
     return {
+      isDisabled: true,
+      hasChecked: true,
       disabled: false,
       time: 0,
       timer: '',
-      checkReg: true,
+      checkReg: false,
       sendButtonText: '获取验证码',
-      form: {
+      obj: {
         username: '',
         verifyCode: '',
         userType: 1,
         inviter: '',
         zmfScore: ''
-      }
+      },
+      popupShow: false,
+      iframe: '',
+      type: '',
+      sesameList: [['550以下', '550-599', '600-650', '650以上']],
+      sesame: [],
+      sesameValue: ['550以下', '550-599', '600-650', '650以上']
+    }
+  },
+  watch: {
+    sesame(val) {
+      const index = this.sesameValue.indexOf(this.sesame[0])
+      this.obj.zmfScore = index + 1
+    },
+    'obj.username'() {
+      this.checkIsDisabled()
+    },
+    'obj.verifyCode'() {
+      this.checkIsDisabled()
+    },
+    'obj.zmfScore'() {
+      this.checkIsDisabled()
     }
   },
   created() {
-    removeToken()
+    this.iframe = getLoanerRegisterLink()
+    this.obj.inviter = sessionStorage.getItem('inviter')
+    if (!this.iframe) {
+      this.$store.dispatch('init').then(() => {
+        this.iframe = getLoanerRegisterLink()
+      })
+    }
     removeUserId()
+    removeToken()
     removeUserInfo()
-    this.$store.dispatch('init')
+    // this.$store.dispatch('init')
   },
   methods: {
     getMobileValid() {
@@ -102,7 +143,6 @@ export default {
     getAuthValid() {
       return this.$refs.authCode.valid
     },
-
     sendCode() {
       // console.log(1);
       this.$store
@@ -116,11 +156,11 @@ export default {
 
       if (!this.disabled) {
         clearTimeout(this.timer)
-        if (this.form.username && this.getMobileValid()) {
+        if (this.obj.username && this.getMobileValid()) {
           this.disabled = true
           this.$store
             .dispatch('sendVerifyCode', {
-              mobile: this.form.username
+              mobile: this.obj.username
             })
             .then(() => {
               this.$vux.toast.text('发送成功')
@@ -148,24 +188,24 @@ export default {
         clearTimeout(this.timer)
       }
     },
-
     submit() {
-      let login = {}
-      login.username = this.form.username
-      login.verifyCode = this.form.verifyCode
-      login.userType = this.form.userType
-      login.zmfScore = this.form.zmfScore
+      let action = 'register'
+      let form = {}
+      form.username = this.obj.username
+      form.verifyCode = this.obj.verifyCode
+      form.userType = this.obj.userType
+      form.zmfScore = this.obj.zmfScore
+      if (this.obj.inviter) form.inviter = this.obj.inviter
+
       if (this.validForm()) {
         this.$store
-          .dispatch('loginByVerifyCode', login)
+          .dispatch(action, form)
           .then(() => {
             this.$router.push({ path: '/authentication' })
           })
           .catch(err => {
             console.log(err)
           })
-      } else {
-        this.$vux.toast.text('手机号或验证码错误')
       }
     },
     validForm() {
@@ -189,14 +229,138 @@ export default {
         }
       }
       return true
+    },
+    open() {
+      if (!this.iframe) return
+      this.popupShow = true
+    },
+    checkIsDisabled() {
+      if (!/^1([34578])\d{9}$/.test(this.obj.username)) {
+        this.isDisabled = true
+        return
+      }
+      if (this.obj.verifyCode == '') {
+        this.isDisabled = true
+        return
+      }
+      if (!this.getAuthValid()) {
+        this.isDisabled = true
+        return
+      }
+
+      if (!this.checkReg) {
+        if (this.sesame.length == 0) {
+          this.isDisabled = true
+          return
+        }
+      }
+      this.isDisabled = false
     }
   }
 }
 </script>
 <style lang="less">
+.weui-cells {
+  font-size: 14px !important;
+}
+.vux-popup-dialog {
+  iframe {
+    display: block;
+    width: 100%;
+    height: 1000px;
+  }
+}
+.login-agree {
+  > span {
+    vertical-align: middle;
+  }
+}
+.vux-check-icon {
+  > .weui-icon-success {
+    font-size: 19px !important;
+  }
+  > .weui-icon-circle {
+    font-size: 19px !important;
+  }
+}
+.vux-check-icon > .weui-icon-success:before,
+.vux-check-icon > .weui-icon-success-circle:before {
+  color: #00a7fd !important;
+}
+.btn-inline {
+  margin-top: 5px;
+  font-size: 14px;
+  float: right;
+  color: #000;
+  text-decoration: underline;
+}
+.login-input_last {
+  > .vux-tap-active {
+    .weui-label {
+      width: auto;
+    }
+  }
+}
+.vux-cell-box:not(:first-child):before {
+  width: auto !important;
+}
+.login-group .weui-cell::before {
+  left: 20px !important;
+  right: 20px !important;
+}
+.vux-check-icon > .weui-icon-success,
+.vux-check-icon > .weui-icon-circle {
+  font-size: 17px !important;
+}
+.vux-cell-box.login-input_last::before {
+  border-top: 1px solid #d9d9d9 !important;
+  left: 20px !important;
+  right: 20px !important;
+}
+.login-group .login-input_last:after {
+  border: none !important;
+}
+
 .login-group .weui-cells:after {
   border-bottom: 1px solid #d9d9d9 !important;
-  left: 50px;
-  right: 50px;
+  left: 20px !important;
+  right: 20px !important;
+}
+.login-agree {
+  text-align: center;
+  margin-top: 10px;
+}
+.weui-btn:after {
+  border: none !important;
+}
+.login-group .login-auto-btn {
+  background: #fff !important;
+  border-radius: none !important;
+  color: #00a7fd !important;
+}
+.login-btn_warp {
+  padding: 30px 25px 0;
+  margin-bottom: 15px;
+}
+.weui-cell_access .weui-cell__ft:after {
+  display: none !important;
+}
+ins {
+  text-decoration: none;
+}
+
+.login-group .login-auto-btn {
+  border-radius: none !important;
+}
+
+.login-agree {
+  font-size: 12px;
+  color: #666;
+  > span {
+    color: #00a7fd;
+  }
+}
+.login-link {
+  margin-top: 20px;
 }
 </style>

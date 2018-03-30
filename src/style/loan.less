@@ -6,8 +6,9 @@ body {
 
 body {
   background-color: #fbf9fe;
-  font-family: 'Helvetica Neue', 'PingFang SC', Helvetica, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei',
-    sans-serif;
+  // font-family: 'Helvetica Neue', 'PingFang SC', Helvetica, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei',
+  //   sans-serif;
+  font-family: Helvetica, STHeiti STXihei, Microsoft YaHei, Arial;
 }
 #app {
   height: 100%;
@@ -86,6 +87,7 @@ body {
     text-align: center;
   }
 }
+
 .login-link {
   text-align: center;
   font-size: 15px;
@@ -115,10 +117,10 @@ body {
     border-bottom: none !important;
   }
   .weui-cell {
-    padding: 10px 50px !important;
+    padding: 10px 20px !important;
     &::before {
-      left: 50px !important;
-      right: 50px !important;
+      left: 20px !important;
+      right: 20px !important;
     }
     .iconfont {
       padding: 0 10px;
@@ -143,12 +145,6 @@ body {
     }
   }
   .weui-cell_warn {
-    &::before {
-      border-top: 1px solid @loan-red !important;
-    }
-    &::after {
-      border-bottom: 1px solid @loan-red !important;
-    }
     .weui-cell__ft {
       .weui-icon-warn {
         display: none;
