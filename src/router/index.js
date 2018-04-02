@@ -600,6 +600,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/popularize',
+    name: '征信推广页',
+    component: _import('popularizeZX/index'),
+    meta: {
+      title: '过海征信',
+      auth: false
+    }
+  },
+  {
     path: '/cookie',
     name: 'cookie',
     component: _import('cookieTest/cookie'),
