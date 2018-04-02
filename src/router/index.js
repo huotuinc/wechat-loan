@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/views/layout'
+import { getToken } from '../utils/auth'
 
 const _import = require('./_import')
 
@@ -562,6 +563,33 @@ export const constantRouterMap = [
   //     auth: false
   //   }
   // },
+  {
+    path: '/loanPublish/publish',
+    name: 'Publish',
+    component: _import('loanPublish/LoanPublish'),
+    meta: {
+      title: '我要借款',
+      auth: false
+    }
+  },
+  {
+    path: '/loanPublish/publishList',
+    name: 'PublishList',
+    component: _import('loanPublish/LoanPublishList'),
+    meta: {
+      title: '发布',
+      auth: false
+    }
+  },
+  {
+    path: '/personal/applyList',
+    name: 'ApplyList',
+    component: _import('personalPublish/ApplyLogs'),
+    meta: {
+      title: '借款申请记录',
+      auth: false
+    }
+  },
   {
     path: '/404',
     name: '404',

@@ -49,7 +49,7 @@
           <p>芝麻信用认证</p>
         </a>
       </div>
-       <!-- <div class="auth-item" @click="payTips">
+       <div class="auth-item" @click="payTips">
         <a href="javascript:;" @click.prevent="blackListClick(isPay, status.zhimaIndustryFlg)" :class="classNames(status.zhimaIndustryFlg)">
           <div class="icon">
             <i class="iconfont icon-heimingdan"></i>
@@ -57,7 +57,7 @@
           </div>
           <p>行业黑名单</p>
         </a>
-      </div> -->
+      </div>
     </div>
     <ul class="basic-tips" v-show="!isShowPay()">
       <li v-if="isSpecial"><strong style="color:#dc3545;">提示：</strong>点击图标进行认证。</li>
