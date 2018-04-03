@@ -68,7 +68,7 @@
     </div>
     <div v-transfer-dom>
       <popup v-model="popupShow" position="bottom" max-height="50%">
-        <iframe :src="iframe" frameborder="0"></iframe>
+        <iframe :src="iframe" frameborder="0" style="width:100%"></iframe>
       </popup>
     </div>
   </div>
@@ -77,6 +77,7 @@
 import { TransferDom, Popup, Cell, XInput, Group, XButton, CheckIcon, Picker, PopupPicker } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
 import { log } from 'util'
+import { setChannelId } from '../../utils/auth'
 
 export default {
   directives: {
@@ -94,6 +95,7 @@ export default {
   },
   data() {
     return {
+      case: {},
       isDisabled: true,
       hasChecked: true,
       disabled: false,
@@ -107,6 +109,7 @@ export default {
         inviter: '',
         zmfScore: ''
       },
+      isDefault: false,
       popupShow: false,
       iframe: '',
       type: '',
@@ -116,6 +119,17 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.channelId) {
+      this.isDefault = false
+      setChannelId(this.$route.query.channelId)
+    } else {
+      this.isDefault = true
+      setChannelId('default')
+    }
+    this.$store.dispatch('getCases').then(res => {
+      this.cases = res
+    })
+
     this.iframe = getLoanerRegisterLink()
     this.obj.inviter = sessionStorage.getItem('inviter')
     if (!this.iframe) {
@@ -197,7 +211,9 @@ export default {
       if (this.validForm()) {
         this.$store
           .dispatch(action, form)
-          .then(() => {})
+          .then(res => {
+            // window.location.href = ''
+          })
           .catch(err => {
             console.log(err)
           })

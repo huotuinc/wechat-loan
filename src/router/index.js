@@ -591,6 +591,57 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/orderPublish/orderList',
+    component: _import('orderPublish/index'),
+    children: [
+      {
+        path: '',
+        name: 'All',
+        component: _import('orderPublish/OrderAll'),
+        meta: {
+          title: '我的借款',
+          auth: false
+        }
+      },
+      {
+        path: 'pending',
+        name: 'Pending',
+        component: _import('orderPublish/OrderPending'),
+        meta: {
+          title: '待审核',
+          auth: false
+        }
+      },
+      {
+        path: 'repayment',
+        name: 'Repayment',
+        component: _import('orderPublish/OrderRepayment'),
+        meta: {
+          title: '待还款',
+          auth: false
+        }
+      },
+      {
+        path: 'overdue',
+        name: 'Overdue',
+        component: _import('orderPublish/OrderOverdue'),
+        meta: {
+          title: '已逾期',
+          auth: false
+        }
+      },
+      {
+        path: 'complete',
+        name: 'Complete',
+        component: _import('orderPublish/OrderComplete'),
+        meta: {
+          title: '已完成',
+          auth: false
+        }
+      }
+    ]
+  },
+  {
     path: '/404',
     name: '404',
     component: _import('404'),

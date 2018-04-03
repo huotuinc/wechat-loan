@@ -37,7 +37,7 @@
       <cell title="信用报告" is-link v-if="authNum === 3" link="/credit">
         <span class="text-success">{{authText}}</span>
       </cell>
-      <cell title="信用报告" is-link v-else link="/authentication">
+      <cell title="信用报告" is-link v-else link="http://zhengxinappauth">
         <span :class="authNum === 1 ? 'text-primary' : 'text-danger'" >{{authText}}</span>
       </cell>
     </group>
@@ -72,16 +72,28 @@ export default {
     getUserInfo()
 
     if (!getToken()) {
-      // console.log(14)
       window.location.href = 'http://zhengxinapplogin'
       return
     }
+    // if (!this.authText) {
 
+    // }
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
-      this.$store.dispatch('getIndex').then(() => {
+      this.$store.dispatch('getIndex').then(res => {
         this.validForm()
+        console.log(res)
+        if (res.authCode !== 3) {
+          this.$vux.alert.show({
+            title: '',
+            content: '请先完成基本信息认证确保个人信息完整性！',
+            buttonText: '去认证',
+            onHide() {
+              window.location.href = 'http://zhengxinappauth'
+            }
+          })
+        }
       })
     }
     if (this.$route.name === 'Subscribe') {
@@ -355,5 +367,12 @@ export default {
 
 .loan-publish_btn {
   padding: 20px;
+}
+.weui-dialog__bd {
+  color: #000;
+  font-size: 16px !important;
+}
+.weui-dialog {
+  max-width: 240px;
 }
 </style>
