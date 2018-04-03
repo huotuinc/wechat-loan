@@ -565,7 +565,7 @@ export const constantRouterMap = [
   // },
   {
     path: '/loanPublish/publish',
-    name: 'Publish',
+    name: 'loanPublish',
     component: _import('loanPublish/LoanPublish'),
     meta: {
       title: '我要借款',
@@ -574,7 +574,7 @@ export const constantRouterMap = [
   },
   {
     path: '/loanPublish/publishList',
-    name: 'PublishList',
+    name: 'loanPublishList',
     component: _import('loanPublish/LoanPublishList'),
     meta: {
       title: '发布',
@@ -583,7 +583,7 @@ export const constantRouterMap = [
   },
   {
     path: '/personal/applyList',
-    name: 'ApplyList',
+    name: 'loanApplyList',
     component: _import('personalPublish/ApplyLogs'),
     meta: {
       title: '借款申请记录',

@@ -8,7 +8,7 @@
        <div class="username">
         <x-input
           name="username"
-          placeholder="请输入手机号码"
+          placeholder="请输入手机号"
           keyboard="number"
           is-type="china-mobile"
           ref="username"
@@ -23,7 +23,7 @@
         <x-input
           ref="authCode"
           name="authCode"
-          placeholder="输入验证码"
+          placeholder="请输入验证码"
           required
           type="tel"
           class="weui-vcode"
@@ -53,18 +53,14 @@
           class="login-input_last"
           value-text-align="left"
           aria-disabled="true">
-          <template slot="title" slot-scope="props">
-            <span :class="props.labelClass">
-              <!-- <span style="vertical-align:middle;">芝麻分数</span> -->
-            </span>
-          </template>
         </popup-picker>
       </div>
+    </div>
 
-      <div class="login-btn_warp">
+    <div class="footer">
+       <div class="login-btn_warp">
           <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px;" :disabled="isDisabled">获取征信</x-button>
       </div>
-
       <div class="login-agree">
         <check-icon :value.sync="hasChecked">我同意</check-icon><span>《<ins @click="open">用户注册服务协议</ins>》</span>
         <p>点击"获取验证码"即表示您同意《用户注册服务协议》</p>
@@ -263,8 +259,8 @@ body {
   height: 100%;
   background: linear-gradient(#cb1f1f 50%, #e44034);
 }
-[class^='weui-icon-']:before,
-[class*=' weui-icon-']:before,
+[class^='weui-icon-warn']:before,
+[class*=' weui-icon-warn']:before,
 .weui-cell_access .weui-cell__ft:after {
   display: none !important;
 }
@@ -315,6 +311,10 @@ input.weui-btn {
     border-radius: 50px;
     background: #fff;
   }
+}
+
+.footer {
+  padding: 0 20px;
   > .login-btn_warp {
     margin-top: 1.2rem;
     margin-bottom: 0.13rem;
@@ -324,9 +324,23 @@ input.weui-btn {
     margin-top: 0.8rem;
     text-align: center;
     font-size: 12px;
+    color: #faf7f8;
     & ins {
       text-decoration: none;
     }
   }
+}
+.vux-check-icon > .weui-icon-success,
+.vux-check-icon > .weui-icon-circle {
+  font-size: 14px !important;
+  vertical-align: middle !important;
+  margin-top: -2px !important;
+}
+.vux-check-icon > .weui-icon-success:before,
+.vux-check-icon > .weui-icon-success-circle:before {
+  color: #151515 !important;
+}
+.vux-check-icon > span {
+  color: #faf7f8 !important;
 }
 </style>
