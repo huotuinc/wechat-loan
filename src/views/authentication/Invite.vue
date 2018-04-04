@@ -48,6 +48,14 @@
           <p>芝麻信用认证</p>
         </a>
       </div>
+       <div class="auth-item">
+        <a href="javascript:;" class="is-pay">
+          <div class="icon">
+            <i class="iconfont icon-heimingdan"></i>
+          </div>
+          <p>黑名单认证</p>
+        </a>
+      </div>
     </div>
     <div @click="toAuth" class="auth-btn">
       <p class="btn-yellow" v-if="vip">我要借钱，免费认证</p>
@@ -92,9 +100,9 @@ export default {
       }
       sessionStorage.setItem('inviter', this.inviter)
       if (this.vip) {
-        this.$router.push('/signUp')
+        this.$router.push('/signIn')
       } else {
-        this.$router.push('/register')
+        this.$router.push('/login')
       }
     }
   }
