@@ -8,24 +8,6 @@
         <router-view></router-view>
       </keep-alive>
     </div>
-    <tabbar>
-      <tabbar-item link="/">
-        <i slot="icon" class="iconfont icon-home"></i>
-        <span slot="label">首页</span>
-      </tabbar-item>
-      <tabbar-item link="/">
-        <i slot="icon" class="iconfont icon-loan-mk"></i>
-        <span slot="label">贷款广场</span>
-      </tabbar-item>
-      <tabbar-item link="/publishList">
-        <i slot="icon" class="iconfont icon-list"></i>
-        <span slot="label">发布记录</span>
-      </tabbar-item>
-      <tabbar-item link="/personal">
-        <i slot="icon" class="iconfont icon-personal"></i>
-        <span slot="label">个人中心</span>
-      </tabbar-item>
-    </tabbar>
   </view-box>
 </template>
 <script>
@@ -66,19 +48,19 @@ export default {
     pageChange(index) {
       switch (index) {
         case 0:
-          this.$router.replace({ path: '/orderList' })
+          this.$router.replace({ path: '/orderPublish/orderList' })
           break
         case 1:
-          this.$router.replace({ path: '/orderList/pending' })
+          this.$router.replace({ path: '/orderPublish/orderList/pending' })
           break
         case 2:
-          this.$router.replace({ path: '/orderList/repayment' })
+          this.$router.replace({ path: '/orderPublish/orderList/repayment' })
           break
         case 3:
-          this.$router.replace({ path: '/orderList/overdue' })
+          this.$router.replace({ path: '/orderPublish/orderList/overdue' })
           break
         case 4:
-          this.$router.replace({ path: '/orderList/complete' })
+          this.$router.replace({ path: '/orderPublish/orderList/complete' })
           break
         default:
           break
@@ -112,7 +94,7 @@ export default {
 .loan-list-wrap {
   position: relative;
   width: 100%;
-  height: calc(~'100vh - 100px');
+  height: calc(~'100vh - 50px');
   overflow: hidden;
   overflow-y: auto;
 }

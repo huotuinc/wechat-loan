@@ -212,7 +212,8 @@ export default {
         this.$store
           .dispatch(action, form)
           .then(res => {
-            // window.location.href = ''
+            window.location.href =
+              'http://a.app.qq.com/o/simple.jsp?pkgname=com.huotu.android.guohai.credit&fromcase=40002'
           })
           .catch(err => {
             console.log(err)
