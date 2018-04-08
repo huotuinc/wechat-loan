@@ -652,7 +652,7 @@ export const constantRouterMap = [
   },
   {
     path: '/popularize',
-    name: '征信推广页',
+    name: 'Popularize',
     component: _import('popularizeZX/index'),
     meta: {
       title: '过海征信',

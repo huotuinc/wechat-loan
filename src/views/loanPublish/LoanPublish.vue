@@ -84,7 +84,7 @@ export default {
       this.$store.dispatch('getIndex').then(res => {
         this.validForm()
         console.log(res)
-        if (res.authCode !== 3) {
+        if (res.authCode !== 3 && res.authText !== '已认证') {
           this.$vux.alert.show({
             title: '',
             content: '请先完成基本信息认证确保个人信息完整性！',
@@ -314,11 +314,13 @@ export default {
           minDay = parseInt(dayArr[0])
         }
       }
-
       return {
         minDays: minDay,
         maxDays: maxDay
       }
+    },
+    goHttp() {
+      window.location.href = 'http://zhengxinappauth'
     }
   }
 }
