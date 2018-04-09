@@ -573,6 +573,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/loanPublish/subscribe/:lenderId/lend/:lendId',
+    name: 'LoanSubscribe',
+    component: _import('loan/LoanPublish'),
+    meta: {
+      title: '我要借款',
+      auth: false
+    }
+  },
+  {
     path: '/loanPublish/publishList',
     name: 'loanPublishList',
     component: _import('loanPublish/LoanPublishList'),

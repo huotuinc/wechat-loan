@@ -75,9 +75,6 @@ export default {
       window.location.href = 'http://zhengxinapplogin'
       return
     }
-    // if (!this.authText) {
-
-    // }
     this._getPurposeList()
     //页面刷新，需要再次获取
     if (!this.authText) {
@@ -96,7 +93,7 @@ export default {
         }
       })
     }
-    if (this.$route.name === 'Subscribe') {
+    if (this.$route.name === 'LoanSubscribe') {
       this.obj.lendId = this.$route.params.lendId || 0
       this.obj.lendUserId = this.$route.params.lenderId || 0
       this.$store
@@ -189,11 +186,11 @@ export default {
       sessionStorage.setItem('use', val)
     },
     $route(val) {
-      if (val.name === 'Publish') {
+      if (val.name === 'loanPublishList') {
         this.obj.lendId = 0
         this.obj.lendUserId = 0
       }
-      if (val.name === 'Subscribe') {
+      if (val.name === 'LoanSubscribe') {
         this.obj.lendId = this.$route.params.lendId || 0
         this.obj.lendUserId = this.$route.params.lenderId || 0
       }
@@ -208,15 +205,30 @@ export default {
       this.list.push(ret)
     },
     submit() {
+      this.$store.dispatch('getIndex').then(res => {
+        console.log(res)
+        if (res.authCode !== 3 && res.authMsg !== '已认证') {
+          this.$vux.alert.show({
+            title: '',
+            content: '请先完成基本信息认证确保个人信息完整性！',
+            buttonText: '去认证',
+            onHide() {
+              window.location.href = 'http://zhengxinappauth'
+            }
+          })
+          return
+        }
+      })
+
       this.$store.commit('UPDATE_LOADING', { isLoading: true, text: '发布中' })
       this.$store
         .dispatch('saveInfo', this.obj)
         .then(() => {
           this.$store.commit('UPDATE_LOADING', { isLoading: false })
           if (this.obj.lendUserId !== 0) {
-            this.$router.push({ path: '/applyList' })
+            this.$router.push({ path: '/personal/applyList' })
           } else {
-            this.$router.push({ path: '/publishList' })
+            this.$router.push({ path: '/loanPublish/publishList' })
           }
           sessionStorage.clear()
         })
@@ -232,10 +244,10 @@ export default {
       this.obj.borrowUse = findCode(purpose, val[0])
     },
     validForm() {
-      if (this.authNum !== 3) {
-        this.isDisabled = true
-        return
-      }
+      // if (this.authNum !== 3) {
+      //   this.isDisabled = true
+      //   return
+      // }
       if (!/^[1-9]\d*$/.test(this.obj.borrowMoney)) {
         this.isDisabled = true
         return
@@ -318,9 +330,6 @@ export default {
         minDays: minDay,
         maxDays: maxDay
       }
-    },
-    goHttp() {
-      window.location.href = 'http://zhengxinappauth'
     }
   }
 }
