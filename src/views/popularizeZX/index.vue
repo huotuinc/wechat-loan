@@ -345,6 +345,9 @@ input.weui-btn {
     & ins {
       text-decoration: none;
     }
+    & P {
+      white-space: nowrap;
+    }
   }
 }
 .vux-check-icon > .weui-icon-success,
