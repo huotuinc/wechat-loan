@@ -52,7 +52,7 @@
         </popup-picker>
       </group>
         <div class="login-btn_warp">
-          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px;" :disabled="isDisabled">注册&nbsp;/&nbsp;登录</x-button>
+          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px; height:50px;" :disabled="isDisabled">注册&nbsp;/&nbsp;登录</x-button>
         </div>
         <div class="login-agree" v-if="!checkReg">
           <check-icon :value.sync="hasChecked"><span>我同意</span></check-icon><span>《<ins @click="open">用户注册服务协议</ins>》</span>
@@ -287,6 +287,9 @@ export default {
 }
 </script>
 <style lang="less">
+.login-group {
+  padding-top: 20px !important;
+}
 h1 {
   padding-bottom: 30px;
   padding-left: 20px;
@@ -372,7 +375,7 @@ h1 {
   color: #00a7fd !important;
 }
 .login-btn_warp {
-  padding: 30px 25px 0;
+  padding: 50px 25px 0;
   margin-bottom: 15px;
 }
 .weui-cell_access .weui-cell__ft:after {

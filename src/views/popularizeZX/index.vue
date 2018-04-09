@@ -59,7 +59,7 @@
 
     <div class="footer">
        <div class="login-btn_warp">
-          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px;" :disabled="isDisabled">获取征信</x-button>
+          <x-button @click.native="submit" class="btn-yellow" style="border-radius:99px; height:50px;" :disabled="isDisabled">获取征信</x-button>
       </div>
       <div class="login-agree">
         <check-icon :value.sync="hasChecked">我同意</check-icon><span>《<ins @click="open">用户注册服务协议</ins>》</span>
@@ -77,7 +77,7 @@
 import { TransferDom, Popup, Cell, XInput, Group, XButton, CheckIcon, Picker, PopupPicker } from 'vux'
 import { getLoanerRegisterLink } from '../../utils/init'
 import { log } from 'util'
-import { setChannelId } from '../../utils/auth'
+import { setChannelId, removeUserId, removeToken, removeUserInfo } from '../../utils/auth'
 
 export default {
   directives: {
@@ -137,6 +137,10 @@ export default {
         this.iframe = getLoanerRegisterLink()
       })
     }
+
+    removeUserId()
+    removeToken()
+    removeUserInfo()
   },
   watch: {
     sesame(val) {
@@ -274,12 +278,16 @@ export default {
 <style lang="less">
 body {
   height: 100%;
-  background: linear-gradient(#cb1f1f 50%, #e44034);
+  background: #cb1f1f;
 }
 [class^='weui-icon-warn']:before,
 [class*=' weui-icon-warn']:before,
 .weui-cell_access .weui-cell__ft:after {
   display: none !important;
+}
+.weui-cell_access:active {
+  background-color: #ffffff !important;
+  border-radius: 50px !important;
 }
 button.weui-btn,
 input.weui-btn {
@@ -321,6 +329,14 @@ input.weui-btn {
         background: yellow;
         border-radius: 0px 50px 50px 0;
       }
+      > .weui-btn_disabled.weui-btn_default {
+        color: #000 !important;
+        background-color: yellow !important;
+      }
+      > .weui-btn_default:not(.weui-btn_disabled):active {
+        color: #000 !important;
+        background-color: yellow !important;
+      }
     }
   }
   > .zmfScore {
@@ -331,8 +347,9 @@ input.weui-btn {
 }
 
 .footer {
-  padding: 0 20px;
+  padding: 15px 20px;
   > .login-btn_warp {
+    height: 48px;
     margin-top: 1.2rem;
     margin-bottom: 0.13rem;
     padding: 0;
@@ -350,6 +367,9 @@ input.weui-btn {
     }
   }
 }
+.weui-btn:after {
+  border: none !important;
+}
 .vux-check-icon > .weui-icon-success,
 .vux-check-icon > .weui-icon-circle {
   font-size: 14px !important;
@@ -358,7 +378,7 @@ input.weui-btn {
 }
 .vux-check-icon > .weui-icon-success:before,
 .vux-check-icon > .weui-icon-success-circle:before {
-  color: #151515 !important;
+  color: #faf7f8 !important;
 }
 .vux-check-icon > span {
   color: #faf7f8 !important;
